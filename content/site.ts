@@ -9,14 +9,46 @@ export const siteConfig = {
   shortName: "SEKAI",
   description: "一个在现实与次元之间持续生长的个人空间，收藏作品、想法与生活切片。",
   navigation: [
-    { label: "关于", href: "#about" },
-    { label: "收藏", href: "#favorites" },
-    { label: "扭蛋", href: "#gacha" },
-    { label: "作品", href: "#works" },
-    { label: "日志", href: "#notes" },
-    { label: "路线图", href: "#roadmap" },
+    { label: "首页", href: "/" },
+    { label: "关于我", href: "/about/" },
+    { label: "航线终端", href: "/links/" },
+    { label: "世界线日志", href: "/logs/" },
   ],
 } as const;
+
+/** Primary routes shown as the homepage's world map. */
+export const worldRoutes = [
+  {
+    index: "01",
+    href: "/about/",
+    eyebrow: "CHARACTER FILE",
+    title: "角色设定档",
+    description: "不靠虚构标签包装自己，只记录正在构建、真正喜欢和愿意长期坚持的事情。",
+    action: "读取档案",
+    motif: "ID",
+    tone: "mint",
+  },
+  {
+    index: "02",
+    href: "/links/",
+    eyebrow: "ROUTE TERMINAL",
+    title: "航线终端",
+    description: "每一个入口都附带一条愿意回来的理由；不是没有灵魂的常用网站大全。",
+    action: "选择航线",
+    motif: "↗",
+    tone: "violet",
+  },
+  {
+    index: "03",
+    href: "/logs/",
+    eyebrow: "TIMELINE ARCHIVE",
+    title: "世界线日志",
+    description: "把每一话的变化、选择和复盘写下来，让网站成长本身也成为内容。",
+    action: "追更日志",
+    motif: "03",
+    tone: "pink",
+  },
+] as const;
 
 /**
  * Three compact manga beats used directly below the hero. They establish the
@@ -210,10 +242,10 @@ export const fieldNotes = [
   },
   {
     id: "LOG 003",
-    date: "NEXT WEEK",
-    title: "给每次更新留一扇门",
+    date: "2026.08.09",
+    title: "从一张长首页，展开三个独立频道",
     excerpt:
-      "路线图以小步迭代为单位：每周交付一件可以验证的改进，并把决定写进项目文档。",
+      "关于我、航线终端和世界线日志各自承担一个任务；首页终于可以更像世界入口，而不是全部内容的仓库。",
   },
 ] as const;
 
@@ -226,18 +258,24 @@ export const roadmap = [
   },
   {
     phase: "02",
-    title: "录入真实内容",
-    status: "下一步",
-    description: "替换公开身份、作品、社交链接与兴趣收藏，不虚构任何个人资料。",
+    title: "展开多页世界",
+    status: "本话完成",
+    description: "独立 About、Links 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
   },
   {
     phase: "03",
+    title: "录入真实内容",
+    status: "下一步",
+    description: "补充主人确认的公开身份、作品、社交链接与兴趣收藏，不虚构个人资料。",
+  },
+  {
+    phase: "04",
     title: "内容系统",
     status: "规划中",
     description: "引入 MDX 文章、标签、搜索、RSS 与可持续维护的媒体资源管线。",
   },
   {
-    phase: "04",
+    phase: "05",
     title: "次元实验室",
     status: "未来",
     description: "按需加入互动实验、数据服务和后台；每项能力保持可拆卸。",

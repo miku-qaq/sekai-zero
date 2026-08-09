@@ -1,11 +1,13 @@
 import Image from "next/image";
 import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
+import { sitePath } from "@/lib/site-path";
 import { DimensionalGacha } from "./components/dimensional-gacha";
 import { ShareButton } from "./components/share-button";
 import { FavoriteChannels } from "./components/favorite-channels";
+import { SiteFooter } from "./components/site-footer";
+import { WorldMap } from "./components/world-map";
 
-const pagesBaseSegment = process.env.PAGES_BASE_PATH?.trim().replace(/^\/+|\/+$/g, "");
-const publicBasePath = pagesBaseSegment ? `/${pagesBaseSegment}` : "";
+const heroImage = sitePath("/hero-anime-v2.webp");
 
 // The homepage has no request-time data. Declaring the contract explicitly
 // keeps Vinext's conservative static analyzer from skipping Pages export.
@@ -18,31 +20,31 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            EP.002 · ANIME SIGNAL ONLINE
+            EP.003 · PERSONAL UNIVERSE ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
-            我的日常，
-            <span>正在二次元化。</span>
+            这里不只一页，
+            <span>而是一整个世界。</span>
           </h1>
         </div>
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
             欢迎来到一部由代码、音乐、魔法和一点社恐能量共同连载的个人番剧。
-            这里收藏作品，也收藏让我想继续向前的角色与瞬间。
+            角色设定、航线与日志已经拥有各自的房间。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href="#favorites">
-              进入角色频道
+            <a className="button button-primary" href={sitePath("/about/")}>
+              读取角色设定
               <span aria-hidden="true">↘</span>
             </a>
-            <a className="button button-ghost" href="#works">
-              追更作品线
+            <a className="button button-ghost" href={sitePath("/links/")}>
+              打开航线终端
             </a>
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 002 话 · 次元浓度上升</dd>
+              <dd>第 003 话 · 个人宇宙展开</dd>
             </div>
             <div>
               <dt>本话属性</dt>
@@ -56,13 +58,13 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 02</span>
+              <span>ORIGINAL KEY VISUAL / 03</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
               <Image
                 className="hero-anime-image"
-                src={`${publicBasePath}/hero-anime-v2.webp`}
+                src={heroImage}
                 alt="原创动漫群像：青发电子歌者、银发旅行魔女与粉发吉他手置身星空舞台"
                 width={1024}
                 height={1536}
@@ -71,7 +73,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / 002
+                SCENE / 003
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -82,7 +84,7 @@ export default function Home() {
                 <span>DIMENSIONAL STUDIO</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#002</span>
+              <span className="identity-number">#003</span>
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
@@ -130,13 +132,15 @@ export default function Home() {
         ))}
       </section>
 
+      <WorldMap />
+
       <section
         className="about section-shell section-pad"
         id="about"
         aria-labelledby="about-title"
       >
         <div className="section-heading">
-          <p className="section-index">01 / ABOUT THIS SEKAI</p>
+          <p className="section-index">02 / ABOUT THIS SEKAI</p>
           <h2 id="about-title">
             把个人网站，
             <br />
@@ -148,7 +152,7 @@ export default function Home() {
             这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            第二话开始把“二次元”从彩蛋提升为主角：原创群像负责第一眼的情绪，频道卡负责可玩的个性，作品与日志则继续保持清晰、真实、可维护。
+            第三话把网站从单页升级为个人宇宙：原创群像负责第一眼的情绪，独立页面负责真正的内容，作品与日志继续保持清晰、真实、可维护。
           </p>
           <div className="principles-grid">
             <article>
@@ -177,7 +181,7 @@ export default function Home() {
       >
         <div className="section-shell favorites-layout">
           <div className="section-heading favorites-heading">
-            <p className="section-index">02 / FAVORITE FREQUENCIES</p>
+            <p className="section-index">03 / FAVORITE FREQUENCIES</p>
             <h2 id="favorites-title">
               三张我的 SSR
               <br />
@@ -212,7 +216,7 @@ export default function Home() {
         <div className="section-shell">
           <div className="section-heading horizontal-heading">
             <div>
-              <p className="section-index">03 / FEATURED STORY</p>
+              <p className="section-index">04 / FEATURED STORY</p>
               <h2 id="works-title">正在发生的故事</h2>
             </div>
             <p>从一件真正存在的作品开始，之后每次更新都留下可以被看见的进展。</p>
@@ -262,7 +266,7 @@ export default function Home() {
       >
         <div className="section-heading horizontal-heading notes-heading">
           <div>
-            <p className="section-index">04 / FIELD NOTES</p>
+            <p className="section-index">05 / FIELD NOTES</p>
             <h2 id="notes-title">世界线观测日志</h2>
           </div>
           <p>先记录建站过程；未来这里会成为完整的文章与灵感档案。</p>
@@ -284,6 +288,9 @@ export default function Home() {
             </article>
           ))}
         </div>
+        <a className="section-text-link" href={sitePath("/logs/")}>
+          阅读完整世界线日志 <span aria-hidden="true">↗</span>
+        </a>
       </section>
 
       <section
@@ -293,7 +300,7 @@ export default function Home() {
       >
         <div className="section-shell roadmap-layout">
           <div className="section-heading roadmap-heading">
-            <p className="section-index">05 / CONTINUED NEXT WEEK</p>
+            <p className="section-index">06 / CONTINUED NEXT WEEK</p>
             <h2 id="roadmap-title">
               长期项目，
               <br />
@@ -323,29 +330,17 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">第 002 话，放送完毕。</h2>
-        <p>主视觉已点亮；下一话，会继续加入真实作品与更有趣的次元实验。</p>
+        <h2 id="finale-title">第 003 话，放送完毕。</h2>
+        <p>三个独立频道已经上线；下一话，会继续加入真实收藏与更有趣的次元实验。</p>
         <div className="finale-actions">
-          <a className="button button-primary" href="#top">
+          <a className="button button-primary" href={sitePath("/#top")}>
             回到开场 <span aria-hidden="true">↑</span>
           </a>
           <ShareButton />
         </div>
       </section>
 
-      <footer className="site-footer section-shell">
-        <div className="footer-brand">
-          <span className="brand-mark" aria-hidden="true">
-            00
-          </span>
-          <div>
-            <strong>SEKAI / 00</strong>
-            <span>PERSONAL SIGNAL</span>
-          </div>
-        </div>
-        <p>用好奇心、代码与一点点魔法持续构建。</p>
-        <p>© {new Date().getFullYear()} · SIGNAL STILL ON</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

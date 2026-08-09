@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { siteConfig } from "@/content/site";
+import { sitePath } from "@/lib/site-path";
 
 const THEME_STORAGE_KEY = "sekai-theme";
+const THEME_CHANGE_EVENT = "sekai-theme-change";
 type Theme = "light" | "dark";
 
-function initialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-
+function clientThemeSnapshot(): Theme {
   const explicitTheme = document.documentElement.dataset.theme;
   if (explicitTheme === "light" || explicitTheme === "dark") {
     return explicitTheme;
@@ -17,13 +17,52 @@ function initialTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+function serverThemeSnapshot(): Theme {
+  return "light";
+}
+
+function subscribeToTheme(onStoreChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const notify = () => onStoreChange();
+  media.addEventListener("change", notify);
+  window.addEventListener(THEME_CHANGE_EVENT, notify);
+
+  return () => {
+    media.removeEventListener("change", notify);
+    window.removeEventListener(THEME_CHANGE_EVENT, notify);
+  };
+}
+
+function subscribeToPath() {
+  // Navigation uses normal document requests, so the path cannot change during
+  // one mounted page. The empty subscriber gives hydration a stable snapshot.
+  return () => undefined;
+}
+
+function clientPathSnapshot() {
+  return window.location.pathname.replace(/\/+$/, "") || "/";
+}
+
+function serverPathSnapshot() {
+  return "";
+}
+
 /**
  * The only stateful global navigation surface.
  * Theme preference is deliberately device-local and never requires an account.
  */
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>(initialTheme);
+  const theme = useSyncExternalStore(
+    subscribeToTheme,
+    clientThemeSnapshot,
+    serverThemeSnapshot,
+  );
+  const currentPath = useSyncExternalStore(
+    subscribeToPath,
+    clientPathSnapshot,
+    serverPathSnapshot,
+  );
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -44,12 +83,12 @@ export function SiteHeader() {
     const nextTheme: Theme = theme === "dark" ? "light" : "dark";
 
     document.documentElement.dataset.theme = nextTheme;
-    setTheme(nextTheme);
     try {
       window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
     } catch {
       // The visual switch still works for this page even without persistence.
     }
+    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
   }
 
   function closeMenu() {
@@ -59,7 +98,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="brand" href="#top" onClick={closeMenu}>
+        <a className="brand" href={sitePath("/")} onClick={closeMenu}>
           <span className="brand-mark" aria-hidden="true">
             00
           </span>
@@ -68,7 +107,15 @@ export function SiteHeader() {
 
         <nav id="primary-navigation" className="desktop-navigation" aria-label="主导航">
           {siteConfig.navigation.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a
+              key={item.href}
+              href={sitePath(item.href)}
+              aria-current={
+                currentPath === (sitePath(item.href).replace(/\/+$/, "") || "/")
+                  ? "page"
+                  : undefined
+              }
+            >
               {item.label}
             </a>
           ))}
@@ -91,8 +138,8 @@ export function SiteHeader() {
               ◐
             </span>
           </button>
-          <a className="header-cta" href="#works">
-            进入世界
+          <a className="header-cta" href={sitePath("/about/")}>
+            读取档案
             <span aria-hidden="true">↘</span>
           </a>
           <button
@@ -118,7 +165,16 @@ export function SiteHeader() {
         hidden={!menuOpen}
       >
         {siteConfig.navigation.map((item, index) => (
-          <a key={item.href} href={item.href} onClick={closeMenu}>
+          <a
+            key={item.href}
+            href={sitePath(item.href)}
+            onClick={closeMenu}
+            aria-current={
+              currentPath === (sitePath(item.href).replace(/\/+$/, "") || "/")
+                ? "page"
+                : undefined
+            }
+          >
             <span>0{index + 1}</span>
             {item.label}
           </a>

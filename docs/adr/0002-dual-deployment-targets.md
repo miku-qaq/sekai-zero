@@ -17,6 +17,6 @@ Sites 提供 Worker、D1 和 R2 的长期扩展空间，但当前公开 `chatgpt
 
 ## 后果
 
-当前首页可以通过 Pages 获得纯静态公开入口，也能继续在 Sites 迭代。任何新增的服务端功能必须明确提供静态降级，或仅在动态目标开放。两个目标都需要独立契约测试，避免某一条发布路径长期失修。
+当前多页面网站可以通过 Pages 获得纯静态公开入口，也能继续在 Sites 迭代。任何新增的服务端功能必须明确提供静态降级，或仅在动态目标开放。两个目标都需要独立契约测试，避免某一条发布路径长期失修。
 
-Vinext `1.0.0-beta.5` 的预渲染器在配置 `basePath` 时仍以 `/` 请求内部 RSC 服务并返回 404。当前站点只有一个使用页内锚点的页面，因此暂用 `assetPrefix` 与显式公开资源前缀规避；升级 Vinext 时必须重新验证并优先恢复标准 `basePath`。
+Vinext `1.0.0-beta.5` 的预渲染器在配置 `basePath` 时仍以 `/` 请求内部 RSC 服务并返回 404；开启 `trailingSlash` 后，它又会把自己的 308 规范化跳转误判为预渲染失败。因此当前使用 `assetPrefix`、`NEXT_PUBLIC_BASE_PATH` 与 `sitePath()` 显式处理资源和站内链接，先导出 `about.html` 一类规范文件，再由 `prepare-pages.mjs` 生成 `about/index.html` 目录副本。升级 Vinext 时必须重新验证并优先恢复标准 `basePath + trailingSlash`。

@@ -16,7 +16,10 @@ const pagesBasePath = normalizeBasePath(process.env.PAGES_BASE_PATH);
 const nextConfig: NextConfig = isGitHubPages
   ? {
       output: "export",
-      trailingSlash: true,
+      // Vinext's crawler requests route keys without a slash and currently
+      // treats its own trailing-slash 308 as a failure. Export canonical HTML
+      // files first; prepare-pages then adds directory-style index copies.
+      trailingSlash: false,
       // Vinext beta.5 currently asks its prerender server for `/` even when a
       // basePath is configured, which makes the export return 404. This site
       // has one hash-routed page, so an asset prefix plus explicit public-asset

@@ -31,7 +31,10 @@ test("server-renders the product homepage and its core navigation", async () => 
   const html = await response.text();
   assert.match(html, /<html[^>]*lang="zh-CN"/i);
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
-  assert.match(html, /我的日常/);
+  assert.match(html, /这里不只一页/);
+  assert.match(html, /角色设定档/);
+  assert.match(html, /航线终端/);
+  assert.match(html, /世界线日志/);
   assert.match(html, /三张我的 SSR/);
   assert.match(html, /hero-anime-v2\.webp/);
   assert.match(html, /本话三个次元瞬间/);
@@ -50,8 +53,36 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
+test("server-renders every secondary route with its own editorial purpose", async () => {
+  const routes = [
+    {
+      pathname: "/about",
+      title: /<title>角色设定档 · SEKAI<\/title>/i,
+      copy: /欢迎来到我的角色设定页/,
+    },
+    {
+      pathname: "/links",
+      title: /<title>航线终端 · SEKAI<\/title>/i,
+      copy: /我在互联网留下的航线/,
+    },
+    {
+      pathname: "/logs",
+      title: /<title>世界线日志 · SEKAI<\/title>/i,
+      copy: /把网站的成长，也写成内容/,
+    },
+  ];
+
+  for (const route of routes) {
+    const response = await render(route.pathname);
+    assert.equal(response.status, 200, route.pathname);
+    const html = await response.text();
+    assert.match(html, route.title);
+    assert.match(html, route.copy);
+  }
+});
+
 test("keeps product boundaries and interaction safeguards in place", async () => {
-  const [page, content, packageJson, header, layout, share, gacha, styles] =
+  const [page, content, packageJson, header, layout, share, gacha, styles, sitePaths] =
     await Promise.all([
       readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
       readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
@@ -64,6 +95,7 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
         "utf8",
       ),
       readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+      readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
     ]);
 
   assert.match(page, /from "@\/content\/site"/);
@@ -75,11 +107,14 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle-kit/);
   assert.match(header, /hidden=\{!menuOpen\}/);
   assert.match(header, /event\.key === "Escape"/);
+  assert.match(header, /aria-current/);
   assert.match(layout, /themeInitializationScript/);
+  assert.match(layout, /subpages\.css/);
   assert.match(share, /manualUrl/);
   assert.match(share, /aria-live="polite"/);
   assert.match(gacha, /Math\.random/);
   assert.match(gacha, /aria-atomic="true"/);
+  assert.match(sitePaths, /NEXT_PUBLIC_BASE_PATH/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");
   const mobileEnd = styles.indexOf("@media (max-width: 420px)");

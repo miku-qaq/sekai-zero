@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/content/site";
 import { SiteHeader } from "./components/site-header";
 import "./globals.css";
+import "./subpages.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,7 @@ function resolveSiteUrl(): URL {
 }
 
 const metadataBase = resolveSiteUrl();
-const socialImage = new URL("og.png", metadataBase).toString();
+const socialImage = new URL("og-v3.png", metadataBase).toString();
 const favicon = new URL("favicon.svg", metadataBase).toString();
 
 export const metadata: Metadata = {
