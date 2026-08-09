@@ -11,8 +11,9 @@ export const siteConfig = {
   navigation: [
     { label: "首页", href: "/" },
     { label: "关于我", href: "/about/" },
-    { label: "航线终端", href: "/links/" },
+    { label: "制作档案", href: "/projects/" },
     { label: "学习笔记", href: "/study/" },
+    { label: "航线终端", href: "/links/" },
     { label: "世界线日志", href: "/logs/" },
   ],
 } as const;
@@ -28,6 +29,7 @@ export const worldRoutes = [
     action: "读取档案",
     motif: "ID",
     tone: "mint",
+    layout: "standard",
   },
   {
     index: "02",
@@ -38,9 +40,21 @@ export const worldRoutes = [
     action: "选择航线",
     motif: "↗",
     tone: "violet",
+    layout: "standard",
   },
   {
     index: "03",
+    href: "/projects/",
+    eyebrow: "PRODUCTION DOSSIER",
+    title: "制作档案",
+    description: "不只展示完成画面，也记录目标、结构、取舍与仍在进行的下一步。",
+    action: "读取 Project 001",
+    motif: "作",
+    tone: "amber",
+    layout: "featured",
+  },
+  {
+    index: "04",
     href: "/study/",
     eyebrow: "COMPUTER STUDY DECK",
     title: "计算机学习舱",
@@ -48,16 +62,18 @@ export const worldRoutes = [
     action: "开始复习",
     motif: "</>",
     tone: "blue",
+    layout: "standard",
   },
   {
-    index: "04",
+    index: "05",
     href: "/logs/",
     eyebrow: "TIMELINE ARCHIVE",
     title: "世界线日志",
     description: "把每一话的变化、选择和复盘写下来，让网站成长本身也成为内容。",
     action: "追更日志",
-    motif: "04",
+    motif: "05",
     tone: "pink",
+    layout: "standard",
   },
 ] as const;
 
@@ -217,12 +233,12 @@ export const projectHighlights = [
   },
   {
     index: "02",
-    status: "NEXT CHAPTER",
-    title: "作品陈列室",
-    subtitle: "可检索的项目档案",
+    status: "CASE 001 ONLINE",
+    title: "制作档案",
+    subtitle: "真实项目案例",
     description:
-      "下一阶段会把真实作品整理为独立案例，补充目标、过程、结果与复盘，而不只展示一张截图。",
-    tags: ["Case Study", "Filter", "MDX"],
+      "先把本站本身整理为第一份案例：问题、目标、系统、质量标准与每一话的演进都可以追溯。",
+    tags: ["Case Study", "Architecture", "Evidence"],
     tone: "violet",
   },
   {
@@ -239,6 +255,13 @@ export const projectHighlights = [
 
 export const fieldNotes = [
   {
+    id: "LOG 005",
+    date: "2026.08.09",
+    title: "让作品不只停在一张展示卡",
+    excerpt:
+      "把本站作为第一个可验证案例，公开目标、结构、取舍与版本轨迹，不用虚构项目数量撑满档案。",
+  },
+  {
     id: "LOG 004",
     date: "2026.08.09",
     title: "给长期学习留一个可检索的房间",
@@ -246,11 +269,11 @@ export const fieldNotes = [
       "计算机笔记不再混在建站日志里；它有自己的分类、搜索、回忆问题和一手资料入口。",
   },
   {
-    id: "LOG 001",
+    id: "LOG 003",
     date: "2026.08.09",
-    title: "先把房子搭稳，再开始装饰",
+    title: "从一张长首页，展开三个独立频道",
     excerpt:
-      "清晰的边界、自动检查和可替换的内容层，决定了这个网站半年后还能不能轻松修改。",
+      "关于我、航线终端和世界线日志各自承担一个任务；首页终于可以更像世界入口，而不是全部内容的仓库。",
   },
   {
     id: "LOG 002",
@@ -259,11 +282,11 @@ export const fieldNotes = [
     excerpt: "大部分界面保持安静，只把动画留给状态、反馈与少数值得记住的瞬间。",
   },
   {
-    id: "LOG 003",
+    id: "LOG 001",
     date: "2026.08.09",
-    title: "从一张长首页，展开三个独立频道",
+    title: "先把房子搭稳，再开始装饰",
     excerpt:
-      "关于我、航线终端和世界线日志各自承担一个任务；首页终于可以更像世界入口，而不是全部内容的仓库。",
+      "清晰的边界、自动检查和可替换的内容层，决定了这个网站半年后还能不能轻松修改。",
   },
 ] as const;
 
@@ -279,7 +302,7 @@ export const roadmap = [
     title: "展开多页世界",
     status: "本话完成",
     description:
-      "独立 About、Links、Study 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
+      "独立 About、Links、Projects、Study 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
   },
   {
     phase: "03",

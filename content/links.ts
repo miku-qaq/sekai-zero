@@ -24,6 +24,15 @@ export const linkEntries: readonly LinkEntry[] = [
     tags: ["关于我", "设定", "长期主线"],
   },
   {
+    id: "projects",
+    group: "internal",
+    label: "制作档案",
+    eyebrow: "PRODUCTION DOSSIER",
+    href: "/projects/",
+    reason: "查看这座网站真实的问题、目标、结构、取舍与版本证据，而不只看最终画面。",
+    tags: ["项目", "案例", "工程"],
+  },
+  {
     id: "study",
     group: "internal",
     label: "计算机学习舱",

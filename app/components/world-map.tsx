@@ -13,7 +13,7 @@ export function WorldMap() {
           <p className="section-index">01 / WORLD MAP</p>
           <h2 id="world-map-title">这次，不只是一张首页。</h2>
         </div>
-        <p>四个独立频道已经接入主世界；每一页都有自己的任务，也能单独收藏和分享。</p>
+        <p>五个独立频道已经接入主世界；每一页都有自己的任务，也能单独收藏和分享。</p>
       </div>
       <div className="world-route-grid">
         {worldRoutes.map((route) => (
@@ -21,6 +21,7 @@ export function WorldMap() {
             className={`world-route-card world-route-${route.tone}`}
             href={sitePath(route.href)}
             key={route.href}
+            data-layout={route.layout}
           >
             <span className="world-route-index">ROUTE / {route.index}</span>
             <span className="world-route-motif" aria-hidden="true">

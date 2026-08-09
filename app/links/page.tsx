@@ -74,9 +74,9 @@ export default function LinksPage() {
 
       <section className="subpage-next section-shell" aria-labelledby="next-title">
         <span>下一站 / ROUTE 03</span>
-        <h2 id="next-title">想知道这座网站怎么一步步长成？</h2>
-        <a className="button button-primary" href={sitePath("/logs/")}>
-          打开世界线日志 <span aria-hidden="true">↗</span>
+        <h2 id="next-title">想知道这座网站为什么这样设计？</h2>
+        <a className="button button-primary" href={sitePath("/projects/")}>
+          读取制作档案 <span aria-hidden="true">↗</span>
         </a>
       </section>
       <SiteFooter />

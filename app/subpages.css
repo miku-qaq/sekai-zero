@@ -47,6 +47,19 @@
     border-color 220ms ease;
 }
 
+.world-route-card[data-layout="featured"] {
+  min-height: 350px;
+  grid-column: 1 / -1;
+}
+
+.world-route-card[data-layout="featured"] > div {
+  max-width: 58ch;
+}
+
+.world-route-card[data-layout="featured"] .world-route-motif {
+  font-size: clamp(88px, 12vw, 160px);
+}
+
 .world-route-card::before {
   position: absolute;
   z-index: -1;
@@ -81,6 +94,10 @@
 
 .world-route-blue {
   --route-color: #4f8df7;
+}
+
+.world-route-amber {
+  --route-color: #f2a93b;
 }
 
 .world-route-index,
@@ -190,6 +207,10 @@
 
 .subpage-blue {
   --page-accent: #4f8df7;
+}
+
+.subpage-amber {
+  --page-accent: #f2a93b;
 }
 
 .subpage-crumb {
@@ -1348,6 +1369,11 @@
   .world-route-card:last-child,
   .influence-card:last-child,
   .dormant-grid article:last-child {
+    grid-column: auto;
+  }
+
+  .world-route-card[data-layout="featured"] {
+    min-height: 340px;
     grid-column: auto;
   }
 

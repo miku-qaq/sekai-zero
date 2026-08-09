@@ -34,6 +34,7 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.match(html, /这里不只一页/);
   assert.match(html, /角色设定档/);
   assert.match(html, /航线终端/);
+  assert.match(html, /制作档案/);
   assert.match(html, /计算机学习舱/);
   assert.match(html, /世界线日志/);
   assert.match(html, /三张我的 SSR/);
@@ -67,6 +68,11 @@ test("server-renders every secondary route with its own editorial purpose", asyn
       copy: /我在互联网留下的航线/,
     },
     {
+      pathname: "/projects",
+      title: /<title>制作档案 · SEKAI<\/title>/i,
+      copy: /把制作过程，也做成一份作品/,
+    },
+    {
       pathname: "/study",
       title: /<title>计算机学习舱 · SEKAI<\/title>/i,
       copy: /把学到的东西，整理成可以返回的地图/,
@@ -98,6 +104,8 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
     gacha,
     studyNotebook,
     studyContent,
+    projectsPage,
+    projectsContent,
     styles,
     sitePaths,
   ] = await Promise.all([
@@ -113,6 +121,8 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
     ),
     readFile(new URL("../app/components/study-notebook.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/study.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/projects/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/projects.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
   ]);
@@ -141,6 +151,10 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(studyContent, /educational content, not claims about courses completed/);
   assert.match(studyContent, /developer\.mozilla\.org/);
   assert.match(studyContent, /git-scm\.com/);
+  assert.match(projectsPage, /CASE 001 \/ SEKAI 00/);
+  assert.match(projectsContent, /not a claim about traffic, clients, revenue/);
+  assert.match(projectsContent, /WAITING FOR VERIFIED WORK/);
+  assert.doesNotMatch(projectsContent, /访问量|收入|客户评价|转化率/);
   assert.match(sitePaths, /NEXT_PUBLIC_BASE_PATH/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");

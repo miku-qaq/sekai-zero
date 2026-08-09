@@ -6,7 +6,7 @@ type PageMastheadProps = {
   title: string;
   lead: string;
   motif: string;
-  tone: "mint" | "violet" | "pink" | "blue";
+  tone: "mint" | "violet" | "pink" | "blue" | "amber";
   meta: readonly { label: string; value: string }[];
 };
 

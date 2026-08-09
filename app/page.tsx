@@ -20,7 +20,7 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            EP.004 · KNOWLEDGE DECK ONLINE
+            EP.005 · PROJECT FILE ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
             这里不只一页，
@@ -30,21 +30,21 @@ export default function Home() {
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
             欢迎来到一部由代码、音乐、魔法和一点社恐能量共同连载的个人番剧。
-            角色设定、航线、学习笔记与日志已经拥有各自的房间。
+            角色设定、航线、制作档案、学习笔记与日志已经拥有各自的房间。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href={sitePath("/about/")}>
-              读取角色设定
+            <a className="button button-primary" href={sitePath("/projects/")}>
+              读取制作档案
               <span aria-hidden="true">↘</span>
             </a>
-            <a className="button button-ghost" href={sitePath("/links/")}>
-              打开航线终端
+            <a className="button button-ghost" href={sitePath("/study/")}>
+              打开学习舱
             </a>
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 004 话 · 学习舱点亮</dd>
+              <dd>第 005 话 · 制作档案启封</dd>
             </div>
             <div>
               <dt>本话属性</dt>
@@ -58,7 +58,7 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 04</span>
+              <span>ORIGINAL KEY VISUAL / 05</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
@@ -73,7 +73,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / 004
+                SCENE / 005
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -84,7 +84,7 @@ export default function Home() {
                 <span>DIMENSIONAL STUDIO</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#004</span>
+              <span className="identity-number">#005</span>
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
@@ -152,7 +152,7 @@ export default function Home() {
             这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            第四话为计算机学习增加独立空间：原创群像负责第一眼的情绪，独立页面负责真正的内容，作品、笔记与日志继续保持清晰、真实、可维护。
+            第五话把网站本身整理成第一份真实案例：原创群像负责第一眼的情绪，独立页面负责真正的内容，目标、取舍与版本证据也开始被认真保存。
           </p>
           <div className="principles-grid">
             <article>
@@ -256,6 +256,9 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <a className="section-text-link" href={sitePath("/projects/")}>
+            阅读 Project 001 完整制作档案 <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </section>
 
@@ -330,8 +333,8 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">第 004 话，放送完毕。</h2>
-        <p>计算机学习舱已经上线；下一话，会继续加入真实收藏与更有趣的次元实验。</p>
+        <h2 id="finale-title">第 005 话，放送完毕。</h2>
+        <p>第一份制作档案已经上线；下一话，会继续加入真实收藏与更有趣的次元实验。</p>
         <div className="finale-actions">
           <a className="button button-primary" href={sitePath("/#top")}>
             回到开场 <span aria-hidden="true">↑</span>

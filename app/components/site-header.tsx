@@ -138,8 +138,8 @@ export function SiteHeader() {
               ◐
             </span>
           </button>
-          <a className="header-cta" href={sitePath("/study/")}>
-            开始学习
+          <a className="header-cta" href={sitePath("/projects/")}>
+            查看制作档案
             <span aria-hidden="true">↘</span>
           </a>
           <button

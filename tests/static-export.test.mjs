@@ -14,6 +14,7 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
     { path: "index.html", title: /<title>SEKAI \/ 00 · 个人次元站<\/title>/i },
     { path: "about/index.html", title: /<title>角色设定档 · SEKAI<\/title>/i },
     { path: "links/index.html", title: /<title>航线终端 · SEKAI<\/title>/i },
+    { path: "projects/index.html", title: /<title>制作档案 · SEKAI<\/title>/i },
     { path: "study/index.html", title: /<title>计算机学习舱 · SEKAI<\/title>/i },
     { path: "logs/index.html", title: /<title>世界线日志 · SEKAI<\/title>/i },
   ];
@@ -54,8 +55,10 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   assert.match(homepage, new RegExp(`src="${basePath}/hero-anime-v2\\.webp"`));
   assert.match(homepage, new RegExp(`href="${basePath}/about/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/links/"`));
+  assert.match(homepage, new RegExp(`href="${basePath}/projects/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/study/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/logs/"`));
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
+  await access(new URL("../dist/pages/og-projects.png", import.meta.url));
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));
 });
