@@ -11,6 +11,7 @@ export const siteConfig = {
   navigation: [
     { label: "关于", href: "#about" },
     { label: "收藏", href: "#favorites" },
+    { label: "扭蛋", href: "#gacha" },
     { label: "作品", href: "#works" },
     { label: "日志", href: "#notes" },
     { label: "路线图", href: "#roadmap" },
@@ -45,6 +46,76 @@ export const mangaMoments = [
     motif: "♬",
     copy: "就算紧张到融化，也要弹完这一小节。",
     tone: "pink",
+  },
+] as const;
+
+/**
+ * Expandable card pool for the dimensional gacha. These are original prompts
+ * inspired by the emotional qualities the owner enjoys in three characters;
+ * they are not quotations from the source works.
+ */
+export const dimensionalFortunes = [
+  {
+    id: "miku-tomorrow",
+    channel: "miku",
+    rarity: "SSR",
+    code: "MINT SIGNAL / 39",
+    motif: "♪",
+    title: "先让明天发出声音",
+    message: "不必等到一切准备完美。今天完成的一个小片段，就能成为未来真正开始的前奏。",
+    action: "行动指令：完成一件可以分享的小作品。",
+  },
+  {
+    id: "elaina-detour",
+    channel: "elaina",
+    rarity: "SR",
+    code: "ASH VOYAGE / 07",
+    motif: "✦",
+    title: "绕路也算旅程",
+    message:
+      "计划之外的风景并不是浪费时间；把意外记下来，它可能正是今天最值得收藏的故事。",
+    action: "行动指令：记录一个意外发现。",
+  },
+  {
+    id: "bocchi-stage",
+    channel: "bocchi",
+    rarity: "SSR",
+    code: "PINK ROCK / 06",
+    motif: "♬",
+    title: "紧张也可以上台",
+    message: "勇气不是完全不害怕，而是手还在发抖时，也愿意把下一小节认真弹完。",
+    action: "行动指令：公开一个还不完美的想法。",
+  },
+  {
+    id: "miku-rhythm",
+    channel: "miku",
+    rarity: "SR",
+    code: "MINT LOOP / 01",
+    motif: "♫",
+    title: "把重复练习变成节奏",
+    message: "那些看似普通的重复，会在某个时刻突然连成旋律。今天只需要守住自己的节拍。",
+    action: "行动指令：给重要技能留二十五分钟。",
+  },
+  {
+    id: "elaina-curiosity",
+    channel: "elaina",
+    rarity: "SSR",
+    code: "VIOLET MAP / 02",
+    motif: "✧",
+    title: "让好奇心先出发",
+    message:
+      "地图不一定要完整才启程。先朝那个让你忍不住多看一眼的方向，迈出很小的一步。",
+    action: "行动指令：打开一个一直想了解的主题。",
+  },
+  {
+    id: "bocchi-next-bar",
+    channel: "bocchi",
+    rarity: "SR",
+    code: "PINK BAR / 04",
+    motif: "♩",
+    title: "只弹下一小节",
+    message: "任务大到让人想融化时，不用解决整首歌。把眼前这一小节弹好，就已经在前进。",
+    action: "行动指令：把大任务缩成十分钟步骤。",
   },
 ] as const;
 

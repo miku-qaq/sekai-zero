@@ -38,6 +38,10 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.match(html, /キラッ/);
   assert.match(html, /<h3>把还没有形状的明天/);
   assert.match(html, /role="meter"[^>]*aria-valuenow="99"/);
+  assert.match(html, /id="gacha"/);
+  assert.match(html, /抽一张今天的次元签/);
+  assert.match(html, /抽取下一张/);
+  assert.match(html, /先让明天发出声音/);
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /波奇/);
@@ -47,21 +51,25 @@ test("server-renders the product homepage and its core navigation", async () => 
 });
 
 test("keeps product boundaries and interaction safeguards in place", async () => {
-  const [page, content, packageJson, header, layout, share, styles] = await Promise.all(
-    [
+  const [page, content, packageJson, header, layout, share, gacha, styles] =
+    await Promise.all([
       readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
       readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
       readFile(new URL("../package.json", import.meta.url), "utf8"),
       readFile(new URL("../app/components/site-header.tsx", import.meta.url), "utf8"),
       readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
       readFile(new URL("../app/components/share-button.tsx", import.meta.url), "utf8"),
+      readFile(
+        new URL("../app/components/dimensional-gacha.tsx", import.meta.url),
+        "utf8",
+      ),
       readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-    ],
-  );
+    ]);
 
   assert.match(page, /from "@\/content\/site"/);
   assert.match(content, /favoriteChannels/);
   assert.match(content, /mangaMoments/);
+  assert.match(content, /dimensionalFortunes/);
   assert.match(packageJson, /"name": "sekai-zero-personal-site"/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle-kit/);
@@ -70,6 +78,8 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(layout, /themeInitializationScript/);
   assert.match(share, /manualUrl/);
   assert.match(share, /aria-live="polite"/);
+  assert.match(gacha, /Math\.random/);
+  assert.match(gacha, /aria-atomic="true"/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");
   const mobileEnd = styles.indexOf("@media (max-width: 420px)");

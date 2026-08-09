@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
+import { DimensionalGacha } from "./components/dimensional-gacha";
 import { ShareButton } from "./components/share-button";
 import { FavoriteChannels } from "./components/favorite-channels";
 
@@ -188,6 +189,23 @@ export default function Home() {
           </div>
           <FavoriteChannels />
         </div>
+      </section>
+
+      <section
+        className="gacha-section section-shell section-pad"
+        id="gacha"
+        aria-labelledby="gacha-title"
+      >
+        <div className="section-heading horizontal-heading gacha-heading">
+          <div>
+            <p className="section-index">BONUS TRACK / DIMENSIONAL GACHA</p>
+            <h2 id="gacha-title">抽一张今天的次元签。</h2>
+          </div>
+          <p>
+            不是角色原台词，而是从音乐、远行与摇滚精神延伸出的原创小签；给今天一个轻松但可以执行的开场。
+          </p>
+        </div>
+        <DimensionalGacha />
       </section>
 
       <section className="works section-pad" id="works" aria-labelledby="works-title">
