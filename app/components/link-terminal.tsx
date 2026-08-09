@@ -100,7 +100,7 @@ export function LinkTerminal() {
                 ))}
               </ul>
               <strong>
-                {entry.external ? "打开外部坐标" : "进入频道"}
+                {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
                 <span aria-hidden="true">↗</span>
               </strong>
             </a>

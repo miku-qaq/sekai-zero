@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import {
-  influenceSignals,
-  profileFacts,
-  profileQuestions,
-  profileTimeline,
-} from "@/content/about";
+import { influenceSignals, profileQuestions, profileTimeline } from "@/content/about";
+import { profileFacts, publicProfile } from "@/content/profile";
 import { sitePath } from "@/lib/site-path";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -14,7 +10,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "角色设定档",
   description:
-    "认识 SEKAI / 00 背后正在长期建设个人网站的人，以及音乐、旅行与摇滚构成的三种能量。",
+    "认识 Mikureina：南京大学 CS 在读，喜欢动漫与游戏，也在长期建设 SEKAI / 00。",
 };
 
 export default function AboutPage() {
@@ -23,14 +19,14 @@ export default function AboutPage() {
       <PageMasthead
         episode="FILE 01"
         eyebrow="PROFILE SIGNAL / VERIFIED FACTS ONLY"
-        title="欢迎来到我的角色设定页。"
-        lead="现实资料保持克制，喜欢的事认真展开。这里不会用一串标签假装认识我，而是记录我正在构建、正在学习和愿意长期坚持的东西。"
-        motif="私"
+        title="你好，我是 Mikureina。"
+        lead="南京大学 CS 在读。平时喜欢动漫和游戏，也在这里记录计算机学习、作品与一座长期生长的个人次元站。"
+        motif="M"
         tone="mint"
         meta={[
-          { label: "当前主线", value: "长期建设 SEKAI / 00" },
-          { label: "次元属性", value: "音乐 × 旅行 × 摇滚" },
-          { label: "档案状态", value: "持续补完中" },
+          { label: "CN 名", value: publicProfile.handle },
+          { label: "当前状态", value: publicProfile.academicStatus },
+          { label: "兴趣频道", value: publicProfile.interests.join(" × ") },
         ]}
       />
 
@@ -40,26 +36,57 @@ export default function AboutPage() {
       >
         <div className="section-heading profile-heading">
           <p className="section-index">01 / VERIFIED PROFILE</p>
-          <h2 id="profile-title">先从真实的四件事开始。</h2>
+          <h2 id="profile-title">已经确认的真实坐标。</h2>
           <p>
-            称呼、职业、所在地等现实信息尚未由主人公开，因此不会为了“看起来完整”而代填。
+            以下资料均由本人确认公开；未提供的年级、经历、所在地与社交账号继续保持留白。
           </p>
         </div>
         <div className="profile-sheet">
-          <div className="profile-avatar" aria-hidden="true">
-            <span>00</span>
-            <strong>PLAYER</strong>
-            <i />
-          </div>
+          <article className="profile-id-card" aria-labelledby="profile-handle">
+            <div className="profile-id-topline">
+              <span>PUBLIC CHARACTER FILE</span>
+              <strong>VERIFIED</strong>
+            </div>
+            <div className="profile-id-body">
+              <span className="profile-id-mark" aria-hidden="true">
+                {publicProfile.monogram}
+              </span>
+              <div>
+                <p>CN / PLAYER 00</p>
+                <h3 id="profile-handle">{publicProfile.handle}</h3>
+                <span>{publicProfile.academicStatus}</span>
+              </div>
+            </div>
+            <ul className="profile-id-tags" aria-label="公开兴趣与常玩平台">
+              {[...publicProfile.interests, ...publicProfile.gamingPlatforms].map(
+                (item) => (
+                  <li key={item}>{item}</li>
+                ),
+              )}
+            </ul>
+            <p className="profile-id-status">
+              <span aria-hidden="true" /> PROFILE ONLINE
+            </p>
+          </article>
           <dl className="profile-facts">
             {profileFacts.map((fact, index) => (
-              <div key={fact.label}>
+              <div id={fact.id} key={fact.label}>
                 <dt>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   {fact.label}
                 </dt>
                 <dd>
-                  <strong>{fact.value}</strong>
+                  {fact.href ? (
+                    <a
+                      className="profile-fact-link"
+                      href={fact.href}
+                      aria-label={fact.ariaLabel}
+                    >
+                      {fact.value} <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <strong>{fact.value}</strong>
+                  )}
                   <span>{fact.note}</span>
                 </dd>
               </div>

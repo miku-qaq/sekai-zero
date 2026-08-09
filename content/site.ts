@@ -1,3 +1,5 @@
+import { publicProfile } from "./profile";
+
 /**
  * Public-facing copy and navigation for the site.
  *
@@ -7,7 +9,9 @@
 export const siteConfig = {
   name: "SEKAI / 00",
   shortName: "SEKAI",
-  description: "一个在现实与次元之间持续生长的个人空间，收藏作品、想法与生活切片。",
+  owner: publicProfile.handle,
+  description:
+    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、作品与长期建站过程。",
   navigation: [
     { label: "首页", href: "/" },
     { label: "关于我", href: "/about/" },
@@ -25,7 +29,8 @@ export const worldRoutes = [
     href: "/about/",
     eyebrow: "CHARACTER FILE",
     title: "角色设定档",
-    description: "不靠虚构标签包装自己，只记录正在构建、真正喜欢和愿意长期坚持的事情。",
+    description:
+      "认识 Mikureina：南京大学 CS 在读，喜欢动漫、游戏，并认真记录正在学习和愿意长期坚持的事情。",
     action: "读取档案",
     motif: "ID",
     tone: "mint",
@@ -255,6 +260,13 @@ export const projectHighlights = [
 
 export const fieldNotes = [
   {
+    id: "LOG 006",
+    date: "2026.08.09",
+    title: "让名字与现实坐标正式上线",
+    excerpt:
+      "只录入主人明确确认的称呼、学习状态、兴趣、游戏平台与联系入口；未知资料继续保持留白。",
+  },
+  {
     id: "LOG 005",
     date: "2026.08.09",
     title: "让作品不只停在一张展示卡",
@@ -307,8 +319,9 @@ export const roadmap = [
   {
     phase: "03",
     title: "录入真实内容",
-    status: "下一步",
-    description: "补充主人确认的公开身份、作品、社交链接与兴趣收藏，不虚构个人资料。",
+    status: "已点亮一部分",
+    description:
+      "Mikureina 的称呼、学习状态、兴趣、游戏平台与联系邮箱已经上线；作品、收藏与社交坐标继续按确认范围补充。",
   },
   {
     phase: "04",

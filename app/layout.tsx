@@ -47,8 +47,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  keywords: ["个人网站", "作品集", "二次元", "动漫", "设计", "开发"],
-  authors: [{ name: siteConfig.shortName }],
+  keywords: ["个人网站", "作品集", "二次元", "动漫", "游戏", "计算机学习", "开发"],
+  authors: [{ name: siteConfig.owner }],
+  creator: siteConfig.owner,
   icons: {
     icon: favicon,
     shortcut: favicon,

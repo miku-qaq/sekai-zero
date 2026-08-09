@@ -108,6 +108,12 @@ export const productionChapters = [
     copy: "不等待虚构作品填满页面，先把这个真实项目的问题、选择和演进说清楚。",
     evidence: "CASE STUDY",
   },
+  {
+    episode: "EP.006",
+    title: "让真实档案进入内容系统",
+    copy: "只录入主人确认的称呼、学习状态、兴趣、游戏平台与联系入口，并为未知资料保留边界。",
+    evidence: "PUBLIC PROFILE",
+  },
 ] as const;
 
 export const qualityGates = [
@@ -152,9 +158,9 @@ export const projectDecisions = [
 ] as const;
 
 export const nextCheckpoints = [
-  "录入主人确认的真实项目、收藏与公开坐标",
+  "收录主人确认的真实作品、游戏收藏与社交坐标",
   "把长文章迁移到独立路由与构建期 MDX",
-  "建立 GitHub 远程仓库、分支保护与 Pages 公开备用入口",
+  "为 main 配置与每周协作方式匹配的分支保护",
 ] as const;
 
 export const futureCase = {

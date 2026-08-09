@@ -9,7 +9,8 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "航线终端",
-  description: "SEKAI / 00 的站内频道与建造装备，每个入口都记录一条愿意回来的理由。",
+  description:
+    "SEKAI / 00 的站内频道、建造装备与公开联系入口，每条航线都记录愿意返回的理由。",
 };
 
 export default function LinksPage() {
@@ -23,7 +24,7 @@ export default function LinksPage() {
         motif="↗"
         tone="violet"
         meta={[
-          { label: "当前航线", value: "本站频道 / 建造装备" },
+          { label: "当前航线", value: "本站 / 工具 / 联系" },
           { label: "筛选方式", value: "分类 / 搜索 / 随机跃迁" },
           { label: "录入原则", value: "真实关系优先" },
         ]}
@@ -53,7 +54,7 @@ export default function LinksPage() {
               <h2 id="dormant-title">还没有点亮的星域。</h2>
             </div>
             <p>
-              空白也应该说实话。等你提供真正的收藏、朋友与公开账号后，再让这些坐标上线。
+              邮件联系已经点亮；收藏、朋友与社交主页仍然保持诚实空白，等真实内容确认后再上线。
             </p>
           </div>
           <div className="dormant-grid">

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { publicProfile } from "@/content/profile";
 import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import { DimensionalGacha } from "./components/dimensional-gacha";
@@ -20,7 +21,7 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            EP.005 · PROJECT FILE ONLINE
+            EP.006 · PROFILE SIGNAL ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
             这里不只一页，
@@ -29,12 +30,12 @@ export default function Home() {
         </div>
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
-            欢迎来到一部由代码、音乐、魔法和一点社恐能量共同连载的个人番剧。
-            角色设定、航线、制作档案、学习笔记与日志已经拥有各自的房间。
+            欢迎来到 Mikureina 的个人次元站：南京大学 CS 在读，喜欢动漫和游戏。
+            角色设定、航线、制作档案、计算机学习笔记与世界线日志都在这里继续生长。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href={sitePath("/projects/")}>
-              读取制作档案
+            <a className="button button-primary" href={sitePath("/about/")}>
+              认识 Mikureina
               <span aria-hidden="true">↘</span>
             </a>
             <a className="button button-ghost" href={sitePath("/study/")}>
@@ -44,11 +45,11 @@ export default function Home() {
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 005 话 · 制作档案启封</dd>
+              <dd>第 006 话 · 真实档案上线</dd>
             </div>
             <div>
-              <dt>本话属性</dt>
-              <dd>音乐 × 魔法 × 摇滚</dd>
+              <dt>站主信号</dt>
+              <dd>{publicProfile.handle} · NJU CS</dd>
             </div>
           </dl>
         </div>
@@ -58,7 +59,7 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 05</span>
+              <span>ORIGINAL KEY VISUAL / 06</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
@@ -73,7 +74,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / 005
+                SCENE / 006
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -84,7 +85,7 @@ export default function Home() {
                 <span>DIMENSIONAL STUDIO</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#005</span>
+              <span className="identity-number">#006</span>
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
@@ -152,7 +153,7 @@ export default function Home() {
             这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            第五话把网站本身整理成第一份真实案例：原创群像负责第一眼的情绪，独立页面负责真正的内容，目标、取舍与版本证据也开始被认真保存。
+            第六话让真实档案上线：原创群像负责第一眼的情绪，独立页面承载可核对的个人资料、学习内容、项目过程与版本证据。
           </p>
           <div className="principles-grid">
             <article>
@@ -333,8 +334,8 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">第 005 话，放送完毕。</h2>
-        <p>第一份制作档案已经上线；下一话，会继续加入真实收藏与更有趣的次元实验。</p>
+        <h2 id="finale-title">第 006 话，放送完毕。</h2>
+        <p>真实角色档案已经上线；下一话，会继续加入确认过的收藏与更有趣的次元实验。</p>
         <div className="finale-actions">
           <a className="button button-primary" href={sitePath("/#top")}>
             回到开场 <span aria-hidden="true">↑</span>

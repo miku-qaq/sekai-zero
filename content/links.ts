@@ -1,11 +1,12 @@
 export type LinkEntry = {
   id: string;
-  group: "internal" | "toolkit";
+  group: "internal" | "toolkit" | "contact";
   label: string;
   eyebrow: string;
   href: string;
   reason: string;
   tags: readonly string[];
+  action?: string;
   external?: boolean;
 };
 
@@ -60,6 +61,17 @@ export const linkEntries: readonly LinkEntry[] = [
     tags: ["互动", "随机", "小彩蛋"],
   },
   {
+    id: "contact",
+    group: "contact",
+    label: "联系 Mikureina",
+    eyebrow: "PUBLIC MAILBOX",
+    href: "/about/#contact",
+    reason:
+      "已确认的联系邮箱集中保留在角色设定档；关于本站、学习或共同兴趣，可以从那里写信。",
+    tags: ["联系", "邮箱", "Mikureina"],
+    action: "查看联系邮箱",
+  },
+  {
     id: "react",
     group: "toolkit",
     label: "React",
@@ -95,6 +107,7 @@ export const linkGroups = [
   { id: "all", label: "全部航线" },
   { id: "internal", label: "本站频道" },
   { id: "toolkit", label: "建造装备" },
+  { id: "contact", label: "公开坐标" },
 ] as const;
 
 export const dormantSectors = [
@@ -109,8 +122,8 @@ export const dormantSectors = [
     copy: "这个星域还没有公开坐标。等主人确认后再点亮，拒绝为了热闹而虚构友链。",
   },
   {
-    title: "我的公开坐标",
-    code: "SECTOR / SOCIAL",
-    copy: "社交主页与联系方式尚未公开；未来会在确认隐私边界后逐项接入。",
+    title: "游戏收藏馆",
+    code: "SECTOR / GAMES",
+    copy: "Nintendo Switch 与 Steam 已经确认；具体游戏、游玩状态和收藏理由会等真实清单准备好后再录入。",
   },
 ] as const;

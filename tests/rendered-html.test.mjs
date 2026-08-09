@@ -32,6 +32,8 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.match(html, /<html[^>]*lang="zh-CN"/i);
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
   assert.match(html, /这里不只一页/);
+  assert.match(html, /Mikureina/);
+  assert.match(html, /EP\.006/);
   assert.match(html, /角色设定档/);
   assert.match(html, /航线终端/);
   assert.match(html, /制作档案/);
@@ -60,7 +62,7 @@ test("server-renders every secondary route with its own editorial purpose", asyn
     {
       pathname: "/about",
       title: /<title>角色设定档 · SEKAI<\/title>/i,
-      copy: /欢迎来到我的角色设定页/,
+      copy: /你好，我是 Mikureina/,
     },
     {
       pathname: "/links",
@@ -93,6 +95,35 @@ test("server-renders every secondary route with its own editorial purpose", asyn
   }
 });
 
+test("publishes only the owner-confirmed profile and one direct contact entry", async () => {
+  const aboutResponse = await render("/about");
+  assert.equal(aboutResponse.status, 200);
+  const about = await aboutResponse.text();
+
+  assert.match(about, /Mikureina/);
+  assert.match(about, /南京大学 · CS 在读/);
+  assert.match(about, /动漫/);
+  assert.match(about, /游戏/);
+  assert.match(about, /Nintendo Switch/);
+  assert.match(about, /Steam/);
+  assert.match(about, /miku125194847@gmail\.com/);
+  assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
+  assert.doesNotMatch(about, /称呼、职业、所在地等现实信息尚未由主人公开/);
+
+  const [homepageResponse, linksResponse] = await Promise.all([
+    render("/"),
+    render("/links"),
+  ]);
+  const [homepage, links] = await Promise.all([
+    homepageResponse.text(),
+    linksResponse.text(),
+  ]);
+  assert.doesNotMatch(homepage, /miku125194847@gmail\.com/);
+  assert.doesNotMatch(links, /miku125194847@gmail\.com/);
+  assert.match(links, /联系 Mikureina/);
+  assert.match(links, /href="\/about\/#contact"/);
+});
+
 test("keeps product boundaries and interaction safeguards in place", async () => {
   const [
     page,
@@ -108,6 +139,7 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
     projectsContent,
     styles,
     sitePaths,
+    profileContent,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
@@ -125,6 +157,7 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
     readFile(new URL("../content/projects.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/profile.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /from "@\/content\/site"/);
@@ -156,6 +189,10 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(projectsContent, /WAITING FOR VERIFIED WORK/);
   assert.doesNotMatch(projectsContent, /访问量|收入|客户评价|转化率/);
   assert.match(sitePaths, /NEXT_PUBLIC_BASE_PATH/);
+  assert.match(profileContent, /Owner-confirmed public profile data/);
+  assert.match(profileContent, /handle: "Mikureina"/);
+  assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
+  assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");
   const mobileEnd = styles.indexOf("@media (max-width: 420px)");

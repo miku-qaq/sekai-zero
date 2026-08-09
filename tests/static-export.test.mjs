@@ -58,6 +58,23 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   assert.match(homepage, new RegExp(`href="${basePath}/projects/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/study/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/logs/"`));
+
+  const about = await readFile(
+    new URL("../dist/pages/about/index.html", import.meta.url),
+    "utf8",
+  );
+  const links = await readFile(
+    new URL("../dist/pages/links/index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(about, /Mikureina/);
+  assert.match(about, /南京大学 · CS 在读/);
+  assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
+  assert.doesNotMatch(about, /href="[^"]*\/mailto:/);
+  assert.match(links, new RegExp(`href="${basePath}/about/#contact"`));
+  assert.doesNotMatch(homepage, /miku125194847@gmail\.com/);
+  assert.doesNotMatch(links, /miku125194847@gmail\.com/);
+
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
   await access(new URL("../dist/pages/og-projects.png", import.meta.url));
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));

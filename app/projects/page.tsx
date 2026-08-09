@@ -159,7 +159,9 @@ export default function ProjectsPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">04 / PRODUCTION REEL</p>
-            <h2 id="chapters-title">五话，不是五次推倒重来。</h2>
+            <h2 id="chapters-title">
+              已经连载 {productionChapters.length} 话，没有一次推倒重来。
+            </h2>
           </div>
           <p>
             每一话都留下能够被下一话复用的结构；项目演进本身，就是这份案例最重要的证据。

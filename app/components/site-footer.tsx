@@ -21,7 +21,9 @@ export function SiteFooter() {
           </a>
         ))}
       </nav>
-      <p>© {new Date().getFullYear()} · SIGNAL STILL ON</p>
+      <p>
+        © {new Date().getFullYear()} {siteConfig.owner} · SIGNAL STILL ON
+      </p>
     </footer>
   );
 }

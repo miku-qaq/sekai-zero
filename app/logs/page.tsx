@@ -111,7 +111,7 @@ export default function LogsPage() {
 
       <section className="subpage-next section-shell" aria-labelledby="next-title">
         <span>循环结束 / RETURN TO OPENING</span>
-        <h2 id="next-title">第 005 话正在放送，回到首页看看完整世界。</h2>
+        <h2 id="next-title">{buildLogs[0].episode} 正在放送，回到首页看看完整世界。</h2>
         <a className="button button-primary" href={sitePath("/")}>
           返回世界入口 <span aria-hidden="true">↑</span>
         </a>
