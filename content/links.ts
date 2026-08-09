@@ -24,6 +24,15 @@ export const linkEntries: readonly LinkEntry[] = [
     tags: ["关于我", "设定", "长期主线"],
   },
   {
+    id: "study",
+    group: "internal",
+    label: "计算机学习舱",
+    eyebrow: "KNOWLEDGE DECK",
+    href: "/study/",
+    reason: "把计算机概念整理成可以搜索、展开、复述和继续校订的个人知识地图。",
+    tags: ["学习", "计算机", "笔记"],
+  },
+  {
     id: "logs",
     group: "internal",
     label: "世界线日志",

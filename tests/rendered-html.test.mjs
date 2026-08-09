@@ -34,6 +34,7 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.match(html, /这里不只一页/);
   assert.match(html, /角色设定档/);
   assert.match(html, /航线终端/);
+  assert.match(html, /计算机学习舱/);
   assert.match(html, /世界线日志/);
   assert.match(html, /三张我的 SSR/);
   assert.match(html, /hero-anime-v2\.webp/);
@@ -66,6 +67,11 @@ test("server-renders every secondary route with its own editorial purpose", asyn
       copy: /我在互联网留下的航线/,
     },
     {
+      pathname: "/study",
+      title: /<title>计算机学习舱 · SEKAI<\/title>/i,
+      copy: /把学到的东西，整理成可以返回的地图/,
+    },
+    {
       pathname: "/logs",
       title: /<title>世界线日志 · SEKAI<\/title>/i,
       copy: /把网站的成长，也写成内容/,
@@ -82,21 +88,34 @@ test("server-renders every secondary route with its own editorial purpose", asyn
 });
 
 test("keeps product boundaries and interaction safeguards in place", async () => {
-  const [page, content, packageJson, header, layout, share, gacha, styles, sitePaths] =
-    await Promise.all([
-      readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
-      readFile(new URL("../package.json", import.meta.url), "utf8"),
-      readFile(new URL("../app/components/site-header.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../app/components/share-button.tsx", import.meta.url), "utf8"),
-      readFile(
-        new URL("../app/components/dimensional-gacha.tsx", import.meta.url),
-        "utf8",
-      ),
-      readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-      readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
-    ]);
+  const [
+    page,
+    content,
+    packageJson,
+    header,
+    layout,
+    share,
+    gacha,
+    studyNotebook,
+    studyContent,
+    styles,
+    sitePaths,
+  ] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/site-header.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/share-button.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/components/dimensional-gacha.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/components/study-notebook.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/study.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
+  ]);
 
   assert.match(page, /from "@\/content\/site"/);
   assert.match(content, /favoriteChannels/);
@@ -114,6 +133,14 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(share, /aria-live="polite"/);
   assert.match(gacha, /Math\.random/);
   assert.match(gacha, /aria-atomic="true"/);
+  assert.match(studyNotebook, /role="search"/);
+  assert.match(studyNotebook, /aria-live="polite"/);
+  assert.match(studyNotebook, /<details/);
+  assert.match(studyNotebook, /<summary>/);
+  assert.match(studyNotebook, /清除筛选/);
+  assert.match(studyContent, /educational content, not claims about courses completed/);
+  assert.match(studyContent, /developer\.mozilla\.org/);
+  assert.match(studyContent, /git-scm\.com/);
   assert.match(sitePaths, /NEXT_PUBLIC_BASE_PATH/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");

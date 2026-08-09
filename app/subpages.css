@@ -23,7 +23,7 @@
 
 .world-route-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -77,6 +77,10 @@
 
 .world-route-pink {
   --route-color: #ff79aa;
+}
+
+.world-route-blue {
+  --route-color: #4f8df7;
 }
 
 .world-route-index,
@@ -182,6 +186,10 @@
 
 .subpage-pink {
   --page-accent: #ff74a7;
+}
+
+.subpage-blue {
+  --page-accent: #4f8df7;
 }
 
 .subpage-crumb {
@@ -1230,13 +1238,11 @@
    -------------------------------------------------------------------------- */
 
 @media (max-width: 1040px) {
-  .world-route-grid,
   .influence-grid,
   .dormant-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .world-route-card:last-child,
   .influence-card:last-child,
   .dormant-grid article:last-child {
     grid-column: 1 / -1;

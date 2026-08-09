@@ -12,6 +12,7 @@ export const siteConfig = {
     { label: "首页", href: "/" },
     { label: "关于我", href: "/about/" },
     { label: "航线终端", href: "/links/" },
+    { label: "学习笔记", href: "/study/" },
     { label: "世界线日志", href: "/logs/" },
   ],
 } as const;
@@ -40,12 +41,22 @@ export const worldRoutes = [
   },
   {
     index: "03",
+    href: "/study/",
+    eyebrow: "COMPUTER STUDY DECK",
+    title: "计算机学习舱",
+    description: "把零散概念整理成可以搜索、复述和继续扩充的知识地图。",
+    action: "开始复习",
+    motif: "</>",
+    tone: "blue",
+  },
+  {
+    index: "04",
     href: "/logs/",
     eyebrow: "TIMELINE ARCHIVE",
     title: "世界线日志",
     description: "把每一话的变化、选择和复盘写下来，让网站成长本身也成为内容。",
     action: "追更日志",
-    motif: "03",
+    motif: "04",
     tone: "pink",
   },
 ] as const;
@@ -228,6 +239,13 @@ export const projectHighlights = [
 
 export const fieldNotes = [
   {
+    id: "LOG 004",
+    date: "2026.08.09",
+    title: "给长期学习留一个可检索的房间",
+    excerpt:
+      "计算机笔记不再混在建站日志里；它有自己的分类、搜索、回忆问题和一手资料入口。",
+  },
+  {
     id: "LOG 001",
     date: "2026.08.09",
     title: "先把房子搭稳，再开始装饰",
@@ -260,7 +278,8 @@ export const roadmap = [
     phase: "02",
     title: "展开多页世界",
     status: "本话完成",
-    description: "独立 About、Links 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
+    description:
+      "独立 About、Links、Study 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
   },
   {
     phase: "03",

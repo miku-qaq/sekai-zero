@@ -13,7 +13,7 @@ export function WorldMap() {
           <p className="section-index">01 / WORLD MAP</p>
           <h2 id="world-map-title">这次，不只是一张首页。</h2>
         </div>
-        <p>三个独立频道已经接入主世界；每一页都有自己的任务，也能单独收藏和分享。</p>
+        <p>四个独立频道已经接入主世界；每一页都有自己的任务，也能单独收藏和分享。</p>
       </div>
       <div className="world-route-grid">
         {worldRoutes.map((route) => (
