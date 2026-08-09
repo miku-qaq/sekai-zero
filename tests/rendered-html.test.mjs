@@ -31,8 +31,13 @@ test("server-renders the product homepage and its core navigation", async () => 
   const html = await response.text();
   assert.match(html, /<html[^>]*lang="zh-CN"/i);
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
-  assert.match(html, /在现实与/);
-  assert.match(html, /三条特别喜欢的/);
+  assert.match(html, /我的日常/);
+  assert.match(html, /三张我的 SSR/);
+  assert.match(html, /hero-anime-v2\.webp/);
+  assert.match(html, /本话三个次元瞬间/);
+  assert.match(html, /キラッ/);
+  assert.match(html, /<h3>把还没有形状的明天/);
+  assert.match(html, /role="meter"[^>]*aria-valuenow="99"/);
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /波奇/);
@@ -42,17 +47,21 @@ test("server-renders the product homepage and its core navigation", async () => 
 });
 
 test("keeps product boundaries and interaction safeguards in place", async () => {
-  const [page, content, packageJson, header, layout, share] = await Promise.all([
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
-    readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readFile(new URL("../app/components/site-header.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/components/share-button.tsx", import.meta.url), "utf8"),
-  ]);
+  const [page, content, packageJson, header, layout, share, styles] = await Promise.all(
+    [
+      readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
+      readFile(new URL("../package.json", import.meta.url), "utf8"),
+      readFile(new URL("../app/components/site-header.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/components/share-button.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    ],
+  );
 
   assert.match(page, /from "@\/content\/site"/);
   assert.match(content, /favoriteChannels/);
+  assert.match(content, /mangaMoments/);
   assert.match(packageJson, /"name": "sekai-zero-personal-site"/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle-kit/);
@@ -61,4 +70,16 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(layout, /themeInitializationScript/);
   assert.match(share, /manualUrl/);
   assert.match(share, /aria-live="polite"/);
+
+  const mobileStart = styles.indexOf("@media (max-width: 760px)");
+  const mobileEnd = styles.indexOf("@media (max-width: 420px)");
+  const mobileStyles = styles.slice(mobileStart, mobileEnd);
+  assert.match(
+    mobileStyles,
+    /\.channel-options\s*\{[^}]*repeat\(3, minmax\(0, 1fr\)\)/,
+  );
+  assert.match(
+    mobileStyles,
+    /\.channel-option-symbol\s*\{[^}]*grid-row:\s*auto;[^}]*grid-column:\s*auto;/,
+  );
 });

@@ -28,6 +28,8 @@ npm run format       # 自动格式化
 npm run lint         # 代码规范与可访问性检查
 npm run typecheck    # TypeScript 静态检查
 npm test             # 构建并验证服务端输出
+npm run build:pages  # 生成 GitHub Pages 静态产物
+npm run test:pages   # 验证静态首页与资源路径
 npm run check        # 提交前完整质量门禁
 ```
 
@@ -41,10 +43,19 @@ Windows PowerShell 如果因本机执行策略拦截 `npm.ps1`，请使用 `npm.
 4. 运行 `npm run check`，通过后再提交 Pull Request。
 5. 使用 Conventional Commits，例如 `feat: add project archive`。
 
+## 公开部署
+
+项目保留两条相互隔离的发布路径：
+
+- **Sites / Cloudflare Worker**：保留未来登录、数据库和服务端能力。
+- **GitHub Pages**：当前公开首页的静态备用入口，避免服务端安全层阻断访问。
+
+公开仓库启用 Pages 后，在仓库设置中选择 **GitHub Actions** 作为发布源。`main` 更新会由 `.github/workflows/pages.yml` 自动读取仓库子路径、构建并整理 `dist/pages`、验证资源地址后发布；不要手工维护 `gh-pages` 分支。
+
 目录边界、部署约束与未来扩展方式见 [架构说明](docs/ARCHITECTURE.md)，计划见 [项目路线图](docs/ROADMAP.md)。
 
 ## 素材与隐私
 
-动漫角色相关内容只使用自制、获得授权或符合法律要求的素材，并记录来源。首版用色彩、文字与抽象图形向喜欢的角色致意，不复制官方立绘。公开个人资料、联系方式和统计能力必须经过站点所有者确认。
+动漫角色相关内容只使用自制、生成、获得授权或符合法律要求的素材，并记录来源。当前主视觉采用原创角色群像，以色彩和人物原型回应站点兴趣，不复制官方立绘、官方服装或 Logo；完整登记见 `docs/ASSETS.md`。公开个人资料、联系方式和统计能力必须经过站点所有者确认。
 
 本仓库当前不声明开源许可证；除非后续明确授权，否则保留全部权利。

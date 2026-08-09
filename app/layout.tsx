@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { headers } from "next/headers";
 import { siteConfig } from "@/content/site";
 import { SiteHeader } from "./components/site-header";
 import "./globals.css";
@@ -19,51 +18,54 @@ const geistMono = Geist_Mono({
 // the operating-system preference. Failure simply falls back to CSS.
 const themeInitializationScript = `try{const value=localStorage.getItem("sekai-theme");if(value==="light"||value==="dark"){document.documentElement.dataset.theme=value}}catch{}`;
 
-/** Derives absolute social image URLs from the host serving this exact request. */
-export async function generateMetadata(): Promise<Metadata> {
-  const requestHeaders = await headers();
-  const host =
-    requestHeaders.get("x-forwarded-host")?.split(",")[0]?.trim() ||
-    requestHeaders.get("host") ||
-    "localhost:3000";
-  const forwardedProtocol = requestHeaders
-    .get("x-forwarded-proto")
-    ?.split(",")[0]
-    ?.trim();
-  const protocol =
-    forwardedProtocol || (host.startsWith("localhost") ? "http" : "https");
-  const metadataBase = new URL(`${protocol}://${host}`);
-  const socialImage = new URL("/og.png", metadataBase).toString();
+const defaultSiteUrl = "https://sekai-zero.miku125194847910362.chatgpt.site/";
 
-  return {
-    metadataBase,
-    title: {
-      default: `${siteConfig.name} · 个人次元站`,
-      template: `%s · ${siteConfig.shortName}`,
-    },
-    description: siteConfig.description,
-    applicationName: siteConfig.name,
-    keywords: ["个人网站", "作品集", "二次元", "动漫", "设计", "开发"],
-    authors: [{ name: siteConfig.shortName }],
-    icons: {
-      icon: "/favicon.svg",
-      shortcut: "/favicon.svg",
-    },
-    openGraph: {
-      type: "website",
-      locale: "zh_CN",
-      title: `${siteConfig.name} · 个人次元站`,
-      description: siteConfig.description,
-      images: [{ url: socialImage, alt: "SEKAI / 00 个人次元站分享卡片" }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${siteConfig.name} · 个人次元站`,
-      description: siteConfig.description,
-      images: [socialImage],
-    },
-  };
+/**
+ * Metadata must be deterministic so the same page can be pre-rendered for
+ * GitHub Pages. CI injects the final Pages URL; Sites uses the stable fallback.
+ */
+function resolveSiteUrl(): URL {
+  const candidate = process.env.NEXT_PUBLIC_SITE_URL?.trim() || defaultSiteUrl;
+
+  try {
+    return new URL(candidate.endsWith("/") ? candidate : `${candidate}/`);
+  } catch {
+    return new URL(defaultSiteUrl);
+  }
 }
+
+const metadataBase = resolveSiteUrl();
+const socialImage = new URL("og.png", metadataBase).toString();
+const favicon = new URL("favicon.svg", metadataBase).toString();
+
+export const metadata: Metadata = {
+  metadataBase,
+  title: {
+    default: `${siteConfig.name} · 个人次元站`,
+    template: `%s · ${siteConfig.shortName}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: ["个人网站", "作品集", "二次元", "动漫", "设计", "开发"],
+  authors: [{ name: siteConfig.shortName }],
+  icons: {
+    icon: favicon,
+    shortcut: favicon,
+  },
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    title: `${siteConfig.name} · 个人次元站`,
+    description: siteConfig.description,
+    images: [{ url: socialImage, alt: "SEKAI / 00 个人次元站分享卡片" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} · 个人次元站`,
+    description: siteConfig.description,
+    images: [socialImage],
+  },
+};
 
 export const viewport: Viewport = {
   width: "device-width",

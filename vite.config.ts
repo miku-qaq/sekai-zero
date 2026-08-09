@@ -33,6 +33,16 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async () => {
+  const isGitHubPages = process.env.DEPLOY_TARGET === "github-pages";
+
+  // Pages is a pure static target. Returning before importing the Cloudflare
+  // plugin keeps Worker bindings and Sites packaging out of its artifact.
+  if (isGitHubPages) {
+    return {
+      plugins: [vinext()],
+    };
+  }
+
   // Keep Wrangler and Miniflare state project-local. These are non-secret tool
   // settings; application environment belongs in ignored `.env*` files.
   process.env.WRANGLER_WRITE_LOGS ??= "false";

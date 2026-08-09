@@ -9,7 +9,7 @@ SEKAI / 00 是长期个人站，不以首版功能数量衡量质量。架构优
 ```text
 app/                 路由、全局布局、页面与浏览器交互
 content/             公开文案和结构化内容（Git 即 CMS）
-tests/               构建产物的服务端渲染契约测试
+tests/               Worker SSR 与 Pages 静态产物契约测试
 worker/              Cloudflare Worker 适配层
 docs/                架构、路线图与重要决策
 .github/             自动检查和协作模板
@@ -25,7 +25,13 @@ docs/                架构、路线图与重要决策
 
 ## 视觉系统
 
-站点使用语义化 CSS token，而不是把颜色散落在组件中。`data-theme` 控制明暗模式，`data-channel` 控制初音未来、伊蕾娜与波奇主题频道。角色致意通过配色、节奏、音符和星轨表达，避免复制官方图像资产。
+站点使用语义化 CSS token，而不是把颜色散落在组件中。`data-theme` 控制明暗模式，`data-channel` 控制初音未来、伊蕾娜与波奇主题频道。视觉语言由原创群像、漫画网点、对白框和分镜构成；兴趣频道可以使用角色姓名和主题文案，但不复制官方图像资产。所有生成或授权素材统一登记在 `docs/ASSETS.md`。
+
+## 双目标发布
+
+默认 `npm run build` 继续产出 Sites/Cloudflare Worker，以保留未来的服务端扩展能力。`DEPLOY_TARGET=github-pages` 时，Vite 只加载 Vinext，Next 配置改为静态导出并使用 Pages 提供的仓库资源前缀。Vinext beta 的 `basePath` 预渲染缺陷和临时规避记录在 ADR 0002。
+
+静态目标不得导入 `headers()`、Server Actions、D1、R2 或 Worker 绑定。需要这些能力的页面必须留在动态目标，并在内容边界上提供静态降级。两种构建均由自动化测试验证；整理脚本把 Vinext 的带前缀资源归一到 `dist/pages`，Pages 只上传该目录。
 
 ## 迁移策略
 

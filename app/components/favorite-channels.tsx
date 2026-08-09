@@ -6,8 +6,9 @@ import { favoriteChannels } from "@/content/site";
 type ChannelId = (typeof favoriteChannels)[number]["id"];
 
 /**
- * A playful, copyright-conscious tribute: each favorite is represented through
- * palette, rhythm and symbols rather than copied character artwork.
+ * A playful, copyright-conscious tribute. The original key visual establishes
+ * the site's own cast; this selector references the owner's favorites through
+ * editorial copy, palettes and motifs instead of reproducing official assets.
  */
 export function FavoriteChannels() {
   const [activeChannel, setActiveChannel] = useState<ChannelId>("miku");
@@ -26,10 +27,19 @@ export function FavoriteChannels() {
     <div className="channel-console">
       <div className="channel-screen" aria-live="polite">
         <div className="channel-screen-grid" aria-hidden="true" />
+        <div className="channel-manga-burst" lang="ja" aria-hidden="true">
+          好き!
+        </div>
         <div className="channel-screen-header">
-          <span>FAVORITE SIGNAL SELECTOR</span>
+          <span>CHARACTER INSPIRATION ARCHIVE</span>
           <span className="channel-live">
             <i /> LIVE
+          </span>
+        </div>
+        <div className="channel-rarity-row">
+          <span className="rarity-badge">{active.rarity} PICK</span>
+          <span>
+            CH.{active.index} / {active.chapter}
           </span>
         </div>
         <div className="channel-screen-content">
@@ -43,8 +53,29 @@ export function FavoriteChannels() {
           </div>
         </div>
         <p className="channel-quote">「{active.note}」</p>
+        <div className="channel-screen-footer">
+          <ul className="channel-tags" aria-label={`${active.name} 频道关键词`}>
+            {active.tags.map((tag) => (
+              <li key={tag}>#{tag}</li>
+            ))}
+          </ul>
+          <div
+            className="sync-meter"
+            role="meter"
+            aria-label="次元同步率"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={active.sync}
+            aria-valuetext={`${active.sync}%`}
+          >
+            <span>SYNC {active.sync}%</span>
+            <i aria-hidden="true">
+              <b style={{ width: `${active.sync}%` }} />
+            </i>
+          </div>
+        </div>
         <div className="equalizer" aria-hidden="true">
-          {Array.from({ length: 18 }, (_, index) => (
+          {Array.from({ length: 22 }, (_, index) => (
             <i key={index} />
           ))}
         </div>
@@ -62,6 +93,7 @@ export function FavoriteChannels() {
               onClick={() => selectChannel(channel.id)}
             >
               <span className="channel-option-index">CH / {channel.index}</span>
+              <span className="channel-option-rarity">{channel.rarity}</span>
               <span className="channel-option-symbol" aria-hidden="true">
                 {channel.motif}
               </span>
@@ -77,7 +109,7 @@ export function FavoriteChannels() {
         })}
       </div>
       <p className="channel-hint">
-        <span aria-hidden="true">↳</span> 点击频道，观察整站的信号颜色。
+        <span aria-hidden="true">↳</span> 点击角色卡，整站会同步切换专属信号色。
       </p>
     </div>
   );

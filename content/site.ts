@@ -17,6 +17,37 @@ export const siteConfig = {
   ],
 } as const;
 
+/**
+ * Three compact manga beats used directly below the hero. They establish the
+ * site's anime language before visitors reach the more detailed collection.
+ */
+export const mangaMoments = [
+  {
+    index: "01",
+    label: "SING",
+    soundEffect: "キラッ",
+    motif: "♪",
+    copy: "把还没有形状的明天，先唱给它听。",
+    tone: "mint",
+  },
+  {
+    index: "02",
+    label: "WANDER",
+    soundEffect: "ふわっ",
+    motif: "✦",
+    copy: "把每一次远行，收进自己的故事书。",
+    tone: "violet",
+  },
+  {
+    index: "03",
+    label: "ROCK",
+    soundEffect: "ジャーン",
+    motif: "♬",
+    copy: "就算紧张到融化，也要弹完这一小节。",
+    tone: "pink",
+  },
+] as const;
+
 export const favoriteChannels = [
   {
     id: "miku",
@@ -24,8 +55,12 @@ export const favoriteChannels = [
     name: "初音未来",
     romanized: "HATSUNE MIKU",
     motif: "♪",
+    rarity: "SSR",
+    chapter: "VOICE OF TOMORROW",
     signal: "MIKU GREEN / DIGITAL POP",
     note: "把还没发生的明天，唱成现在就想抵达的样子。",
+    sync: 99,
+    tags: ["电子歌姬", "未来感", "音乐"],
   },
   {
     id: "elaina",
@@ -33,8 +68,12 @@ export const favoriteChannels = [
     name: "伊蕾娜",
     romanized: "ELAINA",
     motif: "✦",
+    rarity: "SSR",
+    chapter: "WANDERING WITCH",
     signal: "ASH VIOLET / WANDER",
     note: "保持好奇，去看更远的地方，也把沿途故事认真收好。",
+    sync: 92,
+    tags: ["旅行魔女", "故事感", "星轨"],
   },
   {
     id: "bocchi",
@@ -42,8 +81,12 @@ export const favoriteChannels = [
     name: "波奇",
     romanized: "BOCCHI",
     motif: "♬",
+    rarity: "SSR",
+    chapter: "SHY ROCK HERO",
     signal: "SHY PINK / ROCK ON",
     note: "即使紧张到快要融化，也可以抱紧吉他，再向前一步。",
+    sync: 96,
+    tags: ["摇滚少女", "社恐能量", "吉他"],
   },
 ] as const;
 

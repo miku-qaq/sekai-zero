@@ -1,73 +1,94 @@
-import { fieldNotes, projectHighlights, roadmap } from "@/content/site";
+import Image from "next/image";
+import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
 import { ShareButton } from "./components/share-button";
 import { FavoriteChannels } from "./components/favorite-channels";
+
+const pagesBaseSegment = process.env.PAGES_BASE_PATH?.trim().replace(/^\/+|\/+$/g, "");
+const publicBasePath = pagesBaseSegment ? `/${pagesBaseSegment}` : "";
+
+// The homepage has no request-time data. Declaring the contract explicitly
+// keeps Vinext's conservative static analyzer from skipping Pages export.
+export const dynamic = "force-static";
 
 export default function Home() {
   return (
     <main id="main-content">
       <section className="hero section-shell" id="top" aria-labelledby="hero-title">
-        <div className="hero-copy">
+        <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            PERSONAL SIGNAL · ONLINE
+            EP.002 · ANIME SIGNAL ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
-            在现实与
-            <span>次元之间，</span>
-            认真生活。
+            我的日常，
+            <span>正在二次元化。</span>
           </h1>
+        </div>
+        <div className="hero-details">
           <p className="hero-description reveal reveal-three">
-            这里是我的个人空间：收藏作品、想法与喜欢的事物，
-            也记录一个网站如何一周一周地长大。
+            欢迎来到一部由代码、音乐、魔法和一点社恐能量共同连载的个人番剧。
+            这里收藏作品，也收藏让我想继续向前的角色与瞬间。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href="#works">
-              查看第一话
+            <a className="button button-primary" href="#favorites">
+              进入角色频道
               <span aria-hidden="true">↘</span>
             </a>
-            <a className="button button-ghost" href="#about">
-              阅读设定集
+            <a className="button button-ghost" href="#works">
+              追更作品线
             </a>
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 001 话 · 个人宇宙启动</dd>
+              <dd>第 002 话 · 次元浓度上升</dd>
             </div>
             <div>
-              <dt>更新计划</dt>
-              <dd>每周持续连载</dd>
+              <dt>本话属性</dt>
+              <dd>音乐 × 魔法 × 摇滚</dd>
             </div>
           </dl>
         </div>
 
-        <div className="hero-visual reveal reveal-three" aria-hidden="true">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-          <article className="identity-card">
+        <div className="hero-visual reveal reveal-three">
+          <div className="orbit orbit-one" aria-hidden="true" />
+          <div className="orbit orbit-two" aria-hidden="true" />
+          <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>PLAYER / 01</span>
-              <span className="online-label">ONLINE</span>
+              <span>ORIGINAL KEY VISUAL / 02</span>
+              <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
-              <div className="portrait-grid" />
-              <div className="portrait-halo" />
-              <div className="portrait-core">✦</div>
-              <div className="portrait-signal signal-a" />
-              <div className="portrait-signal signal-b" />
-              <span className="coordinate coordinate-a">X 39.9</span>
-              <span className="coordinate coordinate-b">Y 00.1</span>
+              <Image
+                className="hero-anime-image"
+                src={`${publicBasePath}/hero-anime-v2.webp`}
+                alt="原创动漫群像：青发电子歌者、银发旅行魔女与粉发吉他手置身星空舞台"
+                width={1024}
+                height={1536}
+                sizes="(max-width: 760px) 300px, (max-width: 900px) 430px, 438px"
+                priority
+              />
+              <div className="portrait-halftone" aria-hidden="true" />
+              <span className="coordinate coordinate-a" aria-hidden="true">
+                SCENE / 002
+              </span>
+              <span className="coordinate coordinate-b" aria-hidden="true">
+                好き × 3
+              </span>
             </div>
-            <div className="identity-card-caption">
+            <figcaption className="identity-card-caption">
               <div>
-                <span>CODENAME</span>
-                <strong>STILL WRITING</strong>
+                <span>DIMENSIONAL STUDIO</span>
+                <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#001</span>
-            </div>
-          </article>
-          <div className="floating-label floating-label-top">次元接続中</div>
-          <div className="floating-label floating-label-bottom">REAL × IMAGINE</div>
+              <span className="identity-number">#002</span>
+            </figcaption>
+          </figure>
+          <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
+          <div className="floating-label floating-label-top">原创次元主视觉</div>
+          <div className="floating-label floating-label-bottom" lang="ja">
+            推しが尊い!
+          </div>
         </div>
       </section>
 
@@ -77,18 +98,36 @@ export default function Home() {
             <div className="signal-group" key={group} aria-hidden={group === 1}>
               <span>ANIME</span>
               <i>✦</i>
-              <span>DESIGN</span>
+              <span>MANGA</span>
               <i>✦</i>
-              <span>CODE</span>
+              <span>MUSIC</span>
               <i>✦</i>
-              <span>NOTES</span>
+              <span>MAGIC</span>
               <i>✦</i>
-              <span>CURIOSITY</span>
+              <span>ROCK</span>
               <i>✦</i>
             </div>
           ))}
         </div>
       </div>
+
+      <section className="manga-moments section-shell" aria-label="本话三个次元瞬间">
+        {mangaMoments.map((moment) => (
+          <article className={`manga-moment manga-${moment.tone}`} key={moment.index}>
+            <div className="manga-moment-meta">
+              <span>FRAME {moment.index}</span>
+              <span>{moment.label}</span>
+            </div>
+            <span className="manga-moment-motif" aria-hidden="true">
+              {moment.motif}
+            </span>
+            <h3>{moment.copy}</h3>
+            <span className="manga-sfx" lang="ja" aria-hidden="true">
+              {moment.soundEffect}
+            </span>
+          </article>
+        ))}
+      </section>
 
       <section
         className="about section-shell section-pad"
@@ -105,26 +144,26 @@ export default function Home() {
         </div>
         <div className="about-copy">
           <p className="about-lead">
-            我想要的不是一张永远不变的网络名片，而是一处会随着经历、作品和兴趣持续变化的个人空间。
+            这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            所以第一版先保持克制：不虚构尚未提供的个人资料，不用未经授权的动漫素材，也不为了“看起来高级”而堆砌交互。我们从稳固的工程结构与一套有记忆点的视觉语言开始。
+            第二话开始把“二次元”从彩蛋提升为主角：原创群像负责第一眼的情绪，频道卡负责可玩的个性，作品与日志则继续保持清晰、真实、可维护。
           </p>
           <div className="principles-grid">
             <article>
               <span className="principle-number">01</span>
-              <h3>真实优先</h3>
-              <p>公开内容由你确认，空白可以等待，身份不被想象代替。</p>
+              <h3>像一页漫画</h3>
+              <p>对白框、网点与分镜服务阅读节奏，而不是遮住内容。</p>
             </article>
             <article>
               <span className="principle-number">02</span>
-              <h3>模块生长</h3>
-              <p>博客、作品、相册与实验室各自扩展，避免一次改动牵动全站。</p>
+              <h3>像一部番剧</h3>
+              <p>每周是一话，网站的变化本身也会被记录和收藏。</p>
             </article>
             <article>
               <span className="principle-number">03</span>
-              <h3>细节有趣</h3>
-              <p>动漫感来自色彩、节奏与文案，不依赖复制某个现成角色。</p>
+              <h3>像自己的世界</h3>
+              <p>尊重喜欢的角色，也用原创素材建立长期个人品牌。</p>
             </article>
           </div>
         </div>
@@ -139,12 +178,12 @@ export default function Home() {
           <div className="section-heading favorites-heading">
             <p className="section-index">02 / FAVORITE FREQUENCIES</p>
             <h2 id="favorites-title">
-              三条特别喜欢的
+              三张我的 SSR
               <br />
-              世界线。
+              推し角色卡。
             </h2>
             <p>
-              不复制官方画面，用色彩、声音与性格做成属于本站的致意。选一个频道，看看世界如何回应。
+              初音未来、伊蕾娜和波奇，是三种让我持续向前的能量。抽一张角色卡，整站都会回应她的频道色。
             </p>
           </div>
           <FavoriteChannels />
@@ -266,8 +305,8 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">这只是第 001 话。</h2>
-        <p>下一次更新，会让这个世界更像你一点。</p>
+        <h2 id="finale-title">第 002 话，放送完毕。</h2>
+        <p>主视觉已点亮；下一话，会继续加入真实作品与更有趣的次元实验。</p>
         <div className="finale-actions">
           <a className="button button-primary" href="#top">
             回到开场 <span aria-hidden="true">↑</span>
