@@ -1,0 +1,131 @@
+/**
+ * Public-facing copy and navigation for the site.
+ *
+ * Keeping identity and editorial content outside React components makes weekly
+ * updates safer: most copy changes happen here without touching layout code.
+ */
+export const siteConfig = {
+  name: "SEKAI / 00",
+  shortName: "SEKAI",
+  description: "一个在现实与次元之间持续生长的个人空间，收藏作品、想法与生活切片。",
+  navigation: [
+    { label: "关于", href: "#about" },
+    { label: "收藏", href: "#favorites" },
+    { label: "作品", href: "#works" },
+    { label: "日志", href: "#notes" },
+    { label: "路线图", href: "#roadmap" },
+  ],
+} as const;
+
+export const favoriteChannels = [
+  {
+    id: "miku",
+    index: "01",
+    name: "初音未来",
+    romanized: "HATSUNE MIKU",
+    motif: "♪",
+    signal: "MIKU GREEN / DIGITAL POP",
+    note: "把还没发生的明天，唱成现在就想抵达的样子。",
+  },
+  {
+    id: "elaina",
+    index: "02",
+    name: "伊蕾娜",
+    romanized: "ELAINA",
+    motif: "✦",
+    signal: "ASH VIOLET / WANDER",
+    note: "保持好奇，去看更远的地方，也把沿途故事认真收好。",
+  },
+  {
+    id: "bocchi",
+    index: "03",
+    name: "波奇",
+    romanized: "BOCCHI",
+    motif: "♬",
+    signal: "SHY PINK / ROCK ON",
+    note: "即使紧张到快要融化，也可以抱紧吉他，再向前一步。",
+  },
+] as const;
+
+export const projectHighlights = [
+  {
+    index: "01",
+    status: "NOW BUILDING",
+    title: "SEKAI / 00",
+    subtitle: "长期个人网站",
+    description:
+      "不是一次性交付的简历模板，而是一套可以每周继续生长的数字空间。首章从设计系统、响应式体验与工程质量开始。",
+    tags: ["TypeScript", "React", "Design System"],
+    tone: "cyan",
+  },
+  {
+    index: "02",
+    status: "NEXT CHAPTER",
+    title: "作品陈列室",
+    subtitle: "可检索的项目档案",
+    description:
+      "下一阶段会把真实作品整理为独立案例，补充目标、过程、结果与复盘，而不只展示一张截图。",
+    tags: ["Case Study", "Filter", "MDX"],
+    tone: "violet",
+  },
+  {
+    index: "03",
+    status: "RESERVED",
+    title: "次元实验室",
+    subtitle: "互动与创意实验",
+    description:
+      "为小游戏、音乐可视化、像素组件和有趣的浏览器实验预留空间；每项功能都独立演进，不拖累主站。",
+    tags: ["Creative Code", "Web Audio", "Lab"],
+    tone: "pink",
+  },
+] as const;
+
+export const fieldNotes = [
+  {
+    id: "LOG 001",
+    date: "2026.08.09",
+    title: "先把房子搭稳，再开始装饰",
+    excerpt:
+      "清晰的边界、自动检查和可替换的内容层，决定了这个网站半年后还能不能轻松修改。",
+  },
+  {
+    id: "LOG 002",
+    date: "DESIGN NOTE",
+    title: "现代感，不等于堆满特效",
+    excerpt: "大部分界面保持安静，只把动画留给状态、反馈与少数值得记住的瞬间。",
+  },
+  {
+    id: "LOG 003",
+    date: "NEXT WEEK",
+    title: "给每次更新留一扇门",
+    excerpt:
+      "路线图以小步迭代为单位：每周交付一件可以验证的改进，并把决定写进项目文档。",
+  },
+] as const;
+
+export const roadmap = [
+  {
+    phase: "01",
+    title: "稳定地基",
+    status: "本周",
+    description: "品牌首页、响应式布局、主题切换、质量检查与发布流程。",
+  },
+  {
+    phase: "02",
+    title: "录入真实内容",
+    status: "下一步",
+    description: "替换公开身份、作品、社交链接与兴趣收藏，不虚构任何个人资料。",
+  },
+  {
+    phase: "03",
+    title: "内容系统",
+    status: "规划中",
+    description: "引入 MDX 文章、标签、搜索、RSS 与可持续维护的媒体资源管线。",
+  },
+  {
+    phase: "04",
+    title: "次元实验室",
+    status: "未来",
+    description: "按需加入互动实验、数据服务和后台；每项能力保持可拆卸。",
+  },
+] as const;
