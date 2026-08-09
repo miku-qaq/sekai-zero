@@ -2,6 +2,11 @@
 
 一个长期维护、每周迭代的动漫主题个人网站。首页是世界入口，角色设定档、航线终端、制作档案、计算机学习舱与世界线日志使用独立路由；重点不是堆砌功能，而是建立稳定的工程地基、鲜明但克制的视觉系统，以及可以安全扩展的内容边界。
 
+## 在线入口
+
+- [访问 SEKAI / 00](https://miku-qaq.github.io/sekai-zero/)
+- [查看公开源码](https://github.com/miku-qaq/sekai-zero)
+
 ## 技术路线
 
 - **TypeScript**：公开接口和内容模型都有静态类型，降低长期修改时的回归风险。
@@ -50,7 +55,7 @@ Windows PowerShell 如果因本机执行策略拦截 `npm.ps1`，请使用 `npm.
 - **Sites / Cloudflare Worker**：保留未来登录、数据库和服务端能力。
 - **GitHub Pages**：当前公开首页的静态备用入口，避免服务端安全层阻断访问。
 
-公开仓库启用 Pages 后，在仓库设置中选择 **GitHub Actions** 作为发布源。`main` 更新会由 `.github/workflows/pages.yml` 自动读取仓库子路径、构建并整理 `dist/pages`、验证资源地址后发布；不要手工维护 `gh-pages` 分支。
+公开仓库已经使用 **GitHub Actions** 作为 Pages 发布源。`main` 更新会由 `.github/workflows/pages.yml` 自动读取仓库子路径、构建并整理 `dist/pages`、验证资源地址后发布；不要手工维护 `gh-pages` 分支。
 
 目录边界、部署约束与未来扩展方式见 [架构说明](docs/ARCHITECTURE.md)，计划见 [项目路线图](docs/ROADMAP.md)。
 
