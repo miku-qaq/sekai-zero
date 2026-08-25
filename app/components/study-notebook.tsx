@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { studyCategories, studyNotes, type StudyCategoryId } from "@/content/study";
+import { sitePath } from "@/lib/site-path";
 import styles from "../study/study.module.css";
 
 type FilterId = "all" | StudyCategoryId;
@@ -10,6 +11,9 @@ type FilterId = "all" | StudyCategoryId;
 export function StudyNotebook() {
   const [filter, setFilter] = useState<FilterId>("all");
   const [query, setQuery] = useState("");
+  const [targetNoteId, setTargetNoteId] = useState<string | null>(null);
+  const [copiedNoteId, setCopiedNoteId] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState("");
 
   const visibleNotes = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
@@ -34,6 +38,68 @@ export function StudyNotebook() {
       );
     });
   }, [filter, query]);
+
+  useEffect(() => {
+    function syncHashTarget() {
+      let id = "";
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+
+      if (!studyNotes.some((note) => note.id === id)) return;
+
+      // A shared URL must reveal its note even if a previous local filter hid it.
+      setFilter("all");
+      setQuery("");
+      setTargetNoteId(id);
+    }
+
+    syncHashTarget();
+    window.addEventListener("hashchange", syncHashTarget);
+    return () => window.removeEventListener("hashchange", syncHashTarget);
+  }, []);
+
+  useEffect(() => {
+    if (!targetNoteId) return;
+
+    const target = document.getElementById(targetNoteId);
+    if (!(target instanceof HTMLDetailsElement)) return;
+
+    target.open = true;
+    const frame = window.requestAnimationFrame(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      target.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+    const highlightTimer = window.setTimeout(() => {
+      setTargetNoteId((current) => (current === targetNoteId ? null : current));
+    }, 2400);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(highlightTimer);
+    };
+  }, [targetNoteId, visibleNotes]);
+
+  async function copyNoteLink(noteId: string) {
+    const url = new URL(window.location.href);
+    url.hash = noteId;
+
+    try {
+      await navigator.clipboard.writeText(url.href);
+      setCopiedNoteId(noteId);
+      setCopyStatus("本篇笔记链接已复制。");
+    } catch {
+      setCopiedNoteId(null);
+      setCopyStatus("浏览器没有允许自动复制，请从地址栏复制当前链接。");
+    }
+  }
 
   return (
     <div className={styles.notebook}>
@@ -81,6 +147,7 @@ export function StudyNotebook() {
               className={styles.note}
               id={note.id}
               data-current={note.current || undefined}
+              data-targeted={targetNoteId === note.id || undefined}
               key={note.id}
             >
               <summary>
@@ -112,6 +179,15 @@ export function StudyNotebook() {
               </summary>
 
               <div className={styles.noteBody}>
+                <div className={styles.noteActions}>
+                  <button type="button" onClick={() => copyNoteLink(note.id)}>
+                    {copiedNoteId === note.id ? "链接已复制" : "复制本篇链接"}
+                    <span aria-hidden="true">⌁</span>
+                  </button>
+                  <a href={sitePath("/study/#learning-queue")}>
+                    查看下一学习节点 <span aria-hidden="true">↓</span>
+                  </a>
+                </div>
                 <div className={styles.noteSections}>
                   {note.sections.map((section) => (
                     <section key={section.heading}>
@@ -186,6 +262,9 @@ export function StudyNotebook() {
           </button>
         </div>
       )}
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {copyStatus}
+      </p>
     </div>
   );
 }

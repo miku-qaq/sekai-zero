@@ -19,11 +19,12 @@ const geistMono = Geist_Mono({
 // the operating-system preference. Failure simply falls back to CSS.
 const themeInitializationScript = `try{const value=localStorage.getItem("sekai-theme");if(value==="light"||value==="dark"){document.documentElement.dataset.theme=value}}catch{}`;
 
-const defaultSiteUrl = "https://sekai-zero.miku125194847910362.chatgpt.site/";
+const defaultSiteUrl = "https://miku-qaq.github.io/sekai-zero/";
 
 /**
  * Metadata must be deterministic so the same page can be pre-rendered for
- * GitHub Pages. CI injects the final Pages URL; Sites uses the stable fallback.
+ * GitHub Pages. CI injects the final target URL; other builds use the stable
+ * public Pages address instead of depending on the optional Worker endpoint.
  */
 function resolveSiteUrl(): URL {
   const candidate = process.env.NEXT_PUBLIC_SITE_URL?.trim() || defaultSiteUrl;

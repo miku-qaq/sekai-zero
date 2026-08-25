@@ -1,3 +1,5 @@
+import { releaseHistory } from "./releases";
+
 export type ProjectTone = "mint" | "violet" | "blue" | "pink" | "amber";
 
 /**
@@ -19,6 +21,27 @@ export const projectCaseStudy = {
     { label: "发布目标", value: "Sites / GitHub Pages" },
   ],
 } as const;
+
+export const projectEvidence = [
+  {
+    code: "LIVE",
+    label: "打开公开网站",
+    href: "https://miku-qaq.github.io/sekai-zero/",
+    external: true,
+  },
+  {
+    code: "SOURCE",
+    label: "查看 GitHub 仓库",
+    href: "https://github.com/miku-qaq/sekai-zero",
+    external: true,
+  },
+  {
+    code: "CHANGELOG",
+    label: "读取世界线日志",
+    href: "/logs/",
+    external: false,
+  },
+] as const;
 
 export const projectShifts = [
   {
@@ -77,50 +100,16 @@ export const projectSystemFlow = [
   },
 ] as const;
 
-export const productionChapters = [
-  {
-    episode: "EP.001",
-    title: "建立稳定地基",
-    copy: "确定 TypeScript、React、自动检查、响应式布局与可替换内容层。",
-    evidence: "ENGINEERING FOUNDATION",
-  },
-  {
-    episode: "EP.002",
-    title: "让二次元成为叙事语言",
-    copy: "用原创主视觉、漫画分镜、频道色与互动反馈建立自己的表达，而不是复制角色素材。",
-    evidence: "VISUAL IDENTITY",
-  },
-  {
-    episode: "EP.003",
-    title: "从单页展开个人宇宙",
-    copy: "角色档案、航线终端与版本日志成为各自可以分享的真实页面。",
-    evidence: "MULTI-PAGE SYSTEM",
-  },
-  {
-    episode: "EP.004",
-    title: "点亮计算机学习舱",
-    copy: "把知识整理成带搜索、分类、回忆问题和一手来源的长期学习地图。",
-    evidence: "LEARNING ARCHIVE",
-  },
-  {
-    episode: "EP.005",
-    title: "把制作过程变成第一份案例",
-    copy: "不等待虚构作品填满页面，先把这个真实项目的问题、选择和演进说清楚。",
-    evidence: "CASE STUDY",
-  },
-  {
-    episode: "EP.006",
-    title: "让真实档案进入内容系统",
-    copy: "只录入主人确认的称呼、学习状态、兴趣、游戏平台与联系入口，并为未知资料保留边界。",
-    evidence: "PUBLIC PROFILE",
-  },
-  {
-    episode: "EP.007",
-    title: "让真实学习主线进入知识地图",
-    copy: "新增 CS224N / NLP 频道、完整笔记、官方来源与自学边界，让学习状态成为可持续更新的内容。",
-    evidence: "LEARNING SIGNAL",
-  },
-] as const;
+/** A compact production view derived from the canonical release history. */
+export const productionChapters = releaseHistory
+  .slice()
+  .reverse()
+  .map(({ episode, title, summary, evidence }) => ({
+    episode,
+    title,
+    copy: summary,
+    evidence,
+  }));
 
 export const qualityGates = [
   {
@@ -164,13 +153,13 @@ export const projectDecisions = [
 ] as const;
 
 export const nextCheckpoints = [
-  "收录主人确认的真实作品、游戏收藏与社交坐标",
-  "把长文章迁移到独立路由与构建期 MDX",
-  "为 main 配置与每周协作方式匹配的分支保护",
+  "收录我确认公开的真实作品、游戏收藏与社交坐标",
+  "让长篇学习笔记拥有独立文章路由与可分享元数据",
+  "为内容发现补齐 sitemap、robots 与 RSS",
 ] as const;
 
 export const futureCase = {
   code: "CASE / 002",
   status: "WAITING FOR VERIFIED WORK",
-  copy: "下一份档案会在主人提供项目名称、目标、本人职责、过程证据与真实结果后点亮；没有证据的数字不会进入这里。",
+  copy: "下一份档案会在我准备好项目名称、目标、本人职责、过程证据与真实结果后点亮；没有证据的数字不会进入这里。",
 } as const;

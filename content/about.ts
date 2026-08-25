@@ -1,3 +1,5 @@
+import { releaseHistory } from "./releases";
+
 export const influenceSignals = [
   {
     index: "39",
@@ -35,51 +37,18 @@ export const profileQuestions = [
       "因为我想拥有一个不受社交平台版式限制、可以长期积累的数字空间。它既是作品，也是记录兴趣与成长的容器。",
   },
   {
-    question: "这里会公开什么？",
+    question: "平时喜欢什么？",
     answer:
-      "目前公开了 Mikureina 这个称呼、南京大学 CS 在读的学习状态、动漫与游戏兴趣、常玩平台和联系邮箱。没有确认的年级、经历与社交账号不会为了填满页面而虚构。",
+      "喜欢动漫和游戏，常用 Nintendo Switch 与 Steam。初音未来、伊蕾娜和波奇，也分别成为本站音乐、远行与摇滚三条灵感频道。",
   },
   {
     question: "最近在投入什么？",
     answer:
-      "最近正在自学 Stanford CS224N 的公开课程资料，沿着自然语言处理、词表示与神经网络继续建立知识地图；同时长期建设 SEKAI / 00，把学习与每一次设计、工程决定都记录下来。",
+      "最近正在自学 Stanford CS224N 的公开课程资料，从自然语言处理与词表示开始建立知识地图；同时持续建设 SEKAI / 00。",
   },
 ] as const;
 
-export const profileTimeline = [
-  {
-    episode: "EP.001",
-    title: "建立稳定地基",
-    copy: "确定 TypeScript、React、自动检查、响应式布局与可替换内容层。",
-  },
-  {
-    episode: "EP.002",
-    title: "点亮次元主视觉",
-    copy: "让漫画分镜、角色频道、扭蛋与主题色成为叙事的一部分。",
-  },
-  {
-    episode: "EP.003",
-    title: "展开个人宇宙",
-    copy: "从一张长首页走向关于、航线与日志各自独立的页面体系。",
-  },
-  {
-    episode: "EP.004",
-    title: "建立计算机学习舱",
-    copy: "把学习内容从版本日志中分离，整理成可搜索、可复习、可持续校订的知识地图。",
-  },
-  {
-    episode: "EP.005",
-    title: "整理第一份制作档案",
-    copy: "把本站本身作为真实案例，记录目标、结构、取舍与能够核对的演进证据。",
-  },
-  {
-    episode: "EP.006",
-    title: "让真实档案上线",
-    copy: "把主人确认公开的称呼、学习状态、兴趣、游戏平台与联系入口写进角色设定档。",
-  },
-  {
-    episode: "EP.007",
-    title: "接入 CS224N 学习信号",
-    copy: "把正在自学的自然语言处理公开课程资料整理成可搜索、可回忆、带一手来源的真实学习笔记。",
-  },
-] as const;
+/** The profile shows the same release facts as Projects and Logs. */
+export const profileTimeline = releaseHistory
+  .toReversed()
+  .map(({ episode, title, summary }) => ({ episode, title, copy: summary }));

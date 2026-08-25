@@ -138,8 +138,8 @@ export function SiteHeader() {
               ◐
             </span>
           </button>
-          <a className="header-cta" href={sitePath("/projects/")}>
-            查看制作档案
+          <a className="header-cta" href={sitePath("/#current")}>
+            查看当前放送
             <span aria-hidden="true">↘</span>
           </a>
           <button

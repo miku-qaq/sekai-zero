@@ -27,6 +27,10 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
     assert.match(html, /<html[^>]*lang="zh-CN"/i);
     assert.match(html, page.title);
     assert.doesNotMatch(html, /localhost(?::\d+)?/i);
+    if (page.path !== "index.html") {
+      assert.match(html, /class="journey-navigation section-shell"/);
+      assert.match(html, /CURRENT FILE/);
+    }
 
     const localReferences = [
       ...html.matchAll(/\b(?:src|href)="(\/[^"#?]+)[^"]*"/g),
@@ -58,6 +62,13 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   assert.match(homepage, new RegExp(`href="${basePath}/projects/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/study/"`));
   assert.match(homepage, new RegExp(`href="${basePath}/logs/"`));
+  assert.match(
+    homepage,
+    new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`),
+  );
+  assert.match(homepage, new RegExp(`href="${basePath}/study/#learning-queue"`));
+  assert.match(homepage, /NOW \/ CURRENT BROADCAST/);
+  assert.match(homepage, /EP\.008/);
 
   const about = await readFile(
     new URL("../dist/pages/about/index.html", import.meta.url),
@@ -67,13 +78,30 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
     new URL("../dist/pages/links/index.html", import.meta.url),
     "utf8",
   );
+  const projects = await readFile(
+    new URL("../dist/pages/projects/index.html", import.meta.url),
+    "utf8",
+  );
+  const logs = await readFile(
+    new URL("../dist/pages/logs/index.html", import.meta.url),
+    "utf8",
+  );
   assert.match(about, /Mikureina/);
   assert.match(about, /南京大学 · CS 在读/);
   assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
   assert.doesNotMatch(about, /href="[^"]*\/mailto:/);
   assert.match(links, new RegExp(`href="${basePath}/about/#contact"`));
+  assert.match(links, new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`));
+  assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
   assert.doesNotMatch(homepage, /miku125194847@gmail\.com/);
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
+
+  assert.match(projects, /打开公开网站/);
+  assert.match(projects, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(projects, new RegExp(`href="${basePath}/logs/"`));
+  assert.match(logs, /id="ep-008"/);
+  assert.match(logs, /让各个页面开始彼此回应/);
 
   const study = await readFile(
     new URL("../dist/pages/study/index.html", import.meta.url),

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildLogs } from "@/content/logs";
-import { sitePath } from "@/lib/site-path";
+import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
 
@@ -16,7 +16,7 @@ export default function LogsPage() {
     <main id="main-content" className="subpage-main">
       <PageMasthead
         episode="FILE 05"
-        eyebrow="TIMELINE ARCHIVE / WEEKLY BROADCAST"
+        eyebrow="TIMELINE ARCHIVE / ITERATION BROADCAST"
         title="把网站的成长，也写成内容。"
         lead="这里不只发布“更新了”三个字。每一话都会留下问题、选择与复盘，让未来的自己知道为什么走到这里。"
         motif="記"
@@ -46,7 +46,7 @@ export default function LogsPage() {
         </div>
         <div className="logs-list">
           {buildLogs.map((log, index) => (
-            <details key={log.episode} open={index === 0}>
+            <details id={`ep-${log.number}`} key={log.episode} open={index === 0}>
               <summary>
                 <div className="log-episode">
                   <span>{log.episode}</span>
@@ -103,19 +103,13 @@ export default function LogsPage() {
             </li>
             <li>
               <span>04</span>
-              <strong>下一周的人能看懂并继续维护吗？</strong>
+              <strong>下一次维护时，未来的自己仍能看懂并继续吗？</strong>
             </li>
           </ol>
         </div>
       </section>
 
-      <section className="subpage-next section-shell" aria-labelledby="next-title">
-        <span>循环结束 / RETURN TO OPENING</span>
-        <h2 id="next-title">{buildLogs[0].episode} 正在放送，回到首页看看完整世界。</h2>
-        <a className="button button-primary" href={sitePath("/")}>
-          返回世界入口 <span aria-hidden="true">↑</span>
-        </a>
-      </section>
+      <JourneyNavigation currentHref="/logs/" />
       <SiteFooter />
     </main>
   );

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { publicProfile } from "@/content/profile";
+import { currentRelease } from "@/content/releases";
 import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import { CurrentBroadcast } from "./components/current-broadcast";
 import { DimensionalGacha } from "./components/dimensional-gacha";
 import { ShareButton } from "./components/share-button";
 import { FavoriteChannels } from "./components/favorite-channels";
@@ -21,7 +23,7 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            EP.007 · CS224N SIGNAL ONLINE
+            PERSONAL SEKAI · SIGNAL ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
             这里不只一页，
@@ -30,13 +32,15 @@ export default function Home() {
         </div>
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
-            欢迎来到 Mikureina 的个人次元站：南京大学 CS 在读，喜欢动漫和游戏。
-            最近正在自学 Stanford CS224N 的公开课程资料；NLP
-            学习笔记也开始在这条世界线上生长。
+            Mikureina 的个人次元站：在南京大学读 CS，记录计算机学习、动漫、游戏，
+            以及这座网站怎样持续生长。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href={sitePath("/study/")}>
-              打开 CS224N 笔记
+            <a
+              className="button button-primary"
+              href={sitePath("/study/#cs224n-nlp-word-vectors")}
+            >
+              继续当前学习
               <span aria-hidden="true">↘</span>
             </a>
             <a className="button button-ghost" href={sitePath("/about/")}>
@@ -46,7 +50,9 @@ export default function Home() {
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 007 话 · NLP 学习信号上线</dd>
+              <dd>
+                {currentRelease.episode} · {currentRelease.title}
+              </dd>
             </div>
             <div>
               <dt>站主信号</dt>
@@ -60,7 +66,7 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 07</span>
+              <span>ORIGINAL KEY VISUAL / 00</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
@@ -75,7 +81,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / 007
+                SCENE / MAIN
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -86,7 +92,7 @@ export default function Home() {
                 <span>DIMENSIONAL STUDIO</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#007</span>
+              <span className="identity-number">#SEKAI</span>
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
@@ -134,6 +140,8 @@ export default function Home() {
         ))}
       </section>
 
+      <CurrentBroadcast />
+
       <WorldMap />
 
       <section
@@ -154,8 +162,8 @@ export default function Home() {
             这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            第七话把正在自学的 CS224N 公开课程资料接入知识地图：从 NLP
-            与词向量开始，独立页面继续承载可核对的个人资料、学习内容、项目过程与版本证据。
+            独立页面分别承载个人档案、学习内容、项目过程与版本证据；首页保持为世界入口，
+            当前放送则告诉你这里此刻正在发生什么。
           </p>
           <div className="principles-grid">
             <article>
@@ -166,7 +174,7 @@ export default function Home() {
             <article>
               <span className="principle-number">02</span>
               <h3>像一部番剧</h3>
-              <p>每周是一话，网站的变化本身也会被记录和收藏。</p>
+              <p>每次有意义的迭代都是一话，网站的变化本身也会被记录和收藏。</p>
             </article>
             <article>
               <span className="principle-number">03</span>
@@ -275,10 +283,12 @@ export default function Home() {
             <p className="section-index">05 / FIELD NOTES</p>
             <h2 id="notes-title">世界线观测日志</h2>
           </div>
-          <p>先记录建站过程；未来这里会成为完整的文章与灵感档案。</p>
+          <p>
+            这里记录版本演进；完整学习正文进入学习舱，后续长文会拥有独立、可分享的页面。
+          </p>
         </div>
         <div className="notes-list">
-          {fieldNotes.map((note) => (
+          {fieldNotes.slice(0, 3).map((note) => (
             <article className="note-row" key={note.id}>
               <div className="note-meta">
                 <span>{note.id}</span>
@@ -288,9 +298,13 @@ export default function Home() {
                 <h3>{note.title}</h3>
                 <p>{note.excerpt}</p>
               </div>
-              <span className="note-arrow" aria-hidden="true">
-                ↗
-              </span>
+              <a
+                className="note-arrow"
+                href={sitePath("/logs/")}
+                aria-label={`在世界线日志中查看：${note.title}`}
+              >
+                <span aria-hidden="true">↗</span>
+              </a>
             </article>
           ))}
         </div>
@@ -336,10 +350,10 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">第 007 话，放送完毕。</h2>
+        <h2 id="finale-title">第 {currentRelease.number} 话，放送完毕。</h2>
         <p>
-          CS224N 学习信号已经上线；下一话，会继续沿着真实进度整理
-          NLP，也加入确认过的收藏与次元实验。
+          当前信号已经与每个频道相连；下一话会继续沿着真实学习进度整理 NLP，
+          也只加入我确认过的收藏与次元实验。
         </p>
         <div className="finale-actions">
           <a className="button button-primary" href={sitePath("/#top")}>

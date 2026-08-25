@@ -80,6 +80,60 @@
   line-height: 1.9;
 }
 
+.evidenceRoutes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 clamp(24px, 5vw, 60px) clamp(42px, 6vw, 62px);
+}
+
+.evidenceRoutes a {
+  display: grid;
+  min-width: 0;
+  min-height: 96px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: center;
+  gap: 5px 12px;
+  padding: 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface-muted);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.evidenceRoutes a > span:first-child {
+  color: var(--project-blue);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.evidenceRoutes strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+
+.evidenceRoutes i {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  color: var(--project-amber);
+  font-size: 20px;
+  font-style: normal;
+}
+
+@media (hover: hover) {
+  .evidenceRoutes a:hover {
+    border-color: var(--foreground);
+    background: var(--project-amber-soft);
+    transform: translateY(-2px);
+  }
+}
+
 .caseFacts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -665,6 +719,15 @@
   .caseSummary {
     padding: 0 20px 36px;
     font-size: 14px;
+  }
+
+  .evidenceRoutes {
+    grid-template-columns: 1fr;
+    padding: 0 20px 38px;
+  }
+
+  .evidenceRoutes a {
+    min-height: 82px;
   }
 
   .shiftGrid,

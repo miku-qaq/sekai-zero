@@ -111,6 +111,15 @@ export function LinkTerminal() {
           <span aria-hidden="true">404 / NO SIGNAL</span>
           <h3>这条航线还没有被记录。</h3>
           <p>换一个关键词，或者回到全部航线继续探索。</p>
+          <button
+            type="button"
+            onClick={() => {
+              setGroup("all");
+              setQuery("");
+            }}
+          >
+            清除筛选
+          </button>
         </div>
       )}
     </div>

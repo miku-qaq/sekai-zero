@@ -5,12 +5,14 @@ import {
   productionChapters,
   projectCaseStudy,
   projectDecisions,
+  projectEvidence,
   projectShifts,
   projectSystemFlow,
   qualityGates,
 } from "@/content/projects";
 import { sitePath } from "@/lib/site-path";
 import { PageMasthead } from "../components/page-masthead";
+import { JourneyNavigation } from "../components/journey-navigation";
 import { SiteFooter } from "../components/site-footer";
 import styles from "./projects.module.css";
 
@@ -60,7 +62,7 @@ export default function ProjectsPage() {
             <h2 id="case-title">第一份案例，就是这座正在生长的网站。</h2>
           </div>
           <p>
-            没有编造客户、访问量或商业结果；只展示当前仓库里真正存在、能够继续验证的工作。
+            公开入口、源码仓库和更新日志一起保留，页面里的技术说明都能沿着证据继续核对。
           </p>
         </div>
 
@@ -77,6 +79,23 @@ export default function ProjectsPage() {
             <p>{projectCaseStudy.subtitle}</p>
           </div>
           <p className={styles.caseSummary}>{projectCaseStudy.summary}</p>
+          <nav className={styles.evidenceRoutes} aria-label="项目公开证据">
+            {projectEvidence.map((item) => (
+              <a
+                href={item.external ? item.href : sitePath(item.href)}
+                key={item.code}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noreferrer" : undefined}
+              >
+                <span>{item.code}</span>
+                <strong>{item.label}</strong>
+                <i aria-hidden="true">↗</i>
+                {item.external ? (
+                  <span className="sr-only">（将在新标签页打开）</span>
+                ) : null}
+              </a>
+            ))}
+          </nav>
           <dl className={styles.caseFacts}>
             {projectCaseStudy.facts.map((fact) => (
               <div key={fact.label}>
@@ -261,13 +280,7 @@ export default function ProjectsPage() {
         </aside>
       </section>
 
-      <section className="subpage-next section-shell" aria-labelledby="next-title">
-        <span>NEXT FILE / COMPUTER STUDY DECK</span>
-        <h2 id="next-title">制作档案说清怎么建，学习舱继续记录学到了什么。</h2>
-        <a className="button button-primary" href={sitePath("/study/")}>
-          打开计算机学习舱 <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+      <JourneyNavigation currentHref="/projects/" />
       <SiteFooter />
     </main>
   );

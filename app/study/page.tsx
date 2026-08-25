@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { studyNotes, studyPrinciples, studyQueue } from "@/content/study";
-import { sitePath } from "@/lib/site-path";
+import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
 import { StudyNotebook } from "../components/study-notebook";
@@ -86,7 +86,11 @@ export default function StudyPage() {
         </div>
       </section>
 
-      <section className={`${styles.queue} section-pad`} aria-labelledby="queue-title">
+      <section
+        className={`${styles.queue} section-pad`}
+        id="learning-queue"
+        aria-labelledby="queue-title"
+      >
         <div className="section-shell">
           <div className="section-heading horizontal-heading">
             <div>
@@ -112,13 +116,7 @@ export default function StudyPage() {
         </div>
       </section>
 
-      <section className="subpage-next section-shell" aria-labelledby="next-title">
-        <span>STUDY LOG / CONTINUE THE TIMELINE</span>
-        <h2 id="next-title">学习内容会持续增长，每次整理也会留下版本记录。</h2>
-        <a className="button button-primary" href={sitePath("/logs/")}>
-          查看世界线日志 <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+      <JourneyNavigation currentHref="/study/" />
       <SiteFooter />
     </main>
   );

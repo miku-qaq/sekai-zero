@@ -1,0 +1,150 @@
+export type Release = {
+  episode: `EP.${string}`;
+  number: string;
+  date: string;
+  title: string;
+  summary: string;
+  body: readonly string[];
+  decisions: readonly string[];
+  evidence: string;
+};
+
+/**
+ * Canonical release history for every public surface that mentions an episode.
+ *
+ * Homepage notes, the About timeline, the Projects production reel and the
+ * complete Logs archive all derive from this file. Keeping the shared facts in
+ * one place prevents an episode number or summary from drifting between pages.
+ */
+export const releaseHistory = [
+  {
+    episode: "EP.008",
+    number: "008",
+    date: "2026.08.25",
+    title: "让各个页面开始彼此回应",
+    summary:
+      "新增当前放送信号，统一五个频道的世界线顺序，并让 CS224N 深链、航线空态与项目证据都拥有明确的下一步。",
+    body: [
+      "这一话把长期不变的品牌介绍与每次变化的进度分开：首页负责说明 Mikureina 与 SEKAI / 00 是什么，当前放送则只展示正在学习、正在建设和已经排队的真实事项。",
+      "五个频道现在共享同一条路线顺序；带锚点打开 CS224N 笔记时会自动恢复筛选、展开正文并定位目标。航线终端补上恢复操作与真实源码、课程入口，制作档案也提供可以直接核对的公开证据。",
+    ],
+    decisions: [
+      "稳定品牌内容与每话进度分离",
+      "页面顺序只从一份路线数据生成",
+      "深链必须直接揭示目标内容",
+    ],
+    evidence: "CONNECTED JOURNEY",
+  },
+  {
+    episode: "EP.007",
+    number: "007",
+    date: "2026.08.25",
+    title: "把 CS224N 学习路线接入知识地图",
+    summary:
+      "新增 AI 与 NLP 频道，并从词表示与分布式语义开始记录 Stanford CS224N 公开课程资料的自学过程。",
+    body: [
+      "这一话没有把课程目录直接复制成完成清单，而是新增一篇完整学习笔记：从 NLP 任务的四个问题、one-hot 的局限、分布式语义，到一个只说明余弦相似度直觉的最小实验。",
+      "笔记只引用 Stanford 官方课程页与课程讲义，并明确说明“正在自学公开课程资料”不等于 Stanford 正式选课、学籍或结课证明。后续内容会沿着真实学习进度逐篇增加。",
+    ],
+    decisions: [
+      "新增独立 AI 与 NLP 筛选频道",
+      "课程状态只写正在自学，不虚构完成度",
+      "课程类笔记优先链接官方一手资料",
+    ],
+    evidence: "LEARNING SIGNAL",
+  },
+  {
+    episode: "EP.006",
+    number: "006",
+    date: "2026.08.09",
+    title: "让名字与现实坐标正式上线",
+    summary:
+      "把 Mikureina、南京大学 CS 在读、动漫与游戏兴趣、常玩平台和联系邮箱写进公开档案。",
+    body: [
+      "这一话只录入我明确确认愿意公开的资料，并把它们集中在单一内容模型中。About 负责完整角色设定，Links 只提供通往联系入口的航线，SEO 元数据不会重复收录邮箱。",
+      "CN 名作为本站公开称呼使用，不等同于法定姓名；年级、培养阶段、所在地、具体游戏和社交账号都没有从现有信息中推断。未知内容继续保持留白。",
+    ],
+    decisions: [
+      "只发布我明确确认的资料",
+      "CN 名不等同于法定姓名",
+      "邮箱集中在一个清晰的联系入口",
+    ],
+    evidence: "PUBLIC PROFILE",
+  },
+  {
+    episode: "EP.005",
+    number: "005",
+    date: "2026.08.09",
+    title: "让作品不只停在一张展示卡",
+    summary:
+      "把本站作为第一个可验证案例，公开目标、结构、取舍与版本轨迹，不用虚构项目数量撑满档案。",
+    body: [
+      "这一话新增独立制作档案。它先说明个人站从单页走向长期系统时遇到的问题，再用内容边界、静态页面、交互小岛、质量门禁与双目标发布解释当前回应。",
+      "案例只使用仓库里已经存在的事实，不填写访问量、客户评价或不存在的商业结果。下一份项目只有在我提供目标、本人职责、过程证据与真实结果后才会点亮。",
+    ],
+    decisions: [
+      "只收录可验证的真实项目",
+      "案例先讲问题与取舍，再列技术",
+      "没有证据的成果指标不展示",
+    ],
+    evidence: "CASE STUDY",
+  },
+  {
+    episode: "EP.004",
+    number: "004",
+    date: "2026.08.09",
+    title: "给长期学习留一个可检索的房间",
+    summary:
+      "计算机学习与建站版本记录不再挤在同一条时间线里：一个负责沉淀知识，一个负责解释网站怎样成长。",
+    body: [
+      "这一话新增独立计算机学习舱，首批笔记从本站真实用到的 Web 请求、Git、TypeScript 与 UTF-8 开始；每篇都包含主线、例子、易错边界、主动回忆与一手资料。",
+      "笔记正文保留静态渲染，只有搜索和分类筛选进入客户端。内容集中在强类型模块里，数量增长后可以迁移到独立文章路由和 MDX，而不推翻当前界面。",
+    ],
+    decisions: ["学习笔记与版本日志分离", "不虚构学习进度", "每篇保留回忆题与一手来源"],
+    evidence: "LEARNING ARCHIVE",
+  },
+  {
+    episode: "EP.003",
+    number: "003",
+    date: "2026.08.09",
+    title: "从单页到可长期生长的结构",
+    summary:
+      "真正成熟的网站需要可分享的页面、清晰的信息架构，以及不用重写首页就能新增内容的边界。",
+    body: [
+      "这一话新增了角色设定档、航线终端和世界线日志。每个页面只承担一个主要任务，首页则负责把访客送往合适的入口。",
+      "导航和资源路径统一经过站点路径工具处理，因此根域名、GitHub Pages 项目路径与本地开发可以复用同一套内容。",
+    ],
+    decisions: ["页面职责互不重复", "未知个人资料不造假", "路由继续支持静态导出"],
+    evidence: "MULTI-PAGE SYSTEM",
+  },
+  {
+    episode: "EP.002",
+    number: "002",
+    date: "2026.08.09",
+    title: "把二次元从装饰变成叙事语言",
+    summary:
+      "二次元感不等于贴满角色图片；它也可以来自分镜、频道、台词框、音轨感与恰到好处的互动反馈。",
+    body: [
+      "主视觉使用原创动漫群像，避免把官方素材直接当作个人品牌。初音未来、伊蕾娜与波奇则通过音乐、旅行、摇滚三种气质进入内容结构。",
+      "角色频道能够同步改变整站信号色，次元扭蛋提供原创行动提示，让主题成为可以参与的体验。",
+    ],
+    decisions: ["原创主视觉优先", "角色气质服务内容", "尊重减少动态偏好"],
+    evidence: "VISUAL IDENTITY",
+  },
+  {
+    episode: "EP.001",
+    number: "001",
+    date: "2026.08.09",
+    title: "为什么我不想只做一张好看的首页",
+    summary:
+      "好看是开场，不是终点。长期项目首先需要稳定的类型、测试、版本记录和可替换的内容层。",
+    body: [
+      "网站从 TypeScript 与 React 起步，把公开文案放在独立内容模块中，并建立格式、Lint、类型、构建和渲染检查。",
+      "视觉系统使用设计令牌管理颜色、间距和主题，未来更换开发电脑或部署目标时不依赖某一台机器的特殊状态。",
+    ],
+    decisions: ["内容与视图分离", "每次发布前自动验证", "技术选择写入项目记录"],
+    evidence: "ENGINEERING FOUNDATION",
+  },
+] as const satisfies readonly Release[];
+
+export const currentRelease = releaseHistory[0];

@@ -344,7 +344,7 @@ export const studyPrinciples = [
   {
     index: "02",
     title: "最小实验",
-    copy: "每篇笔记最终都应该落到一个可以运行、观察或验证的小实验。",
+    copy: "适合实验的主题补一个可以运行、观察或验证的小例子；纯概念主题也留下可检查的推理或练习。",
   },
   {
     index: "03",
@@ -356,18 +356,8 @@ export const studyPrinciples = [
 export const studyQueue = [
   {
     order: "NEXT / 01",
-    title: "CS224N · Word2Vec 与负采样",
+    title: "CS224N · Word2Vec 目标与梯度",
     scope:
-      "沿着官方课程继续拆解 Skip-gram、CBOW、训练目标与负采样；完成理解后再进入正式笔记。",
-  },
-  {
-    order: "NEXT / 02",
-    title: "数据结构与复杂度",
-    scope: "数组、链表、栈、队列，以及 Big O 想回答的实际问题。",
-  },
-  {
-    order: "NEXT / 03",
-    title: "操作系统的基本角色",
-    scope: "进程、线程、内存与文件系统怎样共同抽象硬件。",
+      "把当前笔记中的概念推进到损失函数、负采样目标、梯度更新与一次可运行训练实验；真正完成推导后再发布。",
   },
 ] as const;

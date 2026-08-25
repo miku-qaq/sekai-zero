@@ -1,4 +1,5 @@
 import { publicProfile } from "./profile";
+import { releaseHistory } from "./releases";
 
 /**
  * Public-facing copy and navigation for the site.
@@ -6,27 +7,12 @@ import { publicProfile } from "./profile";
  * Keeping identity and editorial content outside React components makes weekly
  * updates safer: most copy changes happen here without touching layout code.
  */
-export const siteConfig = {
-  name: "SEKAI / 00",
-  shortName: "SEKAI",
-  owner: publicProfile.handle,
-  description:
-    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、作品与长期建站过程。",
-  navigation: [
-    { label: "首页", href: "/" },
-    { label: "关于我", href: "/about/" },
-    { label: "制作档案", href: "/projects/" },
-    { label: "学习笔记", href: "/study/" },
-    { label: "航线终端", href: "/links/" },
-    { label: "世界线日志", href: "/logs/" },
-  ],
-} as const;
-
 /** Primary routes shown as the homepage's world map. */
 export const worldRoutes = [
   {
     index: "01",
     href: "/about/",
+    navLabel: "关于我",
     eyebrow: "CHARACTER FILE",
     title: "角色设定档",
     description:
@@ -39,6 +25,7 @@ export const worldRoutes = [
   {
     index: "02",
     href: "/links/",
+    navLabel: "航线终端",
     eyebrow: "ROUTE TERMINAL",
     title: "航线终端",
     description: "每一个入口都附带一条愿意回来的理由；不是没有灵魂的常用网站大全。",
@@ -50,6 +37,7 @@ export const worldRoutes = [
   {
     index: "03",
     href: "/projects/",
+    navLabel: "制作档案",
     eyebrow: "PRODUCTION DOSSIER",
     title: "制作档案",
     description: "不只展示完成画面，也记录目标、结构、取舍与仍在进行的下一步。",
@@ -61,6 +49,7 @@ export const worldRoutes = [
   {
     index: "04",
     href: "/study/",
+    navLabel: "学习笔记",
     eyebrow: "COMPUTER STUDY DECK",
     title: "计算机学习舱",
     description:
@@ -73,6 +62,7 @@ export const worldRoutes = [
   {
     index: "05",
     href: "/logs/",
+    navLabel: "世界线日志",
     eyebrow: "TIMELINE ARCHIVE",
     title: "世界线日志",
     description: "把每一话的变化、选择和复盘写下来，让网站成长本身也成为内容。",
@@ -82,6 +72,19 @@ export const worldRoutes = [
     layout: "standard",
   },
 ] as const;
+
+/** Header, footer, homepage map and journey controls share this route order. */
+export const siteConfig = {
+  name: "SEKAI / 00",
+  shortName: "SEKAI",
+  owner: publicProfile.handle,
+  description:
+    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、作品与长期建站过程。",
+  navigation: [
+    { label: "首页", href: "/" },
+    ...worldRoutes.map(({ navLabel, href }) => ({ label: navLabel, href })),
+  ],
+} as const;
 
 /**
  * Three compact manga beats used directly below the hero. They establish the
@@ -259,68 +262,25 @@ export const projectHighlights = [
   },
 ] as const;
 
-export const fieldNotes = [
-  {
-    id: "LOG 007",
-    date: "2026.08.25",
-    title: "把 CS224N 学习路线接入知识地图",
-    excerpt:
-      "从 NLP、词表示与分布式语义开始，只整理已经在学的内容，也明确区分自学记录、正式选课与课程完成。",
-  },
-  {
-    id: "LOG 006",
-    date: "2026.08.09",
-    title: "让名字与现实坐标正式上线",
-    excerpt:
-      "只录入主人明确确认的称呼、学习状态、兴趣、游戏平台与联系入口；未知资料继续保持留白。",
-  },
-  {
-    id: "LOG 005",
-    date: "2026.08.09",
-    title: "让作品不只停在一张展示卡",
-    excerpt:
-      "把本站作为第一个可验证案例，公开目标、结构、取舍与版本轨迹，不用虚构项目数量撑满档案。",
-  },
-  {
-    id: "LOG 004",
-    date: "2026.08.09",
-    title: "给长期学习留一个可检索的房间",
-    excerpt:
-      "计算机笔记不再混在建站日志里；它有自己的分类、搜索、回忆问题和一手资料入口。",
-  },
-  {
-    id: "LOG 003",
-    date: "2026.08.09",
-    title: "从一张长首页，展开三个独立频道",
-    excerpt:
-      "关于我、航线终端和世界线日志各自承担一个任务；首页终于可以更像世界入口，而不是全部内容的仓库。",
-  },
-  {
-    id: "LOG 002",
-    date: "DESIGN NOTE",
-    title: "现代感，不等于堆满特效",
-    excerpt: "大部分界面保持安静，只把动画留给状态、反馈与少数值得记住的瞬间。",
-  },
-  {
-    id: "LOG 001",
-    date: "2026.08.09",
-    title: "先把房子搭稳，再开始装饰",
-    excerpt:
-      "清晰的边界、自动检查和可替换的内容层，决定了这个网站半年后还能不能轻松修改。",
-  },
-] as const;
+/** Compact homepage notes derived from the same source as the full log. */
+export const fieldNotes = releaseHistory.map(({ number, date, title, summary }) => ({
+  id: `LOG ${number}`,
+  date,
+  title,
+  excerpt: summary,
+}));
 
 export const roadmap = [
   {
     phase: "01",
     title: "稳定地基",
-    status: "本周",
+    status: "已上线 · 持续维护",
     description: "品牌首页、响应式布局、主题切换、质量检查与发布流程。",
   },
   {
     phase: "02",
     title: "展开多页世界",
-    status: "本话完成",
+    status: "已上线",
     description:
       "独立 About、Links、Projects、Study 与 Logs 路由，共享导航、内容模型和双目标静态路径。",
   },

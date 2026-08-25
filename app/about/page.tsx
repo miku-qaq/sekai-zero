@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { influenceSignals, profileQuestions, profileTimeline } from "@/content/about";
 import { profileFacts, publicProfile } from "@/content/profile";
-import { sitePath } from "@/lib/site-path";
+import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
 
@@ -157,11 +157,11 @@ export default function AboutPage() {
       >
         <div className="section-shell timeline-layout">
           <div className="section-heading">
-            <p className="section-index">04 / ORIGIN STORY</p>
-            <h2 id="timeline-title">这条世界线如何抵达现在。</h2>
+            <p className="section-index">04 / SITE STORY</p>
+            <h2 id="timeline-title">本站最近抵达的三站。</h2>
           </div>
           <ol>
-            {profileTimeline.map((item, index) => (
+            {profileTimeline.slice(-3).map((item, index) => (
               <li key={item.episode}>
                 <span className="timeline-marker">{index + 1}</span>
                 <div>
@@ -175,13 +175,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="subpage-next section-shell" aria-labelledby="next-title">
-        <span>下一站 / ROUTE 02</span>
-        <h2 id="next-title">沿着信号，看看我愿意反复返回的坐标。</h2>
-        <a className="button button-primary" href={sitePath("/links/")}>
-          前往航线终端 <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+      <JourneyNavigation currentHref="/about/" />
       <SiteFooter />
     </main>
   );

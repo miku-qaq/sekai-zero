@@ -404,59 +404,99 @@
   white-space: nowrap;
 }
 
-.subpage-next {
-  position: relative;
-  display: flex;
+.journey-navigation {
+  display: grid;
   overflow: hidden;
-  min-height: 470px;
+  grid-template-columns: minmax(0, 1fr) 170px minmax(0, 1fr);
+  margin-top: clamp(88px, 11vw, 150px);
+  border: 2px solid var(--foreground);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--foreground);
+}
+
+.journey-link {
+  display: flex;
+  min-width: 0;
+  min-height: 148px;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
-  padding: clamp(34px, 7vw, 90px);
-  border-radius: var(--radius-large);
+  gap: 12px;
+  padding: clamp(22px, 4vw, 40px);
+  transition: background-color 180ms ease;
+}
+
+.journey-link > span,
+.journey-progress > span {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.journey-link strong {
+  overflow: hidden;
+  font-size: clamp(20px, 2.5vw, 31px);
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.journey-link strong span {
+  color: var(--accent-deep);
+}
+
+.journey-next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.journey-progress {
+  display: grid;
+  place-content: center;
+  padding: 20px;
+  border-inline: 1px solid var(--foreground);
   background: var(--foreground);
   color: var(--background);
+  text-align: center;
 }
 
-.subpage-next::after {
-  position: absolute;
-  right: -80px;
-  bottom: -190px;
-  width: 420px;
-  height: 420px;
-  border: 1px solid rgb(var(--accent-rgb) / 45%);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 55px rgb(var(--accent-rgb) / 8%),
-    0 0 0 110px rgb(var(--accent-rgb) / 5%);
-  content: "";
+.journey-progress > span {
+  color: currentColor;
+  opacity: 0.62;
 }
 
-.subpage-next > * {
-  position: relative;
-  z-index: 1;
-}
-
-.subpage-next > span {
+.journey-progress > strong {
+  margin-top: 4px;
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  opacity: 0.6;
+  font-size: 22px;
+  letter-spacing: -0.06em;
 }
 
-.subpage-next h2 {
-  max-width: 820px;
-  margin: 23px 0 36px;
-  font-size: clamp(42px, 6vw, 76px);
-  letter-spacing: -0.065em;
-  line-height: 1.04;
+.journey-progress > i {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 13px;
+  font-style: normal;
 }
 
-.subpage-next .button-primary {
-  border-color: var(--background);
-  background: var(--background);
-  color: var(--foreground);
+.journey-progress b {
+  width: 14px;
+  height: 3px;
+  background: rgb(255 255 255 / 24%);
+}
+
+.journey-progress b[data-active="true"] {
+  background: var(--accent);
+}
+
+@media (hover: hover) {
+  .journey-link:hover {
+    background: var(--accent-soft);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1026,6 +1066,10 @@
   --terminal-color: #9279f6;
 }
 
+.terminal-card-study {
+  --terminal-color: #4f8df7;
+}
+
 .terminal-card-contact {
   --terminal-color: #e48b35;
 }
@@ -1134,6 +1178,18 @@
 .terminal-empty p {
   margin: 0;
   color: var(--muted);
+}
+
+.terminal-empty button {
+  min-height: 44px;
+  margin-top: 22px;
+  padding: 0 18px;
+  border: 1px solid var(--foreground);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 760;
 }
 
 .dormant-section {
@@ -1594,9 +1650,30 @@
     grid-row: auto;
   }
 
-  .subpage-next {
+  .journey-navigation {
     width: calc(100% - 24px);
-    min-height: 440px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .journey-progress {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-height: 92px;
+    border-inline: 0;
+    border-bottom: 1px solid var(--foreground);
+  }
+
+  .journey-link {
+    min-height: 132px;
+    padding: 20px;
+  }
+
+  .journey-link strong {
+    white-space: normal;
+  }
+
+  .journey-previous {
+    border-right: 1px solid var(--border-strong);
   }
 
   .site-footer,

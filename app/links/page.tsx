@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { dormantSectors } from "@/content/links";
-import { sitePath } from "@/lib/site-path";
+import { JourneyNavigation } from "../components/journey-navigation";
 import { LinkTerminal } from "../components/link-terminal";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -19,12 +19,12 @@ export default function LinksPage() {
       <PageMasthead
         episode="FILE 02"
         eyebrow="ROUTE TERMINAL / COORDINATES ONLINE"
-        title="我在互联网留下的航线。"
+        title="通往这座世界内外的航线。"
         lead="不是常用网站大全，也不是一堵没有灵魂的 Logo 墙。每个入口都带着一条我为什么愿意回来、它与这座世界有什么关系的批注。"
         motif="↗"
         tone="violet"
         meta={[
-          { label: "当前航线", value: "本站 / 工具 / 联系" },
+          { label: "当前航线", value: "本站 / 学习 / 工具 / 联系" },
           { label: "筛选方式", value: "分类 / 搜索 / 随机跃迁" },
           { label: "录入原则", value: "真实关系优先" },
         ]}
@@ -73,13 +73,7 @@ export default function LinksPage() {
         </div>
       </section>
 
-      <section className="subpage-next section-shell" aria-labelledby="next-title">
-        <span>下一站 / ROUTE 03</span>
-        <h2 id="next-title">想知道这座网站为什么这样设计？</h2>
-        <a className="button button-primary" href={sitePath("/projects/")}>
-          读取制作档案 <span aria-hidden="true">↗</span>
-        </a>
-      </section>
+      <JourneyNavigation currentHref="/links/" />
       <SiteFooter />
     </main>
   );

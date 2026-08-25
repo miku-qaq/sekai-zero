@@ -1,6 +1,6 @@
 export type LinkEntry = {
   id: string;
-  group: "internal" | "toolkit" | "contact";
+  group: "internal" | "study" | "toolkit" | "contact";
   label: string;
   eyebrow: string;
   href: string;
@@ -41,6 +41,17 @@ export const linkEntries: readonly LinkEntry[] = [
     href: "/study/",
     reason: "把计算机概念整理成可以搜索、展开、复述和继续校订的个人知识地图。",
     tags: ["学习", "计算机", "笔记"],
+  },
+  {
+    id: "current-cs224n-note",
+    group: "study",
+    label: "CS224N 当前笔记",
+    eyebrow: "NOW LEARNING / NLP-001",
+    href: "/study/#cs224n-nlp-word-vectors",
+    reason:
+      "从词表示与分布式语义开始，直接进入我正在整理的 CS224N 自学记录与回忆问题。",
+    tags: ["CS224N", "NLP", "Word Vectors"],
+    action: "继续当前学习",
   },
   {
     id: "logs",
@@ -92,13 +103,36 @@ export const linkEntries: readonly LinkEntry[] = [
     external: true,
   },
   {
-    id: "github",
+    id: "sekai-source",
     group: "toolkit",
-    label: "GitHub",
-    eyebrow: "VERSION ARCHIVE",
-    href: "https://github.com/",
-    reason: "保存每一次可追溯的变化，并为持续集成与公开发布提供入口。",
-    tags: ["Git", "版本", "协作"],
+    label: "SEKAI / 00 源码仓库",
+    eyebrow: "SOURCE / VERSION ARCHIVE",
+    href: "https://github.com/miku-qaq/sekai-zero",
+    reason: "本站源码、版本历史与发布流程都在这里公开，可以直接核对制作档案中的说明。",
+    tags: ["GitHub", "源码", "版本证据"],
+    action: "核对公开仓库",
+    external: true,
+  },
+  {
+    id: "cs224n-course",
+    group: "study",
+    label: "Stanford CS224N",
+    eyebrow: "OFFICIAL COURSE / PRIMARY SOURCE",
+    href: "https://web.stanford.edu/class/cs224n/",
+    reason: "当前 NLP 学习主线的一手入口；课程范围、讲义与安排都优先回到官方页面核对。",
+    tags: ["Stanford", "NLP", "官方课程"],
+    action: "打开官方课程页",
+    external: true,
+  },
+  {
+    id: "cs224n-word-vectors",
+    group: "study",
+    label: "CS224N · Word Vectors",
+    eyebrow: "LECTURE 02 / PRIMARY SOURCE",
+    href: "https://web.stanford.edu/class/cs224n/slides_w26/cs224n-2026-lecture02-wordvecs.pdf",
+    reason: "当前词向量笔记对应的官方课程讲义，用来继续核对表示、训练目标与负采样。",
+    tags: ["Lecture 2", "Word2Vec", "PDF"],
+    action: "阅读官方讲义",
     external: true,
   },
 ] as const;
@@ -106,6 +140,7 @@ export const linkEntries: readonly LinkEntry[] = [
 export const linkGroups = [
   { id: "all", label: "全部航线" },
   { id: "internal", label: "本站频道" },
+  { id: "study", label: "学习信标" },
   { id: "toolkit", label: "建造装备" },
   { id: "contact", label: "公开坐标" },
 ] as const;
@@ -114,12 +149,12 @@ export const dormantSectors = [
   {
     title: "灵感星球",
     code: "SECTOR / INSPIRATION",
-    copy: "等待录入真正影响过我的博客、作品与创作者。每条都会写下为什么收藏。",
+    copy: "等我整理好真正影响过自己的博客、作品与创作者后再录入；每条都会写下为什么收藏。",
   },
   {
     title: "朋友的世界",
     code: "SECTOR / FRIENDS",
-    copy: "这个星域还没有公开坐标。等主人确认后再点亮，拒绝为了热闹而虚构友链。",
+    copy: "这个星域还没有公开坐标。等我确认后再点亮，不为了热闹而虚构友链。",
   },
   {
     title: "游戏收藏馆",
