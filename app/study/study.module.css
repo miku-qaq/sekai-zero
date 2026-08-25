@@ -545,20 +545,22 @@
 
 .queue {
   scroll-margin-top: 100px;
-  border-bottom: 1px solid var(--border);
-  background: #101722;
-  color: #f5f8fb;
+  border-block: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 88% 18%, rgb(145 216 255 / 28%), transparent 24%),
+    linear-gradient(125deg, #edf7ff, #f1edff 54%, #fff1f7);
+  color: #353149;
 }
 
 .queue :global(.section-index),
 .queue :global(.horizontal-heading) > p {
-  color: #aab7ca;
+  color: #6f6a80;
 }
 
 .queueList {
   margin: 0;
   padding: 0;
-  border-top: 1px solid #34435a;
+  border-top: 1px solid #cfc6df;
   list-style: none;
 }
 
@@ -568,11 +570,11 @@
   gap: clamp(20px, 4vw, 54px);
   align-items: center;
   padding: 30px 0;
-  border-bottom: 1px solid #34435a;
+  border-bottom: 1px solid #cfc6df;
 }
 
 .queueList li > span {
-  color: #86b7ff;
+  color: #3568b8;
   font-family: var(--font-geist-mono), monospace;
   font-size: 9px;
   font-weight: 800;
@@ -587,12 +589,12 @@
 
 .queueList p {
   margin: 0;
-  color: #aab7ca;
+  color: #6f6a80;
   font-size: 13px;
 }
 
 .queueList i {
-  color: var(--study-yellow);
+  color: #9a6700;
   font-size: 24px;
   font-style: normal;
   text-align: right;

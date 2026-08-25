@@ -258,13 +258,16 @@
 
 .systemSection {
   overflow: hidden;
-  background: var(--project-ink);
-  color: #f4f7fb;
+  border-block: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 86% 18%, rgb(79 141 247 / 16%), transparent 25%),
+    linear-gradient(125deg, #effcf9, #f1edff 52%, #fff4e6);
+  color: #353149;
 }
 
 .systemHeading :global(.section-index),
 .systemHeading > p {
-  color: #9faec2;
+  color: #6f6a80;
 }
 
 .systemFlow {
@@ -273,7 +276,7 @@
   gap: 1px;
   margin: 0;
   padding: 1px;
-  background: #334156;
+  background: #cfc6df;
   list-style: none;
 }
 
@@ -281,7 +284,7 @@
   position: relative;
   min-height: 360px;
   padding: 24px;
-  background: var(--project-ink);
+  background: rgb(255 255 255 / 58%);
 }
 
 .systemFlow li:not(:last-child)::after {
@@ -293,10 +296,10 @@
   width: 27px;
   height: 27px;
   place-items: center;
-  border: 1px solid #52627a;
+  border: 1px solid #a99fbc;
   border-radius: 50%;
-  background: var(--project-ink);
-  color: var(--project-amber);
+  background: #fffefe;
+  color: #8b5a00;
   content: "→";
   font-size: 12px;
   transform: translateY(-50%);
@@ -307,7 +310,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  color: #8ea0b8;
+  color: #6f6a80;
   font-family: var(--font-geist-mono), monospace;
   font-size: 8px;
   font-weight: 800;
@@ -315,7 +318,7 @@
 }
 
 .systemFlow li > div span:first-child {
-  color: var(--project-amber);
+  color: #8b5a00;
   font-size: 13px;
 }
 
@@ -327,7 +330,7 @@
 
 .systemFlow p {
   margin: 0;
-  color: #9faec2;
+  color: #6f6a80;
   font-size: 12px;
   line-height: 1.75;
 }

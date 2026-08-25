@@ -18,7 +18,7 @@ export const currentBroadcast = {
   episode: currentRelease.episode,
   episodeNumber: currentRelease.number,
   updatedAt: currentRelease.date,
-  headline: "这一周，正在让学习、建站与下一步彼此相连。",
+  headline: "这一周，正在把整座 SEKAI 点亮成白昼次元杂志。",
   summary:
     "这里是会随真实进度更新的信号台。每条信号都通往可以继续阅读的页面，而不是停在一句没有上下文的状态。",
   signals: [

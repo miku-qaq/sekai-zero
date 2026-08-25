@@ -1,9 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { favoriteChannels } from "@/content/site";
+import { sitePath } from "@/lib/site-path";
 
 type ChannelId = (typeof favoriteChannels)[number]["id"];
+const CHANNEL_STORAGE_KEY = "sekai-channel";
+const CHANNEL_CHANGE_EVENT = "sekai-channel-change";
+
+function isChannelId(value: string | null | undefined): value is ChannelId {
+  return favoriteChannels.some((channel) => channel.id === value);
+}
+
+function clientChannelSnapshot(): ChannelId {
+  const channel = document.documentElement.dataset.channel;
+  return isChannelId(channel) ? channel : "miku";
+}
+
+function serverChannelSnapshot(): ChannelId {
+  return "miku";
+}
+
+function subscribeToChannel(onStoreChange: () => void) {
+  window.addEventListener(CHANNEL_CHANGE_EVENT, onStoreChange);
+  return () => window.removeEventListener(CHANNEL_CHANGE_EVENT, onStoreChange);
+}
+
+function setClientChannel(channel: ChannelId) {
+  document.documentElement.dataset.channel = channel;
+  try {
+    window.localStorage.setItem(CHANNEL_STORAGE_KEY, channel);
+  } catch {
+    // The active visual channel still works for this page without storage.
+  }
+  window.dispatchEvent(new Event(CHANNEL_CHANGE_EVENT));
+}
 
 /**
  * A playful, copyright-conscious tribute. The original key visual establishes
@@ -11,14 +42,14 @@ type ChannelId = (typeof favoriteChannels)[number]["id"];
  * editorial copy, palettes and motifs instead of reproducing official assets.
  */
 export function FavoriteChannels() {
-  const [activeChannel, setActiveChannel] = useState<ChannelId>("miku");
-
-  useEffect(() => {
-    document.documentElement.dataset.channel = activeChannel;
-  }, [activeChannel]);
+  const activeChannel = useSyncExternalStore(
+    subscribeToChannel,
+    clientChannelSnapshot,
+    serverChannelSnapshot,
+  );
 
   function selectChannel(channel: ChannelId) {
-    setActiveChannel(channel);
+    setClientChannel(channel);
   }
 
   const active = favoriteChannels.find((channel) => channel.id === activeChannel)!;
@@ -53,6 +84,14 @@ export function FavoriteChannels() {
           </div>
         </div>
         <p className="channel-quote">「{active.note}」</p>
+        <a className="channel-program" href={sitePath(active.program.href)}>
+          <span>NOW PLAYING / {active.program.label}</span>
+          <strong>{active.program.title}</strong>
+          <p>{active.program.description}</p>
+          <i>
+            {active.program.action} <span aria-hidden="true">↗</span>
+          </i>
+        </a>
         <div className="channel-screen-footer">
           <ul className="channel-tags" aria-label={`${active.name} 频道关键词`}>
             {active.tags.map((tag) => (
@@ -109,7 +148,8 @@ export function FavoriteChannels() {
         })}
       </div>
       <p className="channel-hint">
-        <span aria-hidden="true">↳</span> 点击角色卡，整站会同步切换专属信号色。
+        <span aria-hidden="true">↳</span>{" "}
+        点击角色卡会切换整站信号色，也会接通一条真实的站内节目。
       </p>
     </div>
   );

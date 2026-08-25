@@ -14,7 +14,10 @@ function clientThemeSnapshot(): Theme {
     return explicitTheme;
   }
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // The site is designed to open like a bright anime magazine. Dark mode is
+  // still available as an explicit, persisted choice, but the operating
+  // system theme no longer turns the first visit into a near-black page.
+  return "light";
 }
 
 function serverThemeSnapshot(): Theme {
@@ -22,13 +25,10 @@ function serverThemeSnapshot(): Theme {
 }
 
 function subscribeToTheme(onStoreChange: () => void) {
-  const media = window.matchMedia("(prefers-color-scheme: dark)");
   const notify = () => onStoreChange();
-  media.addEventListener("change", notify);
   window.addEventListener(THEME_CHANGE_EVENT, notify);
 
   return () => {
-    media.removeEventListener("change", notify);
     window.removeEventListener(THEME_CHANGE_EVENT, notify);
   };
 }

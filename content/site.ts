@@ -200,6 +200,14 @@ export const favoriteChannels = [
     note: "把还没发生的明天，唱成现在就想抵达的样子。",
     sync: 99,
     tags: ["电子歌姬", "未来感", "音乐"],
+    program: {
+      label: "STUDY SIGNAL / CH.39",
+      title: "把词变成坐标",
+      description:
+        "学习舱正在整理 CS224N Word Vectors：从 one-hot 的局限走向稠密表示。",
+      href: "/study/#cs224n-nlp-word-vectors",
+      action: "进入学习舱",
+    },
   },
   {
     id: "elaina",
@@ -213,6 +221,13 @@ export const favoriteChannels = [
     note: "保持好奇，去看更远的地方，也把沿途故事认真收好。",
     sync: 92,
     tags: ["旅行魔女", "故事感", "星轨"],
+    program: {
+      label: "ROUTE SIGNAL / CH.07",
+      title: "下一站，由好奇心选择",
+      description: "航线终端收录本站频道与值得回来的公开入口，每条都说明为什么留下。",
+      href: "/links/",
+      action: "打开航线终端",
+    },
   },
   {
     id: "bocchi",
@@ -226,6 +241,13 @@ export const favoriteChannels = [
     note: "即使紧张到快要融化，也可以抱紧吉他，再向前一步。",
     sync: 96,
     tags: ["摇滚少女", "社恐能量", "吉他"],
+    program: {
+      label: "BUILD SIGNAL / CH.06",
+      title: "先把这一小节放上台",
+      description: "Project 001 记录 SEKAI / 00 的目标、结构、取舍与公开证据。",
+      href: "/projects/",
+      action: "查看制作档案",
+    },
   },
 ] as const;
 
@@ -275,7 +297,7 @@ export const roadmap = [
     phase: "01",
     title: "稳定地基",
     status: "已上线 · 持续维护",
-    description: "品牌首页、响应式布局、主题切换、质量检查与发布流程。",
+    description: "白昼粉彩视觉、响应式布局、主题切换、质量检查与发布流程。",
   },
   {
     phase: "02",

@@ -32,10 +32,12 @@
   display: grid;
   overflow: hidden;
   grid-template-columns: minmax(245px, 0.72fr) minmax(0, 1.28fr);
-  border: 2px solid var(--foreground);
-  border-radius: 8px;
+  border: 2px solid color-mix(in srgb, var(--secondary) 58%, var(--foreground));
+  border-radius: 24px;
   background: var(--surface);
-  box-shadow: 10px 10px 0 var(--foreground);
+  box-shadow:
+    10px 10px 0 color-mix(in srgb, var(--secondary) 42%, var(--foreground)),
+    0 24px 60px rgb(108 82 147 / 14%);
 }
 
 .episodePanel {
@@ -47,10 +49,11 @@
   justify-content: space-between;
   padding: clamp(22px, 3.5vw, 40px);
   background:
-    radial-gradient(circle at 1px 1px, rgb(255 255 255 / 13%) 1px, transparent 1.4px) 0
-      0 / 9px 9px,
-    #101722;
-  color: #f5f8fb;
+    radial-gradient(circle at 1px 1px, rgb(65 53 89 / 13%) 1px, transparent 1.4px) 0 0 /
+      9px 9px,
+    radial-gradient(circle at 18% 12%, rgb(255 255 255 / 88%), transparent 24%),
+    linear-gradient(145deg, #cefff6 0%, #eee7ff 56%, #ffe1ed 100%);
+  color: #353149;
 }
 
 .episodePanel::after {
@@ -59,7 +62,7 @@
   bottom: -110px;
   width: 270px;
   aspect-ratio: 1;
-  border: 42px solid rgb(var(--accent-rgb) / 24%);
+  border: 42px solid rgb(139 120 246 / 18%);
   border-radius: 50%;
   content: "";
 }
@@ -80,7 +83,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #b9c6d8;
+  color: #665f78;
 }
 
 .episodeTopline i {
@@ -95,13 +98,15 @@
   position: relative;
   z-index: 1;
   align-self: center;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-family: var(--font-geist-mono), monospace;
   font-size: clamp(112px, 15vw, 215px);
   font-weight: 900;
   letter-spacing: -0.13em;
   line-height: 0.8;
-  text-shadow: 7px 7px 0 rgb(0 0 0 / 38%);
+  text-shadow:
+    7px 7px 0 rgb(255 130 180 / 38%),
+    13px 13px 0 rgb(145 216 255 / 22%);
   transform: translateX(-0.06em) rotate(-4deg);
 }
 
@@ -118,20 +123,20 @@
 }
 
 .episodeCopy > span {
-  color: #aab7ca;
+  color: #6b657b;
   font-size: 9px;
 }
 
 .episodeCopy > strong {
   margin-top: 4px;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-size: 13px;
 }
 
 .episodeCopy p {
   max-width: 34ch;
   margin: 14px 0 0;
-  color: #c8d1df;
+  color: #625c73;
   font-size: 13px;
 }
 
@@ -151,6 +156,11 @@
   gap: 12px 28px;
   padding: clamp(24px, 3.5vw, 38px);
   border-bottom: 1px solid var(--border);
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--signal-color) 10%, var(--surface)),
+    var(--surface) 64%
+  );
 }
 
 .signal:last-child {
@@ -185,7 +195,7 @@
 }
 
 .signalMeta span:first-child {
-  color: var(--signal-color);
+  color: color-mix(in srgb, var(--signal-color) 40%, var(--foreground));
 }
 
 .signalMeta span:last-child {

@@ -25,6 +25,7 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
     const html = await readFile(output, "utf8");
 
     assert.match(html, /<html[^>]*lang="zh-CN"/i);
+    assert.match(html, /<html[^>]*data-theme="light"/i);
     assert.match(html, page.title);
     assert.doesNotMatch(html, /localhost(?::\d+)?/i);
     if (page.path !== "index.html") {
@@ -68,7 +69,7 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   );
   assert.match(homepage, new RegExp(`href="${basePath}/study/#learning-queue"`));
   assert.match(homepage, /NOW \/ CURRENT BROADCAST/);
-  assert.match(homepage, /EP\.008/);
+  assert.match(homepage, /EP\.009/);
 
   const about = await readFile(
     new URL("../dist/pages/about/index.html", import.meta.url),
@@ -100,8 +101,8 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   assert.match(projects, /打开公开网站/);
   assert.match(projects, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(projects, new RegExp(`href="${basePath}/logs/"`));
-  assert.match(logs, /id="ep-008"/);
-  assert.match(logs, /让各个页面开始彼此回应/);
+  assert.match(logs, /id="ep-009"/);
+  assert.match(logs, /把黑色终端点亮成白昼次元杂志/);
 
   const study = await readFile(
     new URL("../dist/pages/study/index.html", import.meta.url),
@@ -119,5 +120,6 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
 
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
   await access(new URL("../dist/pages/og-projects.png", import.meta.url));
+  await access(new URL("../dist/pages/og-v4.png", import.meta.url));
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));
 });

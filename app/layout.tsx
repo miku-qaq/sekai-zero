@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Runs before hydration to prevent a flash when the saved theme differs from
-// the operating-system preference. Failure simply falls back to CSS.
-const themeInitializationScript = `try{const value=localStorage.getItem("sekai-theme");if(value==="light"||value==="dark"){document.documentElement.dataset.theme=value}}catch{}`;
+// Runs before hydration so an explicitly saved theme is restored without a
+// flash. First visits intentionally use the bright house theme.
+const themeInitializationScript = `try{const theme=localStorage.getItem("sekai-theme");if(theme==="light"||theme==="dark"){document.documentElement.dataset.theme=theme}const channel=localStorage.getItem("sekai-channel");if(channel==="miku"||channel==="elaina"||channel==="bocchi"){document.documentElement.dataset.channel=channel}}catch{}`;
 
 const defaultSiteUrl = "https://miku-qaq.github.io/sekai-zero/";
 
@@ -37,7 +37,7 @@ function resolveSiteUrl(): URL {
 }
 
 const metadataBase = resolveSiteUrl();
-const socialImage = new URL("og-v3.png", metadataBase).toString();
+const socialImage = new URL("og-v4.png", metadataBase).toString();
 const favicon = new URL("favicon.svg", metadataBase).toString();
 
 export const metadata: Metadata = {
@@ -60,7 +60,14 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     title: `${siteConfig.name} · 个人次元站`,
     description: siteConfig.description,
-    images: [{ url: socialImage, alt: "SEKAI / 00 个人次元站分享卡片" }],
+    images: [
+      {
+        url: socialImage,
+        alt: "SEKAI / 00 白昼动画杂志风格分享卡片",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -73,17 +80,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f8fb" },
-    { media: "(prefers-color-scheme: dark)", color: "#090b11" },
-  ],
+  themeColor: "#fff9fd",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="zh-CN" data-channel="miku" suppressHydrationWarning>
+    <html lang="zh-CN" data-theme="light" data-channel="miku" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
       </head>

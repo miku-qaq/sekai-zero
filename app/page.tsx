@@ -352,7 +352,7 @@ export default function Home() {
         </p>
         <h2 id="finale-title">第 {currentRelease.number} 话，放送完毕。</h2>
         <p>
-          当前信号已经与每个频道相连；下一话会继续沿着真实学习进度整理 NLP，
+          白昼模式和三条推し频道已经接通；下一话会继续沿着真实学习进度整理 NLP，
           也只加入我确认过的收藏与次元实验。
         </p>
         <div className="finale-actions">

@@ -30,16 +30,17 @@ test("server-renders the product homepage and its core navigation", async () => 
 
   const html = await response.text();
   assert.match(html, /<html[^>]*lang="zh-CN"/i);
+  assert.match(html, /<html[^>]*data-theme="light"/i);
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
   assert.match(html, /这里不只一页/);
   assert.match(html, /Mikureina/);
-  assert.match(html, /EP\.008/);
+  assert.match(html, /EP\.009/);
   assert.match(html, /CS224N/);
   assert.match(html, /NOW \/ CURRENT BROADCAST/);
-  assert.match(html, /这一周，正在让学习、建站与下一步彼此相连/);
+  assert.match(html, /这一周，正在把整座 SEKAI 点亮成白昼次元杂志/);
   assert.match(html, /href="\/study\/#cs224n-nlp-word-vectors"/);
   assert.match(html, /href="\/study\/#learning-queue"/);
-  assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v3\.png/);
+  assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v4\.png/);
   assert.doesNotMatch(html, /chatgpt\.site/);
   assert.match(html, /角色设定档/);
   assert.match(html, /航线终端/);
@@ -133,11 +134,11 @@ test("publishes connected routes and verifiable project evidence", async () => {
   assert.match(projects, /打开公开网站/);
   assert.match(projects, /查看 GitHub 仓库/);
   assert.match(projects, /href="\/logs\/"/);
-  assert.match(logs, /EP\.008/);
-  assert.match(logs, /id="ep-008"/);
-  assert.match(logs, /让各个页面开始彼此回应/);
+  assert.match(logs, /EP\.009/);
+  assert.match(logs, /id="ep-009"/);
+  assert.match(logs, /把黑色终端点亮成白昼次元杂志/);
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 8);
+  assert.equal(episodeIds.length, 9);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -211,6 +212,7 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
     nowContent,
     journeyNavigation,
     linkTerminal,
+    favoriteChannelsComponent,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
@@ -236,19 +238,32 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
       "utf8",
     ),
     readFile(new URL("../app/components/link-terminal.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/components/favorite-channels.tsx", import.meta.url),
+      "utf8",
+    ),
   ]);
 
   assert.match(page, /from "@\/content\/site"/);
   assert.match(content, /favoriteChannels/);
   assert.match(content, /mangaMoments/);
   assert.match(content, /dimensionalFortunes/);
+  assert.match(content, /label: "ROUTE SIGNAL \/ CH\.07"/);
+  assert.match(content, /href: "\/links\/"/);
+  assert.match(content, /action: "打开航线终端"/);
+  assert.match(content, /label: "BUILD SIGNAL \/ CH\.06"/);
+  assert.match(content, /href: "\/projects\/"/);
+  assert.match(content, /action: "查看制作档案"/);
   assert.match(packageJson, /"name": "sekai-zero-personal-site"/);
   assert.doesNotMatch(page, /SkeletonPreview|codex-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton|drizzle-kit/);
   assert.match(header, /hidden=\{!menuOpen\}/);
   assert.match(header, /event\.key === "Escape"/);
   assert.match(header, /aria-current/);
+  assert.match(header, /return "light"/);
   assert.match(layout, /themeInitializationScript/);
+  assert.match(layout, /data-theme="light"/);
+  assert.match(layout, /sekai-channel/);
   assert.match(layout, /subpages\.css/);
   assert.match(share, /manualUrl/);
   assert.match(share, /aria-live="polite"/);
@@ -278,12 +293,15 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
   assert.match(releasesContent, /Canonical release history/);
-  assert.match(releasesContent, /episode: "EP\.008"/);
+  assert.match(releasesContent, /episode: "EP\.009"/);
   assert.match(nowContent, /LEARNING \/ NLP-001/);
   assert.match(nowContent, /\/study\/#cs224n-nlp-word-vectors/);
   assert.match(journeyNavigation, /worldRoutes\.findIndex/);
   assert.match(linkTerminal, /setGroup\("all"\)/);
   assert.match(linkTerminal, /setQuery\(""\)/);
+  assert.match(favoriteChannelsComponent, /sekai-channel/);
+  assert.match(favoriteChannelsComponent, /NOW PLAYING/);
+  assert.match(favoriteChannelsComponent, /active\.program\.href/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");
   const mobileEnd = styles.indexOf("@media (max-width: 420px)");
