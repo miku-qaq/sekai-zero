@@ -114,6 +114,12 @@ export const productionChapters = [
     copy: "只录入主人确认的称呼、学习状态、兴趣、游戏平台与联系入口，并为未知资料保留边界。",
     evidence: "PUBLIC PROFILE",
   },
+  {
+    episode: "EP.007",
+    title: "让真实学习主线进入知识地图",
+    copy: "新增 CS224N / NLP 频道、完整笔记、官方来源与自学边界，让学习状态成为可持续更新的内容。",
+    evidence: "LEARNING SIGNAL",
+  },
 ] as const;
 
 export const qualityGates = [

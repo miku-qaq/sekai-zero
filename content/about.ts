@@ -42,7 +42,7 @@ export const profileQuestions = [
   {
     question: "最近在投入什么？",
     answer:
-      "一边学习计算机，一边长期建设 SEKAI / 00：继续完善多页面内容，并把每一次设计与工程决定记录下来。",
+      "最近正在自学 Stanford CS224N 的公开课程资料，沿着自然语言处理、词表示与神经网络继续建立知识地图；同时长期建设 SEKAI / 00，把学习与每一次设计、工程决定都记录下来。",
   },
 ] as const;
 
@@ -76,5 +76,10 @@ export const profileTimeline = [
     episode: "EP.006",
     title: "让真实档案上线",
     copy: "把主人确认公开的称呼、学习状态、兴趣、游戏平台与联系入口写进角色设定档。",
+  },
+  {
+    episode: "EP.007",
+    title: "接入 CS224N 学习信号",
+    copy: "把正在自学的自然语言处理公开课程资料整理成可搜索、可回忆、带一手来源的真实学习笔记。",
   },
 ] as const;

@@ -63,7 +63,8 @@ export const worldRoutes = [
     href: "/study/",
     eyebrow: "COMPUTER STUDY DECK",
     title: "计算机学习舱",
-    description: "把零散概念整理成可以搜索、复述和继续扩充的知识地图。",
+    description:
+      "正在自学 Stanford CS224N 公开课程资料；把 NLP 与计算机概念整理成可以搜索、复述和继续扩充的知识地图。",
     action: "开始复习",
     motif: "</>",
     tone: "blue",
@@ -259,6 +260,13 @@ export const projectHighlights = [
 ] as const;
 
 export const fieldNotes = [
+  {
+    id: "LOG 007",
+    date: "2026.08.25",
+    title: "把 CS224N 学习路线接入知识地图",
+    excerpt:
+      "从 NLP、词表示与分布式语义开始，只整理已经在学的内容，也明确区分自学记录、正式选课与课程完成。",
+  },
   {
     id: "LOG 006",
     date: "2026.08.09",

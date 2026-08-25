@@ -1,5 +1,22 @@
 export const buildLogs = [
   {
+    episode: "EP.007",
+    date: "2026.08.25",
+    title: "把 CS224N 学习路线接入知识地图",
+    summary:
+      "新增 AI 与 NLP 频道，并从词表示与分布式语义开始记录 Stanford CS224N 公开课程资料的自学过程。",
+    body: [
+      "这一话没有把课程目录直接复制成完成清单，而是新增一篇完整学习笔记：从 NLP 任务的四个问题、one-hot 的局限、分布式语义，到一个只说明余弦相似度直觉的最小实验。",
+      "笔记只引用 Stanford 官方课程页与课程讲义，并明确说明“正在自学公开课程资料”不等于 Stanford 正式选课、学籍或结课证明。后续内容会沿着真实学习进度逐篇增加。",
+    ],
+    decisions: [
+      "新增独立 AI 与 NLP 筛选频道",
+      "课程状态只写正在自学，不虚构完成度",
+      "课程类笔记优先链接官方一手资料",
+    ],
+    status: "NOW ON AIR",
+  },
+  {
     episode: "EP.006",
     date: "2026.08.09",
     title: "让名字与现实坐标正式上线",
@@ -14,7 +31,7 @@ export const buildLogs = [
       "CN 名不等同于法定姓名",
       "邮箱集中在一个清晰的联系入口",
     ],
-    status: "NOW ON AIR",
+    status: "ARCHIVED",
   },
   {
     episode: "EP.005",

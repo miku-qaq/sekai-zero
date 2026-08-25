@@ -116,7 +116,7 @@
 }
 
 .filters button {
-  min-height: 42px;
+  min-height: 44px;
   padding: 8px 14px;
 }
 
@@ -197,6 +197,7 @@
 
 .note {
   counter-increment: study-note;
+  scroll-margin-top: 110px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -257,6 +258,16 @@
   font-size: 8px;
   font-weight: 740;
   letter-spacing: 0.06em;
+}
+
+.noteMeta .currentBadge {
+  border-color: var(--foreground);
+  background: var(--study-yellow);
+  color: #151515;
+}
+
+.note[data-current="true"] > summary {
+  box-shadow: inset 4px 0 0 var(--study-blue);
 }
 
 .noteIntro h3 {
@@ -486,6 +497,7 @@
 }
 
 .empty button {
+  min-height: 44px;
   margin-top: 22px;
   padding: 10px 18px;
 }

@@ -67,15 +67,22 @@ export function StudyNotebook() {
         </label>
       </form>
 
-      <div className={styles.resultLine} aria-live="polite">
-        <span>NOTES FOUND / {String(visibleNotes.length).padStart(2, "0")}</span>
+      <div className={styles.resultLine}>
+        <span role="status" aria-live="polite" aria-atomic="true">
+          NOTES FOUND / {String(visibleNotes.length).padStart(2, "0")}
+        </span>
         <span>点击标题展开完整笔记</span>
       </div>
 
       {visibleNotes.length > 0 ? (
         <div className={styles.noteList}>
           {visibleNotes.map((note) => (
-            <details className={styles.note} key={note.id}>
+            <details
+              className={styles.note}
+              id={note.id}
+              data-current={note.current || undefined}
+              key={note.id}
+            >
               <summary>
                 <div className={styles.noteIndex}>
                   <span>{note.chapter}</span>
@@ -85,6 +92,9 @@ export function StudyNotebook() {
                 </div>
                 <div className={styles.noteIntro}>
                   <div className={styles.noteMeta}>
+                    {note.current ? (
+                      <span className={styles.currentBadge}>CURRENTLY LEARNING</span>
+                    ) : null}
                     <span>{note.level}</span>
                     <span>{note.readingTime}</span>
                   </div>
@@ -146,7 +156,10 @@ export function StudyNotebook() {
                       <li key={source.href}>
                         <a href={source.href} target="_blank" rel="noreferrer">
                           <span>{source.publisher}</span>
-                          <strong>{source.label}</strong>
+                          <strong>
+                            {source.label}
+                            <span className="sr-only">（将在新标签页打开）</span>
+                          </strong>
                           <i aria-hidden="true">↗</i>
                         </a>
                       </li>

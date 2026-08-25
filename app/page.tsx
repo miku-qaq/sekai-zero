@@ -21,7 +21,7 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            EP.006 · PROFILE SIGNAL ONLINE
+            EP.007 · CS224N SIGNAL ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
             这里不只一页，
@@ -31,21 +31,22 @@ export default function Home() {
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
             欢迎来到 Mikureina 的个人次元站：南京大学 CS 在读，喜欢动漫和游戏。
-            角色设定、航线、制作档案、计算机学习笔记与世界线日志都在这里继续生长。
+            最近正在自学 Stanford CS224N 的公开课程资料；NLP
+            学习笔记也开始在这条世界线上生长。
           </p>
           <div className="hero-actions reveal reveal-four">
-            <a className="button button-primary" href={sitePath("/about/")}>
-              认识 Mikureina
+            <a className="button button-primary" href={sitePath("/study/")}>
+              打开 CS224N 笔记
               <span aria-hidden="true">↘</span>
             </a>
-            <a className="button button-ghost" href={sitePath("/study/")}>
-              打开学习舱
+            <a className="button button-ghost" href={sitePath("/about/")}>
+              认识 Mikureina
             </a>
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
               <dt>现在播放</dt>
-              <dd>第 006 话 · 真实档案上线</dd>
+              <dd>第 007 话 · NLP 学习信号上线</dd>
             </div>
             <div>
               <dt>站主信号</dt>
@@ -59,7 +60,7 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 06</span>
+              <span>ORIGINAL KEY VISUAL / 07</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
@@ -74,7 +75,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / 006
+                SCENE / 007
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -85,7 +86,7 @@ export default function Home() {
                 <span>DIMENSIONAL STUDIO</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
-              <span className="identity-number">#006</span>
+              <span className="identity-number">#007</span>
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
@@ -153,7 +154,8 @@ export default function Home() {
             这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
           </p>
           <p>
-            第六话让真实档案上线：原创群像负责第一眼的情绪，独立页面承载可核对的个人资料、学习内容、项目过程与版本证据。
+            第七话把正在自学的 CS224N 公开课程资料接入知识地图：从 NLP
+            与词向量开始，独立页面继续承载可核对的个人资料、学习内容、项目过程与版本证据。
           </p>
           <div className="principles-grid">
             <article>
@@ -334,8 +336,11 @@ export default function Home() {
         <p className="eyebrow">
           <span className="status-dot" /> TO BE CONTINUED
         </p>
-        <h2 id="finale-title">第 006 话，放送完毕。</h2>
-        <p>真实角色档案已经上线；下一话，会继续加入确认过的收藏与更有趣的次元实验。</p>
+        <h2 id="finale-title">第 007 话，放送完毕。</h2>
+        <p>
+          CS224N 学习信号已经上线；下一话，会继续沿着真实进度整理
+          NLP，也加入确认过的收藏与次元实验。
+        </p>
         <div className="finale-actions">
           <a className="button button-primary" href={sitePath("/#top")}>
             回到开场 <span aria-hidden="true">↑</span>

@@ -1,4 +1,4 @@
-export type StudyCategoryId = "fundamentals" | "programming" | "web" | "tools";
+export type StudyCategoryId = "fundamentals" | "programming" | "web" | "tools" | "ai";
 
 export type StudyNoteSection = {
   heading: string;
@@ -10,6 +10,7 @@ export type StudyNoteSection = {
 
 export type StudyNote = {
   id: string;
+  current?: boolean;
   category: StudyCategoryId;
   chapter: string;
   title: string;
@@ -33,13 +34,100 @@ export const studyCategories = [
   { id: "programming", label: "编程语言", shortLabel: "CODE" },
   { id: "web", label: "Web 开发", shortLabel: "WEB" },
   { id: "tools", label: "开发工具", shortLabel: "TOOL" },
+  { id: "ai", label: "AI 与 NLP", shortLabel: "NLP" },
 ] as const;
 
 /**
- * The first notes explain concepts already exercised by this website. They are
- * educational content, not claims about courses completed by the site owner.
+ * Notes combine concepts exercised by this website with owner-confirmed study
+ * topics. They document learning in progress, not course completion or formal
+ * enrollment unless the owner explicitly confirms those facts.
  */
 export const studyNotes: readonly StudyNote[] = [
+  {
+    id: "cs224n-nlp-word-vectors",
+    current: true,
+    category: "ai",
+    chapter: "NOTE / NLP-001",
+    title: "CS224N 学习笔记 01：词语如何进入向量空间？",
+    summary:
+      "从 Stanford CS224N 的课程主线出发，先建立 NLP、词表示与分布式语义的地图，再理解模型究竟在学习什么。",
+    level: "学习中 · 基础",
+    readingTime: "10 分钟",
+    updatedAt: "2026.08.25",
+    tags: ["CS224N", "NLP", "Word Vectors", "分布式语义", "Stanford"],
+    sections: [
+      {
+        heading: "先说明这条学习记录的边界",
+        paragraphs: [
+          "我最近在自学 Stanford CS224N 的公开课程资料：Natural Language Processing with Deep Learning。这篇先整理第一张知识地图，不代表已经完成课程，也不代表 Stanford 的正式选课、学籍或结课证明。",
+          "课程从 NLP 与深度学习基础出发，并延伸到现代语言模型研究；本站会按实际学习进度逐篇整理，而不是提前把整份 syllabus 写成“已掌握”。",
+        ],
+      },
+      {
+        heading: "NLP 不只是让模型生成句子",
+        paragraphs: [
+          "自然语言处理研究怎样让计算机处理人类语言信息。一个任务通常可以拆成四个问题：输入怎样表示、模型要预测什么、误差怎样定义，以及结果怎样评估。",
+        ],
+        points: [
+          "表示：把词、子词、句子或文档变成模型能够计算的数值结构。",
+          "目标：根据任务预测上下文词、类别、序列、答案或下一段文本。",
+          "学习：用损失函数衡量预测误差，再通过梯度更新模型参数。",
+          "评估：指标只能描述某个切面，还要检查数据偏差、失败案例与真实使用风险。",
+        ],
+      },
+      {
+        heading: "从 one-hot 到分布式语义",
+        paragraphs: [
+          "one-hot 向量能给每个词一个唯一编号，却不能直接表达“猫”和“小猫”比“猫”和“飞机”更相近。分布式语义则利用词出现的上下文来学习稠密向量：上下文相似的词，表示往往也更接近。",
+          "这不是把一个词的全部含义封存在固定坐标里。语料、训练目标、窗口大小和模型结构都会影响向量；多义词与语境变化也提示我们继续走向上下文化表示。",
+        ],
+      },
+      {
+        heading: "Skip-gram 究竟在预测什么",
+        paragraphs: [
+          "Skip-gram 给定中心词 c，预测固定窗口里的上下文词 o。模型为中心词和上下文词分别维护向量，用点积形成匹配分数，再通过训练让真实词对的分数高于不合适的词对。",
+          "完整 softmax 要对整个词表归一化，词表很大时计算昂贵。负采样改为区分真实中心词—上下文词对与随机噪声词对；它是另一个更高效的训练目标，不应简单说成“精确 softmax 的答案”。",
+        ],
+        codeLabel: "SKIP-GRAM / CONDITIONAL PROBABILITY",
+        code: "P(o | c) = exp(u_o · v_c)\n           / sum(exp(u_w · v_c) for w in vocabulary)",
+      },
+      {
+        heading: "一个只说明几何直觉的最小实验",
+        paragraphs: [
+          "下面的数字是手写玩具向量，不是训练结果。它只演示余弦相似度比较方向，而不证明真实语义关系。",
+        ],
+        codeLabel: "PYTHON / TOY EMBEDDINGS",
+        code: "import numpy as np\n\ndef cosine(a, b):\n    return float(a @ b / (np.linalg.norm(a) * np.linalg.norm(b)))\n\ncat = np.array([0.9, 0.8, 0.1])\nkitten = np.array([0.8, 0.9, 0.1])\nairplane = np.array([0.1, 0.0, 1.0])\n\nprint(cosine(cat, kitten))\nprint(cosine(cat, airplane))",
+      },
+      {
+        heading: "接下来沿着哪条线继续",
+        points: [
+          "弄清词汇表、上下文窗口与共现信号分别是什么。",
+          "理解 Word2Vec 的 Skip-gram / CBOW 目标，以及为什么需要负采样。",
+          "复习梯度、反向传播和矩阵运算，再把目标函数落到可运行实现。",
+          "随后再连接语言模型、注意力、Transformer、预训练与后训练，而不是跳过地基只记模型名称。",
+        ],
+      },
+    ],
+    recall: [
+      "one-hot 表示为什么无法直接表达词之间的相似性？",
+      "“一个词的含义由它的上下文体现”怎样转化成可学习的信号？",
+      "余弦相似度衡量什么，又不能证明什么？",
+      "一项 NLP 任务可以拆成哪四个基本问题？",
+    ],
+    sources: [
+      {
+        label: "CS224N: Natural Language Processing with Deep Learning",
+        publisher: "Stanford University",
+        href: "https://web.stanford.edu/class/cs224n/",
+      },
+      {
+        label: "Lecture 2: Word Vectors",
+        publisher: "Stanford CS224N · Winter 2026",
+        href: "https://web.stanford.edu/class/cs224n/slides_w26/cs224n-2026-lecture02-wordvecs.pdf",
+      },
+    ],
+  },
   {
     id: "request-lifecycle",
     category: "web",
@@ -268,17 +356,18 @@ export const studyPrinciples = [
 export const studyQueue = [
   {
     order: "NEXT / 01",
+    title: "CS224N · Word2Vec 与负采样",
+    scope:
+      "沿着官方课程继续拆解 Skip-gram、CBOW、训练目标与负采样；完成理解后再进入正式笔记。",
+  },
+  {
+    order: "NEXT / 02",
     title: "数据结构与复杂度",
     scope: "数组、链表、栈、队列，以及 Big O 想回答的实际问题。",
   },
   {
-    order: "NEXT / 02",
+    order: "NEXT / 03",
     title: "操作系统的基本角色",
     scope: "进程、线程、内存与文件系统怎样共同抽象硬件。",
-  },
-  {
-    order: "NEXT / 03",
-    title: "网络分层与可靠传输",
-    scope: "从数据链路到应用层，继续拆解 TCP、UDP 与拥塞控制。",
   },
 ] as const;

@@ -75,6 +75,20 @@ test("exports a self-contained multi-page GitHub Pages site", async () => {
   assert.doesNotMatch(homepage, /miku125194847@gmail\.com/);
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 
+  const study = await readFile(
+    new URL("../dist/pages/study/index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(study, /NOTE \/ NLP-001/);
+  assert.match(study, /AI 与 NLP/);
+  assert.match(study, /CS224N 学习笔记 01：词语如何进入向量空间/);
+  assert.match(study, /CURRENTLY LEARNING/);
+  assert.match(study, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
+  assert.match(
+    study,
+    /https:\/\/web\.stanford\.edu\/class\/cs224n\/slides_w26\/cs224n-2026-lecture02-wordvecs\.pdf/,
+  );
+
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
   await access(new URL("../dist/pages/og-projects.png", import.meta.url));
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));

@@ -33,7 +33,8 @@ test("server-renders the product homepage and its core navigation", async () => 
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
   assert.match(html, /这里不只一页/);
   assert.match(html, /Mikureina/);
-  assert.match(html, /EP\.006/);
+  assert.match(html, /EP\.007/);
+  assert.match(html, /CS224N/);
   assert.match(html, /角色设定档/);
   assert.match(html, /航线终端/);
   assert.match(html, /制作档案/);
@@ -93,6 +94,26 @@ test("server-renders every secondary route with its own editorial purpose", asyn
     assert.match(html, route.title);
     assert.match(html, route.copy);
   }
+});
+
+test("server-renders the current CS224N learning note with official sources", async () => {
+  const response = await render("/study");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /AI 与 NLP/);
+  assert.match(html, /CURRENTLY LEARNING/);
+  assert.match(html, /NOTE \/ NLP-001/);
+  assert.match(html, /id="cs224n-nlp-word-vectors"/);
+  assert.match(html, /data-current="true"/);
+  assert.match(html, /CS224N 学习笔记 01：词语如何进入向量空间/);
+  assert.match(html, /Skip-gram 究竟在预测什么/);
+  assert.match(html, /不代表 Stanford 的正式选课、学籍或结课证明/);
+  assert.match(html, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
+  assert.match(
+    html,
+    /https:\/\/web\.stanford\.edu\/class\/cs224n\/slides_w26\/cs224n-2026-lecture02-wordvecs\.pdf/,
+  );
 });
 
 test("publishes only the owner-confirmed profile and one direct contact entry", async () => {
@@ -181,7 +202,10 @@ test("keeps product boundaries and interaction safeguards in place", async () =>
   assert.match(studyNotebook, /<details/);
   assert.match(studyNotebook, /<summary>/);
   assert.match(studyNotebook, /清除筛选/);
-  assert.match(studyContent, /educational content, not claims about courses completed/);
+  assert.match(studyContent, /not course completion or formal/);
+  assert.match(studyContent, /category: "ai"/);
+  assert.match(studyContent, /current: true/);
+  assert.match(studyContent, /publisher: "Stanford University"/);
   assert.match(studyContent, /developer\.mozilla\.org/);
   assert.match(studyContent, /git-scm\.com/);
   assert.match(projectsPage, /CASE 001 \/ SEKAI 00/);
