@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { studyCategories, studyNotes, type StudyCategoryId } from "@/content/study";
 import { sitePath } from "@/lib/site-path";
 import styles from "../study/study.module.css";
@@ -14,6 +14,7 @@ export function StudyNotebook() {
   const [targetNoteId, setTargetNoteId] = useState<string | null>(null);
   const [copiedNoteId, setCopiedNoteId] = useState<string | null>(null);
   const [copyStatus, setCopyStatus] = useState("");
+  const targetScrollBehavior = useRef<ScrollBehavior>("auto");
 
   const visibleNotes = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
@@ -40,7 +41,7 @@ export function StudyNotebook() {
   }, [filter, query]);
 
   useEffect(() => {
-    function syncHashTarget() {
+    function syncHashTarget(behavior: ScrollBehavior) {
       let id = "";
       try {
         id = decodeURIComponent(window.location.hash.slice(1));
@@ -53,12 +54,14 @@ export function StudyNotebook() {
       // A shared URL must reveal its note even if a previous local filter hid it.
       setFilter("all");
       setQuery("");
+      targetScrollBehavior.current = behavior;
       setTargetNoteId(id);
     }
 
-    syncHashTarget();
-    window.addEventListener("hashchange", syncHashTarget);
-    return () => window.removeEventListener("hashchange", syncHashTarget);
+    const handleHashChange = () => syncHashTarget("smooth");
+    syncHashTarget("auto");
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
   useEffect(() => {
@@ -73,7 +76,7 @@ export function StudyNotebook() {
         "(prefers-reduced-motion: reduce)",
       ).matches;
       target.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
+        behavior: reduceMotion ? "auto" : targetScrollBehavior.current,
         block: "start",
       });
     });
@@ -184,8 +187,8 @@ export function StudyNotebook() {
                     {copiedNoteId === note.id ? "链接已复制" : "复制本篇链接"}
                     <span aria-hidden="true">⌁</span>
                   </button>
-                  <a href={sitePath("/study/#learning-queue")}>
-                    查看下一学习节点 <span aria-hidden="true">↓</span>
+                  <a href={sitePath("/study/#archive-title")}>
+                    回到笔记索引 <span aria-hidden="true">↑</span>
                   </a>
                 </div>
                 <div className={styles.noteSections}>
@@ -249,8 +252,8 @@ export function StudyNotebook() {
       ) : (
         <div className={styles.empty}>
           <span>NO MATCHING NOTE</span>
-          <h3>这个知识坐标还没有被记录。</h3>
-          <p>换一个关键词，或者回到“全部笔记”继续浏览。</p>
+          <h3>没有找到匹配的笔记。</h3>
+          <p>换一个关键词，或者清除筛选继续浏览。</p>
           <button
             type="button"
             onClick={() => {

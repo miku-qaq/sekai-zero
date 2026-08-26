@@ -10,10 +10,12 @@ export function WorldMap() {
     >
       <div className="section-heading horizontal-heading">
         <div>
-          <p className="section-index">01 / WORLD MAP</p>
-          <h2 id="world-map-title">这次，不只是一张首页。</h2>
+          <p className="section-index">02 / EXPLORE</p>
+          <h2 id="world-map-title">从这里开始浏览。</h2>
         </div>
-        <p>五个独立频道已经接入主世界；每一页都有自己的任务，也能单独收藏和分享。</p>
+        <p>
+          每个页面只负责一件事。先认识我、读学习笔记、逛链接收藏，或查看完整世界线日志。
+        </p>
       </div>
       <div className="world-route-grid">
         {worldRoutes.map((route) => (

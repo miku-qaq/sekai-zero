@@ -12,11 +12,28 @@ export type Release = {
 /**
  * Canonical release history for every public surface that mentions an episode.
  *
- * Homepage notes, the About timeline, the Projects production reel and the
- * complete Logs archive all derive from this file. Keeping the shared facts in
- * one place prevents an episode number or summary from drifting between pages.
+ * The complete Logs archive derives from this file. Keeping the shared facts
+ * in one place prevents an episode number or summary from drifting over time.
  */
 export const releaseHistory = [
+  {
+    episode: "EP.010",
+    number: "010",
+    date: "2026.08.26",
+    title: "把网站内容重新交还给访客",
+    summary:
+      "重排首页与四个主要页面的阅读顺序，把制作档案并入日志，并将 Bilibili 作为第一条真实个人收藏加入链接终端。",
+    body: [
+      "这一话把公开首页从开发进度展示改成个人介绍：访客先看到 Mikureina、南京大学 CS、CS224N 学习主线与动漫游戏兴趣，再按清晰顺序进入关于、学习、链接和日志。三角色频道与次元扭蛋继续留在首页，承担有趣的互动部分。",
+      "原制作档案的有效说明并入世界线日志，公开路线图与内部阶段编号不再占据首页。链接终端保留一张明确标注的有意留白卡，方便以后加入由 Mikureina 亲自确认的新收藏，而不是虚构内容。",
+    ],
+    decisions: [
+      "首页只展示访客真正需要的摘要",
+      "项目说明与开发更新统一进入世界线日志",
+      "只保留少量、明确且不伪造事实的内容留白",
+    ],
+    evidence: "VISITOR-FIRST CONTENT",
+  },
   {
     episode: "EP.009",
     number: "009",

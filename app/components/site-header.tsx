@@ -138,8 +138,8 @@ export function SiteHeader() {
               ◐
             </span>
           </button>
-          <a className="header-cta" href={sitePath("/#current")}>
-            查看当前放送
+          <a className="header-cta" href={sitePath("/study/#cs224n-nlp-word-vectors")}>
+            正在学 CS224N
             <span aria-hidden="true">↘</span>
           </a>
           <button
@@ -164,7 +164,7 @@ export function SiteHeader() {
         data-open={menuOpen}
         hidden={!menuOpen}
       >
-        {siteConfig.navigation.map((item, index) => (
+        {siteConfig.navigation.map((item) => (
           <a
             key={item.href}
             href={sitePath(item.href)}
@@ -175,7 +175,7 @@ export function SiteHeader() {
                 : undefined
             }
           >
-            <span>0{index + 1}</span>
+            <span>{item.index}</span>
             {item.label}
           </a>
         ))}

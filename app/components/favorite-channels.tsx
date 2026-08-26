@@ -83,7 +83,7 @@ export function FavoriteChannels() {
             <span>{active.romanized}</span>
           </div>
         </div>
-        <p className="channel-quote">「{active.note}」</p>
+        <p className="channel-quote">{active.note}</p>
         <a className="channel-program" href={sitePath(active.program.href)}>
           <span>NOW PLAYING / {active.program.label}</span>
           <strong>{active.program.title}</strong>
@@ -98,18 +98,10 @@ export function FavoriteChannels() {
               <li key={tag}>#{tag}</li>
             ))}
           </ul>
-          <div
-            className="sync-meter"
-            role="meter"
-            aria-label="次元同步率"
-            aria-valuemin={0}
-            aria-valuemax={100}
-            aria-valuenow={active.sync}
-            aria-valuetext={`${active.sync}%`}
-          >
-            <span>SYNC {active.sync}%</span>
+          <div className="channel-connection" aria-label="主题频道已接通">
+            <span>CHANNEL CONNECTED</span>
             <i aria-hidden="true">
-              <b style={{ width: `${active.sync}%` }} />
+              <b style={{ width: "100%" }} />
             </i>
           </div>
         </div>

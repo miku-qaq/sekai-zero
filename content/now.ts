@@ -1,8 +1,6 @@
-import { currentRelease } from "./releases";
-
 export type CurrentSignal = {
   code: string;
-  status: "IN PROGRESS" | "ON AIR" | "QUEUED";
+  status: "正在学习" | "兴趣状态" | "个人收藏";
   title: string;
   copy: string;
   href: string;
@@ -15,16 +13,20 @@ export type CurrentSignal = {
  * avoids invented watching, playing or progress data just to make the site busy.
  */
 export const currentBroadcast = {
-  episode: currentRelease.episode,
-  episodeNumber: currentRelease.number,
-  updatedAt: currentRelease.date,
-  headline: "这一周，正在把整座 SEKAI 点亮成白昼次元杂志。",
+  updatedAt: "2026.08.26",
+  headline: "最近在做什么？",
   summary:
-    "这里是会随真实进度更新的信号台。每条信号都通往可以继续阅读的页面，而不是停在一句没有上下文的状态。",
+    "目前正在自学 Stanford CS224N 的公开课程资料，也会把动漫、游戏和喜欢的网站慢慢整理进自己的世界。",
+  panel: {
+    eyebrow: "MIKUREINA / CURRENTLY",
+    mark: "NOW",
+    title: "学习与兴趣，都在这里留下真实进度。",
+    copy: "南京大学 CS 在读 · 动漫与游戏爱好者 · SEKAI / 00 长期维护者",
+  },
   signals: [
     {
       code: "LEARNING / NLP-001",
-      status: "IN PROGRESS",
+      status: "正在学习",
       title: "Stanford CS224N · Word Vectors",
       copy: "正在自学公开课程资料，从 NLP、词表示与分布式语义开始整理自己的知识地图。",
       href: "/study/#cs224n-nlp-word-vectors",
@@ -32,21 +34,21 @@ export const currentBroadcast = {
       tone: "blue",
     },
     {
-      code: `BUILDING / ${currentRelease.episode}`,
-      status: "ON AIR",
-      title: currentRelease.title,
-      copy: currentRelease.summary,
-      href: "/projects/",
-      action: "查看制作证据",
+      code: "GAMES / NS + STEAM",
+      status: "兴趣状态",
+      title: "Nintendo Switch · Steam",
+      copy: "游戏是日常兴趣的一部分，平时主要使用 Nintendo Switch 与 Steam。",
+      href: "/about/#interests",
+      action: "查看兴趣频道",
       tone: "mint",
     },
     {
-      code: "NEXT / NLP-002",
-      status: "QUEUED",
-      title: "Word2Vec 目标与梯度",
-      copy: "把当前概念推进到损失函数、负采样目标、梯度更新与一次可运行训练实验；完成理解后再发布。",
-      href: "/study/#learning-queue",
-      action: "查看学习队列",
+      code: "FAVORITE / VIDEO",
+      status: "个人收藏",
+      title: "哔哩哔哩 · Bilibili",
+      copy: "我最喜欢的视频平台，也是链接终端中第一条明确确认的个人网站收藏。",
+      href: "/links/#route-bilibili",
+      action: "打开链接终端",
       tone: "violet",
     },
   ] satisfies readonly CurrentSignal[],

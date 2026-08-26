@@ -199,7 +199,7 @@ main {
 }
 
 .section-pad {
-  padding-block: clamp(96px, 12vw, 168px);
+  padding-block: clamp(72px, 9vw, 120px);
 }
 
 /* --------------------------------------------------------------------------
@@ -1328,7 +1328,7 @@ main {
   font-weight: 700;
 }
 
-.sync-meter {
+.channel-connection {
   display: grid;
   gap: 6px;
   font-family: var(--font-geist-mono), monospace;
@@ -1337,7 +1337,7 @@ main {
   letter-spacing: 0.08em;
 }
 
-.sync-meter > i {
+.channel-connection > i {
   overflow: hidden;
   height: 7px;
   border: 1px solid #07110f;
@@ -1345,7 +1345,7 @@ main {
   font-style: normal;
 }
 
-.sync-meter b {
+.channel-connection b {
   display: block;
   height: 100%;
   background: #07110f;
@@ -1519,7 +1519,7 @@ main {
   display: flex;
   overflow: hidden;
   min-width: 0;
-  min-height: 430px;
+  min-height: 390px;
   flex-direction: column;
   padding: clamp(24px, 4vw, 42px);
   border: 2px solid #07110f;
@@ -2112,7 +2112,7 @@ main {
   position: relative;
   display: flex;
   overflow: hidden;
-  min-height: 610px;
+  min-height: 430px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -2731,7 +2731,7 @@ main {
 
   .finale {
     width: calc(100% - 24px);
-    min-height: 520px;
+    min-height: 380px;
     border-radius: 28px;
   }
 
@@ -2793,7 +2793,7 @@ main {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  .sync-meter {
+  .channel-connection {
     display: none;
   }
   .gacha-ticket-content {

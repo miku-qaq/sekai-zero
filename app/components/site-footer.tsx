@@ -11,7 +11,7 @@ export function SiteFooter() {
         </span>
         <div>
           <strong>{siteConfig.name}</strong>
-          <span>PERSONAL SIGNAL</span>
+          <span>MIKUREINA&apos;S PERSONAL SITE</span>
         </div>
       </div>
       <nav className="footer-navigation" aria-label="页脚导航">
@@ -22,7 +22,7 @@ export function SiteFooter() {
         ))}
       </nav>
       <p>
-        © {new Date().getFullYear()} {siteConfig.owner} · SIGNAL STILL ON
+        © {new Date().getFullYear()} {siteConfig.owner} · 持续更新中
       </p>
     </footer>
   );

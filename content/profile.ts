@@ -26,22 +26,22 @@ export const profileFacts: readonly PublicProfileFact[] = [
   {
     label: "CN 名",
     value: publicProfile.handle,
-    note: "欢迎在这个世界里这样称呼我；这是公开网络称呼，不代表法定姓名。",
+    note: "这是我在本站与网络上使用的公开称呼。",
   },
   {
     label: "当前阶段",
     value: publicProfile.academicStatus,
-    note: "持续学习计算机，也把知识整理成可以反复返回的笔记。",
+    note: "目前在南京大学学习计算机，也在持续整理个人学习笔记。",
   },
   {
     label: "兴趣频道",
     value: publicProfile.interests.join(" / "),
-    note: "喜欢的作品与收藏会在本人确认后逐步加入本站。",
+    note: "动漫与游戏，也是本站二次元主题和互动设计的主要来源。",
   },
   {
     label: "常玩平台",
     value: publicProfile.gamingPlatforms.join(" / "),
-    note: "具体游戏清单后续再认真整理，不用热门作品代填。",
+    note: "平时主要使用 Nintendo Switch（NS）与 Steam。",
   },
   {
     id: "contact",
@@ -49,6 +49,6 @@ export const profileFacts: readonly PublicProfileFact[] = [
     value: publicProfile.email,
     href: `mailto:${publicProfile.email}`,
     ariaLabel: `发送邮件至 ${publicProfile.email}`,
-    note: "适合交流本站、学习或共同兴趣；请勿通过邮件发送敏感信息。",
+    note: "欢迎交流本站、计算机学习或共同兴趣；请勿通过邮件发送敏感信息。",
   },
 ];

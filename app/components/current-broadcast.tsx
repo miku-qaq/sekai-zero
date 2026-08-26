@@ -12,7 +12,7 @@ export function CurrentBroadcast() {
     >
       <div className={`section-heading horizontal-heading ${styles.heading}`}>
         <div>
-          <p className="section-index">NOW / CURRENT BROADCAST</p>
+          <p className="section-index">01 / NOW</p>
           <h2 id="current-title">{currentBroadcast.headline}</h2>
         </div>
         <div className={styles.intro}>
@@ -27,20 +27,20 @@ export function CurrentBroadcast() {
       </div>
 
       <div className={styles.console}>
-        <div className={styles.episodePanel} aria-label="当前放送话数">
+        <div className={styles.episodePanel} aria-label="Mikureina 的当前状态">
           <div className={styles.episodeTopline}>
-            <span>SEKAI TRANSMISSION</span>
+            <span>{currentBroadcast.panel.eyebrow}</span>
             <span>
-              <i aria-hidden="true" /> SIGNAL ONLINE
+              <i aria-hidden="true" /> UPDATED {currentBroadcast.updatedAt}
             </span>
           </div>
           <span className={styles.episodeNumber} aria-hidden="true">
-            {currentBroadcast.episodeNumber}
+            {currentBroadcast.panel.mark}
           </span>
           <div className={styles.episodeCopy}>
-            <span>{currentBroadcast.episode}</span>
-            <strong>NOW ON AIR</strong>
-            <p>学习不是孤岛，建站也不是终点；每条正在发生的线都会留下入口。</p>
+            <span>PERSONAL SNAPSHOT</span>
+            <strong>{currentBroadcast.panel.title}</strong>
+            <p>{currentBroadcast.panel.copy}</p>
           </div>
         </div>
 

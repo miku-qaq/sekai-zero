@@ -1,7 +1,3 @@
-import { releaseHistory } from "./releases";
-
-export type ProjectTone = "mint" | "violet" | "blue" | "pink" | "amber";
-
 /**
  * Project 001 documents work that already exists in this repository. It is a
  * case study, not a claim about traffic, clients, revenue, or professional
@@ -43,94 +39,26 @@ export const projectEvidence = [
   },
 ] as const;
 
-export const projectShifts = [
+export const projectFeatures = [
   {
-    index: "01",
-    label: "INFORMATION ARCHITECTURE",
-    before: "所有内容都挤在一张长首页里。",
-    now: "每个页面只完成一个主要任务，首页负责把访客送往正确入口。",
-    tone: "mint",
+    code: "FEATURE / 01",
+    title: "清晰的多页面内容",
+    copy: "关于、学习、链接与日志各有独立职责，首页只负责介绍、兴趣互动和清晰引导。",
   },
   {
-    index: "02",
-    label: "CONTENT BOUNDARY",
-    before: "文案与布局容易绑在组件中。",
-    now: "公开内容进入强类型模块，大多数更新不需要触碰页面结构。",
-    tone: "violet",
+    code: "FEATURE / 02",
+    title: "可搜索的学习笔记",
+    copy: "按主题筛选计算机笔记，也可以通过链接直接打开并展开指定内容。",
   },
   {
-    index: "03",
-    label: "RELEASE CONFIDENCE",
-    before: "页面能打开，不代表下一次改动仍然安全。",
-    now: "格式、Lint、类型、Worker 渲染和 Pages 子路径都进入发布门禁。",
-    tone: "blue",
-  },
-] as const;
-
-export const projectSystemFlow = [
-  {
-    index: "01",
-    label: "CONTENT",
-    title: "内容层",
-    copy: "个人档案、航线、学习笔记、制作档案与版本日志各自拥有数据边界。",
+    code: "FEATURE / 03",
+    title: "可参与的二次元主题",
+    copy: "三角色频道会改变整站配色并连接真实内容，选择只保存在当前设备。",
   },
   {
-    index: "02",
-    label: "SERVER UI",
-    title: "静态页面",
-    copy: "详细正文默认在服务端生成，让首屏内容可读、可索引，也减少浏览器负担。",
-  },
-  {
-    index: "03",
-    label: "CLIENT ISLANDS",
-    title: "交互小岛",
-    copy: "主题、菜单、搜索和扭蛋等确实需要状态的部分，才进入客户端组件。",
-  },
-  {
-    index: "04",
-    label: "QUALITY GATES",
-    title: "自动检查",
-    copy: "同一份源码必须通过代码规范、类型、构建与页面契约，才允许成为新一话。",
-  },
-  {
-    index: "05",
-    label: "DELIVERY",
-    title: "双目标发布",
-    copy: "动态 Worker 保留未来扩展能力，静态 Pages 构建保留平台迁移与公开备用出口。",
-  },
-] as const;
-
-/** A compact production view derived from the canonical release history. */
-export const productionChapters = releaseHistory
-  .slice()
-  .reverse()
-  .map(({ episode, title, summary, evidence }) => ({
-    episode,
-    title,
-    copy: summary,
-    evidence,
-  }));
-
-export const qualityGates = [
-  {
-    code: "GATE / 01",
-    title: "格式与规范",
-    copy: "统一格式、Lint 与可访问性规则，减少协作和长期修改中的隐性分歧。",
-  },
-  {
-    code: "GATE / 02",
-    title: "类型边界",
-    copy: "TypeScript 在构建前检查内容模型、组件契约与平台适配是否保持一致。",
-  },
-  {
-    code: "GATE / 03",
-    title: "Worker 渲染",
-    copy: "验证所有路由都能生成真实 HTML，而不是只测试一个客户端壳。",
-  },
-  {
-    code: "GATE / 04",
-    title: "Pages 导出",
-    copy: "模拟仓库子路径，检查目录式页面、站内链接、图片和分享资源没有断点。",
+    code: "FEATURE / 04",
+    title: "适配不同设备",
+    copy: "桌面与手机共享同一套内容结构，同时保留键盘操作、主题切换与静态访问。",
   },
 ] as const;
 
@@ -138,7 +66,7 @@ export const projectDecisions = [
   {
     question: "为什么先用 Git 管内容，而不是立即接 CMS？",
     decision:
-      "当前内容规模仍适合强类型文件。它没有额外账号、数据库和编辑器维护成本，也能让每次内容变化跟随代码一起审查。学习笔记超过约 8–10 篇后，再把长内容迁移到构建期 MDX。",
+      "当前内容规模仍适合强类型文件。它没有额外账号、数据库和编辑器维护成本，也能让每次内容变化跟随代码一起审查；当长篇笔记明显增多并需要独立文章能力时，再评估构建期 MDX。",
   },
   {
     question: "为什么不把所有组件都放到客户端？",
@@ -151,15 +79,3 @@ export const projectDecisions = [
       "Worker 为未来登录、数据和服务端能力保留空间；Pages 验证内容层和路由没有被平台绑死，也提供更简单的公开备用出口。两者共享源码，但发布适配层彼此隔离。",
   },
 ] as const;
-
-export const nextCheckpoints = [
-  "收录我确认公开的真实作品、游戏收藏与社交坐标",
-  "让长篇学习笔记拥有独立文章路由与可分享元数据",
-  "为内容发现补齐 sitemap、robots 与 RSS",
-] as const;
-
-export const futureCase = {
-  code: "CASE / 002",
-  status: "WAITING FOR VERIFIED WORK",
-  copy: "下一份档案会在我准备好项目名称、目标、本人职责、过程证据与真实结果后点亮；没有证据的数字不会进入这里。",
-} as const;

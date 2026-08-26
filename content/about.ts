@@ -1,12 +1,10 @@
-import { releaseHistory } from "./releases";
-
 export const influenceSignals = [
   {
     index: "39",
     channel: "音乐频道",
     name: "初音未来",
     romanized: "HATSUNE MIKU",
-    copy: "留给音乐、创作，以及把还没到来的明天先唱出来的冲动。",
+    copy: "本站用薄荷色、音符与数字舞台表达她带来的未来感。",
     tone: "mint",
     motif: "♪",
   },
@@ -15,7 +13,7 @@ export const influenceSignals = [
     channel: "旅行频道",
     name: "伊蕾娜",
     romanized: "ELAINA",
-    copy: "留给好奇心、沿途故事，以及还没有被画完的未知地图。",
+    copy: "本站用雾紫、星轨与路线卡表达旅行故事里的探索感。",
     tone: "violet",
     motif: "✦",
   },
@@ -24,7 +22,7 @@ export const influenceSignals = [
     channel: "摇滚频道",
     name: "波奇",
     romanized: "BOCCHI",
-    copy: "留给紧张时仍愿意抱紧吉他、把下一小节弹完的那一步。",
+    copy: "本站用樱粉、节拍与舞台卡片表达摇滚演出的能量。",
     tone: "pink",
     motif: "♬",
   },
@@ -34,7 +32,7 @@ export const profileQuestions = [
   {
     question: "为什么要做这个网站？",
     answer:
-      "因为我想拥有一个不受社交平台版式限制、可以长期积累的数字空间。它既是作品，也是记录兴趣与成长的容器。",
+      "我会长期维护这个网站，用它整理计算机学习笔记、记录动漫与游戏兴趣，也保存每一次有意义的更新。",
   },
   {
     question: "平时喜欢什么？",
@@ -48,7 +46,26 @@ export const profileQuestions = [
   },
 ] as const;
 
-/** The profile shows the same release facts as Projects and Logs. */
-export const profileTimeline = releaseHistory
-  .toReversed()
-  .map(({ episode, title, summary }) => ({ episode, title, copy: summary }));
+export const currentFocus = [
+  {
+    code: "LEARNING",
+    title: "自然语言处理",
+    copy: "正在自学 Stanford CS224N 公开课程资料，从词向量与分布式语义开始整理个人笔记。",
+    href: "/study/#cs224n-nlp-word-vectors",
+    action: "阅读当前笔记",
+  },
+  {
+    code: "PROJECT",
+    title: "SEKAI / 00",
+    copy: "持续建设这座多页面个人站，重要变化与制作选择都集中记录在世界线日志。",
+    href: "/logs/#project-overview",
+    action: "查看制作记录",
+  },
+  {
+    code: "INTERESTS",
+    title: "动漫与游戏",
+    copy: "喜欢初音未来、伊蕾娜和波奇，常玩平台是 Nintendo Switch 与 Steam。",
+    href: "/links/",
+    action: "浏览我的链接",
+  },
+] as const;

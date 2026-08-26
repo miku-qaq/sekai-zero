@@ -1,7 +1,7 @@
 import Image from "next/image";
+import { currentBroadcast } from "@/content/now";
 import { publicProfile } from "@/content/profile";
-import { currentRelease } from "@/content/releases";
-import { fieldNotes, mangaMoments, projectHighlights, roadmap } from "@/content/site";
+import { homepageFacts } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import { CurrentBroadcast } from "./components/current-broadcast";
 import { DimensionalGacha } from "./components/dimensional-gacha";
@@ -26,14 +26,13 @@ export default function Home() {
             PERSONAL SEKAI · SIGNAL ONLINE
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
-            这里不只一页，
-            <span>而是一整个世界。</span>
+            你好，我是 {publicProfile.handle}。<span>欢迎来到我的个人世界。</span>
           </h1>
         </div>
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
-            Mikureina 的个人次元站：在南京大学读 CS，记录计算机学习、动漫、游戏，
-            以及这座网站怎样持续生长。
+            {publicProfile.academicStatus}，喜欢{publicProfile.interests.join("和")}
+            。这里收录我的计算机学习笔记、 兴趣收藏，以及想长期保存的生活与思考。
           </p>
           <div className="hero-actions reveal reveal-four">
             <a
@@ -49,14 +48,12 @@ export default function Home() {
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
-              <dt>现在播放</dt>
-              <dd>
-                {currentRelease.episode} · {currentRelease.title}
-              </dd>
+              <dt>最近在学</dt>
+              <dd>{currentBroadcast.signals[0].title}</dd>
             </div>
             <div>
-              <dt>站主信号</dt>
-              <dd>{publicProfile.handle} · NJU CS</dd>
+              <dt>常玩平台</dt>
+              <dd>{publicProfile.gamingPlatforms.join(" · ")}</dd>
             </div>
           </dl>
         </div>
@@ -122,8 +119,11 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="manga-moments section-shell" aria-label="本话三个次元瞬间">
-        {mangaMoments.map((moment) => (
+      <section
+        className="manga-moments section-shell"
+        aria-label="Mikureina 的三条个人信息"
+      >
+        {homepageFacts.map((moment) => (
           <article className={`manga-moment manga-${moment.tone}`} key={moment.index}>
             <div className="manga-moment-meta">
               <span>FRAME {moment.index}</span>
@@ -145,47 +145,6 @@ export default function Home() {
       <WorldMap />
 
       <section
-        className="about section-shell section-pad"
-        id="about"
-        aria-labelledby="about-title"
-      >
-        <div className="section-heading">
-          <p className="section-index">02 / ABOUT THIS SEKAI</p>
-          <h2 id="about-title">
-            把个人网站，
-            <br />
-            当作一部长期连载。
-          </h2>
-        </div>
-        <div className="about-copy">
-          <p className="about-lead">
-            这不是贴几张角色图的主题模板，而是一处真正用漫画节奏、角色气质与互动细节构成的个人次元空间。
-          </p>
-          <p>
-            独立页面分别承载个人档案、学习内容、项目过程与版本证据；首页保持为世界入口，
-            当前放送则告诉你这里此刻正在发生什么。
-          </p>
-          <div className="principles-grid">
-            <article>
-              <span className="principle-number">01</span>
-              <h3>像一页漫画</h3>
-              <p>对白框、网点与分镜服务阅读节奏，而不是遮住内容。</p>
-            </article>
-            <article>
-              <span className="principle-number">02</span>
-              <h3>像一部番剧</h3>
-              <p>每次有意义的迭代都是一话，网站的变化本身也会被记录和收藏。</p>
-            </article>
-            <article>
-              <span className="principle-number">03</span>
-              <h3>像自己的世界</h3>
-              <p>尊重喜欢的角色，也用原创素材建立长期个人品牌。</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section
         className="favorites section-pad"
         id="favorites"
         aria-labelledby="favorites-title"
@@ -194,12 +153,12 @@ export default function Home() {
           <div className="section-heading favorites-heading">
             <p className="section-index">03 / FAVORITE FREQUENCIES</p>
             <h2 id="favorites-title">
-              三张我的 SSR
+              我的三位二次元老婆
               <br />
-              推し角色卡。
+              各自接通一条频道。
             </h2>
             <p>
-              初音未来、伊蕾娜和波奇，是三种让我持续向前的能量。抽一张角色卡，整站都会回应她的频道色。
+              初音未来、伊蕾娜和波奇是我最喜欢的三个角色。本站用薄荷音符、雾紫星轨与樱粉节拍，为她们设计了三个原创主题频道。
             </p>
           </div>
           <FavoriteChannels />
@@ -223,141 +182,22 @@ export default function Home() {
         <DimensionalGacha />
       </section>
 
-      <section className="works section-pad" id="works" aria-labelledby="works-title">
-        <div className="section-shell">
-          <div className="section-heading horizontal-heading">
-            <div>
-              <p className="section-index">04 / FEATURED STORY</p>
-              <h2 id="works-title">正在发生的故事</h2>
-            </div>
-            <p>从一件真正存在的作品开始，之后每次更新都留下可以被看见的进展。</p>
-          </div>
-          <div className="project-grid">
-            {projectHighlights.map((project) => (
-              <article
-                className={`project-card project-${project.tone}`}
-                key={project.index}
-              >
-                <div className="project-card-header">
-                  <span className="project-index">{project.index}</span>
-                  <span className="project-status">{project.status}</span>
-                </div>
-                <div className="project-art" aria-hidden="true">
-                  <span className="project-art-label">{project.subtitle}</span>
-                  <div className="project-window">
-                    <span />
-                    <span />
-                    <span />
-                    <div className="project-window-line line-short" />
-                    <div className="project-window-line" />
-                    <div className="project-window-orb" />
-                  </div>
-                  <span className="project-art-number">{project.index}</span>
-                </div>
-                <div className="project-body">
-                  <p>{project.subtitle}</p>
-                  <h3>{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  <ul className="tag-list" aria-label={`${project.title} 标签`}>
-                    {project.tags.map((tag) => (
-                      <li key={tag}>{tag}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))}
-          </div>
-          <a className="section-text-link" href={sitePath("/projects/")}>
-            阅读 Project 001 完整制作档案 <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </section>
-
-      <section
-        className="notes section-shell section-pad"
-        id="notes"
-        aria-labelledby="notes-title"
-      >
-        <div className="section-heading horizontal-heading notes-heading">
-          <div>
-            <p className="section-index">05 / FIELD NOTES</p>
-            <h2 id="notes-title">世界线观测日志</h2>
-          </div>
-          <p>
-            这里记录版本演进；完整学习正文进入学习舱，后续长文会拥有独立、可分享的页面。
-          </p>
-        </div>
-        <div className="notes-list">
-          {fieldNotes.slice(0, 3).map((note) => (
-            <article className="note-row" key={note.id}>
-              <div className="note-meta">
-                <span>{note.id}</span>
-                <time>{note.date}</time>
-              </div>
-              <div className="note-copy">
-                <h3>{note.title}</h3>
-                <p>{note.excerpt}</p>
-              </div>
-              <a
-                className="note-arrow"
-                href={sitePath("/logs/")}
-                aria-label={`在世界线日志中查看：${note.title}`}
-              >
-                <span aria-hidden="true">↗</span>
-              </a>
-            </article>
-          ))}
-        </div>
-        <a className="section-text-link" href={sitePath("/logs/")}>
-          阅读完整世界线日志 <span aria-hidden="true">↗</span>
-        </a>
-      </section>
-
-      <section
-        className="roadmap section-pad"
-        id="roadmap"
-        aria-labelledby="roadmap-title"
-      >
-        <div className="section-shell roadmap-layout">
-          <div className="section-heading roadmap-heading">
-            <p className="section-index">06 / CONTINUED NEXT WEEK</p>
-            <h2 id="roadmap-title">
-              长期项目，
-              <br />
-              小步更新。
-            </h2>
-            <p>每一阶段都应该独立可用、可以验证，也可以在需求变化时被替换。</p>
-          </div>
-          <ol className="roadmap-list">
-            {roadmap.map((item) => (
-              <li key={item.phase}>
-                <span className="roadmap-phase">PHASE {item.phase}</span>
-                <div>
-                  <div className="roadmap-title-line">
-                    <h3>{item.title}</h3>
-                    <span>{item.status}</span>
-                  </div>
-                  <p>{item.description}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
       <section className="finale section-shell" aria-labelledby="finale-title">
         <div className="finale-grid" aria-hidden="true" />
         <p className="eyebrow">
-          <span className="status-dot" /> TO BE CONTINUED
+          <span className="status-dot" /> THANKS FOR VISITING
         </p>
-        <h2 id="finale-title">第 {currentRelease.number} 话，放送完毕。</h2>
-        <p>
-          白昼模式和三条推し频道已经接通；下一话会继续沿着真实学习进度整理 NLP，
-          也只加入我确认过的收藏与次元实验。
-        </p>
+        <h2 id="finale-title">谢谢你逛到这里。</h2>
+        <p>想继续了解我，可以阅读当前 CS224N 学习笔记，或在关于页面找到联系邮箱。</p>
         <div className="finale-actions">
-          <a className="button button-primary" href={sitePath("/#top")}>
-            回到开场 <span aria-hidden="true">↑</span>
+          <a
+            className="button button-primary"
+            href={sitePath("/study/#cs224n-nlp-word-vectors")}
+          >
+            阅读当前笔记 <span aria-hidden="true">↗</span>
+          </a>
+          <a className="button button-ghost" href={sitePath("/about/#contact")}>
+            联系我
           </a>
           <ShareButton />
         </div>

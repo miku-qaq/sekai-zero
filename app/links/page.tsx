@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { dormantSectors } from "@/content/links";
+import { linkEntries } from "@/content/links";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { LinkTerminal } from "../components/link-terminal";
 import { PageMasthead } from "../components/page-masthead";
@@ -8,25 +8,25 @@ import { SiteFooter } from "../components/site-footer";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "航线终端",
+  title: "链接收藏",
   description:
-    "SEKAI / 00 的站内频道、建造装备与公开联系入口，每条航线都记录愿意返回的理由。",
+    "Mikureina 喜欢的网站、当前学习资料、项目源码与联系入口；每条链接都记录愿意返回的理由。",
 };
 
 export default function LinksPage() {
   return (
     <main id="main-content" className="subpage-main">
       <PageMasthead
-        episode="FILE 02"
-        eyebrow="ROUTE TERMINAL / COORDINATES ONLINE"
-        title="通往这座世界内外的航线。"
-        lead="不是常用网站大全，也不是一堵没有灵魂的 Logo 墙。每个入口都带着一条我为什么愿意回来、它与这座世界有什么关系的批注。"
-        motif="↗"
-        tone="violet"
+        currentHref="/links/"
+        title="我愿意再次打开的入口。"
+        lead="这里收录我真正喜欢的网站、当前学习的一手资料、项目源码与联系方式。每条链接都会说明它为什么出现在这里。"
         meta={[
-          { label: "当前航线", value: "本站 / 学习 / 工具 / 联系" },
-          { label: "筛选方式", value: "分类 / 搜索 / 随机跃迁" },
-          { label: "录入原则", value: "真实关系优先" },
+          {
+            label: "已收录",
+            value: `${String(linkEntries.length).padStart(2, "0")} 个入口`,
+          },
+          { label: "收藏状态", value: "Bilibili + 1 个留白" },
+          { label: "可以使用", value: "分类 / 搜索 / 随机推荐" },
         ]}
       />
 
@@ -36,41 +36,12 @@ export default function LinksPage() {
       >
         <div className="section-heading horizontal-heading">
           <div>
-            <p className="section-index">01 / ACTIVE ROUTES</p>
-            <h2 id="route-title">选择今天要去的频道。</h2>
+            <p className="section-index">01 / LINK COLLECTION</p>
+            <h2 id="route-title">选择今天想打开的入口。</h2>
           </div>
-          <p>
-            可以按分类筛选、搜索理由与标签，或者让终端替你随机选择一条已确认的航线。
-          </p>
+          <p>按分类筛选或搜索关键词；随机推荐只会高亮一张卡片，由你决定是否打开。</p>
         </div>
         <LinkTerminal />
-      </section>
-
-      <section className="dormant-section section-pad" aria-labelledby="dormant-title">
-        <div className="section-shell">
-          <div className="section-heading horizontal-heading">
-            <div>
-              <p className="section-index">02 / DORMANT SECTORS</p>
-              <h2 id="dormant-title">还没有点亮的星域。</h2>
-            </div>
-            <p>
-              邮件联系已经点亮；收藏、朋友与社交主页仍然保持诚实空白，等真实内容确认后再上线。
-            </p>
-          </div>
-          <div className="dormant-grid">
-            {dormantSectors.map((sector) => (
-              <article key={sector.title}>
-                <div>
-                  <span className="dormant-dot" aria-hidden="true" />
-                  {sector.code}
-                </div>
-                <h3>{sector.title}</h3>
-                <p>{sector.copy}</p>
-                <span className="dormant-status">WAITING FOR REAL COORDINATES</span>
-              </article>
-            ))}
-          </div>
-        </div>
       </section>
 
       <JourneyNavigation currentHref="/links/" />

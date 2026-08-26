@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { influenceSignals, profileQuestions, profileTimeline } from "@/content/about";
+import { currentFocus, influenceSignals, profileQuestions } from "@/content/about";
 import { profileFacts, publicProfile } from "@/content/profile";
+import { sitePath } from "@/lib/site-path";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -8,7 +9,7 @@ import { SiteFooter } from "../components/site-footer";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "角色设定档",
+  title: "关于我",
   description:
     "认识 Mikureina：南京大学 CS 在读，喜欢动漫与游戏，也在长期建设 SEKAI / 00。",
 };
@@ -17,12 +18,9 @@ export default function AboutPage() {
   return (
     <main id="main-content" className="subpage-main">
       <PageMasthead
-        episode="FILE 01"
-        eyebrow="PROFILE SIGNAL / VERIFIED FACTS ONLY"
+        currentHref="/about/"
         title="你好，我是 Mikureina。"
-        lead="南京大学 CS 在读。平时喜欢动漫和游戏，也在这里记录计算机学习、作品与一座长期生长的个人次元站。"
-        motif="M"
-        tone="mint"
+        lead="南京大学 CS 在读。平时喜欢动漫和游戏，也在这里记录计算机学习、兴趣收藏与一座长期生长的个人次元站。"
         meta={[
           { label: "CN 名", value: publicProfile.handle },
           { label: "当前状态", value: publicProfile.academicStatus },
@@ -35,24 +33,24 @@ export default function AboutPage() {
         aria-labelledby="profile-title"
       >
         <div className="section-heading profile-heading">
-          <p className="section-index">01 / VERIFIED PROFILE</p>
-          <h2 id="profile-title">已经确认的真实坐标。</h2>
+          <p className="section-index">01 / ABOUT ME</p>
+          <h2 id="profile-title">先从这些小事认识我。</h2>
           <p>
-            以下资料均由本人确认公开；未提供的年级、经历、所在地与社交账号继续保持留白。
+            这里整理我的学习状态、兴趣、常玩平台和联系方式，方便第一次来访的人快速了解我。
           </p>
         </div>
         <div className="profile-sheet">
           <article className="profile-id-card" aria-labelledby="profile-handle">
             <div className="profile-id-topline">
-              <span>PUBLIC CHARACTER FILE</span>
-              <strong>VERIFIED</strong>
+              <span>MIKUREINA / PUBLIC PROFILE</span>
+              <strong>ONLINE</strong>
             </div>
             <div className="profile-id-body">
               <span className="profile-id-mark" aria-hidden="true">
                 {publicProfile.monogram}
               </span>
               <div>
-                <p>CN / PLAYER 00</p>
+                <p>CN / MIKUREINA</p>
                 <h3 id="profile-handle">{publicProfile.handle}</h3>
                 <span>{publicProfile.academicStatus}</span>
               </div>
@@ -65,7 +63,7 @@ export default function AboutPage() {
               )}
             </ul>
             <p className="profile-id-status">
-              <span aria-hidden="true" /> PROFILE ONLINE
+              <span aria-hidden="true" /> WELCOME TO MY SEKAI
             </p>
           </article>
           <dl className="profile-facts">
@@ -97,15 +95,16 @@ export default function AboutPage() {
 
       <section
         className="influence-section section-pad"
+        id="interests"
         aria-labelledby="influence-title"
       >
         <div className="section-shell">
           <div className="section-heading horizontal-heading">
             <div>
               <p className="section-index">02 / INFLUENCE SIGNALS</p>
-              <h2 id="influence-title">构成我的三种能量。</h2>
+              <h2 id="influence-title">我喜欢的三个角色频道。</h2>
             </div>
-            <p>不是借角色替我发言，而是诚实记录我从她们身上感受到的创作方向。</p>
+            <p>角色姓名表达个人喜好；配色、图形与介绍文案均由本站原创设计。</p>
           </div>
           <div className="influence-grid">
             {influenceSignals.map((signal) => (
@@ -151,23 +150,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section
-        className="profile-timeline section-pad"
-        aria-labelledby="timeline-title"
-      >
+      <section className="profile-timeline section-pad" aria-labelledby="focus-title">
         <div className="section-shell timeline-layout">
           <div className="section-heading">
-            <p className="section-index">04 / SITE STORY</p>
-            <h2 id="timeline-title">本站最近抵达的三站。</h2>
+            <p className="section-index">04 / CURRENT FOCUS</p>
+            <h2 id="focus-title">最近在投入的三件事。</h2>
           </div>
           <ol>
-            {profileTimeline.slice(-3).map((item, index) => (
-              <li key={item.episode}>
+            {currentFocus.map((item, index) => (
+              <li key={item.code}>
                 <span className="timeline-marker">{index + 1}</span>
                 <div>
-                  <p>{item.episode}</p>
+                  <p>{item.code}</p>
                   <h3>{item.title}</h3>
                   <span>{item.copy}</span>
+                  <a className="section-text-link" href={sitePath(item.href)}>
+                    {item.action} <span aria-hidden="true">↗</span>
+                  </a>
                 </div>
               </li>
             ))}

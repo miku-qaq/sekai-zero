@@ -44,7 +44,7 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  min-height: 560px;
+  min-height: 480px;
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(22px, 3.5vw, 40px);

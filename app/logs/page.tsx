@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
 import { buildLogs } from "@/content/logs";
+import {
+  projectCaseStudy,
+  projectDecisions,
+  projectEvidence,
+  projectFeatures,
+} from "@/content/projects";
+import { sitePath } from "@/lib/site-path";
+import { HashDetailsController } from "../components/hash-details-controller";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -8,19 +16,17 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "世界线日志",
-  description: "记录 SEKAI / 00 每一话的变化、设计决定、工程边界与下一步方向。",
+  description: "SEKAI / 00 的制作说明与每次有效更新，都集中记录在这条世界线上。",
 };
 
 export default function LogsPage() {
   return (
     <main id="main-content" className="subpage-main">
+      <HashDetailsController />
       <PageMasthead
-        episode="FILE 05"
-        eyebrow="TIMELINE ARCHIVE / ITERATION BROADCAST"
-        title="把网站的成长，也写成内容。"
-        lead="这里不只发布“更新了”三个字。每一话都会留下问题、选择与复盘，让未来的自己知道为什么走到这里。"
-        motif="記"
-        tone="pink"
+        currentHref="/logs/"
+        title="网站怎样成长，都记录在这里。"
+        lead="这里集中收录 SEKAI / 00 的项目说明、制作选择与每次有效更新。首页负责让访客认识我，工程细节只在这条世界线展开。"
         meta={[
           {
             label: "收录话数",
@@ -32,17 +38,100 @@ export default function LogsPage() {
       />
 
       <section
+        id="project-overview"
+        className="logs-project section-shell section-pad"
+        aria-labelledby="project-overview-title"
+      >
+        <div className="section-heading horizontal-heading">
+          <div>
+            <p className="section-index">01 / PROJECT OVERVIEW</p>
+            <h2 id="project-overview-title">关于 SEKAI / 00 的制作记录。</h2>
+          </div>
+          <p>
+            原“制作档案”已并入日志。这里保留项目目标、现有能力与关键取舍，完整变化按话数继续向下追更。
+          </p>
+        </div>
+
+        <article className="logs-project-card">
+          <div className="logs-project-topline">
+            <span>{projectCaseStudy.code}</span>
+            <span>{projectCaseStudy.status}</span>
+          </div>
+          <div className="logs-project-intro">
+            <div>
+              <p>LONG-RUN PERSONAL SEKAI</p>
+              <h3>{projectCaseStudy.title}</h3>
+            </div>
+            <p>{projectCaseStudy.subtitle}</p>
+          </div>
+          <p className="logs-project-summary">{projectCaseStudy.summary}</p>
+          <dl className="logs-project-facts">
+            {projectCaseStudy.facts.map((fact) => (
+              <div key={fact.label}>
+                <dt>{fact.label}</dt>
+                <dd>{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav className="logs-project-evidence" aria-label="项目公开入口">
+            {projectEvidence.map((item) => (
+              <a
+                href={item.external ? item.href : sitePath(item.href)}
+                key={item.code}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noreferrer" : undefined}
+              >
+                <span>{item.code}</span>
+                <strong>{item.label}</strong>
+                <i aria-hidden="true">↗</i>
+                {item.external ? (
+                  <span className="sr-only">（将在新标签页打开）</span>
+                ) : null}
+              </a>
+            ))}
+          </nav>
+        </article>
+
+        <div className="logs-feature-grid" aria-label="目前已经上线的功能">
+          {projectFeatures.map((feature) => (
+            <article key={feature.code}>
+              <span>{feature.code}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.copy}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="logs-decisions" aria-labelledby="project-decisions-title">
+          <div>
+            <p className="section-index">PROJECT DECISIONS</p>
+            <h3 id="project-decisions-title">影响长期维护的选择。</h3>
+          </div>
+          <div>
+            {projectDecisions.map((item, index) => (
+              <details key={item.question} open={index === 0}>
+                <summary>
+                  <span>D{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item.question}</strong>
+                  <i aria-hidden="true">＋</i>
+                </summary>
+                <p>{item.decision}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
         className="logs-index section-shell section-pad"
         aria-labelledby="logs-title"
       >
         <div className="section-heading horizontal-heading">
           <div>
-            <p className="section-index">01 / EPISODE INDEX</p>
+            <p className="section-index">02 / EPISODE INDEX</p>
             <h2 id="logs-title">从最新世界线开始追更。</h2>
           </div>
-          <p>
-            展开任意一话可以查看完整摘要与当时确认的决定；以后单篇文章会从这里继续生长。
-          </p>
+          <p>展开任意一条记录，可以查看改动摘要与当时的主要取舍。</p>
         </div>
         <div className="logs-list">
           {buildLogs.map((log, index) => (
@@ -76,36 +165,6 @@ export default function LogsPage() {
               </div>
             </details>
           ))}
-        </div>
-      </section>
-
-      <section
-        className="release-protocol section-pad"
-        aria-labelledby="protocol-title"
-      >
-        <div className="section-shell release-layout">
-          <div className="section-heading">
-            <p className="section-index">02 / RELEASE PROTOCOL</p>
-            <h2 id="protocol-title">每次放送前，都要回答四个问题。</h2>
-          </div>
-          <ol>
-            <li>
-              <span>01</span>
-              <strong>它解决了什么真实问题？</strong>
-            </li>
-            <li>
-              <span>02</span>
-              <strong>手机、桌面和两种主题都好用吗？</strong>
-            </li>
-            <li>
-              <span>03</span>
-              <strong>构建、类型与页面测试都通过了吗？</strong>
-            </li>
-            <li>
-              <span>04</span>
-              <strong>下一次维护时，未来的自己仍能看懂并继续吗？</strong>
-            </li>
-          </ol>
         </div>
       </section>
 

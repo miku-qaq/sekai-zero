@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/content/site";
+import { absoluteSiteUrl, resolveSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "./components/site-header";
 import "./globals.css";
 import "./subpages.css";
@@ -19,26 +20,9 @@ const geistMono = Geist_Mono({
 // flash. First visits intentionally use the bright house theme.
 const themeInitializationScript = `try{const theme=localStorage.getItem("sekai-theme");if(theme==="light"||theme==="dark"){document.documentElement.dataset.theme=theme}const channel=localStorage.getItem("sekai-channel");if(channel==="miku"||channel==="elaina"||channel==="bocchi"){document.documentElement.dataset.channel=channel}}catch{}`;
 
-const defaultSiteUrl = "https://miku-qaq.github.io/sekai-zero/";
-
-/**
- * Metadata must be deterministic so the same page can be pre-rendered for
- * GitHub Pages. CI injects the final target URL; other builds use the stable
- * public Pages address instead of depending on the optional Worker endpoint.
- */
-function resolveSiteUrl(): URL {
-  const candidate = process.env.NEXT_PUBLIC_SITE_URL?.trim() || defaultSiteUrl;
-
-  try {
-    return new URL(candidate.endsWith("/") ? candidate : `${candidate}/`);
-  } catch {
-    return new URL(defaultSiteUrl);
-  }
-}
-
 const metadataBase = resolveSiteUrl();
-const socialImage = new URL("og-v4.png", metadataBase).toString();
-const favicon = new URL("favicon.svg", metadataBase).toString();
+const socialImage = absoluteSiteUrl("og-v4.png");
+const favicon = absoluteSiteUrl("favicon.svg");
 
 export const metadata: Metadata = {
   metadataBase,
@@ -48,7 +32,15 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  keywords: ["个人网站", "作品集", "二次元", "动漫", "游戏", "计算机学习", "开发"],
+  keywords: [
+    "个人网站",
+    "二次元",
+    "动漫",
+    "游戏",
+    "计算机学习",
+    "CS224N",
+    "自然语言处理",
+  ],
   authors: [{ name: siteConfig.owner }],
   creator: siteConfig.owner,
   icons: {
