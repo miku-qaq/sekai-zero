@@ -1,0 +1,379 @@
+[
+  { "id": "ling-cage", "rawTitle": "灵笼", "bangumiId": 269537 },
+  { "id": "kiznaiver", "rawTitle": "羁绊者", "bangumiId": 148281 },
+  { "id": "darwins-game", "rawTitle": "达尔文游戏", "bangumiId": 266147 },
+  { "id": "wandering-witch", "rawTitle": "魔女之旅", "bangumiId": 292970 },
+  { "id": "demon-slayer", "rawTitle": "鬼灭之刃", "bangumiId": 245665 },
+  { "id": "aho-girl", "rawTitle": "笨女孩", "bangumiId": 208450 },
+  { "id": "charlotte", "rawTitle": "夏洛特", "bangumiId": 120925 },
+  { "id": "a-silent-voice", "rawTitle": "声之形", "bangumiId": 117777 },
+  {
+    "id": "i-want-to-eat-your-pancreas",
+    "rawTitle": "我想吃掉你的胰脏",
+    "bangumiId": 221736
+  },
+  {
+    "id": "tonikawa",
+    "rawTitle": "总之就是非常可爱",
+    "bangumiId": 301541
+  },
+  {
+    "id": "a-lull-in-the-sea",
+    "rawTitle": "来自风平浪静的明天",
+    "bangumiId": 47889
+  },
+  { "id": "hyouka", "rawTitle": "冰菓", "bangumiId": 27364 },
+  { "id": "yosuga-no-sora", "rawTitle": "缘之空", "bangumiId": 7157 },
+  {
+    "id": "seraph-of-the-end",
+    "rawTitle": "终结的炽天使",
+    "bangumiId": 112151
+  },
+  { "id": "danganronpa", "rawTitle": "弹丸论破", "bangumiId": 56093 },
+  {
+    "id": "the-garden-of-words",
+    "rawTitle": "言叶之庭",
+    "bangumiId": 58949
+  },
+  { "id": "no-game-no-life", "rawTitle": "游戏人生", "bangumiId": 79227 },
+  {
+    "id": "to-your-eternity",
+    "rawTitle": "致不灭的你",
+    "bangumiId": 297954
+  },
+  {
+    "id": "your-lie-in-april",
+    "rawTitle": "四月是你的谎言",
+    "bangumiId": 100444
+  },
+  {
+    "id": "five-centimeters-per-second",
+    "rawTitle": "时速5cm",
+    "bangumiId": 927
+  },
+  {
+    "id": "weathering-with-you",
+    "rawTitle": "天气之子",
+    "bangumiId": 269235
+  },
+  {
+    "id": "classroom-of-the-elite",
+    "rawTitle": "欢迎来到实力至上的教师",
+    "bangumiId": 214272
+  },
+  { "id": "akame-ga-kill", "rawTitle": "斩赤红之瞳", "bangumiId": 94244 },
+  {
+    "id": "pet-girl-of-sakurasou",
+    "rawTitle": "樱花庄的宠物女孩",
+    "bangumiId": 41488
+  },
+  {
+    "id": "violet-evergarden",
+    "rawTitle": "紫罗兰永恒花园",
+    "bangumiId": 183878
+  },
+  {
+    "id": "bloom-into-you",
+    "rawTitle": "终将成为你",
+    "bangumiId": 243981
+  },
+  {
+    "id": "darling-in-the-franxx",
+    "rawTitle": "darling in the franxx",
+    "bangumiId": 218711
+  },
+  {
+    "id": "rascal-does-not-dream",
+    "rawTitle": "青春猪头少年之不会梦到兔女郎学姐",
+    "bangumiId": 240038
+  },
+  {
+    "id": "battle-game-in-5-seconds",
+    "rawTitle": "见面5秒开始战斗",
+    "bangumiId": 319286
+  },
+  {
+    "id": "aquatope-on-white-sand",
+    "rawTitle": "白纱水族馆",
+    "bangumiId": 325281
+  },
+  {
+    "id": "jojos-bizarre-adventure",
+    "rawTitle": "jojo的奇妙冒险",
+    "bangumiId": 43558
+  },
+  {
+    "id": "love-chunibyo",
+    "rawTitle": "中二病也要谈恋爱",
+    "bangumiId": 29648
+  },
+  {
+    "id": "in-spectre",
+    "rawTitle": "虚构推理",
+    "bangumiId": 271687
+  },
+  {
+    "id": "kabaneri",
+    "rawTitle": "甲铁城的卡巴内瑞",
+    "bangumiId": 118781
+  },
+  { "id": "guilty-crown", "rawTitle": "罪恶王冠", "bangumiId": 18635 },
+  {
+    "id": "deca-dence",
+    "rawTitle": "失落要塞",
+    "bangumiId": 285879
+  },
+  {
+    "id": "angel-beats",
+    "rawTitle": "heart beats",
+    "bangumiId": 1851
+  },
+  {
+    "id": "railgun",
+    "rawTitle": "某科学的超电磁炮",
+    "bangumiId": 2585
+  },
+  {
+    "id": "index",
+    "rawTitle": "魔法禁书目录",
+    "bangumiId": 1014
+  },
+  {
+    "id": "black-bullet",
+    "rawTitle": "漆黑的子弹",
+    "bangumiId": 84873
+  },
+  {
+    "id": "goblin-slayer",
+    "rawTitle": "哥布林杀手",
+    "bangumiId": 238006
+  },
+  {
+    "id": "accelerator",
+    "rawTitle": "某科学的一方通行",
+    "bangumiId": 262939
+  },
+  { "id": "black-butler", "rawTitle": "黑执事", "bangumiId": 883 },
+  {
+    "id": "attack-on-titan",
+    "rawTitle": "进击的巨人",
+    "bangumiId": 55770
+  },
+  {
+    "id": "school-live",
+    "rawTitle": "学院孤岛",
+    "bangumiId": 106693
+  },
+  {
+    "id": "uma-musume",
+    "rawTitle": "赛马娘",
+    "bangumiId": 212003
+  },
+  {
+    "id": "worlds-finest-assassin",
+    "rawTitle": "世界顶尖暗杀者 转生为异世界贵族",
+    "bangumiId": 328313
+  },
+  {
+    "id": "overlord",
+    "rawTitle": "overlord",
+    "bangumiId": 112146
+  },
+  {
+    "id": "ranking-of-kings",
+    "rawTitle": "国王的排名",
+    "bangumiId": 296109
+  },
+  {
+    "id": "parasyte",
+    "rawTitle": "寄生兽",
+    "bangumiId": 88433
+  },
+  {
+    "id": "cagaster",
+    "rawTitle": "虫笼的卡伽斯特尔",
+    "bangumiId": 266224
+  },
+  {
+    "id": "case-study-of-vanitas",
+    "rawTitle": "瓦尼塔斯的手记",
+    "bangumiId": 331692
+  },
+  {
+    "id": "vinland-saga",
+    "rawTitle": "冰海战纪",
+    "bangumiId": 240386
+  },
+  {
+    "id": "evangelion",
+    "rawTitle": "eva",
+    "bangumiId": 265
+  },
+  {
+    "id": "million-lives",
+    "rawTitle": "我立于百万生命之上",
+    "bangumiId": 301469
+  },
+  {
+    "id": "kaguya-sama",
+    "rawTitle": "辉夜大小姐",
+    "bangumiId": 248175
+  },
+  {
+    "id": "id-invaded",
+    "rawTitle": "异度侵入",
+    "bangumiId": 285776
+  },
+  {
+    "id": "shield-hero",
+    "rawTitle": "盾之勇者成名录",
+    "bangumiId": 217660
+  },
+  { "id": "toradora", "rawTitle": "龙与虎", "bangumiId": 909 },
+  {
+    "id": "spy-family",
+    "rawTitle": "间谍过家家",
+    "bangumiId": 329906
+  },
+  {
+    "id": "pacific-rim-the-black",
+    "rawTitle": "环太平洋 黑色禁区",
+    "bangumiId": 107070
+  },
+  {
+    "id": "death-parade",
+    "rawTitle": "死亡游行",
+    "bangumiId": 116742
+  },
+  {
+    "id": "grand-blue",
+    "rawTitle": "碧蓝之海",
+    "bangumiId": 235130
+  },
+  {
+    "id": "summertime-rendering",
+    "rawTitle": "夏日重现",
+    "bangumiId": 326895
+  },
+  {
+    "id": "cyberpunk-edgerunners",
+    "rawTitle": "赛博朋克 边缘行者",
+    "bangumiId": 309311
+  },
+  {
+    "id": "eighty-six",
+    "rawTitle": "86不存在的战区",
+    "bangumiId": 302189
+  },
+  {
+    "id": "lycoris-recoil",
+    "rawTitle": "lycoris recoil",
+    "bangumiId": 364450
+  },
+  {
+    "id": "chainsaw-man",
+    "rawTitle": "电锯人",
+    "bangumiId": 321885
+  },
+  {
+    "id": "empire-of-corpses",
+    "rawTitle": "尸者帝国",
+    "bangumiId": 118784
+  },
+  {
+    "id": "sakamoto",
+    "rawTitle": "在下坂本 有何贵干",
+    "bangumiId": 165829
+  },
+  {
+    "id": "bocchi-the-rock",
+    "rawTitle": "孤独摇滚",
+    "bangumiId": 328609
+  },
+  {
+    "id": "hells-paradise",
+    "rawTitle": "地狱乐",
+    "bangumiId": 325808
+  },
+  {
+    "id": "oshi-no-ko",
+    "rawTitle": "我推的孩子",
+    "bangumiId": 386809
+  },
+  {
+    "id": "future-diary",
+    "rawTitle": "未来日记",
+    "bangumiId": 16235
+  },
+  {
+    "id": "psycho-pass",
+    "rawTitle": "心理测量者",
+    "bangumiId": 37685
+  },
+  {
+    "id": "brynhildr",
+    "rawTitle": "极黑的布伦希尔德",
+    "bangumiId": 89485
+  },
+  {
+    "id": "angels-of-death",
+    "rawTitle": "杀戮天使",
+    "bangumiId": 220566
+  },
+  {
+    "id": "saekano",
+    "rawTitle": "路人女主的养成方式",
+    "bangumiId": 100403
+  },
+  {
+    "id": "frieren",
+    "rawTitle": "葬送的芙莉莲",
+    "bangumiId": 400602
+  },
+  {
+    "id": "solo-leveling",
+    "rawTitle": "我独自升级",
+    "bangumiId": 390353
+  },
+  {
+    "id": "blue-lock",
+    "rawTitle": "蓝色监狱",
+    "bangumiId": 341163
+  },
+  {
+    "id": "uncle-from-another-world",
+    "rawTitle": "奇幻世界舅舅",
+    "bangumiId": 339326
+  },
+  {
+    "id": "death-note",
+    "rawTitle": "死亡笔记",
+    "bangumiId": 1773
+  },
+  {
+    "id": "code-geass",
+    "rawTitle": "反叛的鲁路修",
+    "bangumiId": 793
+  },
+  {
+    "id": "mushoku-tensei",
+    "rawTitle": "无职转生",
+    "bangumiId": 277554
+  },
+  {
+    "id": "steins-gate",
+    "rawTitle": "命运石之门",
+    "bangumiId": 10380
+  },
+  {
+    "id": "hellsing",
+    "rawTitle": "地狱之歌",
+    "bangumiId": 2216
+  },
+  {
+    "id": "tokyo-ghoul",
+    "rawTitle": "东京喰种",
+    "bangumiId": 93714
+  },
+  { "id": "shiki", "rawTitle": "尸鬼", "bangumiId": 5653 }
+]

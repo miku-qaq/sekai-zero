@@ -24,6 +24,17 @@ export const linkEntries: readonly LinkEntry[] = [
     external: true,
   },
   {
+    id: "apple",
+    group: "favorite",
+    label: "Apple 中国官网",
+    eyebrow: "FAVORITE PRODUCT ECOSYSTEM",
+    href: "https://www.apple.com.cn/",
+    reason: "我喜欢 Apple 产品；这里连接官方产品、设计与服务信息，不用第三方页面代替。",
+    tags: ["Apple", "数码产品", "官方网站"],
+    action: "打开 Apple 官网",
+    external: true,
+  },
+  {
     id: "current-cs224n-note",
     group: "study",
     label: "CS224N 当前笔记",

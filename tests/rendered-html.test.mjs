@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname = "/") {
@@ -55,14 +55,14 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /hero-anime-v2\.webp/);
 
   // Engineering history belongs to Logs, not the public-facing homepage.
-  assert.doesNotMatch(html, /EP\.010/);
+  assert.doesNotMatch(html, /EP\.\d{3}/);
   assert.doesNotMatch(html, /id="project-overview"/);
   assert.doesNotMatch(html, /id="works"|id="roadmap"/);
   assert.doesNotMatch(html, /\bPHASE\s*0\d\b/i);
   assert.doesNotMatch(html, /role="meter"|aria-valuenow=/i);
 
-  const routeOrder = ["/about/", "/study/", "/links/", "/logs/"].map((href) =>
-    html.indexOf(`href="${href}"`),
+  const routeOrder = ["/about/", "/anime/", "/study/", "/links/", "/logs/"].map(
+    (href) => html.indexOf(`href="${href}"`),
   );
   assert.ok(routeOrder.every((position) => position >= 0));
   assert.deepEqual(
@@ -73,13 +73,19 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("server-renders the four canonical public routes with clear purposes", async () => {
+test("server-renders the five canonical public routes with clear purposes", async () => {
   const routes = [
     {
       pathname: "/about",
       title: /<title>关于我 · SEKAI<\/title>/i,
       copy: /你好，我是 Mikureina/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>关于我<\/span>/,
+    },
+    {
+      pathname: "/anime",
+      title: /<title>动画收藏馆 · SEKAI<\/title>/i,
+      copy: /看过的故事，也组成了我的世界/,
+      breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>动画收藏<\/span>/,
     },
     {
       pathname: "/study",
@@ -122,7 +128,8 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
 
   assert.match(html, /<title>世界线日志 · SEKAI<\/title>/i);
   assert.match(html, /id="project-overview"/);
-  assert.match(html, /EP\.010/);
+  assert.match(html, /EP\.011/);
+  assert.match(html, /id="ep-011"/);
   assert.match(html, /id="ep-010"/);
   assert.match(html, /网站怎样成长，都记录在这里/);
   assert.doesNotMatch(html, />制作档案</);
@@ -140,6 +147,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.011/);
+  assert.match(logs, /id="ep-011"/);
+  assert.match(logs, /把看过的动画铺成一面收藏墙/);
   assert.match(logs, /EP\.010/);
   assert.match(logs, /id="ep-010"/);
   assert.match(logs, /把网站内容重新交还给访客/);
@@ -147,7 +157,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 10);
+  assert.equal(episodeIds.length, 11);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -159,6 +169,10 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.match(links, /id="route-bilibili"/);
   assert.match(links, /href="https:\/\/www\.bilibili\.com\/"/);
   assert.match(links, /哔哩哔哩 · Bilibili/);
+  assert.match(links, /id="route-apple"/);
+  assert.match(links, /href="https:\/\/www\.apple\.com\.cn\/"/);
+  assert.match(links, /Apple 中国官网/);
+  assert.match(links, /我喜欢 Apple 产品/);
   assert.match(links, /CS224N 当前笔记/);
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
@@ -167,6 +181,41 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.match(links, /不会为了填满版面而虚构/);
   assert.equal(links.match(/terminal-card-placeholder/g)?.length, 1);
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
+});
+
+test("publishes all 89 watched anime with one formal title and local covers", async () => {
+  const response = await render("/anime");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  const source = JSON.parse(
+    await readFile(new URL("../content/anime-source.json", import.meta.url), "utf8"),
+  );
+  const catalog = JSON.parse(
+    await readFile(new URL("../content/anime-catalog.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(source.length, 89);
+  assert.equal(catalog.length, 89);
+  assert.equal(new Set(source.map((entry) => entry.rawTitle)).size, 89);
+  assert.equal(new Set(catalog.map((entry) => entry.id)).size, 89);
+  assert.ok(catalog.every((entry) => !("aliases" in entry)));
+
+  assert.match(html, /89 部/);
+  assert.match(html, /灵笼 上半季/);
+  assert.match(html, /魔女之旅/);
+  assert.match(html, /孤独摇滚！/);
+  assert.match(html, /命运石之门/);
+  assert.match(html, /IMAGE &amp; DATA CREDIT/);
+  assert.match(html, /封面与作品资料索引来自 Bangumi/);
+  assert.doesNotMatch(html, /heart beats|时速5cm|作品名、别名|aliases/i);
+
+  const covers = [...html.matchAll(/src="(\/anime\/[^"]+\.webp)"/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(covers.length, 89);
+  for (const cover of covers) {
+    await access(new URL(`../public${cover}`, import.meta.url));
+  }
 });
 
 test("server-renders the current CS224N learning note with official sources", async () => {
@@ -281,6 +330,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(page, /from "@\/content\/site"/);
   assert.match(siteContent, /export const worldRoutes/);
   assert.match(siteContent, /href: "\/about\/"/);
+  assert.match(siteContent, /href: "\/anime\/"/);
   assert.match(siteContent, /href: "\/study\/"/);
   assert.match(siteContent, /href: "\/links\/"/);
   assert.match(siteContent, /href: "\/logs\/"/);
@@ -325,7 +375,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(studyContent, /current: true/);
   assert.match(studyContent, /publisher: "Stanford University"/);
 
-  // `/projects/` remains readable for bookmarks, but it is not a fifth public
+  // `/projects/` remains readable for bookmarks, but it is not a sixth public
   // information-architecture destination.
   assert.match(projectsPage, /import LogsPage from "\.\.\/logs\/page"/);
   assert.match(
@@ -346,6 +396,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.011"/);
+  assert.match(releasesContent, /ANIME COLLECTION \/ 89/);
   assert.match(releasesContent, /episode: "EP\.010"/);
   assert.match(releasesContent, /VISITOR-FIRST CONTENT/);
   assert.match(nowContent, /LEARNING \/ NLP-001/);
@@ -375,6 +427,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     /window\.open|window\.location|location\.assign|location\.href/,
   );
   assert.match(linksContent, /id: "bilibili"/);
+  assert.match(linksContent, /id: "apple"/);
   assert.match(linksContent, /export const linkPlaceholder/);
   assert.equal(linksContent.match(/NEXT FAVORITE \/ OPEN SLOT/g)?.length, 1);
 

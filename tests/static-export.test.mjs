@@ -43,12 +43,16 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     { path: "index.html", title: /<title>SEKAI \/ 00 · 个人次元站<\/title>/i },
     { path: "about/index.html", title: /<title>关于我 · SEKAI<\/title>/i },
     {
+      path: "anime/index.html",
+      title: /<title>动画收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
     { path: "links/index.html", title: /<title>链接收藏 · SEKAI<\/title>/i },
     { path: "logs/index.html", title: /<title>世界线日志 · SEKAI<\/title>/i },
-    // Keep the former route readable for old bookmarks, but not as a fifth
+    // Keep the former route readable for old bookmarks, but not as a sixth
     // public destination. Its metadata and body are checked separately below.
     {
       path: "projects/index.html",
@@ -91,7 +95,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`),
   );
 
-  for (const route of ["about", "study", "links", "logs"]) {
+  for (const route of ["about", "anime", "study", "links", "logs"]) {
     assert.match(homepage, new RegExp(`href="${basePath}/${route}/"`));
   }
   assert.doesNotMatch(homepage, new RegExp(`href="${basePath}/projects/"`));
@@ -120,10 +124,26 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   );
   assert.doesNotMatch(study, /LEARNING QUEUE|learning-queue/i);
 
+  const anime = exported.get("anime/index.html");
+  assert.match(anime, /89 部/);
+  assert.match(anime, /灵笼 上半季/);
+  assert.match(anime, /魔女之旅/);
+  assert.match(anime, /孤独摇滚！/);
+  assert.match(anime, /命运石之门/);
+  assert.match(anime, /封面与作品资料索引来自 Bangumi/);
+  assert.doesNotMatch(anime, /heart beats|时速5cm|作品名、别名|aliases/i);
+  const animeCovers = [
+    ...anime.matchAll(new RegExp(`src="${basePath}/anime/[^"]+\\.webp"`, "g")),
+  ];
+  assert.equal(animeCovers.length, 89);
+
   const links = exported.get("links/index.html");
   assert.match(links, /href="https:\/\/www\.bilibili\.com\/"/);
   assert.match(links, /哔哩哔哩 · Bilibili/);
   assert.match(links, /我最喜欢的视频平台/);
+  assert.match(links, /href="https:\/\/www\.apple\.com\.cn\/"/);
+  assert.match(links, /Apple 中国官网/);
+  assert.match(links, /我喜欢 Apple 产品/);
   assert.match(links, /下一枚收藏坐标/);
   assert.match(links, /内容待填充/);
   assert.match(links, new RegExp(`href="${basePath}/about/#contact"`));
@@ -137,6 +157,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /原“制作档案”已并入日志/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-011"/);
+  assert.match(logs, /EP\.011/);
+  assert.match(logs, /把看过的动画铺成一面收藏墙/);
   assert.match(logs, /id="ep-010"/);
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
@@ -144,6 +167,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-011"/);
   assert.match(projects, /id="ep-010"/);
   assert.match(projects, /<meta[^>]*name="robots"[^>]*content="[^"]*noindex[^"]*"/i);
   const canonicalMatch = projects.match(
@@ -153,7 +177,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const canonical = new URL(canonicalMatch[1]);
   assert.equal(canonical.pathname, `${basePath}/logs/`);
 
-  const publicPages = [homepage, about, study, links, logs].join("\n");
+  const publicPages = [homepage, about, anime, study, links, logs].join("\n");
   assert.doesNotMatch(
     publicPages,
     new RegExp(`href="${basePath}/projects/"`),

@@ -1,0 +1,1248 @@
+[
+  {
+    "id": "ling-cage",
+    "title": "灵笼 上半季",
+    "image": "/anime/ling-cage.webp",
+    "year": 2019,
+    "format": "网络动画",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/269537",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/5c/c8/269537_jRyHs.jpg",
+      "matchedTitle": "灵笼 上半季"
+    }
+  },
+  {
+    "id": "kiznaiver",
+    "title": "羁绊者",
+    "image": "/anime/kiznaiver.webp",
+    "year": 2016,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/148281",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/85/c3/148281_8czuA.jpg",
+      "matchedTitle": "羁绊者"
+    }
+  },
+  {
+    "id": "darwins-game",
+    "title": "达尔文游戏",
+    "image": "/anime/darwins-game.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/266147",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/18/a4/266147_kQR5x.jpg",
+      "matchedTitle": "达尔文游戏"
+    }
+  },
+  {
+    "id": "wandering-witch",
+    "title": "魔女之旅",
+    "image": "/anime/wandering-witch.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/292970",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/99/17/292970_mxMxx.jpg",
+      "matchedTitle": "魔女之旅"
+    }
+  },
+  {
+    "id": "demon-slayer",
+    "title": "鬼灭之刃",
+    "image": "/anime/demon-slayer.webp",
+    "year": 2019,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/245665",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/9d/d1/245665_5an54.jpg",
+      "matchedTitle": "鬼灭之刃"
+    }
+  },
+  {
+    "id": "aho-girl",
+    "title": "笨女孩",
+    "image": "/anime/aho-girl.webp",
+    "year": 2017,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/208450",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/bf/83/208450_0l5MJ.jpg",
+      "matchedTitle": "笨女孩"
+    }
+  },
+  {
+    "id": "charlotte",
+    "title": "夏洛特",
+    "image": "/anime/charlotte.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/120925",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/9b/d6/120925_Zp040.jpg",
+      "matchedTitle": "夏洛特"
+    }
+  },
+  {
+    "id": "a-silent-voice",
+    "title": "声之形",
+    "image": "/anime/a-silent-voice.webp",
+    "year": 2016,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/117777",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/7c/b9/117777_R8hhl.jpg",
+      "matchedTitle": "声之形"
+    }
+  },
+  {
+    "id": "i-want-to-eat-your-pancreas",
+    "title": "我想吃掉你的胰脏",
+    "image": "/anime/i-want-to-eat-your-pancreas.webp",
+    "year": 2018,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/221736",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/23/17/221736_hm0HO.jpg",
+      "matchedTitle": "我想吃掉你的胰脏"
+    }
+  },
+  {
+    "id": "tonikawa",
+    "title": "总之就是非常可爱",
+    "image": "/anime/tonikawa.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/301541",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/66/50/301541_p2z4K.jpg",
+      "matchedTitle": "总之就是非常可爱"
+    }
+  },
+  {
+    "id": "a-lull-in-the-sea",
+    "title": "来自风平浪静的明天",
+    "image": "/anime/a-lull-in-the-sea.webp",
+    "year": 2013,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/47889",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/16/29/47889_gZy58.jpg",
+      "matchedTitle": "来自风平浪静的明天"
+    }
+  },
+  {
+    "id": "hyouka",
+    "title": "冰菓",
+    "image": "/anime/hyouka.webp",
+    "year": 2012,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/27364",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/cd/38/27364_1ZFmr.jpg",
+      "matchedTitle": "冰菓"
+    }
+  },
+  {
+    "id": "yosuga-no-sora",
+    "title": "缘之空",
+    "image": "/anime/yosuga-no-sora.webp",
+    "year": 2010,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/7157",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/6e/01/7157_hF46A.jpg",
+      "matchedTitle": "缘之空"
+    }
+  },
+  {
+    "id": "seraph-of-the-end",
+    "title": "终结的炽天使",
+    "image": "/anime/seraph-of-the-end.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/112151",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/3c/bd/112151_qJg8v.jpg",
+      "matchedTitle": "终结的炽天使"
+    }
+  },
+  {
+    "id": "danganronpa",
+    "title": "弹丸论破 希望学园与绝望高中生",
+    "image": "/anime/danganronpa.webp",
+    "year": 2013,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/56093",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/bf/46/56093_I1uEu.jpg",
+      "matchedTitle": "弹丸论破 希望学园与绝望高中生"
+    }
+  },
+  {
+    "id": "the-garden-of-words",
+    "title": "言叶之庭",
+    "image": "/anime/the-garden-of-words.webp",
+    "year": 2013,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/58949",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/bc/43/58949_rCnOB.jpg",
+      "matchedTitle": "言叶之庭"
+    }
+  },
+  {
+    "id": "no-game-no-life",
+    "title": "游戏人生",
+    "image": "/anime/no-game-no-life.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/79227",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/54/bd/79227_052R3.jpg",
+      "matchedTitle": "游戏人生"
+    }
+  },
+  {
+    "id": "to-your-eternity",
+    "title": "致不灭的你",
+    "image": "/anime/to-your-eternity.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/297954",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/5c/9c/297954_NyA7J.jpg",
+      "matchedTitle": "致不灭的你"
+    }
+  },
+  {
+    "id": "your-lie-in-april",
+    "title": "四月是你的谎言",
+    "image": "/anime/your-lie-in-april.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/100444",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/ec/c7/100444_96r3J.jpg",
+      "matchedTitle": "四月是你的谎言"
+    }
+  },
+  {
+    "id": "five-centimeters-per-second",
+    "title": "秒速5厘米",
+    "image": "/anime/five-centimeters-per-second.webp",
+    "year": 2007,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/927",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/1f/44/927_J2Q9a.jpg",
+      "matchedTitle": "秒速5厘米"
+    }
+  },
+  {
+    "id": "weathering-with-you",
+    "title": "天气之子",
+    "image": "/anime/weathering-with-you.webp",
+    "year": 2019,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/269235",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/00/e8/269235_Dg6gZ.jpg",
+      "matchedTitle": "天气之子"
+    }
+  },
+  {
+    "id": "classroom-of-the-elite",
+    "title": "欢迎来到实力至上主义的教室",
+    "image": "/anime/classroom-of-the-elite.webp",
+    "year": 2017,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/214272",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/87/01/214272_vlcWz.jpg",
+      "matchedTitle": "欢迎来到实力至上主义的教室"
+    }
+  },
+  {
+    "id": "akame-ga-kill",
+    "title": "斩·赤红之瞳！",
+    "image": "/anime/akame-ga-kill.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/94244",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/5e/e3/94244_aCTut.jpg",
+      "matchedTitle": "斩·赤红之瞳！"
+    }
+  },
+  {
+    "id": "pet-girl-of-sakurasou",
+    "title": "樱花庄的宠物女孩",
+    "image": "/anime/pet-girl-of-sakurasou.webp",
+    "year": 2012,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/41488",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/01/a2/41488_qw09G.jpg",
+      "matchedTitle": "樱花庄的宠物女孩"
+    }
+  },
+  {
+    "id": "violet-evergarden",
+    "title": "紫罗兰永恒花园",
+    "image": "/anime/violet-evergarden.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/183878",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/1e/e2/183878_Fef1o.jpg",
+      "matchedTitle": "紫罗兰永恒花园"
+    }
+  },
+  {
+    "id": "bloom-into-you",
+    "title": "终将成为你",
+    "image": "/anime/bloom-into-you.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/243981",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/bc/72/243981_J20I2.jpg",
+      "matchedTitle": "终将成为你"
+    }
+  },
+  {
+    "id": "darling-in-the-franxx",
+    "title": "DARLING in the FRANXX",
+    "image": "/anime/darling-in-the-franxx.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/218711",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/77/dd/218711_5Z5t1.jpg",
+      "matchedTitle": "DARLING in the FRANXX"
+    }
+  },
+  {
+    "id": "rascal-does-not-dream",
+    "title": "青春猪头少年不会梦到兔女郎学姐",
+    "image": "/anime/rascal-does-not-dream.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/240038",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/b9/45/240038_b5j7g.jpg",
+      "matchedTitle": "青春猪头少年不会梦到兔女郎学姐"
+    }
+  },
+  {
+    "id": "battle-game-in-5-seconds",
+    "title": "见面之后5秒开始战斗",
+    "image": "/anime/battle-game-in-5-seconds.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/319286",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/4b/34/319286_Yt9hb.jpg",
+      "matchedTitle": "见面之后5秒开始战斗"
+    }
+  },
+  {
+    "id": "aquatope-on-white-sand",
+    "title": "白沙的水族馆",
+    "image": "/anime/aquatope-on-white-sand.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/325281",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/d4/a3/325281_CZa9A.jpg",
+      "matchedTitle": "白沙的水族馆"
+    }
+  },
+  {
+    "id": "jojos-bizarre-adventure",
+    "title": "JOJO的奇妙冒险",
+    "image": "/anime/jojos-bizarre-adventure.webp",
+    "year": 2012,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/43558",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/23/5d/43558_ECoSc.jpg",
+      "matchedTitle": "JOJO的奇妙冒险"
+    }
+  },
+  {
+    "id": "love-chunibyo",
+    "title": "中二病也要谈恋爱！",
+    "image": "/anime/love-chunibyo.webp",
+    "year": 2012,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/29648",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/3d/fd/29648_LOcOx.jpg",
+      "matchedTitle": "中二病也要谈恋爱！"
+    }
+  },
+  {
+    "id": "in-spectre",
+    "title": "虚构推理",
+    "image": "/anime/in-spectre.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/271687",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/6c/3b/271687_1326P.jpg",
+      "matchedTitle": "虚构推理"
+    }
+  },
+  {
+    "id": "kabaneri",
+    "title": "甲铁城的卡巴内利",
+    "image": "/anime/kabaneri.webp",
+    "year": 2016,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/118781",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/4e/0a/118781_ZHz9k.jpg",
+      "matchedTitle": "甲铁城的卡巴内利"
+    }
+  },
+  {
+    "id": "guilty-crown",
+    "title": "罪恶王冠",
+    "image": "/anime/guilty-crown.webp",
+    "year": 2011,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/18635",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/7d/4c/18635_71IIr.jpg",
+      "matchedTitle": "罪恶王冠"
+    }
+  },
+  {
+    "id": "deca-dence",
+    "title": "没落要塞",
+    "image": "/anime/deca-dence.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/285879",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/ff/65/285879_l1lG6.jpg",
+      "matchedTitle": "没落要塞"
+    }
+  },
+  {
+    "id": "angel-beats",
+    "title": "天使的心跳！",
+    "image": "/anime/angel-beats.webp",
+    "year": 2010,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/1851",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/ff/14/1851_ZFEg7.jpg",
+      "matchedTitle": "天使的心跳！"
+    }
+  },
+  {
+    "id": "railgun",
+    "title": "某科学的超电磁炮",
+    "image": "/anime/railgun.webp",
+    "year": 2009,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/2585",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/36/e7/2585_pn2eP.jpg",
+      "matchedTitle": "某科学的超电磁炮"
+    }
+  },
+  {
+    "id": "index",
+    "title": "魔法禁书目录",
+    "image": "/anime/index.webp",
+    "year": 2008,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/1014",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/76/6d/1014_nqAH8.jpg",
+      "matchedTitle": "魔法禁书目录"
+    }
+  },
+  {
+    "id": "black-bullet",
+    "title": "漆黑的子弹",
+    "image": "/anime/black-bullet.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/84873",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/b3/32/84873_8NvN2.jpg",
+      "matchedTitle": "漆黑的子弹"
+    }
+  },
+  {
+    "id": "goblin-slayer",
+    "title": "哥布林杀手",
+    "image": "/anime/goblin-slayer.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/238006",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/c7/2a/238006_OJZy1.jpg",
+      "matchedTitle": "哥布林杀手"
+    }
+  },
+  {
+    "id": "accelerator",
+    "title": "某科学的一方通行",
+    "image": "/anime/accelerator.webp",
+    "year": 2019,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/262939",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/3f/11/262939_ZhtWQ.jpg",
+      "matchedTitle": "某科学的一方通行"
+    }
+  },
+  {
+    "id": "black-butler",
+    "title": "黑执事",
+    "image": "/anime/black-butler.webp",
+    "year": 2008,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/883",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/21/0f/883_9w87Y.jpg",
+      "matchedTitle": "黑执事"
+    }
+  },
+  {
+    "id": "attack-on-titan",
+    "title": "进击的巨人",
+    "image": "/anime/attack-on-titan.webp",
+    "year": 2013,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/55770",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/78/c9/55770_HsJfh.jpg",
+      "matchedTitle": "进击的巨人"
+    }
+  },
+  {
+    "id": "school-live",
+    "title": "学园孤岛",
+    "image": "/anime/school-live.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/106693",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/e9/a7/106693_68MDM.jpg",
+      "matchedTitle": "学园孤岛"
+    }
+  },
+  {
+    "id": "uma-musume",
+    "title": "赛马娘 Pretty Derby",
+    "image": "/anime/uma-musume.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/212003",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/91/c0/212003_pPk1M.jpg",
+      "matchedTitle": "赛马娘 Pretty Derby"
+    }
+  },
+  {
+    "id": "worlds-finest-assassin",
+    "title": "世界顶尖的暗杀者转生为异世界贵族",
+    "image": "/anime/worlds-finest-assassin.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/328313",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/49/32/328313_oQlyW.jpg",
+      "matchedTitle": "世界顶尖的暗杀者转生为异世界贵族"
+    }
+  },
+  {
+    "id": "overlord",
+    "title": "OVERLORD",
+    "image": "/anime/overlord.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/112146",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/cd/a9/112146_qr9m3.jpg",
+      "matchedTitle": "OVERLORD"
+    }
+  },
+  {
+    "id": "ranking-of-kings",
+    "title": "国王排名",
+    "image": "/anime/ranking-of-kings.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/296109",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/9a/c1/296109_8GeaM.jpg",
+      "matchedTitle": "国王排名"
+    }
+  },
+  {
+    "id": "parasyte",
+    "title": "寄生兽 生命的准则",
+    "image": "/anime/parasyte.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/88433",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/e3/14/88433_5Jl4M.jpg",
+      "matchedTitle": "寄生兽 生命的准则"
+    }
+  },
+  {
+    "id": "cagaster",
+    "title": "虫笼的卡伽斯特尔",
+    "image": "/anime/cagaster.webp",
+    "year": 2020,
+    "format": "网络动画",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/266224",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/15/6b/266224_s1Rbs.jpg",
+      "matchedTitle": "虫笼的卡伽斯特尔"
+    }
+  },
+  {
+    "id": "case-study-of-vanitas",
+    "title": "瓦尼塔斯的手记",
+    "image": "/anime/case-study-of-vanitas.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/331692",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/5a/cf/331692_O6Em2.jpg",
+      "matchedTitle": "瓦尼塔斯的手记"
+    }
+  },
+  {
+    "id": "vinland-saga",
+    "title": "冰海战记",
+    "image": "/anime/vinland-saga.webp",
+    "year": 2019,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/240386",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/31/8f/240386_6Q62q.jpg",
+      "matchedTitle": "冰海战记"
+    }
+  },
+  {
+    "id": "evangelion",
+    "title": "新世纪福音战士",
+    "image": "/anime/evangelion.webp",
+    "year": 1995,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/265",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/e5/69/265_Z5Uou.jpg",
+      "matchedTitle": "新世纪福音战士"
+    }
+  },
+  {
+    "id": "million-lives",
+    "title": "我立于百万生命之上",
+    "image": "/anime/million-lives.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/301469",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/08/01/301469_cPTHi.jpg",
+      "matchedTitle": "我立于百万生命之上"
+    }
+  },
+  {
+    "id": "kaguya-sama",
+    "title": "辉夜大小姐想让我告白～天才们的恋爱头脑战～",
+    "image": "/anime/kaguya-sama.webp",
+    "year": 2019,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/248175",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/2a/f7/248175_2w4zT.jpg",
+      "matchedTitle": "辉夜大小姐想让我告白～天才们的恋爱头脑战～"
+    }
+  },
+  {
+    "id": "id-invaded",
+    "title": "异度侵入",
+    "image": "/anime/id-invaded.webp",
+    "year": 2020,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/285776",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/73/90/285776_57c5p.jpg",
+      "matchedTitle": "异度侵入"
+    }
+  },
+  {
+    "id": "shield-hero",
+    "title": "盾之勇者成名录",
+    "image": "/anime/shield-hero.webp",
+    "year": 2019,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/217660",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/b9/9b/217660_h3554.jpg",
+      "matchedTitle": "盾之勇者成名录"
+    }
+  },
+  {
+    "id": "toradora",
+    "title": "龙与虎",
+    "image": "/anime/toradora.webp",
+    "year": 2008,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/909",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/a4/30/909_e5zhk.jpg",
+      "matchedTitle": "龙与虎"
+    }
+  },
+  {
+    "id": "spy-family",
+    "title": "间谍过家家",
+    "image": "/anime/spy-family.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/329906",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/de/4a/329906_hmtVD.jpg",
+      "matchedTitle": "间谍过家家"
+    }
+  },
+  {
+    "id": "pacific-rim-the-black",
+    "title": "环太平洋：黑色禁区",
+    "image": "/anime/pacific-rim-the-black.webp",
+    "year": 2021,
+    "format": "网络动画",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/107070",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/aa/d8/107070_czqtu.jpg",
+      "matchedTitle": "环太平洋：黑色禁区"
+    }
+  },
+  {
+    "id": "death-parade",
+    "title": "死亡游行",
+    "image": "/anime/death-parade.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/116742",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/07/86/116742_U6oCo.jpg",
+      "matchedTitle": "死亡游行"
+    }
+  },
+  {
+    "id": "grand-blue",
+    "title": "碧蓝之海",
+    "image": "/anime/grand-blue.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/235130",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/1f/13/235130_suy3s.jpg",
+      "matchedTitle": "碧蓝之海"
+    }
+  },
+  {
+    "id": "summertime-rendering",
+    "title": "夏日重现",
+    "image": "/anime/summertime-rendering.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/326895",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/d9/f5/326895_j1S2n.jpg",
+      "matchedTitle": "夏日重现"
+    }
+  },
+  {
+    "id": "cyberpunk-edgerunners",
+    "title": "赛博浪客",
+    "image": "/anime/cyberpunk-edgerunners.webp",
+    "year": 2022,
+    "format": "网络动画",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/309311",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/39/83/309311_dJU58.jpg",
+      "matchedTitle": "赛博浪客"
+    }
+  },
+  {
+    "id": "eighty-six",
+    "title": "86 -不存在的战区-",
+    "image": "/anime/eighty-six.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/302189",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/a4/b3/302189_1034v.jpg",
+      "matchedTitle": "86 -不存在的战区-"
+    }
+  },
+  {
+    "id": "lycoris-recoil",
+    "title": "莉可丽丝",
+    "image": "/anime/lycoris-recoil.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/364450",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/65/19/364450_xx2zx.jpg",
+      "matchedTitle": "莉可丽丝"
+    }
+  },
+  {
+    "id": "chainsaw-man",
+    "title": "链锯人",
+    "image": "/anime/chainsaw-man.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/321885",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/26/b4/321885_92uzU.jpg",
+      "matchedTitle": "链锯人"
+    }
+  },
+  {
+    "id": "empire-of-corpses",
+    "title": "尸者的帝国",
+    "image": "/anime/empire-of-corpses.webp",
+    "year": 2015,
+    "format": "动画电影",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/118784",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/61/2d/118784_90x7N.jpg",
+      "matchedTitle": "尸者的帝国"
+    }
+  },
+  {
+    "id": "sakamoto",
+    "title": "在下坂本，有何贵干？",
+    "image": "/anime/sakamoto.webp",
+    "year": 2016,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/165829",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/7c/01/165829_cwSZV.jpg",
+      "matchedTitle": "在下坂本，有何贵干？"
+    }
+  },
+  {
+    "id": "bocchi-the-rock",
+    "title": "孤独摇滚！",
+    "image": "/anime/bocchi-the-rock.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/328609",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/e2/e7/328609_2EHLJ.jpg",
+      "matchedTitle": "孤独摇滚！"
+    }
+  },
+  {
+    "id": "hells-paradise",
+    "title": "地狱乐",
+    "image": "/anime/hells-paradise.webp",
+    "year": 2023,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/325808",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/e6/b1/325808_4OXIC.jpg",
+      "matchedTitle": "地狱乐"
+    }
+  },
+  {
+    "id": "oshi-no-ko",
+    "title": "【我推的孩子】",
+    "image": "/anime/oshi-no-ko.webp",
+    "year": 2023,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/386809",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/98/5e/386809_1yR81.jpg",
+      "matchedTitle": "【我推的孩子】"
+    }
+  },
+  {
+    "id": "future-diary",
+    "title": "未来日记",
+    "image": "/anime/future-diary.webp",
+    "year": 2011,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/16235",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/0a/3d/16235_5GJQH.jpg",
+      "matchedTitle": "未来日记"
+    }
+  },
+  {
+    "id": "psycho-pass",
+    "title": "心理测量者",
+    "image": "/anime/psycho-pass.webp",
+    "year": 2012,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/37685",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/bb/0a/37685_JLl2k.jpg",
+      "matchedTitle": "心理测量者"
+    }
+  },
+  {
+    "id": "brynhildr",
+    "title": "极黑的布伦希尔德",
+    "image": "/anime/brynhildr.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/89485",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/59/50/89485_xKkzo.jpg",
+      "matchedTitle": "极黑的布伦希尔德"
+    }
+  },
+  {
+    "id": "angels-of-death",
+    "title": "杀戮天使",
+    "image": "/anime/angels-of-death.webp",
+    "year": 2018,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/220566",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/1a/b7/220566_0CMxK.jpg",
+      "matchedTitle": "杀戮天使"
+    }
+  },
+  {
+    "id": "saekano",
+    "title": "路人女主的养成方法",
+    "image": "/anime/saekano.webp",
+    "year": 2015,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/100403",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/6b/01/100403_R8KN2.jpg",
+      "matchedTitle": "路人女主的养成方法"
+    }
+  },
+  {
+    "id": "frieren",
+    "title": "葬送的芙莉莲",
+    "image": "/anime/frieren.webp",
+    "year": 2023,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/400602",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/13/c5/400602_ZI8Y9.jpg",
+      "matchedTitle": "葬送的芙莉莲"
+    }
+  },
+  {
+    "id": "solo-leveling",
+    "title": "我独自升级",
+    "image": "/anime/solo-leveling.webp",
+    "year": 2024,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/390353",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/f5/2e/390353_07vz7.jpg",
+      "matchedTitle": "我独自升级"
+    }
+  },
+  {
+    "id": "blue-lock",
+    "title": "蓝色监狱",
+    "image": "/anime/blue-lock.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/341163",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/b4/db/341163_l525N.jpg",
+      "matchedTitle": "蓝色监狱"
+    }
+  },
+  {
+    "id": "uncle-from-another-world",
+    "title": "异世界舅舅",
+    "image": "/anime/uncle-from-another-world.webp",
+    "year": 2022,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/339326",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/1a/75/339326_v466V.jpg",
+      "matchedTitle": "异世界舅舅"
+    }
+  },
+  {
+    "id": "death-note",
+    "title": "死亡笔记",
+    "image": "/anime/death-note.webp",
+    "year": 2006,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/1773",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/4a/be/1773_rldoC.jpg",
+      "matchedTitle": "死亡笔记"
+    }
+  },
+  {
+    "id": "code-geass",
+    "title": "Code Geass 反叛的鲁路修",
+    "image": "/anime/code-geass.webp",
+    "year": 2006,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/793",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/da/8c/793_3y432.jpg",
+      "matchedTitle": "Code Geass 反叛的鲁路修"
+    }
+  },
+  {
+    "id": "mushoku-tensei",
+    "title": "无职转生～到了异世界就拿出真本事～",
+    "image": "/anime/mushoku-tensei.webp",
+    "year": 2021,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/277554",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/8b/00/277554_z999u.jpg",
+      "matchedTitle": "无职转生～到了异世界就拿出真本事～"
+    }
+  },
+  {
+    "id": "steins-gate",
+    "title": "命运石之门",
+    "image": "/anime/steins-gate.webp",
+    "year": 2011,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/10380",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/a9/79/10380_YwP4R.jpg",
+      "matchedTitle": "命运石之门"
+    }
+  },
+  {
+    "id": "hellsing",
+    "title": "皇家国教骑士团",
+    "image": "/anime/hellsing.webp",
+    "year": 2001,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/2216",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/59/38/2216_TclUH.jpg",
+      "matchedTitle": "皇家国教骑士团"
+    }
+  },
+  {
+    "id": "tokyo-ghoul",
+    "title": "东京喰种",
+    "image": "/anime/tokyo-ghoul.webp",
+    "year": 2014,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/93714",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/12/ab/93714_r1U22.jpg",
+      "matchedTitle": "东京喰种"
+    }
+  },
+  {
+    "id": "shiki",
+    "title": "尸鬼",
+    "image": "/anime/shiki.webp",
+    "year": 2010,
+    "format": "TV",
+    "status": "watched",
+    "source": {
+      "label": "Bangumi",
+      "url": "https://bgm.tv/subject/5653",
+      "imageUrl": "https://lain.bgm.tv/pic/cover/l/d7/e4/5653_5ugTB.jpg",
+      "matchedTitle": "尸鬼"
+    }
+  }
+]

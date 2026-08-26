@@ -25,7 +25,7 @@ export default function LinksPage() {
             label: "已收录",
             value: `${String(linkEntries.length).padStart(2, "0")} 个入口`,
           },
-          { label: "收藏状态", value: "Bilibili + 1 个留白" },
+          { label: "个人收藏", value: "Bilibili / Apple" },
           { label: "可以使用", value: "分类 / 搜索 / 随机推荐" },
         ]}
       />

@@ -63,9 +63,9 @@ export const currentFocus = [
   },
   {
     code: "INTERESTS",
-    title: "动漫与游戏",
-    copy: "喜欢初音未来、伊蕾娜和波奇，常玩平台是 Nintendo Switch 与 Steam。",
-    href: "/links/",
-    action: "浏览我的链接",
+    title: "动画收藏",
+    copy: "已经把 89 部看过的动画整理成独立收藏馆；喜欢的角色包括初音未来、伊蕾娜和波奇。",
+    href: "/anime/",
+    action: "浏览动画收藏",
   },
 ] as const;

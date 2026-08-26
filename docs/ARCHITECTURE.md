@@ -15,22 +15,25 @@ docs/                架构、路线图与重要决策
 .github/             自动检查和协作模板
 ```
 
-页面默认使用 Server Component。只有移动导航、主题切换、角色频道与原生分享需要 `"use client"`，以控制浏览器 JavaScript 体积。
+页面默认使用 Server Component。只有移动导航、主题切换、角色频道、动画收藏筛选与原生分享需要 `"use client"`，以控制浏览器 JavaScript 体积。
 
 当前页面职责如下：
 
 - `/`：访客入口，依次呈现公开身份、当前学习与兴趣、世界地图、初音未来/伊蕾娜/波奇三个主题频道和次元扭蛋；保留有趣组件，但不陈列开发日志、路线图或工程占位文案。
 - `/about`：只使用已确认信息的个人介绍、兴趣与联系方式。
+- `/anime`：按站点所有者提供的 89 条已看片单建立动画收藏馆；支持正式作品名搜索与类型、年份筛选，只表达“看过”而不虚构评分。每张卡只显示一个资料条目正式名称，并保留年份、形式、封面替代文本和 Bangumi 来源。
 - `/study`：可搜索、可展开的计算机学习笔记，包含独立 AI 与 NLP 频道及 CS224N 公开课程资料自学记录；正文静态可索引，只有筛选与搜索进入客户端。
-- `/links`：收录本人确认的收藏、学习资料、公开源码和联系入口。Bilibili 是首条已确认的个人收藏；另保留一张明确标注“待确认”的空位，用来表达可扩展性而不伪造内容。
+- `/links`：收录本人确认的收藏、学习资料、公开源码和联系入口。Bilibili 与 Apple 中国官网是已确认的个人收藏；另保留一张明确标注“待确认”的空位，用来表达可扩展性而不伪造内容。
 - `/logs`：项目概览、制作取舍与全部版本历史的唯一公开归档。
 - `/projects`：旧书签兼容地址，不再作为导航目的地；页面内容复用 `/logs`，并把 `/logs/` 声明为 canonical URL。
 
-共享页头、内页首屏、页脚、首页路线卡和世界线续读控件位于 `app/components/`。`content/site.ts` 的 `worldRoutes` 是四条公开路线的唯一注册表，按 About → Study → Links → Logs 的顺序同时驱动首页地图、页头、页脚与下一站导航，避免不同页面各自维护名称、编号和顺序。内页视觉单独放在 `app/subpages.css`，首页当前放送使用独立 CSS Module，避免继续无边界扩张全局样式。`lib/site-path.ts` 是唯一的公开路径入口，负责兼容根域与 GitHub Pages 仓库子路径。
+共享页头、内页首屏、页脚、首页路线卡和世界线续读控件位于 `app/components/`。`content/site.ts` 的 `worldRoutes` 是五条公开路线的唯一注册表，按 About → Anime → Study → Links → Logs 的顺序同时驱动首页地图、页头、页脚与下一站导航，避免不同页面各自维护名称、编号和顺序。内页视觉单独放在 `app/subpages.css`，功能较完整的客户端目录可以使用路由级 CSS Module；首页当前放送也使用独立 CSS Module，避免继续无边界扩张全局样式。`lib/site-path.ts` 是唯一的公开路径入口，负责兼容根域与 GitHub Pages 仓库子路径。
 
 ## 内容演进
 
-站点级内容放在 `content/site.ts`；站点所有者确认公开的身份与联系字段只在 `content/profile.ts` 维护，About 负责渲染完整资料，Links 只链接到该联系入口，避免内容漂移和无意义重复。`content/releases.ts` 是每一话编号、日期、摘要与决定的单一来源，当前为 EP.010，并且只由 Logs 负责完整展示；首页不再复制发布历史。`content/now.ts` 只维护首页可核实的当前学习与兴趣信号，不放内部开发进度。角色兴趣文案、航线、项目资料与学习笔记分别放在 `content/about.ts`、`content/links.ts`、`content/projects.ts` 与 `content/study.ts`，让每次文案更新不触碰布局；其中 `content/projects.ts` 仍是项目概览的数据源，但展示职责已经并入 Logs。
+站点级内容放在 `content/site.ts`；站点所有者确认公开的身份与联系字段只在 `content/profile.ts` 维护，About 负责渲染完整资料，Links 只链接到该联系入口，避免内容漂移和无意义重复。`content/releases.ts` 是每一话编号、日期、摘要与决定的单一来源，当前为 EP.011，并且只由 Logs 负责完整展示；首页不再复制发布历史。`content/now.ts` 只维护首页可核实的当前学习与兴趣信号，不放内部开发进度。角色兴趣文案、动画清单、航线、项目资料与学习笔记分别放在 `content/about.ts`、`content/anime.ts`、`content/links.ts`、`content/projects.ts` 与 `content/study.ts`，让每次内容更新不触碰布局；其中 `content/projects.ts` 仍是项目概览的数据源，但展示职责已经并入 Logs。
+
+`content/anime-source.json` 保留站点所有者给出的 89 条原始记录及人工核对后的 Bangumi 条目 ID；`content/anime-catalog.json` 和 `public/anime/` 由同步脚本生成，`content/anime.ts` 只向页面公开正式名称、年份、形式和封面来源。页面总数必须由实际数组长度计算；每张本地封面都保留 Bangumi 条目页和原图地址，并输出能识别作品的替代文本。匹配失败或存在歧义时必须先核对，不得静默替换、合并或删除用户清单中的作品，也不得在页面并列展示别名。
 
 公开内容只使用能够从仓库或站点所有者资料核对的信息。未知但确实需要补充的内容可以保留少量、明确命名的占位符，例如链接页唯一的“下一枚收藏坐标”；占位符必须说明待确认，不能伪装成真实收藏、完成进度、同步百分比或用户评价。项目说明提供公开站点、源码和日志证据入口，没有证据的项目、数字或评价不得补位。
 
