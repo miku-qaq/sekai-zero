@@ -12,7 +12,6 @@ type AnimeCatalogEntry = {
   image: string;
   year?: number | string | null;
   format?: string | null;
-  status: string;
   source: {
     label: string;
     url: string;
@@ -33,14 +32,6 @@ function yearFor(entry: AnimeCatalogEntry) {
 
 function formatFor(entry: AnimeCatalogEntry) {
   return entry.format?.trim() || "类型待补充";
-}
-
-function watchedStatus(status: string) {
-  const value = status.trim();
-  const normalized = value.toLocaleLowerCase("zh-CN");
-  return ["watched", "completed", "complete", "看过"].includes(normalized)
-    ? "已看"
-    : value || "已看";
 }
 
 function byNewest(left: string, right: string) {
@@ -96,70 +87,68 @@ export function AnimeCatalog() {
 
   return (
     <div className={styles.catalog}>
-      <form
-        className={styles.toolbar}
-        role="search"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <label className={styles.search}>
-          <span>搜索收藏</span>
-          <span className={styles.searchField}>
-            <i aria-hidden="true">⌕</i>
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="搜索正式作品名"
-            />
-          </span>
-        </label>
-
-        <label className={styles.selectField}>
-          <span>作品类型</span>
-          <select value={format} onChange={(event) => setFormat(event.target.value)}>
-            <option value={ALL}>全部类型</option>
-            {formats.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className={styles.selectField}>
-          <span>作品年份</span>
-          <select value={year} onChange={(event) => setYear(event.target.value)}>
-            <option value={ALL}>全部年份</option>
-            {years.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <button
-          className={styles.reset}
-          type="button"
-          onClick={resetFilters}
-          disabled={!hasActiveFilters}
+      <div className={styles.catalogControls}>
+        <form
+          className={styles.toolbar}
+          role="search"
+          onSubmit={(event) => event.preventDefault()}
         >
-          清除筛选
-        </button>
-      </form>
+          <label className={styles.search}>
+            <span>搜索收藏</span>
+            <span className={styles.searchField}>
+              <i aria-hidden="true">⌕</i>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="搜索正式作品名"
+              />
+            </span>
+          </label>
 
-      <div className={styles.resultLine}>
-        <p role="status" aria-live="polite" aria-atomic="true">
-          显示 <strong>{String(visibleEntries.length).padStart(2, "0")}</strong> /{" "}
-          {String(entries.length).padStart(2, "0")} 部
-        </p>
-        <span>WATCHED COLLECTION · NO RATING</span>
+          <label className={styles.selectField}>
+            <span>作品类型</span>
+            <select value={format} onChange={(event) => setFormat(event.target.value)}>
+              <option value={ALL}>全部类型</option>
+              {formats.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className={styles.selectField}>
+            <span>作品年份</span>
+            <select value={year} onChange={(event) => setYear(event.target.value)}>
+              <option value={ALL}>全部年份</option>
+              {years.map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {hasActiveFilters ? (
+            <button className={styles.reset} type="button" onClick={resetFilters}>
+              清除筛选
+            </button>
+          ) : null}
+        </form>
+
+        <div className={styles.resultLine}>
+          <p role="status" aria-live="polite" aria-atomic="true">
+            显示 <strong>{String(visibleEntries.length).padStart(2, "0")}</strong> /{" "}
+            {String(entries.length).padStart(2, "0")} 部
+          </p>
+          <span>WATCHED COLLECTION · NO RATING</span>
+        </div>
       </div>
 
       {visibleEntries.length > 0 ? (
         <ol className={styles.catalogGrid}>
           {visibleEntries.map((entry, index) => {
-            const status = watchedStatus(entry.status);
             const titleId = `anime-${entry.id}-title`;
 
             return (
@@ -178,9 +167,6 @@ export function AnimeCatalog() {
                     <span className={styles.cardIndex} aria-hidden="true">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className={styles.status} aria-label={`观看状态：${status}`}>
-                      <i aria-hidden="true">✓</i> {status}
-                    </span>
                   </div>
 
                   <div className={styles.cardBody}>
@@ -195,7 +181,7 @@ export function AnimeCatalog() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {entry.source.label} 资料来源
+                      查看 {entry.source.label} 资料
                       <span aria-hidden="true">↗</span>
                       <span className="sr-only">（将在新标签页打开）</span>
                     </a>

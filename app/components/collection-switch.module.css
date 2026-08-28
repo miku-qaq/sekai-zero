@@ -1,0 +1,152 @@
+.switcher {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 18px 48px rgb(56 45 83 / 8%);
+}
+
+.intro {
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 12px 14px;
+}
+
+.intro span,
+.routeIndex,
+.routeName small {
+  font-family: var(--font-geist-mono), monospace;
+}
+
+.intro span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 780;
+  letter-spacing: 0.1em;
+}
+
+.intro strong {
+  font-size: 16px;
+  letter-spacing: -0.025em;
+}
+
+.routes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.routes a {
+  --collection-accent: #ff7eb2;
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 82px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--collection-accent) 20%, transparent),
+      transparent 45%
+    ),
+    var(--surface-muted);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.routes a[data-accent="violet"] {
+  --collection-accent: #806cf0;
+}
+
+.routes a[aria-current="page"] {
+  border-color: color-mix(in srgb, var(--collection-accent) 52%, var(--border));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--collection-accent) 18%, var(--surface)),
+    var(--surface)
+  );
+  box-shadow: inset 0 0 0 1px
+    color-mix(in srgb, var(--collection-accent) 16%, transparent);
+}
+
+.routeIndex {
+  display: grid;
+  min-width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--foreground);
+  border-radius: 14px;
+  background: var(--collection-accent);
+  color: #241f32;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.routeName {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.routeName strong {
+  font-size: 15px;
+}
+
+.routeName small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 720;
+}
+
+.routeArrow {
+  color: color-mix(in srgb, var(--collection-accent) 52%, var(--foreground));
+  font-size: 16px;
+}
+
+@media (hover: hover) {
+  .routes a:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--collection-accent) 54%, var(--border));
+    box-shadow: 0 12px 26px
+      color-mix(in srgb, var(--collection-accent) 13%, transparent);
+  }
+}
+
+@media (max-width: 760px) {
+  .switcher {
+    grid-template-columns: 1fr;
+  }
+
+  .intro {
+    padding-bottom: 4px;
+  }
+}
+
+@media (max-width: 470px) {
+  .routes {
+    grid-template-columns: 1fr;
+  }
+
+  .routes a {
+    min-height: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routes a {
+    transition: none;
+  }
+}

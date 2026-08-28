@@ -11,18 +11,18 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "计算机学习笔记",
   description:
-    "Mikureina 的计算机学习笔记：正在自学 Stanford CS224N 公开课程资料，并用知识地图、最小实验与主动回忆整理 NLP、基础、编程、Web 与开发工具。",
+    "Mikureina 的计算机学习笔记：正在自学 Stanford CS224N，也回顾此前学习过的 Stanford CS231n，持续整理自然语言处理、计算机视觉与计算机基础。",
   openGraph: {
     title: "计算机学习舱 · SEKAI / 00",
     description:
-      "正在自学 Stanford CS224N 公开课程资料；把 NLP 与计算机概念整理成可以反复返回、搜索与验证的知识地图。",
+      "正在自学 Stanford CS224N，也回顾此前学习过的 CS231n；把视觉、语言与计算机基础整理成可以反复返回的知识地图。",
     images: [{ url: "og-study.png", alt: "SEKAI / 00 计算机学习舱分享卡片" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "计算机学习舱 · SEKAI / 00",
     description:
-      "正在自学 Stanford CS224N 公开课程资料；把 NLP 与计算机概念整理成可以反复返回、搜索与验证的知识地图。",
+      "正在自学 Stanford CS224N，也回顾此前学习过的 CS231n；把视觉、语言与计算机基础整理成可以反复返回的知识地图。",
     images: ["og-study.png"],
   },
 };
@@ -33,7 +33,7 @@ export default function StudyPage() {
       <PageMasthead
         currentHref="/study/"
         title="把学到的东西，整理成可以返回的地图。"
-        lead="最近正在自学 Stanford CS224N 的公开课程资料。这里不复制一整份 syllabus 假装学完，而是从 NLP 的清晰主线出发，配合最小实验和主动回忆，把真正理解的概念逐篇连接起来。"
+        lead="当前正在自学 Stanford CS224N 的公开课程资料，也会回顾此前学习过的 CS231n。这里不把课程目录包装成个人完成度，而是用知识地图、最小实验与主动回忆，整理真正理解过的内容。"
         meta={[
           {
             label: "当前笔记",
@@ -69,7 +69,7 @@ export default function StudyPage() {
             <h2 id="protocol-title">每篇笔记怎样整理。</h2>
           </div>
           <p>
-            目前收录 AI 与 NLP、Web、Git、TypeScript
+            目前收录 AI、计算机视觉与 NLP，以及 Web、Git、TypeScript
             和编码基础；所有笔记都保留摘要、回忆题与一手来源。
           </p>
         </div>

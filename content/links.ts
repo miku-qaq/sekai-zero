@@ -35,6 +35,18 @@ export const linkEntries: readonly LinkEntry[] = [
     external: true,
   },
   {
+    id: "steam",
+    group: "favorite",
+    label: "Steam 商店",
+    eyebrow: "GAME PLATFORM / OFFICIAL",
+    href: "https://store.steampowered.com/",
+    reason:
+      "Steam 是我平时主要使用的游戏平台之一；游戏收藏馆里的作品也都链接回官方商店页。",
+    tags: ["Steam", "游戏", "官方网站"],
+    action: "打开 Steam",
+    external: true,
+  },
+  {
     id: "current-cs224n-note",
     group: "study",
     label: "CS224N 当前笔记",
@@ -76,6 +88,18 @@ export const linkEntries: readonly LinkEntry[] = [
     href: "https://web.stanford.edu/class/cs224n/",
     reason: "当前 NLP 学习主线的一手入口；课程范围、讲义与安排都优先回到官方页面核对。",
     tags: ["Stanford", "NLP", "官方课程"],
+    action: "打开官方课程页",
+    external: true,
+  },
+  {
+    id: "cs231n-course",
+    group: "study",
+    label: "Stanford CS231n",
+    eyebrow: "COURSE REVIEW / PRIMARY SOURCE",
+    href: "https://cs231n.stanford.edu/",
+    reason:
+      "此前学习过的计算机视觉公开课程资料；回顾笔记会以当前官方页面和讲义核对概念边界。",
+    tags: ["Stanford", "计算机视觉", "CS231n"],
     action: "打开官方课程页",
     external: true,
   },

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { animeCatalog, animeCatalogMeta } from "@/content/anime";
+import { CollectionSwitch } from "../components/collection-switch";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -8,7 +9,6 @@ import styles from "./anime.module.css";
 
 type CatalogEntryView = {
   year?: number | string | null;
-  format?: string | null;
 };
 
 type CatalogMetaView = Record<string, unknown>;
@@ -44,12 +44,6 @@ const years = catalogEntries
   .sort((left, right) =>
     right.localeCompare(left, "zh-CN", { numeric: true, sensitivity: "base" }),
   );
-
-const formatCount = new Set(
-  catalogEntries
-    .map((entry) => entry.format?.trim())
-    .filter((format): format is string => Boolean(format)),
-).size;
 
 const yearSpan =
   years.length === 0
@@ -100,30 +94,7 @@ export default function AnimePage() {
           </p>
         </div>
 
-        <dl className={styles.archiveStats} aria-label="动画收藏统计">
-          <div>
-            <dt>WATCHED</dt>
-            <dd>{String(animeCatalog.length).padStart(2, "0")}</dd>
-            <span>已看条目</span>
-          </div>
-          <div>
-            <dt>FORMATS</dt>
-            <dd>{String(formatCount).padStart(2, "0")}</dd>
-            <span>作品类型</span>
-          </div>
-          <div>
-            <dt>YEARS</dt>
-            <dd>{new Set(years).size.toString().padStart(2, "0")}</dd>
-            <span>收录年份</span>
-          </div>
-          <div>
-            <dt>LAST UPDATED</dt>
-            <dd className={styles.updatedAt}>
-              {metaText("updatedAt", "lastUpdated") ?? "持续补充"}
-            </dd>
-            <span>收藏状态</span>
-          </div>
-        </dl>
+        <CollectionSwitch current="anime" />
 
         <AnimeCatalog />
 

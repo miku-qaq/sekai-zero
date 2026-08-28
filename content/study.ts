@@ -34,7 +34,7 @@ export const studyCategories = [
   { id: "programming", label: "编程语言", shortLabel: "CODE" },
   { id: "web", label: "Web 开发", shortLabel: "WEB" },
   { id: "tools", label: "开发工具", shortLabel: "TOOL" },
-  { id: "ai", label: "AI 与 NLP", shortLabel: "NLP" },
+  { id: "ai", label: "AI · 视觉与语言", shortLabel: "AI" },
 ] as const;
 
 /**
@@ -125,6 +125,98 @@ export const studyNotes: readonly StudyNote[] = [
         label: "Lecture 2: Word Vectors",
         publisher: "Stanford CS224N · Winter 2026",
         href: "https://web.stanford.edu/class/cs224n/slides_w26/cs224n-2026-lecture02-wordvecs.pdf",
+      },
+    ],
+  },
+  {
+    id: "cs231n-image-classification-data-driven",
+    category: "ai",
+    chapter: "NOTE / CV-001",
+    title: "CS231n 学习回顾 01：图像分类为什么要从数据出发？",
+    summary:
+      "从像素与语义之间的距离出发，重新串起数据驱动方法、分类基线与卷积网络这条计算机视觉主线。",
+    level: "曾学习 · 回顾",
+    readingTime: "9 分钟",
+    updatedAt: "2026.08.28",
+    tags: ["CS231n", "Computer Vision", "图像分类", "Data-Driven", "CNN", "Stanford"],
+    sections: [
+      {
+        heading: "先说明这篇回顾的边界",
+        paragraphs: [
+          "我之前学习过 Stanford CS231n 的公开课程资料。这篇不是结课证明或进度汇报，而是把仍值得保留的计算机视觉主线重新整理。具体学习年度、完成比例、作业和成绩没有公开确认，因此本站不作推断。",
+          "文中的课程范围使用 Stanford 当前公开课程页面与讲义校对；这些链接说明参考资料来自哪里，不表示我修读了页面所对应学期的正式课程。",
+        ],
+      },
+      {
+        heading: "像素看得见，语义并不在数组里",
+        paragraphs: [
+          "对计算机而言，一张 RGB 图片首先是由数值构成的三维张量；“猫”“汽车”或“飞机”却是人赋予画面的语义。视角、光照、遮挡、形变、背景和同类差异都会让像素发生巨大变化，这正是图像分类的困难所在。",
+        ],
+        points: [
+          "相同物体在不同环境中，可以产生差异很大的像素。",
+          "不同物体的局部像素也可能非常相似。",
+          "分类器需要学习能跨越这些变化的表示，而不是记住单张图片。",
+        ],
+      },
+      {
+        heading: "把识别问题改写成可学习流程",
+        paragraphs: [
+          "数据驱动方法没有手写出“猫的全部规则”，而是规定模型怎样从样本、目标函数和误差反馈中获得决策边界。",
+        ],
+        points: [
+          "收集带标签的图像数据，再划分训练集、验证集与测试集。",
+          "用训练集拟合参数，用验证集选择超参数，测试集只负责最终评估。",
+          "在未参与训练的新图像上检查泛化，而不是只看训练记忆。",
+        ],
+      },
+      {
+        heading: "两条最小分类基线",
+        paragraphs: [
+          "kNN 几乎不需要显式训练，却要在预测时查找训练样本；线性分类器则把训练数据压缩进参数矩阵，为每个类别产生分数。它们不是视觉识别的终点，却能帮助区分距离度量、超参数、损失函数与参数化模型。",
+        ],
+        codeLabel: "CLASSIFICATION / BASELINES",
+        code: "kNN:    prediction(x) ← vote(nearest training examples)\nLinear: scores(x)     = W · x + b",
+      },
+      {
+        heading: "为什么课程还要走向卷积网络",
+        paragraphs: [
+          "普通全连接模型通常先把图片展平成向量，既会迅速增加参数，也没有充分利用图像的空间结构。卷积网络明确假设输入是图像：神经元连接局部区域，并在不同位置共享滤波器参数，从而逐层把原始像素变成可用于分类的特征。",
+        ],
+        points: [
+          "基础：分类、损失函数、优化与反向传播。",
+          "视觉理解：CNN、检测、分割、视频与 Transformer。",
+          "生成与交互：自监督、生成模型、3D 与视觉语言。",
+          "真实使用：还要检查数据、计算、失败模式与社会影响。",
+        ],
+      },
+      {
+        heading: "这是一张地图，不是完成清单",
+        paragraphs: [
+          "后续只有在重新推导、实现或验证某个主题后，才会增加对应笔记。课程目录说明可以去哪里，不等于每一个方向都已经掌握。",
+        ],
+      },
+    ],
+    recall: [
+      "图像的像素表示与人理解的语义之间，为什么存在差距？",
+      "训练集、验证集和测试集分别承担什么职责？",
+      "kNN 与线性分类器分别把学习结果保存在哪里？",
+      "卷积网络利用了图像输入的哪些结构特点？",
+    ],
+    sources: [
+      {
+        label: "CS231n: Deep Learning for Computer Vision",
+        publisher: "Stanford University",
+        href: "https://cs231n.stanford.edu/",
+      },
+      {
+        label: "Image Classification with Linear Classifiers",
+        publisher: "Stanford CS231n · Official Lecture Slides",
+        href: "https://cs231n.stanford.edu/slides/2026/lecture_2.pdf",
+      },
+      {
+        label: "Convolutional Networks",
+        publisher: "Stanford CS231n · Course Notes",
+        href: "https://cs231n.github.io/convolutional-networks/",
       },
     ],
   },

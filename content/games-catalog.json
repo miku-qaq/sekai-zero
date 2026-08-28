@@ -1,0 +1,1174 @@
+{
+  "updatedAt": "2026-08-28",
+  "source": "Steam client local cache",
+  "items": [
+    {
+      "id": "steam-2344520",
+      "appId": "2344520",
+      "title": "《暗黑破坏神® IV》",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2344520/"
+    },
+    {
+      "id": "steam-1233570",
+      "appId": "1233570",
+      "title": "《镜之边缘：Catalyst》",
+      "platform": "Steam",
+      "image": "/games/steam-1233570.webp",
+      "storeUrl": "https://store.steampowered.com/app/1233570/"
+    },
+    {
+      "id": "steam-292030",
+      "appId": "292030",
+      "title": "《巫师 3：狂猎 - 完全版》",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/292030/"
+    },
+    {
+      "id": "steam-1172380",
+      "appId": "1172380",
+      "title": "《星球大战 绝地：陨落的武士团™》",
+      "platform": "Steam",
+      "image": "/games/steam-1172380.webp",
+      "storeUrl": "https://store.steampowered.com/app/1172380/"
+    },
+    {
+      "id": "steam-1238810",
+      "appId": "1238810",
+      "title": "《战地风云 5》",
+      "platform": "Steam",
+      "image": "/games/steam-1238810.webp",
+      "storeUrl": "https://store.steampowered.com/app/1238810/"
+    },
+    {
+      "id": "steam-1517290",
+      "appId": "1517290",
+      "title": "《战地风云™ 2042》",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1517290/"
+    },
+    {
+      "id": "steam-3768760",
+      "appId": "3768760",
+      "title": "007 初露锋芒",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3768760/"
+    },
+    {
+      "id": "steam-251570",
+      "appId": "251570",
+      "title": "7 Days to Die",
+      "platform": "Steam",
+      "image": "/games/steam-251570.webp",
+      "storeUrl": "https://store.steampowered.com/app/251570/"
+    },
+    {
+      "id": "steam-1245620",
+      "appId": "1245620",
+      "title": "艾尔登法环",
+      "platform": "Steam",
+      "image": "/games/steam-1245620.webp",
+      "storeUrl": "https://store.steampowered.com/app/1245620/"
+    },
+    {
+      "id": "steam-880950",
+      "appId": "880950",
+      "title": "爱上火车-Pure Station-",
+      "platform": "Steam",
+      "image": "/games/steam-880950.webp",
+      "storeUrl": "https://store.steampowered.com/app/880950/"
+    },
+    {
+      "id": "steam-323190",
+      "appId": "323190",
+      "title": "冰汽时代",
+      "platform": "Steam",
+      "image": "/games/steam-323190.webp",
+      "storeUrl": "https://store.steampowered.com/app/323190/"
+    },
+    {
+      "id": "steam-977950",
+      "appId": "977950",
+      "title": "冰与火之舞 A Dance of Fire and Ice",
+      "platform": "Steam",
+      "image": "/games/steam-977950.webp",
+      "storeUrl": "https://store.steampowered.com/app/977950/"
+    },
+    {
+      "id": "steam-359550",
+      "appId": "359550",
+      "title": "彩虹六号：围攻",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/359550/"
+    },
+    {
+      "id": "steam-386940",
+      "appId": "386940",
+      "title": "超级鸡马",
+      "platform": "Steam",
+      "image": "/games/steam-386940.webp",
+      "storeUrl": "https://store.steampowered.com/app/386940/"
+    },
+    {
+      "id": "steam-1761390",
+      "appId": "1761390",
+      "title": "初音未来 Project DIVA MEGA39’s＋",
+      "platform": "Steam",
+      "image": "/games/steam-1761390.webp",
+      "storeUrl": "https://store.steampowered.com/app/1761390/"
+    },
+    {
+      "id": "steam-287390",
+      "appId": "287390",
+      "title": "地铁：最后的曙光 重制版",
+      "platform": "Steam",
+      "image": "/games/steam-287390.webp",
+      "storeUrl": "https://store.steampowered.com/app/287390/"
+    },
+    {
+      "id": "steam-286690",
+      "appId": "286690",
+      "title": "地铁2033 重制版",
+      "platform": "Steam",
+      "image": "/games/steam-286690.webp",
+      "storeUrl": "https://store.steampowered.com/app/286690/"
+    },
+    {
+      "id": "steam-1222140",
+      "appId": "1222140",
+      "title": "底特律：化身为人",
+      "platform": "Steam",
+      "image": "/games/steam-1222140.webp",
+      "storeUrl": "https://store.steampowered.com/app/1222140/"
+    },
+    {
+      "id": "steam-924970",
+      "appId": "924970",
+      "title": "喋血复仇",
+      "platform": "Steam",
+      "image": "/games/steam-924970.webp",
+      "storeUrl": "https://store.steampowered.com/app/924970/"
+    },
+    {
+      "id": "steam-2835570",
+      "appId": "2835570",
+      "title": "恶魔轮盘",
+      "platform": "Steam",
+      "image": "/games/steam-2835570.webp",
+      "storeUrl": "https://store.steampowered.com/app/2835570/"
+    },
+    {
+      "id": "steam-775500",
+      "appId": "775500",
+      "title": "绯红结系",
+      "platform": "Steam",
+      "image": "/games/steam-775500.webp",
+      "storeUrl": "https://store.steampowered.com/app/775500/"
+    },
+    {
+      "id": "steam-2358720",
+      "appId": "2358720",
+      "title": "黑神话：悟空",
+      "platform": "Steam",
+      "image": "/games/steam-2358720.webp",
+      "storeUrl": "https://store.steampowered.com/app/2358720/"
+    },
+    {
+      "id": "steam-322330",
+      "appId": "322330",
+      "title": "饥荒联机版",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/322330/"
+    },
+    {
+      "id": "steam-1888160",
+      "appId": "1888160",
+      "title": "机战佣兵™VI 境界天火™",
+      "platform": "Steam",
+      "image": "/games/steam-1888160.webp",
+      "storeUrl": "https://store.steampowered.com/app/1888160/"
+    },
+    {
+      "id": "steam-3447040",
+      "appId": "3447040",
+      "title": "空之轨迹 the 1st",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3447040/"
+    },
+    {
+      "id": "steam-815370",
+      "appId": "815370",
+      "title": "绿色地狱",
+      "platform": "Steam",
+      "image": "/games/steam-815370.webp",
+      "storeUrl": "https://store.steampowered.com/app/815370/"
+    },
+    {
+      "id": "steam-2767030",
+      "appId": "2767030",
+      "title": "漫威争锋",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2767030/"
+    },
+    {
+      "id": "steam-1260320",
+      "appId": "1260320",
+      "title": "猛兽派对",
+      "platform": "Steam",
+      "image": "/games/steam-1260320.webp",
+      "storeUrl": "https://store.steampowered.com/app/1260320/"
+    },
+    {
+      "id": "steam-1085660",
+      "appId": "1085660",
+      "title": "命运2",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1085660/"
+    },
+    {
+      "id": "steam-3101040",
+      "appId": "3101040",
+      "title": "魔法少女的魔女审判",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3101040/"
+    },
+    {
+      "id": "steam-1687950",
+      "appId": "1687950",
+      "title": "女神异闻录5皇家版",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1687950/"
+    },
+    {
+      "id": "steam-2543180",
+      "appId": "2543180",
+      "title": "泡姆泡姆",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2543180/"
+    },
+    {
+      "id": "steam-740130",
+      "appId": "740130",
+      "title": "破晓传奇",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/740130/"
+    },
+    {
+      "id": "steam-1144400",
+      "appId": "1144400",
+      "title": "千恋＊万花",
+      "platform": "Steam",
+      "image": "/games/steam-1144400.webp",
+      "storeUrl": "https://store.steampowered.com/app/1144400/"
+    },
+    {
+      "id": "steam-1142710",
+      "appId": "1142710",
+      "title": "全面战争：战锤3",
+      "platform": "Steam",
+      "image": "/games/steam-1142710.webp",
+      "storeUrl": "https://store.steampowered.com/app/1142710/"
+    },
+    {
+      "id": "steam-1216710",
+      "appId": "1216710",
+      "title": "全网公敌",
+      "platform": "Steam",
+      "image": "/games/steam-1216710.webp",
+      "storeUrl": "https://store.steampowered.com/app/1216710/"
+    },
+    {
+      "id": "steam-457140",
+      "appId": "457140",
+      "title": "缺氧",
+      "platform": "Steam",
+      "image": "/games/steam-457140.webp",
+      "storeUrl": "https://store.steampowered.com/app/457140/"
+    },
+    {
+      "id": "steam-477160",
+      "appId": "477160",
+      "title": "人类一败涂地 / Human Fall Flat",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/477160/"
+    },
+    {
+      "id": "steam-1091500",
+      "appId": "1091500",
+      "title": "赛博朋克 2077",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1091500/"
+    },
+    {
+      "id": "steam-409710",
+      "appId": "409710",
+      "title": "生化奇兵 重制版",
+      "platform": "Steam",
+      "image": "/games/steam-409710.webp",
+      "storeUrl": "https://store.steampowered.com/app/409710/"
+    },
+    {
+      "id": "steam-1938090",
+      "appId": "1938090",
+      "title": "使命召唤®",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1938090/"
+    },
+    {
+      "id": "steam-1426210",
+      "appId": "1426210",
+      "title": "双人成行",
+      "platform": "Steam",
+      "image": "/games/steam-1426210.webp",
+      "storeUrl": "https://store.steampowered.com/app/1426210/"
+    },
+    {
+      "id": "steam-2001120",
+      "appId": "2001120",
+      "title": "双影奇境",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2001120/"
+    },
+    {
+      "id": "steam-1693980",
+      "appId": "1693980",
+      "title": "死亡空间",
+      "platform": "Steam",
+      "image": "/games/steam-1693980.webp",
+      "storeUrl": "https://store.steampowered.com/app/1693980/"
+    },
+    {
+      "id": "steam-3167020",
+      "appId": "3167020",
+      "title": "逃离鸭科夫",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3167020/"
+    },
+    {
+      "id": "steam-527230",
+      "appId": "527230",
+      "title": "为了吾王 / For The King",
+      "platform": "Steam",
+      "image": "/games/steam-527230.webp",
+      "storeUrl": "https://store.steampowered.com/app/527230/"
+    },
+    {
+      "id": "steam-1147560",
+      "appId": "1147560",
+      "title": "小骨：英雄杀手(Skul: The Hero Slayer)",
+      "platform": "Steam",
+      "image": "/games/steam-1147560.webp",
+      "storeUrl": "https://store.steampowered.com/app/1147560/"
+    },
+    {
+      "id": "steam-1392860",
+      "appId": "1392860",
+      "title": "小小梦魇3",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1392860/"
+    },
+    {
+      "id": "steam-1203220",
+      "appId": "1203220",
+      "title": "永劫无间",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1203220/"
+    },
+    {
+      "id": "steam-312520",
+      "appId": "312520",
+      "title": "雨世界",
+      "platform": "Steam",
+      "image": "/games/steam-312520.webp",
+      "storeUrl": "https://store.steampowered.com/app/312520/"
+    },
+    {
+      "id": "steam-632360",
+      "appId": "632360",
+      "title": "雨中冒险 2",
+      "platform": "Steam",
+      "image": "/games/steam-632360.webp",
+      "storeUrl": "https://store.steampowered.com/app/632360/"
+    },
+    {
+      "id": "steam-1262240",
+      "appId": "1262240",
+      "title": "植物大战僵尸™: 和睦小镇保卫战",
+      "platform": "Steam",
+      "image": "/games/steam-1262240.webp",
+      "storeUrl": "https://store.steampowered.com/app/1262240/"
+    },
+    {
+      "id": "steam-1451940",
+      "appId": "1451940",
+      "title": "主播女孩重度依赖",
+      "platform": "Steam",
+      "image": "/games/steam-1451940.webp",
+      "storeUrl": "https://store.steampowered.com/app/1451940/"
+    },
+    {
+      "id": "steam-752590",
+      "appId": "752590",
+      "title": "A Plague Tale: Innocence",
+      "platform": "Steam",
+      "image": "/games/steam-752590.webp",
+      "storeUrl": "https://store.steampowered.com/app/752590/"
+    },
+    {
+      "id": "steam-1172470",
+      "appId": "1172470",
+      "title": "Apex Legends",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1172470/"
+    },
+    {
+      "id": "steam-1230140",
+      "appId": "1230140",
+      "title": "ATRI -My Dear Moments-",
+      "platform": "Steam",
+      "image": "/games/steam-1230140.webp",
+      "storeUrl": "https://store.steampowered.com/app/1230140/"
+    },
+    {
+      "id": "steam-602960",
+      "appId": "602960",
+      "title": "Barotrauma 潜渊症",
+      "platform": "Steam",
+      "image": "/games/steam-602960.webp",
+      "storeUrl": "https://store.steampowered.com/app/602960/"
+    },
+    {
+      "id": "steam-1238840",
+      "appId": "1238840",
+      "title": "Battlefield™ 1",
+      "platform": "Steam",
+      "image": "/games/steam-1238840.webp",
+      "storeUrl": "https://store.steampowered.com/app/1238840/"
+    },
+    {
+      "id": "steam-629730",
+      "appId": "629730",
+      "title": "Blade & Sorcery",
+      "platform": "Steam",
+      "image": "/games/steam-629730.webp",
+      "storeUrl": "https://store.steampowered.com/app/629730/"
+    },
+    {
+      "id": "steam-504230",
+      "appId": "504230",
+      "title": "Celeste",
+      "platform": "Steam",
+      "image": "/games/steam-504230.webp",
+      "storeUrl": "https://store.steampowered.com/app/504230/"
+    },
+    {
+      "id": "steam-678960",
+      "appId": "678960",
+      "title": "CODE VEIN",
+      "platform": "Steam",
+      "image": "/games/steam-678960.webp",
+      "storeUrl": "https://store.steampowered.com/app/678960/"
+    },
+    {
+      "id": "steam-730",
+      "appId": "730",
+      "title": "Counter-Strike 2",
+      "platform": "Steam",
+      "image": "/games/steam-730.webp",
+      "storeUrl": "https://store.steampowered.com/app/730/"
+    },
+    {
+      "id": "steam-1167450",
+      "appId": "1167450",
+      "title": "DAEMON X MACHINA",
+      "platform": "Steam",
+      "image": "/games/steam-1167450.webp",
+      "storeUrl": "https://store.steampowered.com/app/1167450/"
+    },
+    {
+      "id": "steam-374320",
+      "appId": "374320",
+      "title": "DARK SOULS™ III",
+      "platform": "Steam",
+      "image": "/games/steam-374320.webp",
+      "storeUrl": "https://store.steampowered.com/app/374320/"
+    },
+    {
+      "id": "steam-1259420",
+      "appId": "1259420",
+      "title": "Days Gone",
+      "platform": "Steam",
+      "image": "/games/steam-1259420.webp",
+      "storeUrl": "https://store.steampowered.com/app/1259420/"
+    },
+    {
+      "id": "steam-1850570",
+      "appId": "1850570",
+      "title": "DEATH STRANDING DIRECTOR'S CUT",
+      "platform": "Steam",
+      "image": "/games/steam-1850570.webp",
+      "storeUrl": "https://store.steampowered.com/app/1850570/"
+    },
+    {
+      "id": "steam-1252330",
+      "appId": "1252330",
+      "title": "DEATHLOOP",
+      "platform": "Steam",
+      "image": "/games/steam-1252330.webp",
+      "storeUrl": "https://store.steampowered.com/app/1252330/"
+    },
+    {
+      "id": "steam-699920",
+      "appId": "699920",
+      "title": "Despotism 3k",
+      "platform": "Steam",
+      "image": "/games/steam-699920.webp",
+      "storeUrl": "https://store.steampowered.com/app/699920/"
+    },
+    {
+      "id": "steam-601150",
+      "appId": "601150",
+      "title": "Devil May Cry 5",
+      "platform": "Steam",
+      "image": "/games/steam-601150.webp",
+      "storeUrl": "https://store.steampowered.com/app/601150/"
+    },
+    {
+      "id": "steam-1274570",
+      "appId": "1274570",
+      "title": "DEVOUR",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1274570/"
+    },
+    {
+      "id": "steam-379720",
+      "appId": "379720",
+      "title": "DOOM",
+      "platform": "Steam",
+      "image": "/games/steam-379720.webp",
+      "storeUrl": "https://store.steampowered.com/app/379720/"
+    },
+    {
+      "id": "steam-782330",
+      "appId": "782330",
+      "title": "DOOM Eternal",
+      "platform": "Steam",
+      "image": "/games/steam-782330.webp",
+      "storeUrl": "https://store.steampowered.com/app/782330/"
+    },
+    {
+      "id": "steam-570",
+      "appId": "570",
+      "title": "Dota 2",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/570/"
+    },
+    {
+      "id": "steam-1483870",
+      "appId": "1483870",
+      "title": "Draw & Guess - 你画我猜",
+      "platform": "Steam",
+      "image": "/games/steam-1483870.webp",
+      "storeUrl": "https://store.steampowered.com/app/1483870/"
+    },
+    {
+      "id": "steam-1256610",
+      "appId": "1256610",
+      "title": "Dream Date",
+      "platform": "Steam",
+      "image": "/games/steam-1256610.webp",
+      "storeUrl": "https://store.steampowered.com/app/1256610/"
+    },
+    {
+      "id": "steam-239140",
+      "appId": "239140",
+      "title": "Dying Light",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/239140/"
+    },
+    {
+      "id": "steam-1462040",
+      "appId": "1462040",
+      "title": "FINAL FANTASY VII REMAKE INTERGRADE",
+      "platform": "Steam",
+      "image": "/games/steam-1462040.webp",
+      "storeUrl": "https://store.steampowered.com/app/1462040/"
+    },
+    {
+      "id": "steam-637650",
+      "appId": "637650",
+      "title": "FINAL FANTASY XV WINDOWS EDITION",
+      "platform": "Steam",
+      "image": "/games/steam-637650.webp",
+      "storeUrl": "https://store.steampowered.com/app/637650/"
+    },
+    {
+      "id": "steam-322170",
+      "appId": "322170",
+      "title": "Geometry Dash",
+      "platform": "Steam",
+      "image": "/games/steam-322170.webp",
+      "storeUrl": "https://store.steampowered.com/app/322170/"
+    },
+    {
+      "id": "steam-1475810",
+      "appId": "1475810",
+      "title": "Ghostwire: Tokyo",
+      "platform": "Steam",
+      "image": "/games/steam-1475810.webp",
+      "storeUrl": "https://store.steampowered.com/app/1475810/"
+    },
+    {
+      "id": "steam-1593500",
+      "appId": "1593500",
+      "title": "God of War",
+      "platform": "Steam",
+      "image": "/games/steam-1593500.webp",
+      "storeUrl": "https://store.steampowered.com/app/1593500/"
+    },
+    {
+      "id": "steam-1568590",
+      "appId": "1568590",
+      "title": "Goose Goose Duck",
+      "platform": "Steam",
+      "image": "/games/steam-1568590.webp",
+      "storeUrl": "https://store.steampowered.com/app/1568590/"
+    },
+    {
+      "id": "steam-881020",
+      "appId": "881020",
+      "title": "Granblue Fantasy: Relink",
+      "platform": "Steam",
+      "image": "/games/steam-881020.webp",
+      "storeUrl": "https://store.steampowered.com/app/881020/"
+    },
+    {
+      "id": "steam-962130",
+      "appId": "962130",
+      "title": "Grounded",
+      "platform": "Steam",
+      "image": "/games/steam-962130.webp",
+      "storeUrl": "https://store.steampowered.com/app/962130/"
+    },
+    {
+      "id": "steam-1145360",
+      "appId": "1145360",
+      "title": "Hades",
+      "platform": "Steam",
+      "image": "/games/steam-1145360.webp",
+      "storeUrl": "https://store.steampowered.com/app/1145360/"
+    },
+    {
+      "id": "steam-1145350",
+      "appId": "1145350",
+      "title": "Hades II",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/1145350/"
+    },
+    {
+      "id": "steam-546560",
+      "appId": "546560",
+      "title": "Half-Life: Alyx",
+      "platform": "Steam",
+      "image": "/games/steam-546560.webp",
+      "storeUrl": "https://store.steampowered.com/app/546560/"
+    },
+    {
+      "id": "steam-976730",
+      "appId": "976730",
+      "title": "Halo: The Master Chief Collection",
+      "platform": "Steam",
+      "image": "/games/steam-976730.webp",
+      "storeUrl": "https://store.steampowered.com/app/976730/"
+    },
+    {
+      "id": "steam-394360",
+      "appId": "394360",
+      "title": "Hearts of Iron IV",
+      "platform": "Steam",
+      "image": "/games/steam-394360.webp",
+      "storeUrl": "https://store.steampowered.com/app/394360/"
+    },
+    {
+      "id": "steam-553850",
+      "appId": "553850",
+      "title": "HELLDIVERS™ 2",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/553850/"
+    },
+    {
+      "id": "steam-367520",
+      "appId": "367520",
+      "title": "Hollow Knight",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/367520/"
+    },
+    {
+      "id": "steam-1151640",
+      "appId": "1151640",
+      "title": "Horizon Zero Dawn™ Complete Edition",
+      "platform": "Steam",
+      "image": "/games/steam-1151640.webp",
+      "storeUrl": "https://store.steampowered.com/app/1151640/"
+    },
+    {
+      "id": "steam-550",
+      "appId": "550",
+      "title": "Left 4 Dead 2",
+      "platform": "Steam",
+      "image": "/games/steam-550.webp",
+      "storeUrl": "https://store.steampowered.com/app/550/"
+    },
+    {
+      "id": "steam-3097560",
+      "appId": "3097560",
+      "title": "Liar's Bar",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3097560/"
+    },
+    {
+      "id": "steam-319630",
+      "appId": "319630",
+      "title": "Life is Strange™",
+      "platform": "Steam",
+      "image": "/games/steam-319630.webp",
+      "storeUrl": "https://store.steampowered.com/app/319630/"
+    },
+    {
+      "id": "steam-424840",
+      "appId": "424840",
+      "title": "Little Nightmares",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/424840/"
+    },
+    {
+      "id": "steam-1501750",
+      "appId": "1501750",
+      "title": "Lords of the Fallen 堕落之主",
+      "platform": "Steam",
+      "image": "/games/steam-1501750.webp",
+      "storeUrl": "https://store.steampowered.com/app/1501750/"
+    },
+    {
+      "id": "steam-311340",
+      "appId": "311340",
+      "title": "METAL GEAR SOLID V: GROUND ZEROES",
+      "platform": "Steam",
+      "image": "/games/steam-311340.webp",
+      "storeUrl": "https://store.steampowered.com/app/311340/"
+    },
+    {
+      "id": "steam-1449560",
+      "appId": "1449560",
+      "title": "Metro Exodus Enhanced Edition",
+      "platform": "Steam",
+      "image": "/games/steam-1449560.webp",
+      "storeUrl": "https://store.steampowered.com/app/1449560/"
+    },
+    {
+      "id": "steam-1832640",
+      "appId": "1832640",
+      "title": "Mirror 2: Project X",
+      "platform": "Steam",
+      "image": "/games/steam-1832640.webp",
+      "storeUrl": "https://store.steampowered.com/app/1832640/"
+    },
+    {
+      "id": "steam-1446780",
+      "appId": "1446780",
+      "title": "MONSTER HUNTER RISE",
+      "platform": "Steam",
+      "image": "/games/steam-1446780.webp",
+      "storeUrl": "https://store.steampowered.com/app/1446780/"
+    },
+    {
+      "id": "steam-2246340",
+      "appId": "2246340",
+      "title": "Monster Hunter Wilds",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2246340/"
+    },
+    {
+      "id": "steam-582010",
+      "appId": "582010",
+      "title": "Monster Hunter: World",
+      "platform": "Steam",
+      "image": "/games/steam-582010.webp",
+      "storeUrl": "https://store.steampowered.com/app/582010/"
+    },
+    {
+      "id": "steam-976310",
+      "appId": "976310",
+      "title": "Mortal Kombat 11",
+      "platform": "Steam",
+      "image": "/games/steam-976310.webp",
+      "storeUrl": "https://store.steampowered.com/app/976310/"
+    },
+    {
+      "id": "steam-774171",
+      "appId": "774171",
+      "title": "Muse Dash",
+      "platform": "Steam",
+      "image": "/games/steam-774171.webp",
+      "storeUrl": "https://store.steampowered.com/app/774171/"
+    },
+    {
+      "id": "steam-524220",
+      "appId": "524220",
+      "title": "NieR:Automata™",
+      "platform": "Steam",
+      "image": "/games/steam-524220.webp",
+      "storeUrl": "https://store.steampowered.com/app/524220/"
+    },
+    {
+      "id": "steam-3287520",
+      "appId": "3287520",
+      "title": "NINJA GAIDEN 2 Black",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3287520/"
+    },
+    {
+      "id": "steam-2627260",
+      "appId": "2627260",
+      "title": "Ninja Gaiden 4",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2627260/"
+    },
+    {
+      "id": "steam-275850",
+      "appId": "275850",
+      "title": "No Man's Sky 无人深空",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/275850/"
+    },
+    {
+      "id": "steam-728880",
+      "appId": "728880",
+      "title": "Overcooked! 2",
+      "platform": "Steam",
+      "image": "/games/steam-728880.webp",
+      "storeUrl": "https://store.steampowered.com/app/728880/"
+    },
+    {
+      "id": "steam-967050",
+      "appId": "967050",
+      "title": "Pacify",
+      "platform": "Steam",
+      "image": "/games/steam-967050.webp",
+      "storeUrl": "https://store.steampowered.com/app/967050/"
+    },
+    {
+      "id": "steam-3527290",
+      "appId": "3527290",
+      "title": "PEAK",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3527290/"
+    },
+    {
+      "id": "steam-620",
+      "appId": "620",
+      "title": "Portal 2",
+      "platform": "Steam",
+      "image": "/games/steam-620.webp",
+      "storeUrl": "https://store.steampowered.com/app/620/"
+    },
+    {
+      "id": "steam-108600",
+      "appId": "108600",
+      "title": "Project Zomboid",
+      "platform": "Steam",
+      "image": "/games/steam-108600.webp",
+      "storeUrl": "https://store.steampowered.com/app/108600/"
+    },
+    {
+      "id": "steam-578080",
+      "appId": "578080",
+      "title": "PUBG: BATTLEGROUNDS",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/578080/"
+    },
+    {
+      "id": "steam-648800",
+      "appId": "648800",
+      "title": "Raft",
+      "platform": "Steam",
+      "image": "/games/steam-648800.webp",
+      "storeUrl": "https://store.steampowered.com/app/648800/"
+    },
+    {
+      "id": "steam-1174180",
+      "appId": "1174180",
+      "title": "Red Dead Redemption 2",
+      "platform": "Steam",
+      "image": "/games/steam-1174180.webp",
+      "storeUrl": "https://store.steampowered.com/app/1174180/"
+    },
+    {
+      "id": "steam-883710",
+      "appId": "883710",
+      "title": "Resident Evil 2",
+      "platform": "Steam",
+      "image": "/games/steam-883710.webp",
+      "storeUrl": "https://store.steampowered.com/app/883710/"
+    },
+    {
+      "id": "steam-952060",
+      "appId": "952060",
+      "title": "Resident Evil 3",
+      "platform": "Steam",
+      "image": "/games/steam-952060.webp",
+      "storeUrl": "https://store.steampowered.com/app/952060/"
+    },
+    {
+      "id": "steam-2050650",
+      "appId": "2050650",
+      "title": "Resident Evil 4",
+      "platform": "Steam",
+      "image": "/games/steam-2050650.webp",
+      "storeUrl": "https://store.steampowered.com/app/2050650/"
+    },
+    {
+      "id": "steam-418370",
+      "appId": "418370",
+      "title": "Resident Evil 7 Biohazard",
+      "platform": "Steam",
+      "image": "/games/steam-418370.webp",
+      "storeUrl": "https://store.steampowered.com/app/418370/"
+    },
+    {
+      "id": "steam-3764200",
+      "appId": "3764200",
+      "title": "Resident Evil Requiem",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/3764200/"
+    },
+    {
+      "id": "steam-1196590",
+      "appId": "1196590",
+      "title": "Resident Evil Village",
+      "platform": "Steam",
+      "image": "/games/steam-1196590.webp",
+      "storeUrl": "https://store.steampowered.com/app/1196590/"
+    },
+    {
+      "id": "steam-814380",
+      "appId": "814380",
+      "title": "Sekiro™: Shadows Die Twice",
+      "platform": "Steam",
+      "image": "/games/steam-814380.webp",
+      "storeUrl": "https://store.steampowered.com/app/814380/"
+    },
+    {
+      "id": "steam-2868840",
+      "appId": "2868840",
+      "title": "Slay the Spire 2",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2868840/"
+    },
+    {
+      "id": "steam-433340",
+      "appId": "433340",
+      "title": "Slime Rancher",
+      "platform": "Steam",
+      "image": "/games/steam-433340.webp",
+      "storeUrl": "https://store.steampowered.com/app/433340/"
+    },
+    {
+      "id": "steam-1326470",
+      "appId": "1326470",
+      "title": "Sons Of The Forest",
+      "platform": "Steam",
+      "image": "/games/steam-1326470.webp",
+      "storeUrl": "https://store.steampowered.com/app/1326470/"
+    },
+    {
+      "id": "steam-244850",
+      "appId": "244850",
+      "title": "Space Engineers",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/244850/"
+    },
+    {
+      "id": "steam-105600",
+      "appId": "105600",
+      "title": "Terraria",
+      "platform": "Steam",
+      "image": "/games/steam-105600.webp",
+      "storeUrl": "https://store.steampowered.com/app/105600/"
+    },
+    {
+      "id": "steam-250900",
+      "appId": "250900",
+      "title": "The Binding of Isaac: Rebirth",
+      "platform": "Steam",
+      "image": "/games/steam-250900.webp",
+      "storeUrl": "https://store.steampowered.com/app/250900/"
+    },
+    {
+      "id": "steam-641990",
+      "appId": "641990",
+      "title": "The Escapists 2",
+      "platform": "Steam",
+      "image": "/games/steam-641990.webp",
+      "storeUrl": "https://store.steampowered.com/app/641990/"
+    },
+    {
+      "id": "steam-268050",
+      "appId": "268050",
+      "title": "The Evil Within",
+      "platform": "Steam",
+      "image": "/games/steam-268050.webp",
+      "storeUrl": "https://store.steampowered.com/app/268050/"
+    },
+    {
+      "id": "steam-601430",
+      "appId": "601430",
+      "title": "The Evil Within 2",
+      "platform": "Steam",
+      "image": "/games/steam-601430.webp",
+      "storeUrl": "https://store.steampowered.com/app/601430/"
+    },
+    {
+      "id": "steam-1888930",
+      "appId": "1888930",
+      "title": "The Last of Us™ Part I",
+      "platform": "Steam",
+      "image": "/games/steam-1888930.webp",
+      "storeUrl": "https://store.steampowered.com/app/1888930/"
+    },
+    {
+      "id": "steam-780310",
+      "appId": "780310",
+      "title": "The Riftbreaker 银河破裂者",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/780310/"
+    },
+    {
+      "id": "steam-1237970",
+      "appId": "1237970",
+      "title": "Titanfall® 2",
+      "platform": "Steam",
+      "image": "/games/steam-1237970.webp",
+      "storeUrl": "https://store.steampowered.com/app/1237970/"
+    },
+    {
+      "id": "steam-1281930",
+      "appId": "1281930",
+      "title": "tModLoader",
+      "platform": "Steam",
+      "image": "/games/steam-1281930.webp",
+      "storeUrl": "https://store.steampowered.com/app/1281930/"
+    },
+    {
+      "id": "steam-438100",
+      "appId": "438100",
+      "title": "VRChat",
+      "platform": "Steam",
+      "image": "/games/steam-438100.webp",
+      "storeUrl": "https://store.steampowered.com/app/438100/"
+    },
+    {
+      "id": "steam-236390",
+      "appId": "236390",
+      "title": "War Thunder",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/236390/"
+    },
+    {
+      "id": "steam-230410",
+      "appId": "230410",
+      "title": "Warframe 星际战甲",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/230410/"
+    },
+    {
+      "id": "steam-2183900",
+      "appId": "2183900",
+      "title": "Warhammer 40,000: 星际战士2",
+      "platform": "Steam",
+      "image": null,
+      "storeUrl": "https://store.steampowered.com/app/2183900/"
+    },
+    {
+      "id": "steam-612880",
+      "appId": "612880",
+      "title": "Wolfenstein II: The New Colossus",
+      "platform": "Steam",
+      "image": "/games/steam-612880.webp",
+      "storeUrl": "https://store.steampowered.com/app/612880/"
+    },
+    {
+      "id": "steam-201810",
+      "appId": "201810",
+      "title": "Wolfenstein: The New Order",
+      "platform": "Steam",
+      "image": "/games/steam-201810.webp",
+      "storeUrl": "https://store.steampowered.com/app/201810/"
+    },
+    {
+      "id": "steam-350080",
+      "appId": "350080",
+      "title": "Wolfenstein: The Old Blood",
+      "platform": "Steam",
+      "image": "/games/steam-350080.webp",
+      "storeUrl": "https://store.steampowered.com/app/350080/"
+    },
+    {
+      "id": "steam-1056960",
+      "appId": "1056960",
+      "title": "Wolfenstein: Youngblood",
+      "platform": "Steam",
+      "image": "/games/steam-1056960.webp",
+      "storeUrl": "https://store.steampowered.com/app/1056960/"
+    },
+    {
+      "id": "steam-674750",
+      "appId": "674750",
+      "title": "Yet Another Zombie Defense HD",
+      "platform": "Steam",
+      "image": "/games/steam-674750.webp",
+      "storeUrl": "https://store.steampowered.com/app/674750/"
+    }
+  ]
+}

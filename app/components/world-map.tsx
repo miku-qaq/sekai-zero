@@ -14,7 +14,7 @@ export function WorldMap() {
           <h2 id="world-map-title">从这里开始浏览。</h2>
         </div>
         <p>
-          每个页面只负责一件事。先认识我、浏览动画收藏、读学习笔记、逛链接，或查看完整世界线日志。
+          每个页面只负责一件事。先认识我，浏览动画与游戏收藏，读学习笔记，逛链接，或查看完整世界线日志。
         </p>
       </div>
       <div className="world-route-grid">

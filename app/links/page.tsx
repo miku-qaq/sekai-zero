@@ -10,7 +10,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "链接收藏",
   description:
-    "Mikureina 喜欢的网站、当前学习资料、项目源码与联系入口；每条链接都记录愿意返回的理由。",
+    "Mikureina 喜欢的 Bilibili、Apple 与 Steam，以及 Stanford 学习资料、项目源码和联系入口。",
 };
 
 export default function LinksPage() {
@@ -19,13 +19,13 @@ export default function LinksPage() {
       <PageMasthead
         currentHref="/links/"
         title="我愿意再次打开的入口。"
-        lead="这里收录我真正喜欢的网站、当前学习的一手资料、项目源码与联系方式。每条链接都会说明它为什么出现在这里。"
+        lead="这里收录我真正喜欢的 Bilibili、Apple 与 Steam，也连接 Stanford 学习资料、项目源码与联系方式。每条链接都会说明它为什么出现在这里。"
         meta={[
           {
             label: "已收录",
             value: `${String(linkEntries.length).padStart(2, "0")} 个入口`,
           },
-          { label: "个人收藏", value: "Bilibili / Apple" },
+          { label: "个人收藏", value: "Bilibili / Apple / Steam" },
           { label: "可以使用", value: "分类 / 搜索 / 随机推荐" },
         ]}
       />

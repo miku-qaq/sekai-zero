@@ -61,9 +61,14 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.doesNotMatch(html, /\bPHASE\s*0\d\b/i);
   assert.doesNotMatch(html, /role="meter"|aria-valuenow=/i);
 
-  const routeOrder = ["/about/", "/anime/", "/study/", "/links/", "/logs/"].map(
-    (href) => html.indexOf(`href="${href}"`),
-  );
+  const routeOrder = [
+    "/about/",
+    "/anime/",
+    "/games/",
+    "/study/",
+    "/links/",
+    "/logs/",
+  ].map((href) => html.indexOf(`href="${href}"`));
   assert.ok(routeOrder.every((position) => position >= 0));
   assert.deepEqual(
     routeOrder,
@@ -73,7 +78,7 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 
-test("server-renders the five canonical public routes with clear purposes", async () => {
+test("server-renders the six canonical public routes with clear purposes", async () => {
   const routes = [
     {
       pathname: "/about",
@@ -86,6 +91,12 @@ test("server-renders the five canonical public routes with clear purposes", asyn
       title: /<title>动画收藏馆 · SEKAI<\/title>/i,
       copy: /看过的故事，也组成了我的世界/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>动画收藏<\/span>/,
+    },
+    {
+      pathname: "/games",
+      title: /<title>游戏收藏馆 · SEKAI<\/title>/i,
+      copy: /玩过的世界，也值得收藏/,
+      breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>游戏收藏<\/span>/,
     },
     {
       pathname: "/study",
@@ -128,7 +139,8 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
 
   assert.match(html, /<title>世界线日志 · SEKAI<\/title>/i);
   assert.match(html, /id="project-overview"/);
-  assert.match(html, /EP\.011/);
+  assert.match(html, /EP\.012/);
+  assert.match(html, /id="ep-012"/);
   assert.match(html, /id="ep-011"/);
   assert.match(html, /id="ep-010"/);
   assert.match(html, /网站怎样成长，都记录在这里/);
@@ -147,6 +159,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.012/);
+  assert.match(logs, /id="ep-012"/);
+  assert.match(logs, /把游戏足迹与视觉学习接进收藏系统/);
   assert.match(logs, /EP\.011/);
   assert.match(logs, /id="ep-011"/);
   assert.match(logs, /把看过的动画铺成一面收藏墙/);
@@ -157,7 +172,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 11);
+  assert.equal(episodeIds.length, 12);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -173,6 +188,10 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.match(links, /href="https:\/\/www\.apple\.com\.cn\/"/);
   assert.match(links, /Apple 中国官网/);
   assert.match(links, /我喜欢 Apple 产品/);
+  assert.match(links, /id="route-steam"/);
+  assert.match(links, /href="https:\/\/store\.steampowered\.com\/"/);
+  assert.match(links, /id="route-cs231n-course"/);
+  assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
   assert.match(links, /CS224N 当前笔记/);
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
@@ -201,6 +220,10 @@ test("publishes all 89 watched anime with one formal title and local covers", as
   assert.ok(catalog.every((entry) => !("aliases" in entry)));
 
   assert.match(html, /89 部/);
+  assert.match(html, /MIKUREINA&#x27;S COLLECTION/);
+  assert.match(html, /动画收藏/);
+  assert.match(html, /游戏收藏/);
+  assert.match(html, /href="\/games\/"/);
   assert.match(html, /灵笼 上半季/);
   assert.match(html, /魔女之旅/);
   assert.match(html, /孤独摇滚！/);
@@ -218,12 +241,45 @@ test("publishes all 89 watched anime with one formal title and local covers", as
   }
 });
 
-test("server-renders the current CS224N learning note with official sources", async () => {
+test("publishes 146 played Steam games while keeping private activity data local", async () => {
+  const response = await render("/games");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /146 款/);
+  assert.match(html, /104 张/);
+  assert.match(html, /MIKUREINA&#x27;S COLLECTION/);
+  assert.match(html, /动画收藏/);
+  assert.match(html, /游戏收藏/);
+  assert.match(html, /href="\/anime\/"/);
+  assert.match(html, /实际游玩记录/);
+  assert.match(html, /玩过 \/ 不排名/);
+  assert.match(html, /只留下适合公开的收藏信息/);
+  assert.match(html, /Nintendo Switch 收藏待补充/);
+  assert.match(html, /内容待填充 · OWNER CONFIRMATION REQUIRED/);
+  assert.equal(
+    html.match(/<strong>内容待填充 · OWNER CONFIRMATION REQUIRED<\/strong>/g)?.length,
+    1,
+  );
+  assert.match(html, /https:\/\/store\.steampowered\.com\/app\//);
+
+  // Privacy disclosures may explain what is withheld, but no private field or
+  // Steam account value may be serialized into the public document.
+  assert.doesNotMatch(
+    html,
+    /"(?:playtime|lastPlayed|accountId|steamId|friends|token|auth|userdata)"\s*:/i,
+  );
+  assert.doesNotMatch(html, /\b(?:data-)?(?:playtime|lastplayed|accountid|steamid)=/i);
+  assert.doesNotMatch(html, /\b7656119\d{10}\b/);
+  assert.doesNotMatch(html, /STEAM \/ APP\s+\d+/i);
+});
+
+test("renders current CS224N plus a bounded CS231n review with official sources", async () => {
   const response = await render("/study");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /AI 与 NLP/);
+  assert.match(html, /AI · 视觉与语言/);
   assert.match(html, /CURRENTLY LEARNING/);
   assert.match(html, /NOTE \/ NLP-001/);
   assert.match(html, /id="cs224n-nlp-word-vectors"/);
@@ -237,6 +293,15 @@ test("server-renders the current CS224N learning note with official sources", as
     html,
     /https:\/\/web\.stanford\.edu\/class\/cs224n\/slides_w26\/cs224n-2026-lecture02-wordvecs\.pdf/,
   );
+  assert.match(html, /id="cs231n-image-classification-data-driven"/);
+  assert.match(html, /NOTE \/ CV-001/);
+  assert.match(html, /CS231n 学习回顾 01：图像分类为什么要从数据出发/);
+  assert.match(html, /曾学习 · 回顾/);
+  assert.match(html, /我之前学习过 Stanford CS231n 的公开课程资料/);
+  assert.match(html, /不是结课证明或进度汇报/);
+  assert.match(html, /https:\/\/cs231n\.stanford\.edu\//);
+  assert.match(html, /https:\/\/cs231n\.stanford\.edu\/slides\/2026\/lecture_2\.pdf/);
+  assert.match(html, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
   assert.doesNotMatch(html, /learning-queue/);
 });
 
@@ -331,6 +396,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(siteContent, /export const worldRoutes/);
   assert.match(siteContent, /href: "\/about\/"/);
   assert.match(siteContent, /href: "\/anime\/"/);
+  assert.match(siteContent, /href: "\/games\/"/);
   assert.match(siteContent, /href: "\/study\/"/);
   assert.match(siteContent, /href: "\/links\/"/);
   assert.match(siteContent, /href: "\/logs\/"/);
@@ -396,6 +462,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.012"/);
+  assert.match(releasesContent, /GAMES \/ 146 · CV-001/);
   assert.match(releasesContent, /episode: "EP\.011"/);
   assert.match(releasesContent, /ANIME COLLECTION \/ 89/);
   assert.match(releasesContent, /episode: "EP\.010"/);

@@ -42,7 +42,7 @@ export const profileQuestions = [
   {
     question: "最近在投入什么？",
     answer:
-      "最近正在自学 Stanford CS224N 的公开课程资料，从自然语言处理与词表示开始建立知识地图；同时持续建设 SEKAI / 00。",
+      "最近正在自学 Stanford CS224N 的公开课程资料，也在回顾此前学习过的 CS231n；动画与 Steam 游戏收藏会随着真实记录继续更新。",
   },
 ] as const;
 
@@ -55,11 +55,11 @@ export const currentFocus = [
     action: "阅读当前笔记",
   },
   {
-    code: "PROJECT",
-    title: "SEKAI / 00",
-    copy: "持续建设这座多页面个人站，重要变化与制作选择都集中记录在世界线日志。",
-    href: "/logs/#project-overview",
-    action: "查看制作记录",
+    code: "GAMES",
+    title: "Steam 游戏收藏",
+    copy: "已经从本地 Steam 记录整理实际玩过的游戏，只展示名称与封面，不公开账号和时长。",
+    href: "/games/",
+    action: "浏览游戏收藏",
   },
   {
     code: "INTERESTS",
