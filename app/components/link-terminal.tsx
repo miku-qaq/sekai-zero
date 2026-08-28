@@ -15,7 +15,7 @@ function resolvedHref(entry: LinkEntry): string {
   return entry.external ? entry.href : sitePath(entry.href);
 }
 
-/** Searchable route terminal with a playful, deterministic content model. */
+/** Searchable navigation terminal with a playful, deterministic content model. */
 export function LinkTerminal() {
   const [group, setGroup] = useState<GroupId>("all");
   const [query, setQuery] = useState("");
@@ -56,7 +56,7 @@ export function LinkTerminal() {
   return (
     <div className="link-terminal">
       <div className="terminal-toolbar">
-        <div className="terminal-filters" role="group" aria-label="筛选航线">
+        <div className="terminal-filters" role="group" aria-label="筛选导航入口">
           {linkGroups.map((item) => (
             <button
               type="button"
@@ -72,7 +72,7 @@ export function LinkTerminal() {
           ))}
         </div>
         <label className="terminal-search">
-          <span className="sr-only">搜索航线</span>
+          <span className="sr-only">搜索导航终端</span>
           <span aria-hidden="true">⌕</span>
           <input
             type="search"
@@ -114,8 +114,13 @@ export function LinkTerminal() {
               target={entry.external ? "_blank" : undefined}
               rel={entry.external ? "noreferrer" : undefined}
             >
-              <span className="terminal-card-number">
-                {String(index + 1).padStart(2, "0")}
+              <span className="terminal-card-head">
+                <span className="terminal-card-icon" aria-hidden="true">
+                  {entry.icon}
+                </span>
+                <span className="terminal-card-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
               </span>
               <p>{entry.eyebrow}</p>
               <h3>{entry.label}</h3>
@@ -136,7 +141,15 @@ export function LinkTerminal() {
               className="terminal-card terminal-card-placeholder"
               aria-label="待补充的收藏位置"
             >
-              <span className="terminal-card-number">＋</span>
+              <span className="terminal-card-head">
+                <span
+                  className="terminal-card-icon terminal-card-icon-placeholder"
+                  aria-hidden="true"
+                >
+                  ◇
+                </span>
+                <span className="terminal-card-number">＋</span>
+              </span>
               <p>{linkPlaceholder.eyebrow}</p>
               <h3>{linkPlaceholder.label}</h3>
               <span className="terminal-reason">{linkPlaceholder.reason}</span>
@@ -151,7 +164,7 @@ export function LinkTerminal() {
         </div>
       ) : (
         <div className="terminal-empty">
-          <span aria-hidden="true">NO MATCHING LINK</span>
+          <span aria-hidden="true">NO MATCHING ROUTE</span>
           <h3>没有找到匹配的入口。</h3>
           <p>试试“CS224N”“Bilibili”或“联系”，也可以清除筛选。</p>
           <button

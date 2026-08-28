@@ -54,7 +54,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
-    { path: "links/index.html", title: /<title>链接收藏 · SEKAI<\/title>/i },
+    { path: "links/index.html", title: /<title>导航终端 · SEKAI<\/title>/i },
     { path: "logs/index.html", title: /<title>世界线日志 · SEKAI<\/title>/i },
     // Keep the former route readable for old bookmarks, but not as a seventh
     // public destination. Its metadata and body are checked separately below.
@@ -190,6 +190,13 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(links, /我喜欢 Apple 产品/);
   assert.match(links, /href="https:\/\/store\.steampowered\.com\/"/);
   assert.match(links, /Steam 商店/);
+  assert.match(
+    links,
+    /href="https:\/\/www\.nintendo\.com\/hk\/hardware\/switch\/index\.html"/,
+  );
+  assert.match(links, /Nintendo Switch 官方网站/);
+  assert.match(links, /Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台/);
+  assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
   assert.match(links, /下一枚收藏坐标/);
   assert.match(links, /内容待填充/);
@@ -204,6 +211,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /原“制作档案”已并入日志/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-013"/);
+  assert.match(logs, /EP\.013/);
+  assert.match(logs, /让导航终端找回自己的名字/);
   assert.match(logs, /id="ep-012"/);
   assert.match(logs, /EP\.012/);
   assert.match(logs, /把游戏足迹与视觉学习接进收藏系统/);
@@ -217,6 +227,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-013"/);
   assert.match(projects, /id="ep-012"/);
   assert.match(projects, /id="ep-011"/);
   assert.match(projects, /id="ep-010"/);

@@ -123,7 +123,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps the six-world route order and EP.012 as the latest of twelve releases", async () => {
+test("keeps the six-world route order and EP.013 as the latest of thirteen releases", async () => {
   const [site, releases] = await Promise.all([
     readProjectFile("content/site.ts"),
     readProjectFile("content/releases.ts"),
@@ -144,8 +144,9 @@ test("keeps the six-world route order and EP.012 as the latest of twelve release
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 12);
-  assert.equal(new Set(episodes).size, 12);
-  assert.equal(episodes[0], "012");
+  assert.equal(episodes.length, 13);
+  assert.equal(new Set(episodes).size, 13);
+  assert.equal(episodes[0], "013");
+  assert.match(releases, /NAVIGATION TERMINAL \/ ROUTE 05/);
   assert.match(releases, /GAMES \/ 146 · CV-001/);
 });

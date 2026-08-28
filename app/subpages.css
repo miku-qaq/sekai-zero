@@ -1138,15 +1138,51 @@
   opacity: 0.45;
 }
 
+.terminal-card-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.terminal-card-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--terminal-color) 42%, var(--border));
+  border-radius: 17px;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--terminal-color) 30%, white),
+      transparent
+    ),
+    var(--surface-muted);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--terminal-color) 18%, transparent);
+  color: var(--terminal-ink);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  transform: rotate(-3deg);
+}
+
+.terminal-card-icon-placeholder {
+  border-style: dashed;
+  box-shadow: none;
+}
+
 .terminal-card-number {
-  align-self: flex-end;
   color: var(--muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 9px;
 }
 
 .terminal-card > p {
-  margin: 52px 0 8px;
+  margin: 28px 0 8px;
   color: var(--terminal-ink);
   font-family: var(--font-geist-mono), monospace;
   font-size: 9px;

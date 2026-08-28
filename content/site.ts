@@ -67,12 +67,12 @@ export const worldRoutes = [
   {
     index: "05",
     href: "/links/",
-    navLabel: "链接",
-    eyebrow: "CURATED LINKS",
-    title: "链接与收藏",
+    navLabel: "导航终端",
+    eyebrow: "NAVIGATION TERMINAL",
+    title: "导航终端",
     description:
-      "收录我喜欢的网站、当前学习资料、源码与联系方式；每条链接都说明留下的理由。",
-    action: "浏览链接",
+      "收录我喜欢的网站、当前学习资料、源码与联系方式；每个入口都说明留下的理由。",
+    action: "进入终端",
     motif: "↗",
     tone: "violet",
     layout: "standard",
@@ -99,7 +99,7 @@ export const siteConfig = {
   shortName: "SEKAI",
   owner: publicProfile.handle,
   description:
-    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、链接收藏与网站世界线。",
+    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、导航终端与网站世界线。",
   navigation: [
     { index: "00", label: "首页", href: "/" },
     ...worldRoutes.map(({ index, navLabel, href }) => ({
@@ -246,9 +246,9 @@ export const favoriteChannels = [
     program: {
       label: "ROUTE SIGNAL / CH.07",
       title: "下一站，由好奇心选择",
-      description: "航线终端收录本站频道与值得回来的公开入口，每条都说明为什么留下。",
+      description: "导航终端收录本站频道与值得回来的公开入口，每条都说明为什么留下。",
       href: "/links/",
-      action: "打开航线终端",
+      action: "打开导航终端",
     },
   },
   {

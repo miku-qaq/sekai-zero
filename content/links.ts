@@ -6,6 +6,7 @@ export type LinkEntry = {
   href: string;
   reason: string;
   tags: readonly string[];
+  icon: string;
   action?: string;
   external?: boolean;
 };
@@ -18,8 +19,9 @@ export const linkEntries: readonly LinkEntry[] = [
     label: "哔哩哔哩 · Bilibili",
     eyebrow: "FAVORITE VIDEO PLATFORM",
     href: "https://www.bilibili.com/",
-    reason: "我最喜欢的视频平台，也是这份个人链接收藏里的第一条真实偏好。",
+    reason: "我最喜欢的视频平台，也是导航终端里的第一条真实偏好。",
     tags: ["视频", "动漫", "Bilibili"],
+    icon: "▶",
     action: "打开哔哩哔哩",
     external: true,
   },
@@ -31,6 +33,7 @@ export const linkEntries: readonly LinkEntry[] = [
     href: "https://www.apple.com.cn/",
     reason: "我喜欢 Apple 产品；这里连接官方产品、设计与服务信息，不用第三方页面代替。",
     tags: ["Apple", "数码产品", "官方网站"],
+    icon: "A",
     action: "打开 Apple 官网",
     external: true,
   },
@@ -41,9 +44,23 @@ export const linkEntries: readonly LinkEntry[] = [
     eyebrow: "GAME PLATFORM / OFFICIAL",
     href: "https://store.steampowered.com/",
     reason:
-      "Steam 是我平时主要使用的游戏平台之一；游戏收藏馆里的作品也都链接回官方商店页。",
+      "Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台；游戏收藏馆里的 Steam 作品也都连接官方商店页。",
     tags: ["Steam", "游戏", "官方网站"],
+    icon: "◎",
     action: "打开 Steam",
+    external: true,
+  },
+  {
+    id: "nintendo-switch",
+    group: "favorite",
+    label: "Nintendo Switch 官方网站",
+    eyebrow: "FAVORITE GAME PLATFORM / OFFICIAL",
+    href: "https://www.nintendo.com/hk/hardware/switch/index.html",
+    reason:
+      "Nintendo Switch（NS）与 Steam 是我最喜欢的两个游戏平台；具体 NS 游戏会在我确认清单后加入游戏收藏馆。",
+    tags: ["Nintendo Switch", "NS", "游戏平台"],
+    icon: "NS",
+    action: "打开 Nintendo Switch 官网",
     external: true,
   },
   {
@@ -55,6 +72,7 @@ export const linkEntries: readonly LinkEntry[] = [
     reason:
       "从词表示与分布式语义开始，直接进入我正在整理的 CS224N 自学记录与回忆问题。",
     tags: ["CS224N", "NLP", "Word Vectors"],
+    icon: "NLP",
     action: "继续当前学习",
   },
   {
@@ -66,6 +84,7 @@ export const linkEntries: readonly LinkEntry[] = [
     reason:
       "已确认的联系邮箱集中保留在角色设定档；关于本站、学习或共同兴趣，可以从那里写信。",
     tags: ["联系", "邮箱", "Mikureina"],
+    icon: "@",
     action: "查看联系邮箱",
   },
   {
@@ -77,6 +96,7 @@ export const linkEntries: readonly LinkEntry[] = [
     reason:
       "本站源码、版本历史与发布流程都在这里公开，可以直接核对世界线日志中的制作说明。",
     tags: ["GitHub", "源码", "版本证据"],
+    icon: "{ }",
     action: "核对公开仓库",
     external: true,
   },
@@ -88,6 +108,7 @@ export const linkEntries: readonly LinkEntry[] = [
     href: "https://web.stanford.edu/class/cs224n/",
     reason: "当前 NLP 学习主线的一手入口；课程范围、讲义与安排都优先回到官方页面核对。",
     tags: ["Stanford", "NLP", "官方课程"],
+    icon: "N",
     action: "打开官方课程页",
     external: true,
   },
@@ -100,6 +121,7 @@ export const linkEntries: readonly LinkEntry[] = [
     reason:
       "此前学习过的计算机视觉公开课程资料；回顾笔记会以当前官方页面和讲义核对概念边界。",
     tags: ["Stanford", "计算机视觉", "CS231n"],
+    icon: "CV",
     action: "打开官方课程页",
     external: true,
   },
