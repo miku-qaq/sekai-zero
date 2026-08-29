@@ -28,32 +28,19 @@ export const worldRoutes = [
   },
   {
     index: "02",
-    href: "/anime/",
-    navLabel: "动画收藏",
-    eyebrow: "ANIME COLLECTION",
-    title: "动画收藏馆",
+    href: "/collections/",
+    navLabel: "奇妙收藏馆",
+    eyebrow: "WONDER COLLECTION",
+    title: "奇妙收藏馆",
     description:
-      "按 Mikureina 提供的已看片单整理；保留作品标题、年份、类型与可追溯封面来源。",
-    action: "浏览动画收藏",
-    motif: "★",
+      "把看过的动画、玩过的游戏与真实手办收藏收进同一座馆，每个展区保留自己的记录方式。",
+    action: "进入收藏馆",
+    motif: "✦",
     tone: "pink",
     layout: "standard",
   },
   {
     index: "03",
-    href: "/games/",
-    navLabel: "游戏收藏",
-    eyebrow: "GAME COLLECTION",
-    title: "游戏收藏馆",
-    description:
-      "整理 Steam 中确认玩过的作品，封面与商店入口可检索；Nintendo Switch 清单等待继续补充。",
-    action: "浏览游戏收藏",
-    motif: "▣",
-    tone: "violet",
-    layout: "featured",
-  },
-  {
-    index: "04",
     href: "/study/",
     navLabel: "学习笔记",
     eyebrow: "COMPUTER STUDY NOTES",
@@ -65,7 +52,7 @@ export const worldRoutes = [
     layout: "standard",
   },
   {
-    index: "05",
+    index: "04",
     href: "/links/",
     navLabel: "导航终端",
     eyebrow: "NAVIGATION TERMINAL",
@@ -78,14 +65,14 @@ export const worldRoutes = [
     layout: "standard",
   },
   {
-    index: "06",
+    index: "05",
     href: "/logs/",
     navLabel: "日志",
     eyebrow: "WORLDLINE LOG",
     title: "世界线日志",
     description: "项目说明、制作取舍与历次更新集中收录在这里，不再散落到其他页面。",
     action: "阅读日志",
-    motif: "06",
+    motif: "05",
     tone: "amber",
     layout: "featured",
   },
@@ -99,7 +86,7 @@ export const siteConfig = {
   shortName: "SEKAI",
   owner: publicProfile.handle,
   description:
-    "Mikureina 的个人次元站：南京大学 CS 在读，记录动漫、游戏、计算机学习、导航终端与网站世界线。",
+    "Mikureina 的个人次元站：南京大学 CS 在读，记录动画、游戏、手办收藏、计算机学习与网站世界线。",
   navigation: [
     { index: "00", label: "首页", href: "/" },
     ...worldRoutes.map(({ index, navLabel, href }) => ({
@@ -133,10 +120,10 @@ export const homepageFacts = [
   },
   {
     index: "03",
-    label: "ANIME / GAMES",
+    label: "WONDER / COLLECTION",
     soundEffect: "好き",
-    motif: "NS",
-    copy: "喜欢动漫和游戏，平时主要使用 Nintendo Switch 与 Steam。",
+    motif: "✦",
+    copy: "喜欢动漫与游戏，也把动画、Steam 足迹和手办周边整理进奇妙收藏馆。",
     tone: "pink",
   },
 ] as const;

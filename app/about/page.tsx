@@ -154,7 +154,7 @@ export default function AboutPage() {
         <div className="section-shell timeline-layout">
           <div className="section-heading">
             <p className="section-index">04 / CURRENT FOCUS</p>
-            <h2 id="focus-title">最近在投入的三件事。</h2>
+            <h2 id="focus-title">最近在投入的事情。</h2>
           </div>
           <ol>
             {currentFocus.map((item, index) => (

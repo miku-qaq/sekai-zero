@@ -44,7 +44,7 @@ export const linkEntries: readonly LinkEntry[] = [
     eyebrow: "GAME PLATFORM / OFFICIAL",
     href: "https://store.steampowered.com/",
     reason:
-      "Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台；游戏收藏馆里的 Steam 作品也都连接官方商店页。",
+      "Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台；奇妙收藏馆游戏展柜里的 Steam 作品也都连接官方商店页。",
     tags: ["Steam", "游戏", "官方网站"],
     icon: "◎",
     action: "打开 Steam",
@@ -57,7 +57,7 @@ export const linkEntries: readonly LinkEntry[] = [
     eyebrow: "FAVORITE GAME PLATFORM / OFFICIAL",
     href: "https://www.nintendo.com/hk/hardware/switch/index.html",
     reason:
-      "Nintendo Switch（NS）与 Steam 是我最喜欢的两个游戏平台；具体 NS 游戏会在我确认清单后加入游戏收藏馆。",
+      "Nintendo Switch（NS）与 Steam 是我最喜欢的两个游戏平台；具体 NS 游戏会在我确认清单后加入奇妙收藏馆的游戏展柜。",
     tags: ["Nintendo Switch", "NS", "游戏平台"],
     icon: "NS",
     action: "打开 Nintendo Switch 官网",
@@ -129,7 +129,7 @@ export const linkEntries: readonly LinkEntry[] = [
 
 export const linkGroups = [
   { id: "all", label: "全部" },
-  { id: "favorite", label: "我的收藏" },
+  { id: "favorite", label: "喜欢的网站" },
   { id: "study", label: "学习资料" },
   { id: "project", label: "项目源码" },
   { id: "contact", label: "联系" },

@@ -3,13 +3,20 @@ import { sitePath } from "@/lib/site-path";
 
 type PageMastheadProps = {
   currentHref: WorldRouteHref;
+  subpageLabel?: string;
   title: string;
   lead: string;
   meta: readonly { label: string; value: string }[];
 };
 
 /** Shared opening frame driven by the canonical route registry. */
-export function PageMasthead({ currentHref, title, lead, meta }: PageMastheadProps) {
+export function PageMasthead({
+  currentHref,
+  subpageLabel,
+  title,
+  lead,
+  meta,
+}: PageMastheadProps) {
   const route = worldRoutes.find((item) => item.href === currentHref);
 
   if (!route) {
@@ -24,6 +31,12 @@ export function PageMasthead({ currentHref, title, lead, meta }: PageMastheadPro
         <a href={sitePath("/")}>首页</a>
         <span aria-hidden="true">/</span>
         <span>{route.navLabel}</span>
+        {subpageLabel ? (
+          <>
+            <span aria-hidden="true">/</span>
+            <span>{subpageLabel}</span>
+          </>
+        ) : null}
       </div>
       <div className="subpage-copy">
         <p className="eyebrow reveal reveal-one">

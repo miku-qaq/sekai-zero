@@ -119,6 +119,7 @@
 }
 
 .reset,
+.loadMore button,
 .empty button {
   min-height: 48px;
   border: 1px solid var(--foreground);
@@ -171,6 +172,28 @@
 
 .catalogGrid > li {
   min-width: 0;
+}
+
+.loadMore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 4px;
+  padding: 26px 20px;
+  border: 1px solid var(--border);
+  border-radius: 21px;
+  background: color-mix(in srgb, var(--anime-violet) 5%, var(--surface-muted));
+}
+
+.loadMore p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.loadMore button {
+  padding-inline: 20px;
 }
 
 .card {
@@ -401,6 +424,7 @@
   }
 
   .reset:hover,
+  .loadMore button:hover,
   .empty button:hover {
     transform: translateY(-2px);
   }
@@ -456,6 +480,11 @@
     align-items: flex-start;
     flex-direction: column;
     padding-inline: 15px;
+  }
+
+  .loadMore {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .catalogGrid {
@@ -518,6 +547,7 @@
   .card,
   .cover img,
   .reset,
+  .loadMore button,
   .empty button {
     transition: none;
   }

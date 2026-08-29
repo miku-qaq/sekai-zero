@@ -1,6 +1,6 @@
 .switcher {
   display: grid;
-  grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1.45fr);
+  grid-template-columns: minmax(190px, 0.48fr) minmax(0, 1.52fr);
   gap: 12px;
   margin-bottom: 18px;
   padding: 12px;
@@ -35,9 +35,19 @@
   letter-spacing: -0.025em;
 }
 
+.intro a {
+  width: fit-content;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
 .routes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -69,6 +79,10 @@
 
 .routes a[data-accent="violet"] {
   --collection-accent: #806cf0;
+}
+
+.routes a[data-accent="mint"] {
+  --collection-accent: #43d7c1;
 }
 
 .routes a[aria-current="page"] {
@@ -132,6 +146,10 @@
 
   .intro {
     padding-bottom: 4px;
+  }
+
+  .routes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

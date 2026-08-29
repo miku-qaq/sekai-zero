@@ -47,6 +47,21 @@ function serverPathSnapshot() {
   return "";
 }
 
+function isCurrentNavigationPath(currentPath: string, href: string) {
+  const targetPath = sitePath(href).replace(/\/+$/, "") || "/";
+  if (currentPath === targetPath) return true;
+  if (href === "/") return false;
+
+  // Old public bookmarks stay readable, but their matching canonical channel
+  // remains highlighted so visitors never feel that they left the museum.
+  if (href === "/collections/" && /\/(?:anime|games)$/.test(currentPath)) {
+    return true;
+  }
+  if (href === "/logs/" && /\/projects$/.test(currentPath)) return true;
+
+  return currentPath.startsWith(`${targetPath}/`);
+}
+
 /**
  * The only stateful global navigation surface.
  * Theme preference is deliberately device-local and never requires an account.
@@ -111,9 +126,7 @@ export function SiteHeader() {
               key={item.href}
               href={sitePath(item.href)}
               aria-current={
-                currentPath === (sitePath(item.href).replace(/\/+$/, "") || "/")
-                  ? "page"
-                  : undefined
+                isCurrentNavigationPath(currentPath, item.href) ? "page" : undefined
               }
             >
               {item.label}
@@ -170,9 +183,7 @@ export function SiteHeader() {
             href={sitePath(item.href)}
             onClick={closeMenu}
             aria-current={
-              currentPath === (sitePath(item.href).replace(/\/+$/, "") || "/")
-                ? "page"
-                : undefined
+              isCurrentNavigationPath(currentPath, item.href) ? "page" : undefined
             }
           >
             <span>{item.index}</span>

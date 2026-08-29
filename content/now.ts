@@ -13,10 +13,10 @@ export type CurrentSignal = {
  * avoids invented watching, playing or progress data just to make the site busy.
  */
 export const currentBroadcast = {
-  updatedAt: "2026.08.28",
+  updatedAt: "2026.08.29",
   headline: "最近在做什么？",
   summary:
-    "目前正在自学 Stanford CS224N，也会回顾此前学过的 CS231n；动画、游戏和喜欢的网站都在慢慢整理进自己的世界。",
+    "目前正在自学 Stanford CS224N，也会回顾此前学过的 CS231n；动画、游戏、手办和喜欢的网站都在慢慢整理进自己的世界。",
   panel: {
     eyebrow: "MIKUREINA / CURRENTLY",
     mark: "NOW",
@@ -37,9 +37,9 @@ export const currentBroadcast = {
       code: "GAMES / NS + STEAM",
       status: "兴趣状态",
       title: "Nintendo Switch · Steam",
-      copy: "已从本地记录整理实际玩过的 Steam 游戏；Nintendo Switch 清单等待继续补充。",
-      href: "/games/",
-      action: "打开游戏收藏馆",
+      copy: "Steam 游玩记录与 Nintendo Switch 待补清单，已经归入奇妙收藏馆的游戏展柜。",
+      href: "/collections/games/",
+      action: "打开奇妙收藏馆",
       tone: "mint",
     },
     {

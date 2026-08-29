@@ -32,7 +32,7 @@ export const profileQuestions = [
   {
     question: "为什么要做这个网站？",
     answer:
-      "我会长期维护这个网站，用它整理计算机学习笔记、记录动漫与游戏兴趣，也保存每一次有意义的更新。",
+      "我会长期维护这个网站，用它整理计算机学习笔记、记录动漫与游戏兴趣，也把动画、游戏和手办收藏成自己的奇妙收藏馆。",
   },
   {
     question: "平时喜欢什么？",
@@ -42,7 +42,7 @@ export const profileQuestions = [
   {
     question: "最近在投入什么？",
     answer:
-      "最近正在自学 Stanford CS224N 的公开课程资料，也在回顾此前学习过的 CS231n；动画与 Steam 游戏收藏会随着真实记录继续更新。",
+      "最近正在自学 Stanford CS224N 的公开课程资料，也在回顾此前学习过的 CS231n；奇妙收藏馆会随着真实记录继续更新。",
   },
 ] as const;
 
@@ -55,17 +55,10 @@ export const currentFocus = [
     action: "阅读当前笔记",
   },
   {
-    code: "GAMES",
-    title: "Steam 游戏收藏",
-    copy: "已经从本地 Steam 记录整理实际玩过的游戏，只展示名称与封面，不公开账号和时长。",
-    href: "/games/",
-    action: "浏览游戏收藏",
-  },
-  {
-    code: "INTERESTS",
-    title: "动画收藏",
-    copy: "已经把 89 部看过的动画整理成独立收藏馆；喜欢的角色包括初音未来、伊蕾娜和波奇。",
-    href: "/anime/",
-    action: "浏览动画收藏",
+    code: "COLLECTION",
+    title: "奇妙收藏馆",
+    copy: "89 部看过的动画、146 款 Steam 游玩记录与 17 件手办周边，分别保留真实清晰的资料边界。",
+    href: "/collections/",
+    action: "进入奇妙收藏馆",
   },
 ] as const;

@@ -26,7 +26,7 @@ const gameCatalogFile = catalog as GameCatalogFile;
 export const gameCatalog = gameCatalogFile.items as readonly GameCatalogEntry[];
 
 export const gameCatalogMeta = {
-  title: "Mikureina 的游戏收藏馆",
+  title: "Mikureina 的游戏展柜",
   description:
     "从这台电脑的 Steam 本地记录整理实际玩过的游戏；只公开作品名称与识别封面，不公开账号、时长或最近上线信息。",
   updatedAt: gameCatalogFile.updatedAt,
