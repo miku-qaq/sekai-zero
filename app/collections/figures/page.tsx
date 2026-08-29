@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { figureCollection, figureCollectionMeta } from "@/content/figures";
+import { sitePath } from "@/lib/site-path";
 import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
@@ -9,8 +10,7 @@ import styles from "../collections.module.css";
 
 export const dynamic = "force-static";
 
-const description =
-  "奇妙收藏馆的手办与周边展柜：根据 Mikureina 提供的收藏记录去重整理 17 件真实收藏，不公开价格与订单信息。";
+const description = `奇妙收藏馆的手办展柜：整理 ${figureCollection.length} 件真实手办收藏；大 Fufu 已迁入独立分馆。`;
 
 export const metadata: Metadata = {
   title: "手办收藏 · 奇妙收藏馆",
@@ -32,7 +32,7 @@ export default function CollectionsFiguresPage() {
     <main id="main-content" className={`subpage-main ${styles.figurePage}`}>
       <PageMasthead
         currentHref="/collections/"
-        subpageLabel="手办与周边"
+        subpageLabel="手办收藏"
         title="喜欢的角色，也在现实里留下坐标。"
         lead={figureCollectionMeta.summary}
         meta={[
@@ -54,15 +54,28 @@ export default function CollectionsFiguresPage() {
       >
         <div className="section-heading horizontal-heading">
           <div>
-            <p className="section-index">ROOM 03 / FIGURES &amp; GOODS</p>
+            <p className="section-index">ROOM 03 / FIGURE COLLECTION</p>
             <h2 id="figure-archive-title">每一件，都先从真实记录开始。</h2>
           </div>
           <p>
-            截图可以确认收藏数量与大部分角色，但不能可靠确认厂商、比例和商品版本；这些字段会等本人核对后再补。
+            截图可以确认收藏数量与大部分角色，但不能可靠确认厂商、比例和商品版本；大
+            Fufu 已进入独立分馆，其余字段会等本人核对后再补。
           </p>
         </div>
 
         <CollectionNavigation current="figures" />
+
+        <aside className={styles.figureNotice} aria-label="大 Fufu 收藏迁移说明">
+          <div>
+            <span>COLLECTION MOVE / FUFU</span>
+            <strong>大 Fufu 已回到独立分馆</strong>
+          </div>
+          <p>
+            原记录编号继续保留，但不再重复出现在手办清单中；生肖 Fufu
+            也会在同一分馆按年份排列。
+          </p>
+          <a href={sitePath("/collections/fufu/")}>前往 Fufu 收藏 ↗</a>
+        </aside>
 
         <div className={styles.figureStatus} aria-label="手办收藏公开范围">
           <div>
@@ -82,7 +95,10 @@ export default function CollectionsFiguresPage() {
           </div>
         </div>
 
-        <ol className={styles.figureGrid} aria-label="17 件手办与周边收藏">
+        <ol
+          className={styles.figureGrid}
+          aria-label={`${figureCollection.length} 件手办收藏`}
+        >
           {figureCollection.map((entry, index) => {
             const titleId = `${entry.id}-title`;
             const isPending = entry.verification === "pending";

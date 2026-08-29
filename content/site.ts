@@ -32,8 +32,7 @@ export const worldRoutes = [
     navLabel: "奇妙收藏馆",
     eyebrow: "WONDER COLLECTION",
     title: "奇妙收藏馆",
-    description:
-      "把看过的动画、玩过的游戏与真实手办收藏收进同一座馆，每个展区保留自己的记录方式。",
+    description: "把看过的动画、玩过的游戏、真实手办与初音未来 Fufu 收进同一座馆。",
     action: "进入收藏馆",
     motif: "✦",
     tone: "pink",
@@ -86,7 +85,7 @@ export const siteConfig = {
   shortName: "SEKAI",
   owner: publicProfile.handle,
   description:
-    "Mikureina 的个人次元站：南京大学 CS 在读，记录动画、游戏、手办收藏、计算机学习与网站世界线。",
+    "Mikureina 的个人次元站：南京大学 CS 在读，记录动画、游戏、手办、Fufu 收藏、计算机学习与网站世界线。",
   navigation: [
     { index: "00", label: "首页", href: "/" },
     ...worldRoutes.map(({ index, navLabel, href }) => ({
@@ -123,7 +122,7 @@ export const homepageFacts = [
     label: "WONDER / COLLECTION",
     soundEffect: "好き",
     motif: "✦",
-    copy: "喜欢动漫与游戏，也把动画、Steam 足迹和手办周边整理进奇妙收藏馆。",
+    copy: "喜欢动漫与游戏，也把动画、Steam 足迹、手办和 Fufu 整理进奇妙收藏馆。",
     tone: "pink",
   },
 ] as const;

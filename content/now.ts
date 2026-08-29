@@ -16,7 +16,7 @@ export const currentBroadcast = {
   updatedAt: "2026.08.29",
   headline: "最近在做什么？",
   summary:
-    "目前正在自学 Stanford CS224N，也会回顾此前学过的 CS231n；动画、游戏、手办和喜欢的网站都在慢慢整理进自己的世界。",
+    "目前正在自学 Stanford CS224N，也会回顾此前学过的 CS231n；动画、游戏、手办、Fufu 和喜欢的网站都在慢慢整理进自己的世界。",
   panel: {
     eyebrow: "MIKUREINA / CURRENTLY",
     mark: "NOW",

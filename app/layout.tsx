@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     "动漫",
     "游戏",
     "手办收藏",
+    "Fufu 收藏",
     "奇妙收藏馆",
     "计算机学习",
     "CS224N",

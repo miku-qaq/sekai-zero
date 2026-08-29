@@ -1,10 +1,11 @@
 import { animeCatalog } from "./anime";
 import { figureCollection } from "./figures";
+import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
 
-export type CollectionRoomId = "anime" | "games" | "figures";
+export type CollectionRoomId = "anime" | "games" | "figures" | "fufu";
 
-/** Canonical registry for the three rooms inside the Wonder Collection. */
+/** Canonical registry for the four rooms inside the Wonder Collection. */
 export const collectionRooms = [
   {
     id: "anime",
@@ -32,12 +33,23 @@ export const collectionRooms = [
     id: "figures",
     index: "03",
     href: "/collections/figures/",
-    label: "手办与周边",
+    label: "手办收藏",
     count: figureCollection.length,
     unit: "件收藏",
     motif: "◇",
     tone: "mint",
-    description: "先记录能够确认的角色，具体商品资料等待逐件核对。",
+    description: "记录能够确认的角色，具体商品资料等待逐件核对。",
+  },
+  {
+    id: "fufu",
+    index: "04",
+    href: "/collections/fufu/",
+    label: "Fufu 收藏",
+    count: fufuCollection.length,
+    unit: "只毛绒",
+    motif: "ふ",
+    tone: "amber",
+    description: "从虎生肖开始，单独整理初音未来 Fufu 与每年的生肖成员。",
   },
 ] as const;
 

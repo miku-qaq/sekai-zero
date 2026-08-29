@@ -32,7 +32,7 @@ export const profileQuestions = [
   {
     question: "为什么要做这个网站？",
     answer:
-      "我会长期维护这个网站，用它整理计算机学习笔记、记录动漫与游戏兴趣，也把动画、游戏和手办收藏成自己的奇妙收藏馆。",
+      "我会长期维护这个网站，用它整理计算机学习笔记、记录动漫与游戏兴趣，也把动画、游戏、手办和 Fufu 收藏成自己的奇妙收藏馆。",
   },
   {
     question: "平时喜欢什么？",
@@ -57,7 +57,7 @@ export const currentFocus = [
   {
     code: "COLLECTION",
     title: "奇妙收藏馆",
-    copy: "89 部看过的动画、146 款 Steam 游玩记录与 17 件手办周边，分别保留真实清晰的资料边界。",
+    copy: "89 部动画、146 款 Steam 游玩记录、16 件手办与 6 只 Fufu，分别保留真实清晰的资料边界。",
     href: "/collections/",
     action: "进入奇妙收藏馆",
   },

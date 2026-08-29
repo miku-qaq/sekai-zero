@@ -47,7 +47,7 @@
 
 .routes {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -83,6 +83,10 @@
 
 .routes a[data-accent="mint"] {
   --collection-accent: #43d7c1;
+}
+
+.routes a[data-accent="amber"] {
+  --collection-accent: #f0bd47;
 }
 
 .routes a[aria-current="page"] {
@@ -139,7 +143,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1060px) {
   .switcher {
     grid-template-columns: 1fr;
   }
@@ -149,7 +153,13 @@
   }
 
   .routes {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .routes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

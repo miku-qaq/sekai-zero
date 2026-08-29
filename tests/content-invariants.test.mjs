@@ -123,13 +123,17 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, three collection rooms and EP.014 as the latest release", async () => {
-  const [site, collections, figures, releases] = await Promise.all([
-    readProjectFile("content/site.ts"),
-    readProjectFile("content/collections.ts"),
-    readProjectFile("content/figures.ts"),
-    readProjectFile("content/releases.ts"),
-  ]);
+test("keeps five top-level worlds, four collection rooms and EP.015 as the latest release", async () => {
+  const [site, collections, figures, fufu, releases, animeCatalogRaw, gameCatalogRaw] =
+    await Promise.all([
+      readProjectFile("content/site.ts"),
+      readProjectFile("content/collections.ts"),
+      readProjectFile("content/figures.ts"),
+      readProjectFile("content/fufu.ts"),
+      readProjectFile("content/releases.ts"),
+      readProjectFile("content/anime-catalog.json"),
+      readProjectFile("content/games-catalog.json"),
+    ]);
 
   const worldRoutes = site.match(/export const worldRoutes = \[([^]*?)\] as const;/);
   assert.ok(worldRoutes, "site.ts should expose one canonical world route registry");
@@ -139,23 +143,29 @@ test("keeps five top-level worlds, three collection rooms and EP.014 as the late
   assert.deepEqual(hrefs, ["about", "collections", "study", "links", "logs"]);
   assert.doesNotMatch(worldRoutes[1], /href: "\/(?:anime|games)\/"/);
 
-  const roomIds = [...collections.matchAll(/id: "(anime|games|figures)"/g)].map(
+  const roomIds = [...collections.matchAll(/id: "(anime|games|figures|fufu)"/g)].map(
     (match) => match[1],
   );
   const roomHrefs = [
-    ...collections.matchAll(/href: "\/collections\/(anime|games|figures)\/"/g),
+    ...collections.matchAll(/href: "\/collections\/(anime|games|figures|fufu)\/"/g),
   ].map((match) => match[1]);
-  assert.deepEqual(roomIds, ["anime", "games", "figures"]);
-  assert.deepEqual(roomHrefs, ["anime", "games", "figures"]);
+  assert.deepEqual(roomIds, ["anime", "games", "figures", "fufu"]);
+  assert.deepEqual(roomHrefs, ["anime", "games", "figures", "fufu"]);
   assert.match(collections, /count: animeCatalog\.length/);
   assert.match(collections, /count: gameCatalog\.length/);
   assert.match(collections, /count: figureCollection\.length/);
+  assert.match(collections, /count: fufuCollection\.length/);
+  assert.match(
+    collections,
+    /export const collectionRecordCount = collectionRooms\.reduce/,
+  );
 
   const figureEntries = [
     ...figures.matchAll(/\{\s+id: "(figure-\d{3})",([^]*?)\n {2}\},/g),
   ];
-  assert.equal(figureEntries.length, 17);
-  assert.equal(new Set(figureEntries.map((match) => match[1])).size, 17);
+  assert.equal(figureEntries.length, 16);
+  assert.equal(new Set(figureEntries.map((match) => match[1])).size, 16);
+  assert.ok(!figureEntries.some((entry) => entry[1] === "figure-003"));
   const allowedFigureKeys = [
     "character",
     "format",
@@ -176,12 +186,97 @@ test("keeps five top-level worlds, three collection rooms and EP.014 as the late
     /price|cost|amount|currency|order|purchase|platform|date|time/i,
   );
 
+  const fufuEntries = [
+    ...fufu.matchAll(/\{\s+id: "(figure-003|fufu-[^"]+)",([^]*?)\n {2}\},/g),
+  ];
+  assert.equal(fufuEntries.length, 6);
+  assert.deepEqual(
+    fufuEntries.map((entry) => entry[1]),
+    [
+      "figure-003",
+      "fufu-zodiac-2022-tiger",
+      "fufu-zodiac-2023-rabbit",
+      "fufu-zodiac-2024-dragon",
+      "fufu-zodiac-2025-snake",
+      "fufu-zodiac-2026-horse",
+    ],
+  );
+  assert.equal(new Set(fufuEntries.map((entry) => entry[1])).size, 6);
+
+  const allowedFufuKeys = [
+    "character",
+    "id",
+    "kind",
+    "motif",
+    "officialUrl",
+    "title",
+    "tone",
+    "verification",
+    "year",
+    "zodiac",
+  ];
+  for (const entry of fufuEntries) {
+    const keys = [...`id: "${entry[1]}",${entry[2]}`.matchAll(/^\s*(\w+):/gm)].map(
+      (match) => match[1],
+    );
+    assert.deepEqual(keys.toSorted(), allowedFufuKeys);
+  }
+
+  assert.deepEqual(
+    fufuEntries.map((entry) => entry[2].match(/\n\s+title: "([^"]+)"/)?.[1]),
+    [
+      "初音ミクシリーズ　初音ミク　ふわぷち　どでかジャンボぬいぐるみ",
+      "初音ミク　寅2022　ふわふわぬいぐるみ（LL）",
+      "初音ミク　卯2023　ふわぷち　ぬいぐるみ（LL）",
+      "初音ミク　辰2024　ふわぷち　ぬいぐるみ（LL）",
+      "初音ミク　巳2025　ふわぷち　ぬいぐるみ（LL）",
+      "初音ミク　午2026　ふわぷち　ぬいぐるみ（LL）",
+    ],
+  );
+  assert.deepEqual(
+    fufuEntries.map((entry) => [
+      entry[2].match(/\n\s+zodiac: (null|"[^"]+")/)?.[1] ?? null,
+      entry[2].match(/\n\s+year: (null|\d{4})/)?.[1] ?? null,
+    ]),
+    [
+      ["null", "null"],
+      ['"寅"', "2022"],
+      ['"卯"', "2023"],
+      ['"辰"', "2024"],
+      ['"巳"', "2025"],
+      ['"午"', "2026"],
+    ],
+  );
+  assert.equal(fufu.match(/id: "figure-003"/g)?.length, 1);
+  assert.doesNotMatch(
+    fufuEntries.map((entry) => entry[0]).join("\n"),
+    /^\s*(?:price|cost|amount|currency|order|orderId|purchaseDate|purchasedAt|shop|batch):/im,
+  );
+
+  const contentFiles = (await readdir(new URL("content/", projectUrl)))
+    .filter((filename) => filename.endsWith(".ts"))
+    .toSorted();
+  const filesContainingMigratedId = [];
+  for (const filename of contentFiles) {
+    const source = await readProjectFile(`content/${filename}`);
+    if (/id: "figure-003"/.test(source)) filesContainingMigratedId.push(filename);
+  }
+  assert.deepEqual(filesContainingMigratedId, ["fufu.ts"]);
+
+  const animeCount = JSON.parse(animeCatalogRaw).length;
+  const gameCount = JSON.parse(gameCatalogRaw).items.length;
+  assert.equal(animeCount, 89);
+  assert.equal(gameCount, 146);
+  assert.equal(animeCount + gameCount + figureEntries.length + fufuEntries.length, 257);
+
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 14);
-  assert.equal(new Set(episodes).size, 14);
-  assert.equal(episodes[0], "014");
+  assert.equal(episodes.length, 15);
+  assert.equal(new Set(episodes).size, 15);
+  assert.equal(episodes[0], "015");
+  assert.match(releases, /episode: "EP\.015"[^]*?Fufu/);
+  assert.match(releases, /episode: "EP\.015"[^]*?(?:寅|生肖)/);
   assert.match(releases, /episode: "EP\.014"[^]*?奇妙收藏馆/);
   assert.match(releases, /NAVIGATION TERMINAL \/ ROUTE 05/);
   assert.match(releases, /GAMES \/ 146 · CV-001/);

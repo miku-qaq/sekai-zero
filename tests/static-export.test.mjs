@@ -59,6 +59,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>手办收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
     {
+      path: "collections/fufu/index.html",
+      title: /<title>Fufu 收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
@@ -79,6 +83,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>世界线日志 · SEKAI<\/title>/i,
     },
   ];
+  assert.equal(pages.length, 13, "Pages should expose exactly 13 public routes");
 
   const exported = new Map();
   for (const page of pages) {
@@ -162,14 +167,20 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(study, /LEARNING QUEUE|learning-queue/i);
 
   const collections = exported.get("collections/index.html");
-  assert.match(collections, /03 间/);
-  assert.match(collections, /252 条/);
+  assert.match(collections, /04 间/);
+  assert.match(collections, /257 条/);
   assert.match(collections, /动画展柜/);
   assert.match(collections, /游戏展柜/);
-  assert.match(collections, /手办与周边/);
+  assert.match(collections, /手办收藏/);
+  assert.match(collections, /Fufu 收藏/);
   assert.match(collections, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/games/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/figures/"`));
+  assert.match(collections, new RegExp(`href="${basePath}/collections/fufu/"`));
+  assert.match(collections, /从虎生肖开始/);
+  const visibleCollections = collections.replaceAll("<!-- -->", "");
+  assert.match(visibleCollections, /16 件/);
+  assert.match(visibleCollections, /6 只毛绒/);
   assert.equal(
     collections.match(new RegExp(`src="${basePath}/anime/[^"]+\\.webp"`, "g"))?.length,
     4,
@@ -185,6 +196,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(anime, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(anime, new RegExp(`href="${basePath}/collections/games/"`));
   assert.match(anime, new RegExp(`href="${basePath}/collections/figures/"`));
+  assert.match(anime, new RegExp(`href="${basePath}/collections/fufu/"`));
   assert.match(anime, /已展示 <strong>24<\/strong>/);
   assert.match(anime, /还有 (?:<!-- -->)?65(?:<!-- -->)? 部动画尚未展开/);
   assert.match(anime, /灵笼 上半季/);
@@ -204,6 +216,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(games, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(games, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(games, new RegExp(`href="${basePath}/collections/figures/"`));
+  assert.match(games, new RegExp(`href="${basePath}/collections/fufu/"`));
   assert.match(games, /实际游玩记录/);
   assert.match(games, /玩过 \/ 不排名/);
   assert.match(games, /Nintendo Switch 收藏待补充/);
@@ -222,10 +235,12 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(games, /STEAM \/ APP\s+\d+/i);
 
   const figures = exported.get("collections/figures/index.html");
-  assert.match(figures, /去重记录<\/dt><dd>17 件<\/dd>/);
-  assert.match(figures, /aria-label="17 件手办与周边收藏"/);
-  assert.equal(figures.match(/class="[^"]*figureCard[^"]*"/g)?.length, 17);
-  assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 17);
+  assert.match(figures, /去重记录<\/dt><dd>16 件<\/dd>/);
+  assert.match(figures, /aria-label="16 件手办收藏"/);
+  assert.equal(figures.match(/class="[^"]*figureCard[^"]*"/g)?.length, 16);
+  assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 16);
+  assert.doesNotMatch(figures, /id="figure-003-title"/);
+  assert.match(figures, new RegExp(`href="${basePath}/collections/fufu/"`));
   assert.match(figures, /初音未来/);
   assert.match(figures, /伊蕾娜/);
   assert.match(figures, /芙莉莲/);
@@ -236,11 +251,41 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(figures, /(?:order|订单)[-_:#：\s]*[A-Z0-9]{6,}/i);
   assert.doesNotMatch(figures, /<time\b|data-(?:price|order|date|purchased-at)=/i);
 
+  const fufu = exported.get("collections/fufu/index.html");
+  assert.match(fufu, /从寅 2022/);
+  assert.match(fufu, /本人收藏<\/dt><dd>06 只<\/dd>/);
+  assert.match(fufu, /aria-label="5 只生肖 Fufu 收藏"/);
+  assert.equal(fufu.match(/id="(?:figure-003|fufu-zodiac-[^"]+)-title"/g)?.length, 6);
+  assert.match(fufu, /id="figure-003-title"/);
+  assert.match(
+    fufu,
+    /初音ミクシリーズ\u3000初音ミク\u3000ふわぷち\u3000どでかジャンボぬいぐるみ/,
+  );
+  assert.match(fufu, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000卯2023\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000辰2024\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(fufu, /商品卡保留 SEGA 公布的正式名称/);
+  assert.match(fufu, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
+  assert.match(fufu, /href="https:\/\/info\.miku\.sega\.jp\/16431"/);
+  assert.match(fufu, /href="https:\/\/info\.miku\.sega\.jp\/17297"/);
+  assert.match(fufu, /href="https:\/\/segaplaza\.jp\/goods\/120142\/"/);
+  assert.match(fufu, /href="https:\/\/segaplaza\.jp\/goods\/120683\/"/);
+  assert.match(fufu, /href="https:\/\/segaplaza\.jp\/goods\/120684\/"/);
+  assert.match(fufu, new RegExp(`href="${basePath}/collections/figures/"`));
+  assert.doesNotMatch(fufu, /\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i);
+  assert.doesNotMatch(fufu, /[¥￥]\s*\d/);
+  assert.doesNotMatch(fufu, /\b(?:19|20)\d{2}[/-]\d{1,2}(?:[/-]\d{1,2})?\b/);
+  assert.doesNotMatch(fufu, /(?:order|订单)[-_:#：\s]*[A-Z0-9]{6,}/i);
+  assert.doesNotMatch(fufu, /<time\b|data-(?:price|order|date|purchased-at)=/i);
+
   for (const [html, expectedPath] of [
     [collections, `${basePath}/collections/`],
     [anime, `${basePath}/collections/anime/`],
     [games, `${basePath}/collections/games/`],
     [figures, `${basePath}/collections/figures/`],
+    [fufu, `${basePath}/collections/fufu/`],
   ]) {
     const match = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i);
     assert.ok(match, `${expectedPath} should expose a canonical URL`);
@@ -277,6 +322,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /原“制作档案”已并入日志/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-015"/);
+  assert.match(logs, /EP\.015/);
+  assert.match(logs, /Fufu/);
   assert.match(logs, /id="ep-014"/);
   assert.match(logs, /EP\.014/);
   assert.match(logs, /奇妙收藏馆/);
@@ -296,6 +344,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-015"/);
   assert.match(projects, /id="ep-014"/);
   assert.match(projects, /id="ep-013"/);
   assert.match(projects, /id="ep-012"/);
@@ -341,6 +390,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     anime,
     games,
     figures,
+    fufu,
     study,
     links,
     logs,

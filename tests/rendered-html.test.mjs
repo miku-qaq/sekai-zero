@@ -23,6 +23,32 @@ async function render(pathname = "/") {
   );
 }
 
+test("builds the exact 13-route Worker manifest", async () => {
+  const workerSource = await readFile(
+    new URL("../dist/server/index.js", import.meta.url),
+    "utf8",
+  );
+  const routePatterns = [...workerSource.matchAll(/\bpattern:`(\/[^`]*)`/g)].map(
+    (match) => match[1],
+  );
+
+  assert.deepEqual(routePatterns.toSorted(), [
+    "/",
+    "/about",
+    "/anime",
+    "/collections",
+    "/collections/anime",
+    "/collections/figures",
+    "/collections/fufu",
+    "/collections/games",
+    "/games",
+    "/links",
+    "/logs",
+    "/projects",
+    "/study",
+  ]);
+});
+
 test("server-renders a visitor-first homepage with personal and playful content", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -122,7 +148,7 @@ test("server-renders the five canonical top-level routes with clear purposes", a
   }
 });
 
-test("server-renders the three canonical rooms inside the Wonder Collection", async () => {
+test("server-renders the four canonical rooms inside the Wonder Collection", async () => {
   const rooms = [
     {
       pathname: "/collections/anime",
@@ -140,7 +166,13 @@ test("server-renders the three canonical rooms inside the Wonder Collection", as
       pathname: "/collections/figures",
       title: /<title>手办收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
       copy: /喜欢的角色，也在现实里留下坐标/,
-      subpage: "手办与周边",
+      subpage: "手办收藏",
+    },
+    {
+      pathname: "/collections/fufu",
+      title: /<title>Fufu 收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+      copy: /从寅 2022/,
+      subpage: "Fufu 收藏",
     },
   ];
 
@@ -160,6 +192,7 @@ test("server-renders the three canonical rooms inside the Wonder Collection", as
     assert.match(html, /href="\/collections\/anime\/"/);
     assert.match(html, /href="\/collections\/games\/"/);
     assert.match(html, /href="\/collections\/figures\/"/);
+    assert.match(html, /href="\/collections\/fufu\/"/);
     assert.match(html, /class="journey-navigation section-shell"/);
   }
 });
@@ -171,6 +204,8 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
 
   assert.match(html, /<title>世界线日志 · SEKAI<\/title>/i);
   assert.match(html, /id="project-overview"/);
+  assert.match(html, /EP\.015/);
+  assert.match(html, /id="ep-015"/);
   assert.match(html, /EP\.014/);
   assert.match(html, /id="ep-014"/);
   assert.match(html, /EP\.013/);
@@ -224,6 +259,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.015/);
+  assert.match(logs, /id="ep-015"/);
+  assert.match(logs, /Fufu/);
   assert.match(logs, /EP\.014/);
   assert.match(logs, /id="ep-014"/);
   assert.match(logs, /奇妙收藏馆/);
@@ -243,7 +281,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 14);
+  assert.equal(episodeIds.length, 15);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -281,20 +319,25 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 });
 
-test("keeps the Wonder Collection hub concise while linking all three rooms", async () => {
+test("keeps the Wonder Collection hub concise while linking all four rooms", async () => {
   const response = await render("/collections");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /03 间/);
-  assert.match(html, /252 条/);
+  assert.match(html, /04 间/);
+  assert.match(html, /257 条/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
-  assert.match(html, /手办与周边/);
+  assert.match(html, /手办收藏/);
+  assert.match(html, /Fufu 收藏/);
   assert.match(html, /href="\/collections\/anime\/"/);
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
-  assert.match(html, /两张本人收藏记录去重后确认 17 件/);
+  assert.match(html, /href="\/collections\/fufu\/"/);
+  assert.match(html, /从虎生肖开始/);
+  const visibleHtml = html.replaceAll("<!-- -->", "");
+  assert.match(visibleHtml, /16 件/);
+  assert.match(visibleHtml, /6 只毛绒/);
   assert.match(html, /89(?:<!-- -->)? 部已经看过的动画/);
   assert.match(html, /146(?:<!-- -->)? 款真实 Steam 游玩记录/);
 
@@ -325,9 +368,11 @@ test("publishes all 89 watched anime while initially rendering only 24 cards", a
   assert.match(html, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
-  assert.match(html, /手办与周边/);
+  assert.match(html, /手办收藏/);
+  assert.match(html, /Fufu 收藏/);
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
+  assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /已展示 <strong>24<\/strong>/);
   assert.match(html, /还有 (?:<!-- -->)?65(?:<!-- -->)? 部动画尚未展开/);
   assert.match(html, /灵笼 上半季/);
@@ -357,9 +402,11 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.match(html, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
-  assert.match(html, /手办与周边/);
+  assert.match(html, /手办收藏/);
+  assert.match(html, /Fufu 收藏/);
   assert.match(html, /href="\/collections\/anime\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
+  assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /实际游玩记录/);
   assert.match(html, /玩过 \/ 不排名/);
   assert.match(html, /只留下适合公开的收藏信息/);
@@ -382,15 +429,17 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.doesNotMatch(html, /STEAM \/ APP\s+\d+/i);
 });
 
-test("publishes 17 deduplicated figure records without public transaction values", async () => {
+test("publishes 16 deduplicated figure records after moving the large Fufu", async () => {
   const response = await render("/collections/figures");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /去重记录<\/dt><dd>17 件<\/dd>/);
-  assert.match(html, /aria-label="17 件手办与周边收藏"/);
-  assert.equal(html.match(/class="[^"]*figureCard[^"]*"/g)?.length, 17);
-  assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 17);
+  assert.match(html, /去重记录<\/dt><dd>16 件<\/dd>/);
+  assert.match(html, /aria-label="16 件手办收藏"/);
+  assert.equal(html.match(/class="[^"]*figureCard[^"]*"/g)?.length, 16);
+  assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 16);
+  assert.doesNotMatch(html, /id="figure-003-title"/);
+  assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /芙莉莲/);
@@ -399,6 +448,48 @@ test("publishes 17 deduplicated figure records without public transaction values
 
   // Boundary copy may name withheld field categories. Actual financial,
   // order and date values must never be serialized into the public document.
+  assert.doesNotMatch(html, /\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i);
+  assert.doesNotMatch(html, /[¥￥]\s*\d/);
+  assert.doesNotMatch(html, /\b(?:19|20)\d{2}[/-]\d{1,2}(?:[/-]\d{1,2})?\b/);
+  assert.doesNotMatch(html, /(?:order|订单)[-_:#：\s]*[A-Z0-9]{6,}/i);
+  assert.doesNotMatch(html, /<time\b|data-(?:price|order|date|purchased-at)=/i);
+});
+
+test("publishes the six owner-confirmed Fufu with formal names and no transaction values", async () => {
+  const response = await render("/collections/fufu");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>Fufu 收藏 · 奇妙收藏馆 · SEKAI<\/title>/i);
+  assert.match(html, /从寅 2022/);
+  assert.match(html, /本人收藏<\/dt><dd>06 只<\/dd>/);
+  assert.match(html, /aria-label="5 只生肖 Fufu 收藏"/);
+  assert.equal(html.match(/id="(?:figure-003|fufu-zodiac-[^"]+)-title"/g)?.length, 6);
+  assert.match(html, /id="figure-003-title"/);
+  assert.match(
+    html,
+    /初音ミクシリーズ\u3000初音ミク\u3000ふわぷち\u3000どでかジャンボぬいぐるみ/,
+  );
+  assert.match(html, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000卯2023\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000辰2024\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(html, /商品卡保留 SEGA 公布的正式名称/);
+  assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
+  assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/16431"/);
+  assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/17297"/);
+  assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120142\/"/);
+  assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120683\/"/);
+  assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120684\/"/);
+  assert.match(html, /href="\/collections\/figures\/"/);
+
+  const canonicalMatch = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i);
+  assert.ok(canonicalMatch, "the Fufu room should expose a canonical URL");
+  assert.equal(new URL(canonicalMatch[1]).pathname, "/sekai-zero/collections/fufu/");
+
+  // Years identify the zodiac editions. Prices, order identifiers and full
+  // transaction dates remain private and must not appear as public values.
   assert.doesNotMatch(html, /\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i);
   assert.doesNotMatch(html, /[¥￥]\s*\d/);
   assert.doesNotMatch(html, /\b(?:19|20)\d{2}[/-]\d{1,2}(?:[/-]\d{1,2})?\b/);
@@ -483,6 +574,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     gamesCompatibilityPage,
     collectionsContent,
     figuresContent,
+    fufuContent,
+    fufuPage,
     animeCatalogComponent,
     gameCatalogComponent,
     styles,
@@ -515,6 +608,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     readFile(new URL("../app/games/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/collections.ts", import.meta.url), "utf8"),
     readFile(new URL("../content/figures.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/fufu.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/collections/fufu/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/anime-catalog.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/game-catalog.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -627,6 +722,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.015"/);
+  assert.match(releasesContent, /Fufu/);
   assert.match(releasesContent, /episode: "EP\.014"/);
   assert.match(releasesContent, /奇妙收藏馆/);
   assert.match(releasesContent, /episode: "EP\.012"/);
@@ -643,10 +740,27 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(collectionsContent, /href: "\/collections\/anime\/"/);
   assert.match(collectionsContent, /href: "\/collections\/games\/"/);
   assert.match(collectionsContent, /href: "\/collections\/figures\/"/);
+  assert.match(collectionsContent, /href: "\/collections\/fufu\/"/);
   assert.match(collectionsContent, /count: animeCatalog\.length/);
   assert.match(collectionsContent, /count: gameCatalog\.length/);
   assert.match(collectionsContent, /count: figureCollection\.length/);
-  assert.equal(figuresContent.match(/id: "figure-\d{3}"/g)?.length, 17);
+  assert.match(collectionsContent, /count: fufuCollection\.length/);
+  assert.equal(figuresContent.match(/id: "figure-\d{3}"/g)?.length, 16);
+  assert.doesNotMatch(figuresContent, /id: "figure-003"/);
+  assert.equal(fufuContent.match(/id: "(?:figure-003|fufu-zodiac-[^"]+)"/g)?.length, 6);
+  assert.equal(fufuContent.match(/id: "figure-003"/g)?.length, 1);
+  assert.match(fufuContent, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(fufuContent, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.doesNotMatch(
+    fufuContent,
+    /^\s*(?:price|cost|amount|currency|order|orderId|purchaseDate|purchasedAt|shop|batch):/im,
+  );
+  assert.match(fufuPage, /export const dynamic = "force-static"/);
+  assert.match(
+    fufuPage,
+    /alternates: \{ canonical: absoluteSiteUrl\("collections\/fufu\/"\) \}/,
+  );
+  assert.match(fufuPage, /<CollectionNavigation current="fufu" \/>/);
   assert.match(animeCatalogComponent, /const PAGE_SIZE = 24/);
   assert.match(animeCatalogComponent, /visibleEntries\.slice\(0, visibleLimit\)/);
   assert.match(gameCatalogComponent, /const PAGE_SIZE = 24/);
