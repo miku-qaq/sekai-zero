@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { figureCollection, figureCollectionMeta } from "@/content/figures";
-import { sitePath } from "@/lib/site-path";
 import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
+import { CollectionLink } from "../collection-link";
 import { CollectionNavigation } from "../collection-navigation";
 import styles from "../collections.module.css";
 
@@ -74,7 +74,7 @@ export default function CollectionsFiguresPage() {
             原记录编号继续保留，但不再重复出现在手办清单中；生肖 Fufu
             也会在同一分馆按年份排列。
           </p>
-          <a href={sitePath("/collections/fufu/")}>前往 Fufu 收藏 ↗</a>
+          <CollectionLink href="/collections/fufu/">前往 Fufu 收藏 ↗</CollectionLink>
         </aside>
 
         <div className={styles.figureStatus} aria-label="手办收藏公开范围">

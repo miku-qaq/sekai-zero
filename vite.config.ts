@@ -34,12 +34,39 @@ const localBindingConfig = {
 
 export default defineConfig(async () => {
   const isGitHubPages = process.env.DEPLOY_TARGET === "github-pages";
+  const pagesRouterBasePath = process.env.NEXT_PUBLIC_BASE_PATH?.trim().replace(
+    /^\/+|\/+$/g,
+    "",
+  );
 
   // Pages is a pure static target. Returning before importing the Cloudflare
   // plugin keeps Worker bindings and Sites packaging out of its artifact.
   if (isGitHubPages) {
     return {
-      plugins: [vinext()],
+      plugins: [
+        vinext(),
+        {
+          name: "sekai-pages-router-base-path",
+          enforce: "post",
+          // Vinext currently cannot prerender this project with Next's
+          // `basePath`, but its browser router still needs the repository path
+          // for client-side Link navigation. Running after Vinext keeps this
+          // browser-only constant without changing the exported route keys.
+          config() {
+            return {
+              define: {
+                "process.env.__NEXT_ROUTER_BASEPATH": JSON.stringify(
+                  pagesRouterBasePath ? `/${pagesRouterBasePath}` : "",
+                ),
+                // Client navigation should keep the directory-style URL that
+                // prepare-pages materializes, even though Vinext's export
+                // crawler itself must run with trailingSlash disabled.
+                "process.env.__VINEXT_TRAILING_SLASH": JSON.stringify("true"),
+              },
+            };
+          },
+        },
+      ],
     };
   }
 

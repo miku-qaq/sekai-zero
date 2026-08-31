@@ -10,6 +10,7 @@ import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
+import { CollectionLink } from "./collection-link";
 import styles from "./collections.module.css";
 
 export const dynamic = "force-static";
@@ -64,7 +65,7 @@ export default function CollectionsPage() {
 
         <div className={styles.rooms}>
           {collectionRooms.map((room) => (
-            <a href={sitePath(room.href)} key={room.id} data-tone={room.tone}>
+            <CollectionLink href={room.href} key={room.id} data-tone={room.tone}>
               <span>{room.index} / ROOM</span>
               <strong aria-hidden="true">{room.motif}</strong>
               <div>
@@ -75,7 +76,7 @@ export default function CollectionsPage() {
                 <p>{room.description}</p>
               </div>
               <i aria-hidden="true">↗</i>
-            </a>
+            </CollectionLink>
           ))}
         </div>
       </section>
@@ -100,9 +101,9 @@ export default function CollectionsPage() {
               大 Fufu 迁出后，这里保留 {figureCollection.length}
               件手办记录。首版公开角色与收藏类型，价格、订单和无法可靠核对的商品型号不会进入公网页面。
             </p>
-            <a href={sitePath("/collections/figures/")}>
+            <CollectionLink href="/collections/figures/">
               查看 {figureCollection.length} 件手办记录 ↗
-            </a>
+            </CollectionLink>
           </div>
           <div className={styles.figurePreviewRail} aria-hidden="true">
             {figurePreview.map((entry, index) => (
@@ -125,9 +126,9 @@ export default function CollectionsPage() {
               从寅 2022 到午 2026，五只生肖 Fufu 连成时间线；之前的大 Fufu
               也从手办区迁回自己的展柜。
             </p>
-            <a href={sitePath("/collections/fufu/")}>
+            <CollectionLink href="/collections/fufu/">
               查看 {fufuCollection.length} 只 Fufu ↗
-            </a>
+            </CollectionLink>
           </div>
           <div className={styles.fufuPreviewRail} aria-hidden="true">
             {fufuPreview.map((entry) => (
@@ -161,7 +162,7 @@ export default function CollectionsPage() {
               <span>ROOM 01 / ANIME</span>
               <h3>{animeCatalog.length} 部已经看过的动画。</h3>
               <p>保留正式名称、年份、类型与 Bangumi 资料来源，不做分数排行。</p>
-              <a href={sitePath("/collections/anime/")}>进入动画展柜 ↗</a>
+              <CollectionLink href="/collections/anime/">进入动画展柜 ↗</CollectionLink>
             </div>
           </article>
 
@@ -185,7 +186,7 @@ export default function CollectionsPage() {
               <span>ROOM 02 / GAMES</span>
               <h3>{gameCatalog.length} 款真实 Steam 游玩记录。</h3>
               <p>只公开作品名、识别封面与商店入口；账号、时长与最近上线保持私有。</p>
-              <a href={sitePath("/collections/games/")}>进入游戏展柜 ↗</a>
+              <CollectionLink href="/collections/games/">进入游戏展柜 ↗</CollectionLink>
             </div>
           </article>
         </div>

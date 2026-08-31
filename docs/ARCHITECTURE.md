@@ -16,7 +16,7 @@ docs/                架构、路线图与重要决策
 .github/             自动检查和协作模板
 ```
 
-页面默认使用 Server Component。只有移动导航、主题切换、角色频道、收藏馆筛选与原生分享需要 `"use client"`，以控制浏览器 JavaScript 体积。
+页面默认使用 Server Component。只有移动导航、主题切换、角色频道、收藏馆筛选、馆内链接与原生分享需要 `"use client"`，以控制浏览器 JavaScript 体积。收藏馆只使用一个轻量 `CollectionLink` 客户端叶节点；它不导入动画、游戏、手办或 Fufu 数据，因此不会为了无刷新切换把完整目录带进公共导航脚本。
 
 当前页面职责如下：
 
@@ -35,9 +35,11 @@ docs/                架构、路线图与重要决策
 
 共享页头、内页首屏、页脚、首页路线卡和世界线续读控件位于 `app/components/`。`content/site.ts` 的 `worldRoutes` 是五条顶层公开路线的唯一注册表，按 About → Collections → Study → Links → Logs 的顺序同时驱动首页地图、页头、页脚与下一站导航，避免不同页面各自维护名称、编号和顺序。动画、游戏、手办与 Fufu 是 Collections 内部的四个子路由，不再占用顶层路线编号；导航终端中的网站收藏仍属于外部入口，不与作品收藏档案混合。内页视觉单独放在 `app/subpages.css`，功能较完整的客户端目录可以使用路由级 CSS Module；首页当前放送也使用独立 CSS Module，避免继续无边界扩张全局样式。`lib/site-path.ts` 是唯一的公开路径入口，负责兼容根域与 GitHub Pages 仓库子路径。
 
+EP.016 将总馆入口和四间分馆共享的 `CollectionNavigation` 接入轻量 `CollectionLink` 客户端叶节点。它以 `next/link` 管理框架导航，同时保留由 `sitePath` 生成的真实 `<a href>`；GitHub Pages 构建再为 Vinext 浏览器路由注入仓库 base path，使客户端路由和公开静态地址保持一致。框架运行时存在时，馆内切换不会重新加载整份文档；分馆之间的入口设置 `scroll={false}`，让访客保持在当前馆内导航附近。路由没有折叠成单个页面内的标签状态：四间分馆继续拥有独立 URL、标题、canonical 与静态正文，浏览器历史栈可以正常前进和后退。JavaScript 不可用时则自然降级为普通页面跳转。
+
 ## 内容演进
 
-站点级内容放在 `content/site.ts`；站点所有者确认公开的身份与联系字段只在 `content/profile.ts` 维护，About 负责渲染完整资料，导航终端只连接到该联系入口，避免内容漂移和无意义重复。`content/releases.ts` 是每一话编号、日期、摘要与决定的单一来源，当前为 EP.015，并且只由 Logs 负责完整展示；首页不再复制发布历史。EP.014 继续作为三分馆建立时的历史快照保留，不回写成当前结构。`content/now.ts` 只维护首页可核实的当前学习与兴趣信号，不放内部开发进度。角色兴趣文案、动画清单、游戏目录、手办记录、Fufu 记录、导航入口、项目资料与学习笔记分别放在 `content/about.ts`、`content/anime.ts`、`content/games.ts`、`content/figures.ts`、`content/fufu.ts`、`content/links.ts`、`content/projects.ts` 与 `content/study.ts`，让每次内容更新不触碰布局；`content/collections.ts` 只聚合四类收藏的名称、数量、单位、馆内路由与视觉语义，不把来源和字段不同的目录强行合并成一个 JSON。其中 `content/projects.ts` 仍是项目概览的数据源，但展示职责已经并入 Logs。
+站点级内容放在 `content/site.ts`；站点所有者确认公开的身份与联系字段只在 `content/profile.ts` 维护，About 负责渲染完整资料，导航终端只连接到该联系入口，避免内容漂移和无意义重复。`content/releases.ts` 是每一话编号、日期、摘要与决定的单一来源，当前为 EP.016，并且只由 Logs 负责完整展示；首页不再复制发布历史。EP.014 与 EP.015 继续作为当时收藏馆结构的历史快照保留，不回写成当前结构。`content/now.ts` 只维护首页可核实的当前学习与兴趣信号，不放内部开发进度。角色兴趣文案、动画清单、游戏目录、手办记录、Fufu 记录、导航入口、项目资料与学习笔记分别放在 `content/about.ts`、`content/anime.ts`、`content/games.ts`、`content/figures.ts`、`content/fufu.ts`、`content/links.ts`、`content/projects.ts` 与 `content/study.ts`，让每次内容更新不触碰布局；`content/collections.ts` 只聚合四类收藏的名称、数量、单位、馆内路由与视觉语义，不把来源和字段不同的目录强行合并成一个 JSON。其中 `content/projects.ts` 仍是项目概览的数据源，但展示职责已经并入 Logs。
 
 `content/anime-source.json` 保留站点所有者给出的 89 条原始记录及人工核对后的 Bangumi 条目 ID；`content/anime-catalog.json` 和 `public/anime/` 由同步脚本生成，`content/anime.ts` 只向页面公开正式名称、年份、形式和封面来源。页面总数必须由实际数组长度计算；每张本地封面都保留 Bangumi 条目页和原图地址，并输出能识别作品的替代文本。匹配失败或存在歧义时必须先核对，不得静默替换、合并或删除用户清单中的作品，也不得在页面并列展示别名。
 

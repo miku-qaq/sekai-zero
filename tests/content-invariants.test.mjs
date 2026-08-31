@@ -123,7 +123,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, four collection rooms and EP.015 as the latest release", async () => {
+test("keeps five top-level worlds, four collection rooms and EP.016 as the latest release", async () => {
   const [site, collections, figures, fufu, releases, animeCatalogRaw, gameCatalogRaw] =
     await Promise.all([
       readProjectFile("content/site.ts"),
@@ -272,9 +272,11 @@ test("keeps five top-level worlds, four collection rooms and EP.015 as the lates
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 15);
-  assert.equal(new Set(episodes).size, 15);
-  assert.equal(episodes[0], "015");
+  assert.equal(episodes.length, 16);
+  assert.equal(new Set(episodes).size, 16);
+  assert.equal(episodes[0], "016");
+  assert.match(releases, /episode: "EP\.016"[^]*?客户端导航/);
+  assert.match(releases, /episode: "EP\.016"[^]*?不再整页刷新/);
   assert.match(releases, /episode: "EP\.015"[^]*?Fufu/);
   assert.match(releases, /episode: "EP\.015"[^]*?(?:寅|生肖)/);
   assert.match(releases, /episode: "EP\.014"[^]*?奇妙收藏馆/);

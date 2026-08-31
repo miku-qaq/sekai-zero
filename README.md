@@ -10,7 +10,7 @@ Mikureina 长期维护、持续迭代的动漫主题个人网站。首页以明�
 ## 技术路线
 
 - **TypeScript**：公开接口和内容模型都有静态类型，降低长期修改时的回归风险。
-- **React 19 + Vinext**：使用组件化 UI 与 App Router 结构，并输出 Cloudflare Worker 兼容产物。
+- **React 19 + Vinext**：使用组件化 UI 与 App Router 结构；馆内入口由 `next/link` 提供客户端导航，同时输出 Cloudflare Worker 兼容产物。
 - **Tailwind CSS 4 + CSS design tokens**：Tailwind 负责构建管线，站点自己的颜色、间距与主题通过可维护的 CSS 变量表达。
 - **Node.js 22 + npm**：Windows 与 macOS 使用同一套锁文件和脚本。
 - **GitHub Actions**：每个提交自动执行格式、Lint、类型、构建与服务端渲染检查。
@@ -48,7 +48,7 @@ Windows PowerShell 如果因本机执行策略拦截 `npm.ps1`，请使用 `npm.
 
 实体收藏分为 16 件手办与 6 件 Fufu。原 17 条截图记录中的大 Fufu 已从手办分馆迁入独立 Fufu 分馆；另外五件生肖收藏依次为寅、卯、辰、巳、午。六件 Fufu 的正式商品名均以对应 SEGA 商品页为准，其中 2022 寅款保留官方名称中的 `ふわふわ`，其余生肖款使用 `ふわぷち`，不会为了统一显示而擅自改写。原始截图只用于去重与核对，不复制进 `public/`，也不公开其中的价格、日期、订单或第三方 App 界面；未来优先使用 Mikureina 本人实拍，并在加入 `public/figures/` 或 `public/fufu/` 前记录来源、替代文本与优化规格。
 
-`/collections/` 是四类收藏唯一的顶层公开入口，并继续连接 `/collections/anime/`、`/collections/games/`、`/collections/figures/` 与 `/collections/fufu/` 四个馆内子路由。原 `/anime/` 与 `/games/` 继续作为旧书签兼容地址存在，但不再进入顶层导航；它们通过 `noindex` 与 canonical 元数据分别把搜索索引统一到对应的新分馆。
+`/collections/` 是四类收藏唯一的顶层公开入口，并继续连接 `/collections/anime/`、`/collections/games/`、`/collections/figures/` 与 `/collections/fufu/` 四个馆内子路由。自 EP.016 起，总馆与分馆入口统一使用 `next/link`：在浏览器脚本可用时，切换动画、游戏、手办与 Fufu 不再触发整页刷新，分馆之间切换还会保持当前浏览位置；每个分馆仍拥有独立 URL，可直接分享并支持浏览器前进、后退。链接继续渲染为标准 `<a href>`，因此关闭 JavaScript 时可以普通跳转，GitHub Pages 的静态导出也不依赖单页状态。原 `/anime/` 与 `/games/` 继续作为旧书签兼容地址存在，但不再进入顶层导航；它们通过 `noindex` 与 canonical 元数据分别把搜索索引统一到对应的新分馆。
 
 ## 每周更新方式
 

@@ -49,6 +49,20 @@ test("builds the exact 13-route Worker manifest", async () => {
   ]);
 });
 
+test("ships collection navigation as a hydrated client boundary", async () => {
+  const manifest = JSON.parse(
+    await readFile(
+      new URL("../dist/client/.vite/manifest.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const entry = manifest["app/collections/collection-link.tsx"];
+
+  assert.ok(entry, "collection-link should be present in the client manifest");
+  assert.equal(entry.isDynamicEntry, true);
+  await access(new URL(`../dist/client/${entry.file}`, import.meta.url));
+});
+
 test("server-renders a visitor-first homepage with personal and playful content", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -204,6 +218,8 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
 
   assert.match(html, /<title>世界线日志 · SEKAI<\/title>/i);
   assert.match(html, /id="project-overview"/);
+  assert.match(html, /EP\.016/);
+  assert.match(html, /id="ep-016"/);
   assert.match(html, /EP\.015/);
   assert.match(html, /id="ep-015"/);
   assert.match(html, /EP\.014/);
@@ -259,6 +275,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.016/);
+  assert.match(logs, /id="ep-016"/);
+  assert.match(logs, /让收藏馆切换不再打断参观/);
   assert.match(logs, /EP\.015/);
   assert.match(logs, /id="ep-015"/);
   assert.match(logs, /Fufu/);
@@ -281,7 +300,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 15);
+  assert.equal(episodeIds.length, 16);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -589,6 +608,10 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     linkTerminal,
     linksContent,
     favoriteChannelsComponent,
+    collectionNavigation,
+    collectionLink,
+    collectionsPage,
+    viteConfig,
   ] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/site.ts", import.meta.url), "utf8"),
@@ -629,6 +652,16 @@ test("keeps navigation, deep links and playful interactions within safe boundari
       new URL("../app/components/favorite-channels.tsx", import.meta.url),
       "utf8",
     ),
+    readFile(
+      new URL("../app/collections/collection-navigation.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../app/collections/collection-link.tsx", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../app/collections/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /from "@\/content\/site"/);
@@ -722,6 +755,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.016"/);
+  assert.match(releasesContent, /COLLECTION SPA NAVIGATION/);
   assert.match(releasesContent, /episode: "EP\.015"/);
   assert.match(releasesContent, /Fufu/);
   assert.match(releasesContent, /episode: "EP\.014"/);
@@ -745,6 +780,20 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(collectionsContent, /count: gameCatalog\.length/);
   assert.match(collectionsContent, /count: figureCollection\.length/);
   assert.match(collectionsContent, /count: fufuCollection\.length/);
+  assert.match(collectionLink, /^"use client";/);
+  assert.match(collectionLink, /import Link from "next\/link"/);
+  assert.match(collectionLink, /legacyBehavior/);
+  assert.match(collectionLink, /href=\{sitePath\(href\)\}/);
+  assert.doesNotMatch(collectionLink, /window\.location|location\.assign/);
+  assert.match(collectionNavigation, /import \{ CollectionLink \}/);
+  assert.match(collectionNavigation, /href=\{room\.href\}/);
+  assert.match(collectionNavigation, /scroll=\{false\}/);
+  assert.doesNotMatch(collectionNavigation, /<a\b/);
+  assert.match(collectionsPage, /import \{ CollectionLink \}/);
+  assert.doesNotMatch(collectionsPage, /<a[^>]+href=\{sitePath\([^)]*collections/);
+  assert.match(viteConfig, /process\.env\.__NEXT_ROUTER_BASEPATH/);
+  assert.match(viteConfig, /process\.env\.__VINEXT_TRAILING_SLASH/);
+  assert.match(viteConfig, /process\.env\.NEXT_PUBLIC_BASE_PATH/);
   assert.equal(figuresContent.match(/id: "figure-\d{3}"/g)?.length, 16);
   assert.doesNotMatch(figuresContent, /id: "figure-003"/);
   assert.equal(fufuContent.match(/id: "(?:figure-003|fufu-zodiac-[^"]+)"/g)?.length, 6);

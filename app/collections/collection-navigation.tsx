@@ -1,5 +1,5 @@
 import { collectionRooms, type CollectionRoomId } from "@/content/collections";
-import { sitePath } from "@/lib/site-path";
+import { CollectionLink } from "./collection-link";
 import styles from "./collection-navigation.module.css";
 
 /** Shared doorway between the four rooms inside the Wonder Collection. */
@@ -9,15 +9,16 @@ export function CollectionNavigation({ current }: { current?: CollectionRoomId }
       <div className={styles.intro}>
         <span>MIKUREINA&apos;S WONDER COLLECTION</span>
         <strong>选择一间展柜</strong>
-        <a href={sitePath("/collections/")}>返回馆内导览</a>
+        <CollectionLink href="/collections/">返回馆内导览</CollectionLink>
       </div>
       <div className={styles.routes}>
         {collectionRooms.map((room) => {
           const isCurrent = room.id === current;
           return (
-            <a
+            <CollectionLink
               key={room.id}
-              href={sitePath(room.href)}
+              href={room.href}
+              scroll={false}
               aria-current={isCurrent ? "page" : undefined}
               data-accent={room.tone}
             >
@@ -31,7 +32,7 @@ export function CollectionNavigation({ current }: { current?: CollectionRoomId }
               <span className={styles.routeArrow} aria-hidden="true">
                 {isCurrent ? "●" : "↗"}
               </span>
-            </a>
+            </CollectionLink>
           );
         })}
       </div>

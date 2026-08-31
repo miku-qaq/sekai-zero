@@ -39,6 +39,39 @@ function assertBasePathSafeReferences(html, pagePath, basePath) {
 
 test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const basePath = normalizedBasePath();
+  const clientManifest = JSON.parse(
+    await readFile(
+      new URL("../dist/client/.vite/manifest.json", import.meta.url),
+      "utf8",
+    ),
+  );
+  const collectionLinkEntry = clientManifest["app/collections/collection-link.tsx"];
+  assert.ok(collectionLinkEntry, "collection navigation needs a client entry");
+  assert.equal(collectionLinkEntry.isDynamicEntry, true);
+  const collectionLinkChunk = await readFile(
+    new URL(`../dist/client/${collectionLinkEntry.file}`, import.meta.url),
+    "utf8",
+  );
+  assert.ok(
+    collectionLinkChunk.includes(`=\`${basePath}\`,`),
+    "the Pages Link runtime should retain the repository base path",
+  );
+  assert.match(
+    collectionLinkChunk,
+    new RegExp(`=\\\`${basePath}\\\`,[A-Za-z_$][\\w$]*=!0`),
+    "the Pages Link runtime should preserve directory-style URLs",
+  );
+  const browserEntry = clientManifest["virtual:vinext-app-browser-entry"];
+  assert.ok(browserEntry, "the App Router browser entry should be emitted");
+  const browserChunk = await readFile(
+    new URL(`../dist/client/${browserEntry.file}`, import.meta.url),
+    "utf8",
+  );
+  assert.ok(
+    browserChunk.includes(`=\`${basePath}\`,`),
+    "the Pages navigation runtime should retain the repository base path",
+  );
+
   const pages = [
     { path: "index.html", title: /<title>SEKAI \/ 00 · 个人次元站<\/title>/i },
     { path: "about/index.html", title: /<title>关于我 · SEKAI<\/title>/i },
@@ -322,6 +355,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /原“制作档案”已并入日志/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-016"/);
+  assert.match(logs, /EP\.016/);
+  assert.match(logs, /让收藏馆切换不再打断参观/);
   assert.match(logs, /id="ep-015"/);
   assert.match(logs, /EP\.015/);
   assert.match(logs, /Fufu/);
@@ -344,6 +380,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-016"/);
   assert.match(projects, /id="ep-015"/);
   assert.match(projects, /id="ep-014"/);
   assert.match(projects, /id="ep-013"/);
