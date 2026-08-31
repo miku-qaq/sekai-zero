@@ -38,7 +38,7 @@ export const collectionRooms = [
     unit: "件收藏",
     motif: "◇",
     tone: "mint",
-    description: "记录能够确认的角色，具体商品资料等待逐件核对。",
+    description: "角色与作品出处已完成核对，正式商品资料等待盒照或实拍确认。",
   },
   {
     id: "fufu",

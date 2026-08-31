@@ -218,6 +218,8 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
 
   assert.match(html, /<title>世界线日志 · SEKAI<\/title>/i);
   assert.match(html, /id="project-overview"/);
+  assert.match(html, /EP\.017/);
+  assert.match(html, /id="ep-017"/);
   assert.match(html, /EP\.016/);
   assert.match(html, /id="ep-016"/);
   assert.match(html, /EP\.015/);
@@ -271,10 +273,14 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /原“制作档案”已并入日志/);
+  assert.match(logs, /17 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.017/);
+  assert.match(logs, /id="ep-017"/);
+  assert.match(logs, /手办/);
   assert.match(logs, /EP\.016/);
   assert.match(logs, /id="ep-016"/);
   assert.match(logs, /让收藏馆切换不再打断参观/);
@@ -300,7 +306,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 16);
+  assert.equal(episodeIds.length, 17);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -448,22 +454,71 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.doesNotMatch(html, /STEAM \/ APP\s+\d+/i);
 });
 
-test("publishes 16 deduplicated figure records after moving the large Fufu", async () => {
+test("publishes 16 character-verified figures with stable archive numbers", async () => {
   const response = await render("/collections/figures");
   assert.equal(response.status, 200);
   const html = await response.text();
+  const visibleHtml = html.replaceAll("<!-- -->", "");
 
   assert.match(html, /去重记录<\/dt><dd>16 件<\/dd>/);
-  assert.match(html, /aria-label="16 件手办收藏"/);
-  assert.equal(html.match(/class="[^"]*figureCard[^"]*"/g)?.length, 16);
+  assert.match(html, /初音未来<\/dt><dd>07 件<\/dd>/);
+  assert.match(html, /角色核对<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(html, /aria-label="16 件手办收藏核对目录"/);
   assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(html, /id="figure-003-title"/);
+  assert.deepEqual(
+    [...html.matchAll(/id="figure-(\d{3})-title"/g)].map((match) => match[1]),
+    [
+      "001",
+      "002",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010",
+      "011",
+      "012",
+      "013",
+      "014",
+      "015",
+      "016",
+      "017",
+    ],
+  );
+  assert.deepEqual(
+    [...visibleHtml.matchAll(/FIG \/ (\d{3})/g)].map((match) => match[1]),
+    [
+      "001",
+      "002",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010",
+      "011",
+      "012",
+      "013",
+      "014",
+      "015",
+      "016",
+      "017",
+    ],
+  );
   assert.match(html, /href="\/collections\/fufu\/"/);
+  assert.match(html, /搜索角色或作品/);
+  assert.match(html, /aria-label="筛选手办角色"/);
+  assert.match(visibleHtml, /当前展示 <strong>16<\/strong> \/\s*总计 16 件/);
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /芙莉莲/);
-  assert.match(html, /角色待确认/);
-  assert.match(html, /实物照片待补充/);
+  assert.match(html, /Angel Beats!/);
+  assert.equal(html.match(/角色已核对/g)?.length, 16);
+  assert.doesNotMatch(html, /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/);
+  assert.doesNotMatch(html, /NEXT \/ 03[^]{0,160}本人拍摄的实物照片/);
 
   // Boundary copy may name withheld field categories. Actual financial,
   // order and date values must never be serialized into the public document.
@@ -489,10 +544,10 @@ test("publishes the six owner-confirmed Fufu with formal names and no transactio
     html,
     /初音ミクシリーズ\u3000初音ミク\u3000ふわぷち\u3000どでかジャンボぬいぐるみ/,
   );
-  assert.match(html, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ\(LL\)/);
   assert.match(html, /初音ミク\u3000卯2023\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(html, /初音ミク\u3000辰2024\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
-  assert.match(html, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(html, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（ＬＬ）/);
   assert.match(html, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(html, /商品卡保留 SEGA 公布的正式名称/);
   assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
@@ -593,6 +648,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     gamesCompatibilityPage,
     collectionsContent,
     figuresContent,
+    figuresPage,
+    figureCatalog,
     fufuContent,
     fufuPage,
     animeCatalogComponent,
@@ -631,6 +688,11 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     readFile(new URL("../app/games/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../content/collections.ts", import.meta.url), "utf8"),
     readFile(new URL("../content/figures.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/collections/figures/page.tsx", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/collections/figures/figure-catalog.tsx", import.meta.url),
+      "utf8",
+    ),
     readFile(new URL("../content/fufu.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/fufu/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/anime-catalog.tsx", import.meta.url), "utf8"),
@@ -755,6 +817,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.017"/);
+  assert.match(releasesContent, /手办/);
   assert.match(releasesContent, /episode: "EP\.016"/);
   assert.match(releasesContent, /COLLECTION SPA NAVIGATION/);
   assert.match(releasesContent, /episode: "EP\.015"/);
@@ -794,11 +858,41 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(viteConfig, /process\.env\.__NEXT_ROUTER_BASEPATH/);
   assert.match(viteConfig, /process\.env\.__VINEXT_TRAILING_SLASH/);
   assert.match(viteConfig, /process\.env\.NEXT_PUBLIC_BASE_PATH/);
+  const figureCollectionSource = figuresContent.match(
+    /export const figureCollection:[^=]+ = \[([^]*?)\] as const;/,
+  );
+  assert.ok(figureCollectionSource, "figures.ts should expose the typed collection");
   assert.equal(figuresContent.match(/id: "figure-\d{3}"/g)?.length, 16);
   assert.doesNotMatch(figuresContent, /id: "figure-003"/);
+  assert.equal(figureCollectionSource[1].match(/character: "初音未来"/g)?.length, 7);
+  assert.equal(
+    figureCollectionSource[1].match(/verification: "identity-confirmed"/g)?.length,
+    16,
+  );
+  assert.equal(figureCollectionSource[1].match(/product: null/g)?.length, 16);
+  assert.match(figuresContent, /work: string;/);
+  assert.match(figuresContent, /product: FigureProductDetails;/);
+  assert.match(
+    figuresContent,
+    /id: "figure-017"[^]*?character: "初音未来"[^]*?work: "初音未来"/,
+  );
+  assert.doesNotMatch(
+    figuresContent,
+    /verification: "pending"|character: "角色待确认"|format: "待确认"/,
+  );
+  assert.match(figuresPage, /<FigureCatalog \/>/);
+  assert.doesNotMatch(figuresPage, /PUBLIC \/ 01|PRIVATE \/ 02|NEXT \/ 03/);
+  assert.match(figureCatalog, /^"use client";/);
+  assert.match(figureCatalog, /id\.replace\("figure-", ""\)/);
+  assert.match(figureCatalog, /FIG \/ \{number\}/);
+  assert.doesNotMatch(figureCatalog, /index \+ 1|角色待确认|NEEDS CONFIRMATION/);
   assert.equal(fufuContent.match(/id: "(?:figure-003|fufu-zodiac-[^"]+)"/g)?.length, 6);
   assert.equal(fufuContent.match(/id: "figure-003"/g)?.length, 1);
-  assert.match(fufuContent, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(fufuContent, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ\(LL\)/);
+  assert.match(
+    fufuContent,
+    /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（ＬＬ）/,
+  );
   assert.match(fufuContent, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.doesNotMatch(
     fufuContent,

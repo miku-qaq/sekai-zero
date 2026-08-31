@@ -67,6 +67,7 @@ export default function CollectionsAnimePage() {
     <main id="main-content" className={`subpage-main ${styles.animePage}`}>
       <PageMasthead
         currentHref="/collections/"
+        animate={false}
         subpageLabel="动画展柜"
         title="看过的故事，也组成了我的世界。"
         lead={archiveLead}

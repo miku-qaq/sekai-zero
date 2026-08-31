@@ -125,7 +125,7 @@
 
 .zodiacRibbon {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
   gap: 7px;
   align-items: stretch;
 }
@@ -368,7 +368,7 @@
 
 .fufuGrid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: clamp(12px, 1.45vw, 20px);
   margin: 0;
   padding: 2px;
@@ -602,7 +602,9 @@
 
 @media (max-width: 500px) {
   .zodiacRibbon {
-    grid-template-columns: repeat(5, minmax(58px, 1fr));
+    grid-auto-columns: minmax(58px, 1fr);
+    grid-auto-flow: column;
+    grid-template-columns: none;
     overflow-x: auto;
   }
 

@@ -9,8 +9,16 @@ import styles from "./fufu.module.css";
 
 export const dynamic = "force-static";
 
-const description =
-  "Mikureina 的 Fufu 毛绒收藏：大 Fufu 与从寅 2022 到午 2026 的五只初音未来生肖 Fufu。";
+const largeFufu = fufuCollection.find((entry) => entry.kind === "large");
+const zodiacFufu = fufuCollection.filter((entry) => entry.kind === "zodiac");
+const firstZodiac = zodiacFufu.at(0);
+const latestZodiac = zodiacFufu.at(-1);
+const zodiacRange =
+  firstZodiac && latestZodiac
+    ? `${firstZodiac.zodiac} ${firstZodiac.year} → ${latestZodiac.zodiac} ${latestZodiac.year}`
+    : "等待生肖记录";
+const zodiacLabels = zodiacFufu.map((entry) => entry.zodiac).join("、");
+const description = `Mikureina 的 Fufu 毛绒收藏：大 Fufu 与 ${zodiacRange} 的 ${zodiacFufu.length} 只初音未来生肖 Fufu。`;
 
 export const metadata: Metadata = {
   title: "Fufu 收藏 · 奇妙收藏馆",
@@ -20,14 +28,12 @@ export const metadata: Metadata = {
   twitter: { title: "Fufu 收藏 · 奇妙收藏馆", description },
 };
 
-const largeFufu = fufuCollection.find((entry) => entry.kind === "large");
-const zodiacFufu = fufuCollection.filter((entry) => entry.kind === "zodiac");
-
 export default function CollectionsFufuPage() {
   return (
     <main id="main-content" className={`subpage-main ${styles.fufuPage}`}>
       <PageMasthead
         currentHref="/collections/"
+        animate={false}
         subpageLabel="Fufu 收藏"
         title="软乎乎的未来，也有自己的展柜。"
         lead={fufuCollectionMeta.summary}
@@ -40,7 +46,7 @@ export default function CollectionsFufuPage() {
             label: "生肖成员",
             value: `${String(zodiacFufu.length).padStart(2, "0")} 只`,
           },
-          { label: "收藏时间线", value: "寅 2022 → 午 2026" },
+          { label: "收藏时间线", value: zodiacRange },
         ]}
       />
 
@@ -51,7 +57,7 @@ export default function CollectionsFufuPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 04 / FUFU PLUSH COLLECTION</p>
-            <h2 id="fufu-archive-title">从一只大 Fufu，到完整的生肖队列。</h2>
+            <h2 id="fufu-archive-title">从一只大 Fufu，到每年延续的生肖队列。</h2>
           </div>
           <p>
             “Fufu”是本站使用的收藏称呼；每张生肖卡都保留 SEGA
@@ -64,14 +70,15 @@ export default function CollectionsFufuPage() {
         <div className={styles.originPanel}>
           <div className={styles.originYear} aria-hidden="true">
             <span>COLLECTION START</span>
-            <strong>2022</strong>
-            <i>寅</i>
+            <strong>{firstZodiac?.year ?? "—"}</strong>
+            <i>{firstZodiac?.zodiac ?? "始"}</i>
           </div>
           <div className={styles.originCopy}>
             <span>OWNER CONFIRMED / ZODIAC LINE</span>
             <h3>我的生肖 Fufu 收藏，从虎年开始。</h3>
             <p>
-              寅、卯、辰、巳、午依次连接成五年的收藏时间线。这里记录“我拥有哪一只”和官方正式名称；价格、订单、商家与购入日期继续保持私有。
+              {zodiacLabels}依次连接成{zodiacFufu.length}
+              年的收藏时间线。这里记录“我拥有哪一只”和官方正式名称；价格、订单、商家与购入日期继续保持私有。
             </p>
           </div>
           <div className={styles.zodiacRibbon} aria-label="生肖收藏顺序">
@@ -114,15 +121,19 @@ export default function CollectionsFufuPage() {
 
         <div className={styles.zodiacHeading}>
           <div>
-            <span>ANNUAL LINEUP / 05</span>
+            <span>ANNUAL LINEUP / {String(zodiacFufu.length).padStart(2, "0")}</span>
             <h3>生肖 Fufu 时间线</h3>
           </div>
           <p>
-            从第一弹寅年款开始，按生肖年份排列；2022 年款保留正式名称中的“ふわふわ”。
+            从第一弹{firstZodiac?.zodiac ?? "起点"}
+            年款开始，按生肖年份排列；首款保留正式名称中的“ふわふわ”。
           </p>
         </div>
 
-        <ol className={styles.fufuGrid} aria-label="5 只生肖 Fufu 收藏">
+        <ol
+          className={styles.fufuGrid}
+          aria-label={`${zodiacFufu.length} 只生肖 Fufu 收藏`}
+        >
           {zodiacFufu.map((entry, index) => {
             const titleId = `${entry.id}-title`;
             return (

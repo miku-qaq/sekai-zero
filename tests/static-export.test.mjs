@@ -268,16 +268,68 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(games, /STEAM \/ APP\s+\d+/i);
 
   const figures = exported.get("collections/figures/index.html");
+  const visibleFigures = figures.replaceAll("<!-- -->", "");
   assert.match(figures, /去重记录<\/dt><dd>16 件<\/dd>/);
-  assert.match(figures, /aria-label="16 件手办收藏"/);
-  assert.equal(figures.match(/class="[^"]*figureCard[^"]*"/g)?.length, 16);
+  assert.match(figures, /初音未来<\/dt><dd>07 件<\/dd>/);
+  assert.match(figures, /角色核对<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(figures, /aria-label="16 件手办收藏核对目录"/);
   assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(figures, /id="figure-003-title"/);
+  assert.deepEqual(
+    [...figures.matchAll(/id="figure-(\d{3})-title"/g)].map((match) => match[1]),
+    [
+      "001",
+      "002",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010",
+      "011",
+      "012",
+      "013",
+      "014",
+      "015",
+      "016",
+      "017",
+    ],
+  );
+  assert.deepEqual(
+    [...visibleFigures.matchAll(/FIG \/ (\d{3})/g)].map((match) => match[1]),
+    [
+      "001",
+      "002",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010",
+      "011",
+      "012",
+      "013",
+      "014",
+      "015",
+      "016",
+      "017",
+    ],
+  );
   assert.match(figures, new RegExp(`href="${basePath}/collections/fufu/"`));
+  assert.match(figures, /搜索角色或作品/);
+  assert.match(figures, /aria-label="筛选手办角色"/);
   assert.match(figures, /初音未来/);
   assert.match(figures, /伊蕾娜/);
   assert.match(figures, /芙莉莲/);
-  assert.match(figures, /角色待确认/);
+  assert.match(figures, /Angel Beats!/);
+  assert.equal(figures.match(/角色已核对/g)?.length, 16);
+  assert.doesNotMatch(
+    figures,
+    /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/,
+  );
+  assert.doesNotMatch(figures, /NEXT \/ 03[^]{0,160}本人拍摄的实物照片/);
   assert.doesNotMatch(figures, /\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i);
   assert.doesNotMatch(figures, /[¥￥]\s*\d/);
   assert.doesNotMatch(figures, /\b(?:19|20)\d{2}[/-]\d{1,2}(?:[/-]\d{1,2})?\b/);
@@ -294,10 +346,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     fufu,
     /初音ミクシリーズ\u3000初音ミク\u3000ふわぷち\u3000どでかジャンボぬいぐるみ/,
   );
-  assert.match(fufu, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000寅2022\u3000ふわふわぬいぐるみ\(LL\)/);
   assert.match(fufu, /初音ミク\u3000卯2023\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(fufu, /初音ミク\u3000辰2024\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
-  assert.match(fufu, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
+  assert.match(fufu, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（ＬＬ）/);
   assert.match(fufu, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(fufu, /商品卡保留 SEGA 公布的正式名称/);
   assert.match(fufu, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
@@ -353,8 +405,12 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /原“制作档案”已并入日志/);
+  assert.match(logs, /17 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-017"/);
+  assert.match(logs, /EP\.017/);
+  assert.match(logs, /手办/);
   assert.match(logs, /id="ep-016"/);
   assert.match(logs, /EP\.016/);
   assert.match(logs, /让收藏馆切换不再打断参观/);
@@ -377,9 +433,11 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
   assert.match(logs, /id="ep-009"/);
+  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 17);
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-017"/);
   assert.match(projects, /id="ep-016"/);
   assert.match(projects, /id="ep-015"/);
   assert.match(projects, /id="ep-014"/);

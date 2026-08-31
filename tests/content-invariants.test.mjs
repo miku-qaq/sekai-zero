@@ -123,7 +123,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, four collection rooms and EP.016 as the latest release", async () => {
+test("keeps five top-level worlds, four collection rooms and EP.017 as the latest release", async () => {
   const [site, collections, figures, fufu, releases, animeCatalogRaw, gameCatalogRaw] =
     await Promise.all([
       readProjectFile("content/site.ts"),
@@ -165,14 +165,36 @@ test("keeps five top-level worlds, four collection rooms and EP.016 as the lates
   ];
   assert.equal(figureEntries.length, 16);
   assert.equal(new Set(figureEntries.map((match) => match[1])).size, 16);
-  assert.ok(!figureEntries.some((entry) => entry[1] === "figure-003"));
+  assert.deepEqual(
+    figureEntries.map((entry) => entry[1]),
+    [
+      "figure-001",
+      "figure-002",
+      "figure-004",
+      "figure-005",
+      "figure-006",
+      "figure-007",
+      "figure-008",
+      "figure-009",
+      "figure-010",
+      "figure-011",
+      "figure-012",
+      "figure-013",
+      "figure-014",
+      "figure-015",
+      "figure-016",
+      "figure-017",
+    ],
+  );
   const allowedFigureKeys = [
     "character",
     "format",
     "id",
     "motif",
+    "product",
     "tone",
     "verification",
+    "work",
   ];
   for (const entry of figureEntries) {
     const keys = [...`id: "${entry[1]}",${entry[2]}`.matchAll(/^\s*(\w+):/gm)].map(
@@ -180,9 +202,25 @@ test("keeps five top-level worlds, four collection rooms and EP.016 as the lates
     );
     assert.deepEqual(keys.toSorted(), allowedFigureKeys);
   }
-  assert.equal(figures.match(/verification: "pending"/g)?.length, 1);
+  const figureEntrySource = figureEntries.map((entry) => entry[0]).join("\n");
+  assert.equal(
+    figureEntrySource.match(/verification: "identity-confirmed"/g)?.length,
+    16,
+  );
+  assert.equal(figureEntrySource.match(/product: null/g)?.length, 16);
+  assert.equal(figureEntrySource.match(/character: "初音未来"/g)?.length, 7);
+  assert.match(
+    figures,
+    /id: "figure-017"[^]*?character: "初音未来"[^]*?work: "初音未来"/,
+  );
+  assert.match(figures, /work: string;/);
+  assert.match(figures, /product: FigureProductDetails;/);
   assert.doesNotMatch(
-    figureEntries.map((entry) => entry[0]).join("\n"),
+    figures,
+    /verification: "pending"|character: "角色待确认"|format: "待确认"/,
+  );
+  assert.doesNotMatch(
+    figureEntrySource,
     /price|cost|amount|currency|order|purchase|platform|date|time/i,
   );
 
@@ -226,10 +264,10 @@ test("keeps five top-level worlds, four collection rooms and EP.016 as the lates
     fufuEntries.map((entry) => entry[2].match(/\n\s+title: "([^"]+)"/)?.[1]),
     [
       "初音ミクシリーズ　初音ミク　ふわぷち　どでかジャンボぬいぐるみ",
-      "初音ミク　寅2022　ふわふわぬいぐるみ（LL）",
+      "初音ミク　寅2022　ふわふわぬいぐるみ(LL)",
       "初音ミク　卯2023　ふわぷち　ぬいぐるみ（LL）",
       "初音ミク　辰2024　ふわぷち　ぬいぐるみ（LL）",
-      "初音ミク　巳2025　ふわぷち　ぬいぐるみ（LL）",
+      "初音ミク　巳2025　ふわぷち　ぬいぐるみ（ＬＬ）",
       "初音ミク　午2026　ふわぷち　ぬいぐるみ（LL）",
     ],
   );
@@ -272,9 +310,11 @@ test("keeps five top-level worlds, four collection rooms and EP.016 as the lates
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 16);
-  assert.equal(new Set(episodes).size, 16);
-  assert.equal(episodes[0], "016");
+  assert.equal(episodes.length, 17);
+  assert.equal(new Set(episodes).size, 17);
+  assert.equal(episodes[0], "017");
+  assert.match(releases, /episode: "EP\.017"[^]*?手办/);
+  assert.match(releases, /episode: "EP\.017"[^]*?(?:核对|作品出处)/);
   assert.match(releases, /episode: "EP\.016"[^]*?客户端导航/);
   assert.match(releases, /episode: "EP\.016"[^]*?不再整页刷新/);
   assert.match(releases, /episode: "EP\.015"[^]*?Fufu/);

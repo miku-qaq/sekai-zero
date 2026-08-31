@@ -32,6 +32,7 @@ export default function CollectionsGamesPage() {
     <main id="main-content" className={`subpage-main ${styles.gamesPage}`}>
       <PageMasthead
         currentHref="/collections/"
+        animate={false}
         subpageLabel="游戏展柜"
         title="玩过的世界，也值得收藏。"
         lead="这里整理我在 Steam 留下实际游玩记录的作品。页面只公开游戏名称与识别封面，不公开账号、游玩时长、最近上线或好友信息。"

@@ -28,14 +28,36 @@ export const metadata: Metadata = {
 
 const animePreview = animeCatalog.slice(0, 4);
 const gamePreview = gameCatalog.filter((entry) => entry.image).slice(0, 4);
-const figurePreview = figureCollection.slice(0, 7);
+const figurePreviewIds = [
+  "figure-001",
+  "figure-004",
+  "figure-005",
+  "figure-008",
+  "figure-009",
+  "figure-013",
+  "figure-014",
+] as const;
+const figurePreview = figurePreviewIds.flatMap((id) =>
+  figureCollection.filter((entry) => entry.id === id),
+);
+const figureMikuCount = figureCollection.filter(
+  (entry) => entry.character === "初音未来",
+).length;
 const fufuPreview = fufuCollection;
+const zodiacFufu = fufuCollection.filter((entry) => entry.kind === "zodiac");
+const firstZodiacFufu = zodiacFufu.at(0);
+const latestZodiacFufu = zodiacFufu.at(-1);
+const fufuTimeline =
+  firstZodiacFufu && latestZodiacFufu
+    ? `${firstZodiacFufu.zodiac} ${firstZodiacFufu.year} 到 ${latestZodiacFufu.zodiac} ${latestZodiacFufu.year}`
+    : "持续更新中的生肖时间线";
 
 export default function CollectionsPage() {
   return (
     <main id="main-content" className={`subpage-main ${styles.collectionPage}`}>
       <PageMasthead
         currentHref="/collections/"
+        animate={false}
         title="把喜欢的世界，收进同一座馆。"
         lead="奇妙收藏馆把动画、游戏、手办与 Fufu 放进同一条清晰的浏览路径；每个展区保留自己的检索方式、内容模型与真实性边界。"
         meta={[
@@ -93,54 +115,6 @@ export default function CollectionsPage() {
           <p>这里仅展示少量预览；完整搜索、筛选、来源与隐私说明都保留在对应分馆。</p>
         </div>
 
-        <article className={`${styles.previewCard} ${styles.figurePreview}`}>
-          <div className={styles.previewCopy}>
-            <span>ROOM 03 / FIGURE COLLECTION</span>
-            <h3>手办收藏，逐件确认。</h3>
-            <p>
-              大 Fufu 迁出后，这里保留 {figureCollection.length}
-              件手办记录。首版公开角色与收藏类型，价格、订单和无法可靠核对的商品型号不会进入公网页面。
-            </p>
-            <CollectionLink href="/collections/figures/">
-              查看 {figureCollection.length} 件手办记录 ↗
-            </CollectionLink>
-          </div>
-          <div className={styles.figurePreviewRail} aria-hidden="true">
-            {figurePreview.map((entry, index) => (
-              <span key={entry.id} data-tone={entry.tone}>
-                <i>F-{String(index + 1).padStart(2, "0")}</i>
-                <strong>{entry.motif}</strong>
-                <b>{entry.character}</b>
-              </span>
-            ))}
-          </div>
-        </article>
-
-        <article
-          className={`${styles.previewCard} ${styles.figurePreview} ${styles.fufuPreview}`}
-        >
-          <div className={styles.previewCopy}>
-            <span>NEW ROOM / FUFU PLUSH COLLECTION</span>
-            <h3>大 Fufu 与五只生肖成员，集合。</h3>
-            <p>
-              从寅 2022 到午 2026，五只生肖 Fufu 连成时间线；之前的大 Fufu
-              也从手办区迁回自己的展柜。
-            </p>
-            <CollectionLink href="/collections/fufu/">
-              查看 {fufuCollection.length} 只 Fufu ↗
-            </CollectionLink>
-          </div>
-          <div className={styles.fufuPreviewRail} aria-hidden="true">
-            {fufuPreview.map((entry) => (
-              <span key={entry.id} data-tone={entry.tone}>
-                <i>{entry.year ?? "BIG"}</i>
-                <strong>{entry.motif}</strong>
-                <b>{entry.zodiac ?? "大 Fufu"}</b>
-              </span>
-            ))}
-          </div>
-        </article>
-
         <div className={styles.mediaPreviews}>
           <article className={styles.previewCard}>
             <div className={styles.previewMedia}>
@@ -190,6 +164,55 @@ export default function CollectionsPage() {
             </div>
           </article>
         </div>
+
+        <article className={`${styles.previewCard} ${styles.figurePreview}`}>
+          <div className={styles.previewCopy}>
+            <span>ROOM 03 / FIGURE COLLECTION</span>
+            <h3>手办收藏，已经逐件对回角色与作品。</h3>
+            <p>
+              大 Fufu 迁出后，这里保留 {figureCollection.length} 件手办，其中{" "}
+              {figureMikuCount}
+              件是初音未来。正式商品名与厂商只会在盒照或本人实拍确认后补充。
+            </p>
+            <CollectionLink href="/collections/figures/">
+              查看 {figureCollection.length} 件手办记录 ↗
+            </CollectionLink>
+          </div>
+          <div className={styles.figurePreviewRail} aria-hidden="true">
+            {figurePreview.map((entry) => (
+              <span key={entry.id} data-tone={entry.tone}>
+                <i>F-{entry.id.slice(-3)}</i>
+                <strong>{entry.motif}</strong>
+                <b>{entry.character}</b>
+              </span>
+            ))}
+          </div>
+        </article>
+
+        <article
+          className={`${styles.previewCard} ${styles.figurePreview} ${styles.fufuPreview}`}
+        >
+          <div className={styles.previewCopy}>
+            <span>ROOM 04 / FUFU PLUSH COLLECTION</span>
+            <h3>大 Fufu 与 {zodiacFufu.length} 只生肖成员，集合。</h3>
+            <p>
+              从{fufuTimeline}，生肖 Fufu 连成持续更新的时间线；之前的大 Fufu
+              也从手办区迁回自己的展柜。
+            </p>
+            <CollectionLink href="/collections/fufu/">
+              查看 {fufuCollection.length} 只 Fufu ↗
+            </CollectionLink>
+          </div>
+          <div className={styles.fufuPreviewRail} aria-hidden="true">
+            {fufuPreview.map((entry) => (
+              <span key={entry.id} data-tone={entry.tone}>
+                <i>{entry.year ?? "BIG"}</i>
+                <strong>{entry.motif}</strong>
+                <b>{entry.zodiac ?? "大 Fufu"}</b>
+              </span>
+            ))}
+          </div>
+        </article>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />
