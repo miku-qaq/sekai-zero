@@ -273,11 +273,14 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /原“制作档案”已并入日志/);
-  assert.match(logs, /17 EPISODES/);
+  assert.match(logs, /18 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /EP\.018/);
+  assert.match(logs, /id="ep-018"/);
+  assert.match(logs, /把开发桌面搬到 Mac/);
   assert.match(logs, /EP\.017/);
   assert.match(logs, /id="ep-017"/);
   assert.match(logs, /手办/);
@@ -306,7 +309,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 17);
+  assert.equal(episodeIds.length, 18);
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -817,6 +820,8 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(profileContent, /handle: "Mikureina"/);
   assert.match(profileContent, /academicStatus: "南京大学 · CS 在读"/);
   assert.match(profileContent, /email: "miku125194847@gmail\.com"/);
+  assert.match(releasesContent, /episode: "EP\.018"/);
+  assert.match(releasesContent, /MACOS HANDOFF \/ READY/);
   assert.match(releasesContent, /episode: "EP\.017"/);
   assert.match(releasesContent, /手办/);
   assert.match(releasesContent, /episode: "EP\.016"/);

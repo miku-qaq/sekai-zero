@@ -22,7 +22,8 @@ Mikureina 长期维护、持续迭代的动漫主题个人网站。首页以明�
 要求 Node.js `>=22.14.0`，推荐使用仓库内 `.nvmrc` / `.node-version` 指定的版本。
 
 ```bash
-npm install
+npm ci --ignore-scripts --no-audit --no-fund
+npm run doctor
 npm run dev
 ```
 
@@ -37,14 +38,18 @@ npm run build:pages  # 生成 GitHub Pages 静态产物
 npm run test:pages   # 验证全部静态页面、路由与资源路径
 npm run sync:anime   # 按已核对的 Bangumi 条目同步并压缩动画封面
 npm run sync:games   # 从本机 Steam 缓存生成游戏目录并压缩已有封面
+npm run doctor       # 核对当前电脑的 Node、npm、Git 与仓库边界
 npm run check        # 提交前完整质量门禁
+npm run check:pages  # 用真实项目子路径构建并验证 GitHub Pages
 ```
 
 Windows PowerShell 如果因本机执行策略拦截 `npm.ps1`，请使用 `npm.cmd run dev`；不要为了运行本项目降低系统安全策略。
 
+准备换到 Mac 时，请直接从 GitHub 克隆，不要复制 Windows 工作目录。完整的首次安装、GitHub 登录、双设备切换和可选 Steam 同步步骤见 [macOS 开发接管指南](docs/MACOS_SETUP.md)。
+
 新增已看动画时，在 `content/anime-source.json` 追加唯一 ID、本人提供的标题和核对后的 Bangumi 条目 ID，再运行 `npm run sync:anime`。受限 Windows 网络若无法让 Node 直接下载，可运行 `scripts/sync-anime-covers.ps1`；它与 macOS 使用的主脚本生成同一份内容和本地 WebP 资源。页面只展示一个资料条目正式名称，不显示别名。
 
-游戏目录由 `scripts/sync-steam-library.mjs` 从本机 Steam 客户端缓存生成。脚本会自动探测 Windows 与 macOS 的常见安装位置；非默认安装可以运行 `npm run sync:games -- --steam-dir "<Steam 目录>"`，也可以设置 `STEAM_DIR`。当前目录包含 146 条有正向游玩记录的 Steam 游戏，其中 104 条拥有可用的本地 WebP 封面；Steamworks 测试应用不会进入收藏。生成结果只保留公开作品名、Steam App ID、平台、封面路径与商店入口，不写入账号标识、游玩时长、最近上线或授权信息。
+游戏目录由 `scripts/sync-steam-library.mjs` 从本机 Steam 客户端缓存生成。脚本会自动探测 Windows 与 macOS 的常见安装位置；非默认安装可以运行 `npm run sync:games -- --steam-dir "<Steam 目录>"`，也可以设置 `STEAM_DIR`。存在多个本地用户缓存时，用 `--steam-user <数字目录名>` 或 `STEAM_USER_ID` 明确选择，不删除其他用户数据。脚本先在忽略目录中生成并校验完整目录与封面，缺少本地封面时复用已公开版本，并默认拒绝删除既有条目；确需删除时必须在核对后显式传入 `--allow-removals`。可恢复事务完整提交后公开快照才会变化，清理备份失败也不会撤销新快照；独立进程锁会拒绝并发同步，避免两次恢复互相破坏。当前目录包含 146 条有正向游玩记录的 Steam 游戏，其中 104 条拥有可用的本地 WebP 封面；Steamworks 测试应用不会进入收藏。生成结果只保留公开作品名、Steam App ID、平台、封面路径与商店入口，不写入账号标识、游玩时长、最近上线或授权信息。
 
 实体收藏的两张截图去重后共有 17 条原始记录：16 件手办与 1 件大 Fufu。大 Fufu 迁入独立分馆后仍保留原始 `figure-003` 编号，其余手办也不因分类变化而重新编号。手办分馆已经完成 16 / 16 件角色与作品出处核对，其中 7 件为初音未来；正式商品名、厂商、比例与本人实拍仍等待逐件确认，截图中的价格、订单、购买日期和第三方 App 界面不会公开。
 
@@ -53,6 +58,8 @@ Fufu 分馆另外记录寅、卯、辰、巳、午五件生肖款。六件 Fufu 
 `/collections/` 是四类收藏唯一的顶层公开入口，并继续连接 `/collections/anime/`、`/collections/games/`、`/collections/figures/` 与 `/collections/fufu/` 四个馆内子路由。自 EP.016 起，总馆与分馆入口统一使用 `next/link`：在浏览器脚本可用时，切换动画、游戏、手办与 Fufu 不再触发整页刷新，分馆之间切换还会保持当前浏览位置；每个分馆仍拥有独立 URL，可直接分享并支持浏览器前进、后退。链接继续渲染为标准 `<a href>`，因此关闭 JavaScript 时可以普通跳转，GitHub Pages 的静态导出也不依赖单页状态。原 `/anime/` 与 `/games/` 继续作为旧书签兼容地址存在，但不再进入顶层导航；它们通过 `noindex` 与 canonical 元数据分别把搜索索引统一到对应的新分馆。
 
 EP.017 完成手办目录核对与页面重整：访客可以按角色或作品搜索，并在全部、初音未来与其他角色之间筛选；每张卡继续显示稳定的原始记录编号，不会因为第 003 号大 Fufu 迁馆而错位。商品级资料与照片只有在盒照、本人实拍或精确官方商品页能够确认后才会补入。
+
+EP.018 为开学后的 Mac 开发准备迁移护栏：新电脑从 GitHub 全新克隆后可运行 `npm run doctor` 核对版本、Git、依赖、换行与版本库边界；Windows/macOS 冒烟构建进入 Pull Request 门禁，Steam 同步也改为完整生成、校验并备份后再替换，避免换机时因本地缓存差异破坏已公开的收藏目录。
 
 ## 每周更新方式
 

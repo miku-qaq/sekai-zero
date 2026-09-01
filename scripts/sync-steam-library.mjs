@@ -1,10 +1,11 @@
 import {
   access,
+  copyFile,
   mkdir,
   readFile,
   readdir,
+  rm,
   stat,
-  unlink,
   writeFile,
 } from "node:fs/promises";
 import { homedir, platform } from "node:os";
@@ -16,10 +17,23 @@ import {
   parseSteamAppInfo,
   parseSteamTextVdf,
 } from "./lib/steam-vdf.mjs";
+import {
+  commitSnapshotTransaction,
+  recoverSnapshotTransaction,
+} from "./lib/snapshot-transaction.mjs";
+import {
+  assertSafeSteamCatalogChange,
+  compareSteamCatalogs,
+} from "./lib/steam-snapshot-policy.mjs";
+import { acquireProcessLock } from "./lib/process-lock.mjs";
 
 const projectRoot = path.resolve(import.meta.dirname, "..");
 const catalogPath = path.join(projectRoot, "content", "games-catalog.json");
 const coverDirectory = path.join(projectRoot, "public", "games");
+const workDirectory = path.join(projectRoot, "work");
+const transactionRoot = path.join(workDirectory, "steam-transaction");
+const committedMarker = path.join(workDirectory, "steam-transaction.committed");
+const lockPath = path.join(workDirectory, "steam-sync.lock");
 // App 480 is Valve's Steamworks integration test, not a real library title.
 const excludedAppIds = new Set(["480"]);
 
@@ -69,6 +83,23 @@ async function resolveSteamDirectory() {
 
 async function resolveLocalConfig(steamDirectory) {
   const userdataDirectory = path.join(steamDirectory, "userdata");
+  const requestedUser = readArgument("--steam-user") || process.env.STEAM_USER_ID;
+  if (requestedUser) {
+    if (!/^\d+$/.test(requestedUser)) {
+      throw new Error("Steam user selector must contain digits only.");
+    }
+    const selected = path.join(
+      userdataDirectory,
+      requestedUser,
+      "config",
+      "localconfig.vdf",
+    );
+    if (!(await exists(selected))) {
+      throw new Error("The selected Steam user cache does not exist.");
+    }
+    return selected;
+  }
+
   const candidates = [];
 
   for (const entry of await readdir(userdataDirectory, { withFileTypes: true })) {
@@ -85,24 +116,40 @@ async function resolveLocalConfig(steamDirectory) {
   if (candidates.length !== 1) {
     throw new Error(
       `Expected exactly one Steam user cache, found ${candidates.length}. ` +
-        "Use a separate Steam directory or remove inactive local user caches before syncing.",
+        "Pass --steam-user <numeric directory name> or set STEAM_USER_ID; " +
+        "do not delete another user's Steam cache.",
     );
   }
   return candidates[0];
 }
 
-async function clearGeneratedCovers() {
-  await mkdir(coverDirectory, { recursive: true });
-  const expected = path.join(projectRoot, "public", "games");
-  if (path.resolve(coverDirectory) !== path.resolve(expected)) {
-    throw new Error("Refusing to clean an unexpected game cover directory");
+function assertPathWithin(target, parent, label) {
+  const relative = path.relative(path.resolve(parent), path.resolve(target));
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`Refusing to modify an unexpected ${label} path.`);
   }
+}
 
-  for (const entry of await readdir(coverDirectory, { withFileTypes: true })) {
-    if (entry.isFile() && entry.name.endsWith(".webp")) {
-      await unlink(path.join(coverDirectory, entry.name));
-    }
-  }
+/** Install a fully generated snapshot, rolling back if either move fails. */
+async function commitGeneratedSnapshot(stagedCovers, stagedCatalog) {
+  assertPathWithin(transactionRoot, workDirectory, "Steam transaction");
+  assertPathWithin(committedMarker, workDirectory, "Steam commit marker");
+  assertPathWithin(coverDirectory, path.join(projectRoot, "public"), "cover");
+  assertPathWithin(catalogPath, path.join(projectRoot, "content"), "catalog");
+  await commitSnapshotTransaction({
+    transactionRoot,
+    committedMarker,
+    stagedDirectory: stagedCovers,
+    stagedFile: stagedCatalog,
+    liveDirectory: coverDirectory,
+    liveFile: catalogPath,
+    onCleanupWarning: (error) => {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(
+        `Steam snapshot was committed; deferred backup cleanup until the next run. ${message}`,
+      );
+    },
+  });
 }
 
 async function findCover(steamDirectory, appId) {
@@ -125,13 +172,61 @@ async function renderCover(source, destination) {
     .toFile(destination);
 }
 
-async function main() {
+async function readExistingCatalog() {
+  if (!(await exists(catalogPath))) return [];
+
+  let parsed;
+  try {
+    parsed = JSON.parse(await readFile(catalogPath, "utf8"));
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`The existing public Steam catalog is invalid. ${message}`);
+  }
+  if (!Array.isArray(parsed?.items)) {
+    throw new Error("The existing public Steam catalog has no items array.");
+  }
+  return parsed.items;
+}
+
+async function stageCover({ steamDirectory, game, existingGame, stagedCovers }) {
+  const filename = `steam-${game.appId}.webp`;
+  const publicImage = `/games/${filename}`;
+  const destination = path.join(stagedCovers, filename);
+  const sourceCover = await findCover(steamDirectory, game.appId);
+
+  if (sourceCover) {
+    await renderCover(sourceCover, destination);
+    return publicImage;
+  }
+
+  const reusableCover = path.join(coverDirectory, filename);
+  if (existingGame?.image === publicImage && (await exists(reusableCover))) {
+    await copyFile(reusableCover, destination);
+    return publicImage;
+  }
+  return null;
+}
+
+async function syncSteamLibrary() {
+  const recovery = await recoverSnapshotTransaction({
+    transactionRoot,
+    committedMarker,
+    liveDirectory: coverDirectory,
+    liveFile: catalogPath,
+  });
+  if (recovery === "rolled-back") {
+    console.warn("Recovered the previous Steam snapshot after an interrupted sync.");
+  }
+
   const steamDirectory = await resolveSteamDirectory();
   const localConfigPath = await resolveLocalConfig(steamDirectory);
-  const [appInfoBuffer, localConfigText] = await Promise.all([
-    readFile(path.join(steamDirectory, "appcache", "appinfo.vdf")),
-    readFile(localConfigPath, "utf8"),
-  ]);
+  const [appInfoBuffer, localConfigText, existingCatalog, appInfoStats] =
+    await Promise.all([
+      readFile(path.join(steamDirectory, "appcache", "appinfo.vdf")),
+      readFile(localConfigPath, "utf8"),
+      readExistingCatalog(),
+      stat(path.join(steamDirectory, "appcache", "appinfo.vdf")),
+    ]);
 
   const products = parseSteamAppInfo(appInfoBuffer);
   const playedAppIds = getPlayedSteamAppIds(parseSteamTextVdf(localConfigText));
@@ -147,43 +242,110 @@ async function main() {
     )
     .sort((left, right) => collator.compare(left.title, right.title));
 
-  await clearGeneratedCovers();
-  const catalog = [];
-  for (const game of games) {
-    const sourceCover = await findCover(steamDirectory, game.appId);
-    const image = sourceCover ? `/games/steam-${game.appId}.webp` : null;
-    if (sourceCover) {
-      await renderCover(
-        sourceCover,
-        path.join(coverDirectory, `steam-${game.appId}.webp`),
-      );
-    }
-    catalog.push({
-      id: `steam-${game.appId}`,
-      appId: game.appId,
-      title: game.title,
-      platform: "Steam",
-      image,
-      storeUrl: `https://store.steampowered.com/app/${game.appId}/`,
-    });
+  if (games.length === 0) {
+    throw new Error(
+      "No played Steam games were found; the existing public catalog was left unchanged.",
+    );
   }
 
-  const generated = {
-    updatedAt: new Date().toISOString().slice(0, 10),
-    source: "Steam client local cache",
-    items: catalog,
-  };
-  await writeFile(catalogPath, `${JSON.stringify(generated, null, 2)}\n`, "utf8");
+  const existingByAppId = new Map(
+    existingCatalog.map((game) => [String(game.appId), game]),
+  );
+  const allowRemovals =
+    process.argv.includes("--allow-removals") ||
+    process.env.STEAM_ALLOW_REMOVALS === "1";
+  const inventoryPreview = games.map((game) => ({
+    appId: game.appId,
+    image: existingByAppId.get(String(game.appId))?.image ?? null,
+  }));
+  assertSafeSteamCatalogChange(
+    compareSteamCatalogs(existingCatalog, inventoryPreview),
+    {
+      allowRemovals,
+    },
+  );
 
-  const withCover = catalog.filter((game) => game.image).length;
-  const appInfoTime = (await stat(path.join(steamDirectory, "appcache", "appinfo.vdf")))
-    .mtime;
+  await mkdir(transactionRoot);
+  const stagedCovers = path.join(transactionRoot, "staged-directory");
+  const stagedCatalog = path.join(transactionRoot, "staged-file");
+  await mkdir(stagedCovers, { recursive: true });
+  let catalog;
+  let withCover;
+  let comparison;
+  let commitStarted = false;
+
+  try {
+    catalog = [];
+    for (const game of games) {
+      const image = await stageCover({
+        steamDirectory,
+        game,
+        existingGame: existingByAppId.get(String(game.appId)),
+        stagedCovers,
+      });
+      catalog.push({
+        id: `steam-${game.appId}`,
+        appId: game.appId,
+        title: game.title,
+        platform: "Steam",
+        image,
+        storeUrl: `https://store.steampowered.com/app/${game.appId}/`,
+      });
+    }
+
+    const generated = {
+      updatedAt: new Date().toISOString().slice(0, 10),
+      source: "Steam client local cache",
+      items: catalog,
+    };
+    await writeFile(stagedCatalog, `${JSON.stringify(generated, null, 2)}\n`, "utf8");
+
+    withCover = catalog.filter((game) => game.image).length;
+    const stagedCoverCount = (await readdir(stagedCovers)).filter((filename) =>
+      filename.endsWith(".webp"),
+    ).length;
+    if (stagedCoverCount !== withCover || catalog.length !== games.length) {
+      throw new Error("Generated Steam snapshot failed validation.");
+    }
+
+    comparison = compareSteamCatalogs(existingCatalog, catalog);
+    assertSafeSteamCatalogChange(comparison, { allowRemovals });
+
+    commitStarted = true;
+    await commitGeneratedSnapshot(stagedCovers, stagedCatalog);
+  } catch (error) {
+    if (!commitStarted) {
+      await rm(transactionRoot, { recursive: true, force: true });
+    }
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`Steam sync did not publish a complete snapshot. ${message}`, {
+      cause: error,
+    });
+  }
   console.log(
-    `Synced ${catalog.length} played Steam games (${withCover} covers) from cache updated ${appInfoTime.toISOString()}.`,
+    `Synced ${catalog.length} played Steam games (${withCover} covers) from cache updated ${appInfoStats.mtime.toISOString()}.`,
+  );
+  console.log(
+    `Snapshot diff: +${comparison.added.length} item(s), -${comparison.removed.length} item(s), ` +
+      `+${comparison.coversAdded.length} cover(s), -${comparison.coversLost.length} retained cover(s).`,
   );
   console.log(
     "Private account identifiers and playtime were not written to the catalog.",
   );
+}
+
+async function main() {
+  await mkdir(workDirectory, { recursive: true });
+  const releaseLock = await acquireProcessLock({
+    lockPath,
+    label: "Steam library sync",
+    allowUnknownStale: process.argv.includes("--recover-interrupted-sync"),
+  });
+  try {
+    await syncSteamLibrary();
+  } finally {
+    await releaseLock();
+  }
 }
 
 await main();

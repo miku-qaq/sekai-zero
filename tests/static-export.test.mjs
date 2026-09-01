@@ -405,9 +405,12 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /原“制作档案”已并入日志/);
-  assert.match(logs, /17 EPISODES/);
+  assert.match(logs, /18 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
+  assert.match(logs, /id="ep-018"/);
+  assert.match(logs, /EP\.018/);
+  assert.match(logs, /把开发桌面搬到 Mac/);
   assert.match(logs, /id="ep-017"/);
   assert.match(logs, /EP\.017/);
   assert.match(logs, /手办/);
@@ -433,10 +436,11 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
   assert.match(logs, /id="ep-009"/);
-  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 17);
+  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 18);
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
+  assert.match(projects, /id="ep-018"/);
   assert.match(projects, /id="ep-017"/);
   assert.match(projects, /id="ep-016"/);
   assert.match(projects, /id="ep-015"/);

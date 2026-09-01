@@ -80,15 +80,38 @@ test("Steam cache helpers return played app IDs without returning activity value
 });
 
 test("documents the Steam sync output allow-list and protects local authorization data", async () => {
-  const [syncScript, parser] = await Promise.all([
+  const [syncScript, parser, transaction, policy, processLock] = await Promise.all([
     readProjectFile("scripts/sync-steam-library.mjs"),
     readProjectFile("scripts/lib/steam-vdf.mjs"),
+    readProjectFile("scripts/lib/snapshot-transaction.mjs"),
+    readProjectFile("scripts/lib/steam-snapshot-policy.mjs"),
+    readProjectFile("scripts/lib/process-lock.mjs"),
   ]);
 
   assert.match(syncScript, /product\?\.type === "game"/);
   assert.match(syncScript, /const excludedAppIds = new Set\(\["480"\]\)/);
   assert.match(syncScript, /!excludedAppIds\.has\(product\.appId\)/);
   assert.match(syncScript, /Private account identifiers and playtime were not written/);
+  assert.match(syncScript, /readArgument\("--steam-user"\)/);
+  assert.match(syncScript, /process\.env\.STEAM_USER_ID/);
+  assert.match(syncScript, /do not delete another user's Steam cache/);
+  assert.doesNotMatch(syncScript, /remove inactive local user caches/);
+  assert.match(syncScript, /async function commitGeneratedSnapshot/);
+  assert.match(syncScript, /recoverSnapshotTransaction/);
+  assert.match(syncScript, /commitSnapshotTransaction/);
+  assert.match(syncScript, /process\.argv\.includes\("--allow-removals"\)/);
+  assert.match(syncScript, /acquireProcessLock/);
+  assert.match(syncScript, /--recover-interrupted-sync/);
+  assert.match(syncScript, /await copyFile\(reusableCover, destination\)/);
+  assert.match(syncScript, /games\.length === 0/);
+  assert.match(syncScript, /stagedCoverCount !== withCover/);
+  assert.match(transaction, /COMMITTED/);
+  assert.match(transaction, /committed-cleanup/);
+  assert.match(policy, /comparison\.removed\.length > 0/);
+  assert.match(policy, /comparison\.coversLost\.length > 0/);
+  assert.match(processLock, /await open\(lockPath, "wx"\)/);
+  assert.match(processLock, /processIsRunning/);
+  assert.doesNotMatch(syncScript, /async function clearGeneratedCovers/);
   assert.match(syncScript, /id: `steam-\$\{game\.appId\}`/);
   assert.match(
     syncScript,
@@ -123,7 +146,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, four collection rooms and EP.017 as the latest release", async () => {
+test("keeps five top-level worlds, four collection rooms and EP.018 as the latest release", async () => {
   const [site, collections, figures, fufu, releases, animeCatalogRaw, gameCatalogRaw] =
     await Promise.all([
       readProjectFile("content/site.ts"),
@@ -310,9 +333,11 @@ test("keeps five top-level worlds, four collection rooms and EP.017 as the lates
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 17);
-  assert.equal(new Set(episodes).size, 17);
-  assert.equal(episodes[0], "017");
+  assert.equal(episodes.length, 18);
+  assert.equal(new Set(episodes).size, 18);
+  assert.equal(episodes[0], "018");
+  assert.match(releases, /episode: "EP\.018"[^]*?Mac/);
+  assert.match(releases, /episode: "EP\.018"[^]*?(?:GitHub|环境自检)/);
   assert.match(releases, /episode: "EP\.017"[^]*?手办/);
   assert.match(releases, /episode: "EP\.017"[^]*?(?:核对|作品出处)/);
   assert.match(releases, /episode: "EP\.016"[^]*?客户端导航/);

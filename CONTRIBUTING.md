@@ -11,6 +11,8 @@
 
 提交前运行 `npm run check`。新增行为需要测试；修改公开内容时检查隐私、版权与链接有效性。注释解释设计原因、边界与不直观的限制，不逐行复述代码。
 
+新电脑首次克隆后先执行 `npm ci --ignore-scripts --no-audit --no-fund` 与 `npm run doctor`。修改路由、静态资源路径或 Pages 发布逻辑时，再执行 `npm run check:pages`。Windows 与 macOS 使用同一份锁文件，不复制另一台电脑的 `node_modules` 或构建产物；详细步骤见 [macOS 开发接管指南](docs/MACOS_SETUP.md)。
+
 ## 架构边界
 
 - `content/`：可公开的数据和文案。
