@@ -177,7 +177,7 @@ export function AnimeCatalog() {
 
       {visibleEntries.length > 0 ? (
         <>
-          <ol className={styles.catalogGrid}>
+          <ol className={catalogStyles.catalogGrid}>
             {displayedEntries.map((entry, index) => {
               const titleId = `anime-${entry.id}-title`;
 
@@ -196,7 +196,7 @@ export function AnimeCatalog() {
                         alt={`${entry.title} 的动画封面`}
                         width={640}
                         height={960}
-                        sizes="(max-width: 420px) 44vw, (max-width: 760px) 46vw, (max-width: 1200px) 30vw, 260px"
+                        sizes="(max-width: 340px) 88vw, (max-width: 700px) 44vw, (max-width: 960px) 29vw, (max-width: 1180px) 22vw, 184px"
                         loading="lazy"
                         unoptimized
                       />
@@ -220,13 +220,22 @@ export function AnimeCatalog() {
           {remaining > 0 ? (
             <div className={catalogStyles.loadMore}>
               <p>还有 {remaining} 部动画尚未展开。</p>
-              <button
-                className="button button-primary"
-                type="button"
-                onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
-              >
-                再展开 {Math.min(PAGE_SIZE, remaining)} 部
-              </button>
+              <div className={catalogStyles.loadMoreActions}>
+                <button
+                  className="button button-primary"
+                  type="button"
+                  onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
+                >
+                  再展开 {Math.min(PAGE_SIZE, remaining)} 部
+                </button>
+                <button
+                  className="button button-ghost"
+                  type="button"
+                  onClick={() => setVisibleLimit(visibleEntries.length)}
+                >
+                  展开全部
+                </button>
+              </div>
             </div>
           ) : null}
         </>

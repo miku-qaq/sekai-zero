@@ -4,16 +4,26 @@
 }
 
 .catalogControls {
-  position: sticky;
-  z-index: 6;
-  top: 82px;
   overflow: hidden;
   margin-bottom: 24px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-medium);
-  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  background: var(--surface);
   box-shadow: var(--collection-shadow);
-  backdrop-filter: blur(18px);
+}
+
+/* Every column count divides the 24-card batch, including after a resize. */
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px 16px;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+}
+
+.catalogGrid > li {
+  min-width: 0;
 }
 
 .toolbar {
@@ -31,6 +41,22 @@
 
 [data-catalog="figures"] .toolbar {
   grid-template-columns: minmax(220px, 1fr) minmax(0, 1.3fr) auto;
+}
+
+/* One compact row leaves more room for covers in the game room. */
+[data-catalog="games"] .catalogControls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+[data-catalog="games"] .resultLine {
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 20px 16px 0;
+  border-top: 0;
 }
 
 .search,
@@ -136,13 +162,26 @@
 .loadMore {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
-  margin-top: 16px;
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-medium);
-  background: var(--surface-muted);
+  margin-top: 24px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.loadMoreActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loadMoreActions button {
+  width: auto;
+}
+
+.loadMoreActions button:last-child {
+  background: var(--surface);
 }
 
 .loadMore p,
@@ -152,10 +191,16 @@
   font-size: 13px;
 }
 
-.loadMore button,
+.loadMoreActions button,
 .empty button {
   min-height: 46px;
   font-size: 13px;
+}
+
+@media (max-width: 1180px) {
+  .catalogGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .empty {
@@ -189,6 +234,9 @@
 }
 
 @media (max-width: 960px) {
+  .catalogGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
   [data-catalog="anime"] .toolbar {
     grid-template-columns: minmax(0, 1fr) repeat(2, minmax(130px, 0.6fr));
   }
@@ -202,9 +250,19 @@
 }
 
 @media (max-width: 700px) {
-  .catalogControls {
-    position: relative;
-    top: auto;
+  .catalogGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+  [data-catalog="games"] .catalogControls {
+    display: block;
+  }
+  [data-catalog="games"] .resultLine {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
   }
   .toolbar,
   [data-catalog="anime"] .toolbar {
@@ -230,6 +288,12 @@
   .loadMore {
     flex-direction: column;
     gap: 12px;
-    padding: 20px;
+    padding: 20px 0 0;
+  }
+}
+
+@media (max-width: 340px) {
+  .catalogGrid {
+    grid-template-columns: 1fr;
   }
 }

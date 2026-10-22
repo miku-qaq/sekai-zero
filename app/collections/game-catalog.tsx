@@ -79,7 +79,7 @@ export function GameCatalog() {
 
       {filteredGames.length > 0 ? (
         <>
-          <ol className={styles.catalogGrid}>
+          <ol className={catalogStyles.catalogGrid}>
             {visibleGames.map((game, index) => {
               const titleId = `${game.id}-title`;
 
@@ -99,7 +99,7 @@ export function GameCatalog() {
                           alt={`${game.title} 的 Steam 游戏封面`}
                           width={420}
                           height={630}
-                          sizes="(max-width: 420px) 44vw, (max-width: 760px) 46vw, (max-width: 1200px) 30vw, 240px"
+                          sizes="(max-width: 340px) 88vw, (max-width: 700px) 44vw, (max-width: 960px) 29vw, (max-width: 1180px) 22vw, 184px"
                           loading="lazy"
                           unoptimized
                         />
@@ -127,13 +127,22 @@ export function GameCatalog() {
           {remaining > 0 ? (
             <div className={catalogStyles.loadMore}>
               <p>还有 {remaining} 款游戏尚未展开。</p>
-              <button
-                className="button button-primary"
-                type="button"
-                onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
-              >
-                再展开 {Math.min(PAGE_SIZE, remaining)} 款
-              </button>
+              <div className={catalogStyles.loadMoreActions}>
+                <button
+                  className="button button-primary"
+                  type="button"
+                  onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
+                >
+                  再展开 {Math.min(PAGE_SIZE, remaining)} 款
+                </button>
+                <button
+                  className="button button-ghost"
+                  type="button"
+                  onClick={() => setVisibleLimit(filteredGames.length)}
+                >
+                  展开全部
+                </button>
+              </div>
             </div>
           ) : null}
         </>
