@@ -424,8 +424,11 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(links, /Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台/);
   assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
-  assert.match(links, /下一枚收藏坐标/);
-  assert.match(links, /内容待填充/);
+  assert.match(links, /id="terminal-category-shopping"/);
+  assert.match(links, /id="route-netflix"/);
+  assert.match(links, /id="route-hpoi"/);
+  assert.match(links, /id="route-pinduoduo"/);
+  assert.doesNotMatch(links, /terminal-card-placeholder/);
   assert.match(links, new RegExp(`href="${basePath}/about/#contact"`));
   assert.match(links, new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`));
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);

@@ -1,6 +1,49 @@
+/** The same category order drives filters and the grouped directory. */
+export const linkCategories = [
+  {
+    id: "video",
+    label: "影音娱乐",
+    description: "视频、电影和剧集，给日常留一点放松时间。",
+    icon: "▶",
+  },
+  {
+    id: "games",
+    label: "游戏世界",
+    description: "游戏平台、玩家交流与下一场冒险。",
+    icon: "✧",
+  },
+  {
+    id: "community",
+    label: "社区收藏",
+    description: "发现生活灵感，也查查喜欢的手办与周边。",
+    icon: "♡",
+  },
+  {
+    id: "shopping",
+    label: "购物数码",
+    description: "常用购物平台与喜欢的数码产品。",
+    icon: "＋",
+  },
+  {
+    id: "study",
+    label: "学习资料",
+    description: "正在学习的课程、讲义和自己的笔记。",
+    icon: "N",
+  },
+  {
+    id: "site",
+    label: "本站相关",
+    description: "看看这个小世界的源码，或者来打个招呼。",
+    icon: "↗",
+  },
+] as const;
+
+export type LinkCategoryId = (typeof linkCategories)[number]["id"];
+export const linkGroups = [{ id: "all", label: "全部" }, ...linkCategories] as const;
+
 export type LinkEntry = {
   id: string;
-  group: "favorite" | "study" | "project" | "contact";
+  group: LinkCategoryId;
   label: string;
   eyebrow: string;
   href: string;
@@ -15,7 +58,7 @@ export type LinkEntry = {
 export const linkEntries: readonly LinkEntry[] = [
   {
     id: "bilibili",
-    group: "favorite",
+    group: "video",
     label: "哔哩哔哩 · Bilibili",
     eyebrow: "FAVORITE VIDEO PLATFORM",
     href: "https://www.bilibili.com/",
@@ -27,7 +70,7 @@ export const linkEntries: readonly LinkEntry[] = [
   },
   {
     id: "apple",
-    group: "favorite",
+    group: "shopping",
     label: "Apple 中国官网",
     eyebrow: "FAVORITE PRODUCT ECOSYSTEM",
     href: "https://www.apple.com.cn/",
@@ -39,7 +82,7 @@ export const linkEntries: readonly LinkEntry[] = [
   },
   {
     id: "steam",
-    group: "favorite",
+    group: "games",
     label: "Steam 商店",
     eyebrow: "GAME PLATFORM / OFFICIAL",
     href: "https://store.steampowered.com/",
@@ -52,7 +95,7 @@ export const linkEntries: readonly LinkEntry[] = [
   },
   {
     id: "nintendo-switch",
-    group: "favorite",
+    group: "games",
     label: "Nintendo Switch 官方网站",
     eyebrow: "FAVORITE GAME PLATFORM / OFFICIAL",
     href: "https://www.nintendo.com/hk/hardware/switch/index.html",
@@ -77,7 +120,7 @@ export const linkEntries: readonly LinkEntry[] = [
   },
   {
     id: "contact",
-    group: "contact",
+    group: "site",
     label: "联系 Mikureina",
     eyebrow: "PUBLIC MAILBOX",
     href: "/about/#contact",
@@ -89,7 +132,7 @@ export const linkEntries: readonly LinkEntry[] = [
   },
   {
     id: "sekai-source",
-    group: "project",
+    group: "site",
     label: "SEKAI / 00 源码仓库",
     eyebrow: "SOURCE / VERSION ARCHIVE",
     href: "https://github.com/miku-qaq/sekai-zero",
@@ -125,24 +168,88 @@ export const linkEntries: readonly LinkEntry[] = [
     action: "打开官方课程页",
     external: true,
   },
+  {
+    id: "netflix",
+    group: "video",
+    label: "Netflix",
+    eyebrow: "FILMS / SERIES",
+    href: "https://www.netflix.com/",
+    reason: "电影、剧集与动画的观看入口，想找一部作品时从这里开始。",
+    tags: ["Netflix", "奈飞", "网飞", "电影", "剧集"],
+    icon: "N",
+    action: "打开 Netflix",
+    external: true,
+  },
+  {
+    id: "xiaohongshu",
+    group: "community",
+    label: "小红书",
+    eyebrow: "LIFE / INSPIRATION",
+    href: "https://www.xiaohongshu.com/explore",
+    reason: "生活经验、兴趣分享与日常灵感，收集那些想继续了解的小发现。",
+    tags: ["小红书", "生活", "社区", "Xiaohongshu"],
+    icon: "红",
+    action: "打开小红书",
+    external: true,
+  },
+  {
+    id: "xiaoheihe",
+    group: "games",
+    label: "小黑盒",
+    eyebrow: "GAMES / COMMUNITY",
+    href: "https://www.xiaoheihe.cn/",
+    reason: "看游戏资讯、玩家讨论和游戏资料，给下一款想玩的游戏找点参考。",
+    tags: ["小黑盒", "游戏社区", "Steam", "HeyBox"],
+    icon: "盒",
+    action: "打开小黑盒",
+    external: true,
+  },
+  {
+    id: "hpoi",
+    group: "community",
+    label: "Hpoi 手办维基",
+    eyebrow: "FIGURES / COLLECTION",
+    href: "https://www.hpoi.net/",
+    reason: "查询手办与模型资料，浏览官图、玩家晒图和周边资讯。",
+    tags: ["Hpoi", "hopi", "手办", "模型", "收藏"],
+    icon: "H",
+    action: "打开 Hpoi",
+    external: true,
+  },
+  {
+    id: "jd",
+    group: "shopping",
+    label: "京东",
+    eyebrow: "SHOPPING / JD",
+    href: "https://www.jd.com/",
+    reason: "常用购物入口之一，浏览数码家电和日常用品。",
+    tags: ["京东", "JD", "购物", "数码家电"],
+    icon: "JD",
+    action: "打开京东",
+    external: true,
+  },
+  {
+    id: "taobao",
+    group: "shopping",
+    label: "淘宝",
+    eyebrow: "SHOPPING / TAOBAO",
+    href: "https://www.taobao.com/",
+    reason: "逛店、找周边，也把日常想买的小东西慢慢挑好。",
+    tags: ["淘宝", "Taobao", "购物", "周边"],
+    icon: "淘",
+    action: "打开淘宝",
+    external: true,
+  },
+  {
+    id: "pinduoduo",
+    group: "shopping",
+    label: "拼多多 · PDD",
+    eyebrow: "SHOPPING / PDD",
+    href: "https://www.pinduoduo.com/",
+    reason: "日常购物与商品浏览的另一个入口，和京东、淘宝放在一起方便找到。",
+    tags: ["拼多多", "PDD", "购物", "Pinduoduo"],
+    icon: "拼",
+    action: "打开拼多多",
+    external: true,
+  },
 ] as const;
-
-export const linkGroups = [
-  { id: "all", label: "全部" },
-  { id: "favorite", label: "喜欢的网站" },
-  { id: "study", label: "学习资料" },
-  { id: "project", label: "项目源码" },
-  { id: "contact", label: "联系" },
-] as const;
-
-/**
- * One intentional blank card keeps the collection visibly extensible without
- * publishing invented favorites. It is not counted as an available route.
- */
-export const linkPlaceholder = {
-  eyebrow: "NEXT FAVORITE / OPEN SLOT",
-  label: "下一枚收藏坐标",
-  reason:
-    "这里会留给下一项由 Mikureina 亲自确认的网站；内容待补充，但不会为了填满版面而虚构。",
-  tags: ["有意留白", "待确认"],
-} as const;

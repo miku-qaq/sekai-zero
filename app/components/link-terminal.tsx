@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import {
   linkEntries,
   linkGroups,
-  linkPlaceholder,
+  linkCategories,
   type LinkEntry,
 } from "@/content/links";
 import { sitePath } from "@/lib/site-path";
@@ -26,7 +26,14 @@ export function LinkTerminal() {
 
     return linkEntries.filter((entry) => {
       const inGroup = group === "all" || entry.group === group;
-      const haystack = [entry.label, entry.eyebrow, entry.reason, ...entry.tags]
+      const category = linkCategories.find((item) => item.id === entry.group);
+      const haystack = [
+        entry.label,
+        entry.eyebrow,
+        entry.reason,
+        category?.label,
+        ...entry.tags,
+      ]
         .join(" ")
         .toLocaleLowerCase("zh-CN");
       return inGroup && (!normalizedQuery || haystack.includes(normalizedQuery));
@@ -50,8 +57,12 @@ export function LinkTerminal() {
     });
   }
 
-  const showPlaceholder =
-    (group === "all" || group === "favorite") && query.trim() === "";
+  const visibleCategories = linkCategories
+    .map((category) => ({
+      ...category,
+      entries: visibleEntries.filter((entry) => entry.group === category.id),
+    }))
+    .filter((category) => category.entries.length > 0);
 
   return (
     <div className="link-terminal">
@@ -68,6 +79,11 @@ export function LinkTerminal() {
               }}
             >
               {item.label}
+              <span aria-hidden="true">
+                {item.id === "all"
+                  ? linkEntries.length
+                  : linkEntries.filter((entry) => entry.group === item.id).length}
+              </span>
             </button>
           ))}
         </div>
@@ -81,7 +97,7 @@ export function LinkTerminal() {
               setQuery(event.target.value);
               setRecommendedId(null);
             }}
-            placeholder="搜索理由或标签"
+            placeholder="搜索网站、分类或标签"
           />
         </label>
         <button
@@ -96,71 +112,70 @@ export function LinkTerminal() {
 
       <p className="terminal-count" aria-live="polite">
         找到 {String(visibleEntries.length).padStart(2, "0")} 个入口
-        {showPlaceholder ? " · 另有 01 个内容留白" : ""}
+        {` · ${String(visibleCategories.length).padStart(2, "0")} 个分类`}
         {recommendedId
           ? ` · 推荐：${linkEntries.find((entry) => entry.id === recommendedId)?.label ?? ""}`
           : ""}
       </p>
 
       {visibleEntries.length > 0 ? (
-        <div className="terminal-grid">
-          {visibleEntries.map((entry, index) => (
-            <a
-              className={`terminal-card terminal-card-${entry.group}`}
-              id={`route-${entry.id}`}
-              href={resolvedHref(entry)}
-              key={entry.id}
-              data-recommended={recommendedId === entry.id || undefined}
-              target={entry.external ? "_blank" : undefined}
-              rel={entry.external ? "noreferrer" : undefined}
+        <div className="terminal-sections">
+          {visibleCategories.map((category) => (
+            <section
+              className="terminal-category"
+              key={category.id}
+              aria-labelledby={`terminal-category-${category.id}`}
             >
-              <span className="terminal-card-head">
-                <span className="terminal-card-icon" aria-hidden="true">
-                  {entry.icon}
+              <div className="terminal-category-heading">
+                <div>
+                  <h3 id={`terminal-category-${category.id}`}>
+                    <span aria-hidden="true">{category.icon}</span>
+                    {category.label}
+                  </h3>
+                  <p>{category.description}</p>
+                </div>
+                <span className="terminal-category-count">
+                  {String(category.entries.length).padStart(2, "0")} 个入口
                 </span>
-                <span className="terminal-card-number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </span>
-              <p>{entry.eyebrow}</p>
-              <h3>{entry.label}</h3>
-              <span className="terminal-reason">{entry.reason}</span>
-              <ul aria-label={`${entry.label} 标签`}>
-                {entry.tags.map((tag) => (
-                  <li key={tag}>#{tag}</li>
+              </div>
+              <div className="terminal-grid" data-count={category.entries.length}>
+                {category.entries.map((entry) => (
+                  <a
+                    className={`terminal-card terminal-card-${entry.group}`}
+                    id={`route-${entry.id}`}
+                    href={resolvedHref(entry)}
+                    key={entry.id}
+                    data-recommended={recommendedId === entry.id || undefined}
+                    target={entry.external ? "_blank" : undefined}
+                    rel={entry.external ? "noreferrer" : undefined}
+                  >
+                    <span className="terminal-card-head">
+                      <span className="terminal-card-icon" aria-hidden="true">
+                        {entry.icon}
+                      </span>
+                      <span className="terminal-card-number">
+                        {entry.external
+                          ? new URL(entry.href).hostname.replace(/^www\./, "")
+                          : "SEKAI / 00"}
+                      </span>
+                    </span>
+                    <p>{entry.eyebrow}</p>
+                    <h4>{entry.label}</h4>
+                    <span className="terminal-reason">{entry.reason}</span>
+                    <ul aria-label={`${entry.label} 标签`}>
+                      {entry.tags.map((tag) => (
+                        <li key={tag}>#{tag}</li>
+                      ))}
+                    </ul>
+                    <strong>
+                      {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
+                      <span aria-hidden="true">↗</span>
+                    </strong>
+                  </a>
                 ))}
-              </ul>
-              <strong>
-                {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
-                <span aria-hidden="true">↗</span>
-              </strong>
-            </a>
+              </div>
+            </section>
           ))}
-          {showPlaceholder ? (
-            <article
-              className="terminal-card terminal-card-placeholder"
-              aria-label="待补充的收藏位置"
-            >
-              <span className="terminal-card-head">
-                <span
-                  className="terminal-card-icon terminal-card-icon-placeholder"
-                  aria-hidden="true"
-                >
-                  ◇
-                </span>
-                <span className="terminal-card-number">＋</span>
-              </span>
-              <p>{linkPlaceholder.eyebrow}</p>
-              <h3>{linkPlaceholder.label}</h3>
-              <span className="terminal-reason">{linkPlaceholder.reason}</span>
-              <ul aria-label="占位说明">
-                {linkPlaceholder.tags.map((tag) => (
-                  <li key={tag}>#{tag}</li>
-                ))}
-              </ul>
-              <strong>内容待填充</strong>
-            </article>
-          ) : null}
         </div>
       ) : (
         <div className="terminal-empty">

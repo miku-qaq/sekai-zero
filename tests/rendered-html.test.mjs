@@ -321,7 +321,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
-test("publishes confirmed links plus one honest future placeholder", async () => {
+test("publishes the categorized directory with all confirmed destinations", async () => {
   const response = await render("/links");
   assert.equal(response.status, 200);
   const links = await response.text();
@@ -348,10 +348,25 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.match(links, /CS224N 当前笔记/);
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
-  assert.match(links, /下一枚收藏坐标/);
-  assert.match(links, /内容待填充/);
-  assert.match(links, /不会为了填满版面而虚构/);
-  assert.equal(links.match(/terminal-card-placeholder/g)?.length, 1);
+  assert.equal(links.match(/<a[^>]*id="route-/g)?.length, 16);
+  for (const category of ["video", "games", "community", "shopping", "study", "site"]) {
+    assert.match(links, new RegExp(`id="terminal-category-${category}"`));
+  }
+  for (const host of [
+    "www.netflix.com",
+    "www.xiaohongshu.com",
+    "www.xiaoheihe.cn",
+    "www.hpoi.net",
+    "www.jd.com",
+    "www.taobao.com",
+    "www.pinduoduo.com",
+  ]) {
+    assert.ok(
+      links.includes(`href="https://${host}/`),
+      `${host} should be a real destination`,
+    );
+  }
+  assert.doesNotMatch(links, /terminal-card-placeholder/);
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 });
 
@@ -955,8 +970,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   );
   assert.match(linksContent, /id: "bilibili"/);
   assert.match(linksContent, /id: "apple"/);
-  assert.match(linksContent, /export const linkPlaceholder/);
-  assert.equal(linksContent.match(/NEXT FAVORITE \/ OPEN SLOT/g)?.length, 1);
+  assert.match(linksContent, /export const linkCategories/);
 
   // Character channels use one honest connected state, not invented sync
   // percentages that look like measured user data.

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { linkEntries } from "@/content/links";
+import { linkCategories, linkEntries } from "@/content/links";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { LinkTerminal } from "../components/link-terminal";
 import { PageMasthead } from "../components/page-masthead";
@@ -10,7 +10,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "导航终端",
   description:
-    "Mikureina 喜欢的 Bilibili、Apple、Steam 与 Nintendo Switch，以及 Stanford 学习资料、项目源码和联系入口。",
+    "Mikureina 的常用网站导航：影音娱乐、游戏世界、社区收藏、购物数码、学习资料与本站相关入口。",
 };
 
 export default function LinksPage() {
@@ -19,13 +19,16 @@ export default function LinksPage() {
       <PageMasthead
         currentHref="/links/"
         title="我愿意再次打开的入口。"
-        lead="这里收录我真正喜欢的 Bilibili、Apple、Steam 与 Nintendo Switch，也连接 Stanford 学习资料、项目源码与联系方式。每个入口都会说明它为什么出现在这里。"
+        lead="看视频、逛社区、找手办、挑东西，或是继续今天的学习。把常用的网站分门别类，想去哪里，都从这里出发。"
         meta={[
           {
             label: "已收录",
             value: `${String(linkEntries.length).padStart(2, "0")} 个入口`,
           },
-          { label: "个人收藏", value: "Bilibili / Apple / Steam / NS" },
+          {
+            label: "分类整理",
+            value: `${String(linkCategories.length).padStart(2, "0")} 个分区`,
+          },
           { label: "可以使用", value: "分类 / 搜索 / 随机推荐" },
         ]}
       />
@@ -37,9 +40,9 @@ export default function LinksPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">01 / NAVIGATION TERMINAL</p>
-            <h2 id="route-title">选择今天想打开的入口。</h2>
+            <h2 id="route-title">常用网站，分门别类。</h2>
           </div>
-          <p>按分类筛选或搜索关键词；随机推荐只会高亮一张卡片，由你决定是否打开。</p>
+          <p>常用网站按用途归位。选择分类、搜索名字，或让随机推荐带来一点灵感。</p>
         </div>
         <LinkTerminal />
       </section>
