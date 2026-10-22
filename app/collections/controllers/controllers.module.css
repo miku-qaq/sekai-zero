@@ -1,23 +1,5 @@
 .controllerPage {
-  --controller-accent: #62bfe9;
-}
-.controllerPage :global(.subpage-hero) {
-  min-height: auto;
-  padding-top: 108px;
-  padding-bottom: 24px;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-.controllerPage :global(.subpage-visual) {
-  display: none;
-}
-.controllerPage :global(.subpage-copy h1) {
-  max-width: 900px;
-  font-size: clamp(34px, 4.3vw, 54px);
-}
-.controllerPage :global(.subpage-meta) {
-  grid-row: auto;
-  margin-top: 0;
+  --controller-accent: var(--sky);
 }
 .controllerPage .archive {
   padding-top: 28px;
@@ -39,22 +21,22 @@
   min-width: 0;
 }
 .card {
-  --controller-accent: #43d7c1;
+  --controller-accent: var(--accent);
   height: 100%;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 26px;
+  border-radius: var(--radius-medium);
   background: var(--surface);
-  box-shadow: 0 14px 38px rgb(47 36 72 / 7%);
+  box-shadow: var(--collection-shadow);
 }
 .card[data-tone="violet"] {
-  --controller-accent: #8f7af7;
+  --controller-accent: var(--secondary);
 }
 .card[data-tone="blue"] {
-  --controller-accent: #62bfe9;
+  --controller-accent: var(--sky);
 }
 .card[data-tone="pink"] {
-  --controller-accent: #ff7eb2;
+  --controller-accent: var(--pink);
 }
 .photo {
   position: relative;
@@ -155,25 +137,6 @@
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   font-size: 12px;
-}
-.sourceNote {
-  margin-top: 24px;
-  padding: 22px 24px;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  background: color-mix(in srgb, var(--controller-accent) 7%, var(--surface));
-}
-.sourceNote > span {
-  font:
-    10px var(--font-geist-mono),
-    monospace;
-  letter-spacing: 0.06em;
-}
-.sourceNote p {
-  margin: 10px 0 0;
-  font-size: 12px;
-  line-height: 1.8;
-  color: var(--muted);
 }
 .lightbox {
   margin: auto;

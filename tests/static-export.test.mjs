@@ -259,11 +259,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(games, /实际游玩记录/);
   assert.match(games, /玩过 \/ 不排名/);
   assert.match(games, /Nintendo Switch 收藏待补充/);
-  assert.match(games, /内容待填充 · OWNER CONFIRMATION REQUIRED/);
-  assert.equal(
-    games.match(/<strong>内容待填充 · OWNER CONFIRMATION REQUIRED<\/strong>/g)?.length,
-    1,
-  );
+  assert.match(games, /正在整理中/);
   assert.match(games, /https:\/\/store\.steampowered\.com\/app\//);
   assert.doesNotMatch(
     games,
@@ -278,7 +274,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(figures, /展柜收藏<\/dt><dd>16 件<\/dd>/);
   assert.match(figures, /初音未来<\/dt><dd>06 件<\/dd>/);
   assert.match(figures, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
-  assert.match(figures, /aria-label="16 件手办收藏核对目录"/);
+  assert.match(figures, /aria-label="16 件手办收藏"/);
   assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(figures, /id="figure-003-title"/);
   assert.deepEqual(
@@ -330,7 +326,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(figures, /伊蕾娜/);
   assert.match(figures, /芙莉莲/);
   assert.match(figures, /Angel Beats!/);
-  assert.equal(figures.match(/款式已核对<\/p>/g)?.length, 16);
+  assert.doesNotMatch(figures, /款式已核对<\/p>/);
   assert.equal(
     [
       ...figures.matchAll(

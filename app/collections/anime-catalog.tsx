@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import catalogStyles from "./catalog.module.css";
 import { useMemo, useState } from "react";
 import { animeCatalog } from "@/content/anime";
 import { sitePath } from "@/lib/site-path";
@@ -106,16 +107,16 @@ export function AnimeCatalog() {
   }
 
   return (
-    <div className={styles.catalog}>
-      <div className={styles.catalogControls}>
+    <div className={catalogStyles.catalog} data-catalog="anime">
+      <div className={catalogStyles.catalogControls}>
         <form
-          className={styles.toolbar}
+          className={catalogStyles.toolbar}
           role="search"
           onSubmit={(event) => event.preventDefault()}
         >
-          <label className={styles.search}>
+          <label className={catalogStyles.search}>
             <span>搜索收藏</span>
-            <span className={styles.searchField}>
+            <span className={catalogStyles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
                 type="search"
@@ -126,7 +127,7 @@ export function AnimeCatalog() {
             </span>
           </label>
 
-          <label className={styles.selectField}>
+          <label className={catalogStyles.selectField}>
             <span>作品类型</span>
             <select
               value={format}
@@ -141,7 +142,7 @@ export function AnimeCatalog() {
             </select>
           </label>
 
-          <label className={styles.selectField}>
+          <label className={catalogStyles.selectField}>
             <span>作品年份</span>
             <select value={year} onChange={(event) => updateYear(event.target.value)}>
               <option value={ALL}>全部年份</option>
@@ -154,19 +155,23 @@ export function AnimeCatalog() {
           </label>
 
           {hasActiveFilters ? (
-            <button className={styles.reset} type="button" onClick={resetFilters}>
+            <button
+              className={catalogStyles.reset}
+              type="button"
+              onClick={resetFilters}
+            >
               清除筛选
             </button>
           ) : null}
         </form>
 
-        <div className={styles.resultLine}>
+        <div className={catalogStyles.resultLine}>
           <p role="status" aria-live="polite" aria-atomic="true">
             已展示 <strong>{String(displayedEntries.length).padStart(2, "0")}</strong> /
             找到 {String(visibleEntries.length).padStart(2, "0")} / 总计{" "}
             {String(entries.length).padStart(2, "0")} 部
           </p>
-          <span>WATCHED COLLECTION · NO RATING</span>
+          <span>点击封面，打开作品资料 ↗</span>
         </div>
       </div>
 
@@ -213,9 +218,10 @@ export function AnimeCatalog() {
             })}
           </ol>
           {remaining > 0 ? (
-            <div className={styles.loadMore}>
+            <div className={catalogStyles.loadMore}>
               <p>还有 {remaining} 部动画尚未展开。</p>
               <button
+                className="button button-primary"
                 type="button"
                 onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
               >
@@ -225,11 +231,15 @@ export function AnimeCatalog() {
           ) : null}
         </>
       ) : (
-        <div className={styles.empty}>
+        <div className={catalogStyles.empty}>
           <span aria-hidden="true">NO MATCHING ANIME</span>
           <h3>这组条件下还没有作品。</h3>
           <p>换个关键词或年份试试，也可以恢复完整收藏墙。</p>
-          <button type="button" onClick={resetFilters}>
+          <button
+            className="button button-primary"
+            type="button"
+            onClick={resetFilters}
+          >
             清除全部筛选
           </button>
         </div>

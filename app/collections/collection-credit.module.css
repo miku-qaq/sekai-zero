@@ -1,0 +1,78 @@
+.credit {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+}
+.credit summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 650;
+}
+.credit summary::-webkit-details-marker {
+  display: none;
+}
+.credit summary:focus-visible {
+  border-radius: var(--radius-medium);
+}
+.credit summary small {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+.indicator {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--accent-deep);
+  font-size: 18px;
+}
+.credit[open] .indicator {
+  transform: rotate(45deg);
+}
+.body {
+  display: grid;
+  gap: 12px;
+  padding: 0 20px 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.body p {
+  margin: 0;
+}
+.body a {
+  width: fit-content;
+  color: var(--accent-deep);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .credit summary {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    padding: 14px 16px;
+  }
+  .credit summary small {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .indicator {
+    margin-left: auto;
+  }
+  .body {
+    padding: 0 16px 16px;
+  }
+}

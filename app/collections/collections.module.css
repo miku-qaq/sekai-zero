@@ -3,18 +3,18 @@
 }
 
 .collectionPage {
-  --collection-pink: #ff7eb2;
-  --collection-violet: #8f7af7;
-  --collection-mint: #43d7c1;
-  --collection-amber: #f0bd47;
-  --collection-blue: #62bfe9;
+  --collection-pink: var(--pink);
+  --collection-violet: var(--secondary);
+  --collection-mint: var(--accent);
+  --collection-amber: var(--lemon);
+  --collection-blue: var(--sky);
 }
 
 .figurePage {
-  --figure-mint: #43d7c1;
-  --figure-violet: #8f7af7;
-  --figure-pink: #ff7eb2;
-  --figure-amber: #f0bd47;
+  --figure-mint: var(--accent);
+  --figure-violet: var(--secondary);
+  --figure-pink: var(--pink);
+  --figure-amber: var(--lemon);
 }
 
 .figureArchive {
@@ -381,9 +381,9 @@
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 28px;
+  border-radius: var(--radius-large);
   background: var(--surface);
-  box-shadow: 0 12px 36px rgb(54 42 82 / 6%);
+  box-shadow: var(--collection-shadow);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease;

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import catalogStyles from "../catalog.module.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { figureCollection, type FigureCollectionEntry } from "@/content/figures";
 import { sitePath } from "@/lib/site-path";
@@ -76,16 +77,16 @@ export function FigureCatalog() {
   }
 
   return (
-    <div className={styles.catalog}>
-      <div className={styles.catalogControls}>
+    <div className={catalogStyles.catalog} data-catalog="figures">
+      <div className={catalogStyles.catalogControls}>
         <form
-          className={styles.toolbar}
+          className={catalogStyles.toolbar}
           role="search"
           onSubmit={(event) => event.preventDefault()}
         >
-          <label className={styles.search}>
+          <label className={catalogStyles.search}>
             <span>搜索角色、作品或款式</span>
-            <span className={styles.searchField}>
+            <span className={catalogStyles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
                 type="search"
@@ -111,25 +112,29 @@ export function FigureCatalog() {
           </div>
 
           {hasActiveFilters ? (
-            <button className={styles.reset} type="button" onClick={resetFilters}>
+            <button
+              className={catalogStyles.reset}
+              type="button"
+              onClick={resetFilters}
+            >
               清除筛选
             </button>
           ) : null}
         </form>
 
-        <div className={styles.resultLine}>
+        <div className={catalogStyles.resultLine}>
           <p role="status" aria-live="polite" aria-atomic="true">
             当前展示 <strong>{String(visibleEntries.length).padStart(2, "0")}</strong> /
             总计 {String(figureCollection.length).padStart(2, "0")} 件
           </p>
-          <span>{figureCollection.length} MATCHED PRODUCT PHOTOS</span>
+          <span>点击图片，查看收藏细节</span>
         </div>
       </div>
 
       {visibleEntries.length > 0 ? (
         <ol
           className={styles.grid}
-          aria-label={`${figureCollection.length} 件手办收藏核对目录`}
+          aria-label={`${figureCollection.length} 件手办收藏`}
         >
           {visibleEntries.map((entry) => {
             const titleId = `${entry.id}-title`;
@@ -174,9 +179,6 @@ export function FigureCatalog() {
                   </div>
 
                   <div className={styles.cardBody}>
-                    <p className={styles.verifyLine}>
-                      <span aria-hidden="true">●</span> 款式已核对
-                    </p>
                     <h3 id={titleId}>{entry.character}</h3>
                     {entry.product ? (
                       <p className={styles.variant}>{entry.product.title}</p>
@@ -215,11 +217,15 @@ export function FigureCatalog() {
           })}
         </ol>
       ) : (
-        <div className={styles.empty}>
+        <div className={catalogStyles.empty}>
           <span aria-hidden="true">NO MATCHING FIGURE</span>
           <h3>没有找到对应的收藏。</h3>
           <p>换一个角色、作品或款式名称，也可以恢复完整展柜。</p>
-          <button type="button" onClick={resetFilters}>
+          <button
+            className="button button-primary"
+            type="button"
+            onClick={resetFilters}
+          >
             查看全部手办
           </button>
         </div>

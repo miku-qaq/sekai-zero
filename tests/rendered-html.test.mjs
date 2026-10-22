@@ -417,7 +417,7 @@ test("publishes all 89 watched anime while initially rendering only 24 cards", a
   assert.match(html, /魔女之旅/);
   assert.match(html, /樱花庄的宠物女孩/);
   assert.doesNotMatch(html, /孤独摇滚！|命运石之门/);
-  assert.match(html, /IMAGE &amp; DATA CREDIT/);
+  assert.match(html, /动画资料与封面来源/);
   assert.match(html, /封面与作品资料索引来自 Bangumi/);
   assert.doesNotMatch(html, /heart beats|时速5cm|作品名、别名|aliases/i);
 
@@ -450,11 +450,7 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.match(html, /玩过 \/ 不排名/);
   assert.match(html, /只留下适合公开的收藏信息/);
   assert.match(html, /Nintendo Switch 收藏待补充/);
-  assert.match(html, /内容待填充 · OWNER CONFIRMATION REQUIRED/);
-  assert.equal(
-    html.match(/<strong>内容待填充 · OWNER CONFIRMATION REQUIRED<\/strong>/g)?.length,
-    1,
-  );
+  assert.match(html, /正在整理中/);
   assert.match(html, /https:\/\/store\.steampowered\.com\/app\//);
 
   // Privacy disclosures may explain what is withheld, but no private field or
@@ -477,7 +473,7 @@ test("publishes 16 product-matched figures with stable archive numbers", async (
   assert.match(html, /展柜收藏<\/dt><dd>16 件<\/dd>/);
   assert.match(html, /初音未来<\/dt><dd>06 件<\/dd>/);
   assert.match(html, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
-  assert.match(html, /aria-label="16 件手办收藏核对目录"/);
+  assert.match(html, /aria-label="16 件手办收藏"/);
   assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(html, /id="figure-003-title"/);
   assert.deepEqual(
@@ -531,7 +527,7 @@ test("publishes 16 product-matched figures with stable archive numbers", async (
   assert.match(html, /伊蕾娜/);
   assert.match(html, /芙莉莲/);
   assert.match(html, /Angel Beats!/);
-  assert.equal(html.match(/款式已核对<\/p>/g)?.length, 16);
+  assert.doesNotMatch(html, /款式已核对<\/p>/);
   assert.equal(html.match(/src="\/figures\/figure-\d{3}\.webp"/g)?.length, 16);
   assert.equal(html.match(/aria-haspopup="dialog"/g)?.length, 16);
   assert.match(html, /超天酱/);

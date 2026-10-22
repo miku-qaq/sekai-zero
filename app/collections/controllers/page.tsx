@@ -4,6 +4,7 @@ import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
+import { CollectionCredit } from "../collection-credit";
 import { CollectionNavigation } from "../collection-navigation";
 import { ControllerCatalog } from "./controller-catalog";
 import styles from "./controllers.module.css";
@@ -57,13 +58,12 @@ export default function CollectionsControllersPage() {
         <CollectionNavigation current="controllers" />
         <p className={styles.imageNote}>商品展示图 · 非本人实拍</p>
         <ControllerCatalog />
-        <aside className={styles.sourceNote} aria-label="手柄图片来源说明">
-          <span>COLLECTION NOTE / CONTROLLERS</span>
+        <CollectionCredit label="手柄图片与商品资料" source="Xbox · Nintendo · WHOTAO">
           <p>
             Xbox 与 Nintendo 图片来自官方商品页；八重神子联名款使用 WHOTAO
             商品资料图。每张卡片保留来源入口，图片与商品设计版权归各自权利方。
           </p>
-        </aside>
+        </CollectionCredit>
       </section>
       <JourneyNavigation currentHref="/collections/" />
       <SiteFooter />

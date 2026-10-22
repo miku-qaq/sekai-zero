@@ -5,6 +5,7 @@ import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
 import { CollectionLink } from "../collection-link";
+import { CollectionCredit } from "../collection-credit";
 import { CollectionNavigation } from "../collection-navigation";
 import { FigureCatalog } from "./figure-catalog";
 import styles from "./figures.module.css";
@@ -75,14 +76,9 @@ export default function CollectionsFiguresPage() {
 
         <FigureCatalog />
 
-        <aside className={styles.sourcePanel} aria-label="手办收藏资料说明">
-          <div>
-            <span>COLLECTION NOTE / IMAGE SOURCES</span>
-            <strong>{figureCollectionMeta.sourceLabel}</strong>
-          </div>
+        <CollectionCredit label="手办图片与款式资料" source="商品展示图 · 非本人实拍">
           <p>{figureCollectionMeta.rightsNote}</p>
-          <b>款式已核对 · 实拍待补充</b>
-        </aside>
+        </CollectionCredit>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />

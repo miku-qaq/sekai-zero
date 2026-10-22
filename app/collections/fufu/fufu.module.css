@@ -1,9 +1,9 @@
 .fufuPage {
-  --fufu-mint: #43d7c1;
-  --fufu-pink: #ff7eb2;
-  --fufu-violet: #8f7af7;
-  --fufu-amber: #f0bd47;
-  --fufu-blue: #62bfe9;
+  --fufu-mint: var(--accent);
+  --fufu-pink: var(--pink);
+  --fufu-violet: var(--secondary);
+  --fufu-amber: var(--lemon);
+  --fufu-blue: var(--sky);
 }
 
 .fufuArchive {
@@ -63,9 +63,7 @@
 .largeCopy > span,
 .fufuVisual > span,
 .fufuVisual > i,
-.fufuBody > p,
-.fufuNotice span,
-.fufuNotice b {
+.fufuBody > p {
   font-family: var(--font-geist-mono), monospace;
 }
 
@@ -189,9 +187,9 @@
   margin-bottom: 22px;
   overflow: hidden;
   border: 1px solid var(--border-strong);
-  border-radius: 28px;
+  border-radius: var(--radius-medium);
   background: var(--surface);
-  box-shadow: 0 22px 52px rgb(51 38 79 / 9%);
+  box-shadow: var(--collection-shadow);
 }
 
 .largeVisual {
@@ -339,18 +337,6 @@
   line-height: 1.8;
 }
 
-.largeCopy a,
-.fufuBody a {
-  width: fit-content;
-  min-height: 44px;
-  margin-top: 22px;
-  padding: 12px 15px;
-  border: 1px solid var(--foreground);
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 780;
-}
-
 .zodiacHeading {
   display: grid;
   grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1fr);
@@ -384,9 +370,9 @@
   height: 100%;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: var(--radius-medium);
   background: var(--surface);
-  box-shadow: 0 14px 34px rgb(48 36 73 / 8%);
+  box-shadow: var(--collection-shadow);
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -470,7 +456,7 @@
 
 .fufuBody {
   display: grid;
-  min-height: 190px;
+  min-height: 112px;
   align-content: start;
   padding: 17px 16px 19px;
   background: linear-gradient(
@@ -494,60 +480,6 @@
   letter-spacing: -0.035em;
   line-height: 1.55;
   overflow-wrap: anywhere;
-}
-
-.fufuBody a {
-  min-height: 44px;
-  margin-top: 16px;
-  padding: 10px 12px;
-  border-color: var(--border-strong);
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.fufuNotice {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.5fr) auto;
-  align-items: center;
-  gap: 24px;
-  margin-top: 22px;
-  padding: 22px 24px;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-medium);
-  background: color-mix(in srgb, var(--fufu-mint) 8%, var(--surface-muted));
-}
-
-.fufuNotice div {
-  display: grid;
-  gap: 5px;
-}
-
-.fufuNotice span {
-  color: color-mix(in srgb, var(--fufu-mint) 42%, var(--foreground));
-  font-size: 9px;
-  font-weight: 820;
-  letter-spacing: 0.09em;
-}
-
-.fufuNotice strong {
-  font-size: 13px;
-}
-
-.fufuNotice p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.fufuNotice b {
-  padding: 10px 13px;
-  border: 1px dashed var(--border-strong);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: 9px;
-  letter-spacing: 0.07em;
-  white-space: nowrap;
 }
 
 @media (hover: hover) {
@@ -577,8 +509,7 @@
 @media (max-width: 760px) {
   .originPanel,
   .largeFufu,
-  .zodiacHeading,
-  .fufuNotice {
+  .zodiacHeading {
     grid-template-columns: 1fr;
   }
 
@@ -593,10 +524,6 @@
   .fufuGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-  }
-
-  .fufuNotice b {
-    width: fit-content;
   }
 }
 
@@ -645,6 +572,14 @@
   height: auto;
   aspect-ratio: 1;
   object-fit: contain;
+}
+.productPhoto a {
+  display: block;
+  border-radius: var(--radius-small);
+}
+.productPhoto a:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 2px;
 }
 .productPhoto figcaption {
   padding: 10px 0 2px;

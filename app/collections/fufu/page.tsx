@@ -6,6 +6,7 @@ import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
+import { CollectionCredit } from "../collection-credit";
 import { CollectionNavigation } from "../collection-navigation";
 import styles from "./fufu.module.css";
 
@@ -89,15 +90,22 @@ export default function CollectionsFufuPage() {
             aria-labelledby={`${largeFufu.id}-title`}
           >
             <figure className={styles.productPhoto}>
-              <Image
-                src={sitePath(largeFufu.image)}
-                alt={`${largeFufu.title}，SEGA 官方商品示意图`}
-                width={800}
-                height={800}
-                sizes="(max-width: 760px) 90vw, 480px"
-                loading="lazy"
-                unoptimized
-              />
+              <a
+                href={largeFufu.officialUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`查看 ${largeFufu.title} 的 SEGA 商品资料（将在新标签页打开）`}
+              >
+                <Image
+                  src={sitePath(largeFufu.image)}
+                  alt={`${largeFufu.title}，SEGA 官方商品示意图`}
+                  width={800}
+                  height={800}
+                  sizes="(max-width: 760px) 90vw, 480px"
+                  loading="lazy"
+                  unoptimized
+                />
+              </a>
               <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
             </figure>
             <div className={styles.largeCopy}>
@@ -106,9 +114,6 @@ export default function CollectionsFufuPage() {
               <p>
                 毛绒小队里的大个子，和每年的生肖伙伴一起，组成我的初音未来 Fufu 收藏。
               </p>
-              <a href={largeFufu.officialUrl} target="_blank" rel="noreferrer">
-                查看 SEGA 正式商品资料（新窗口） ↗
-              </a>
             </div>
           </article>
         ) : null}
@@ -142,23 +147,27 @@ export default function CollectionsFufuPage() {
                     <span className={styles.yearBadge}>
                       {entry.year} · {entry.zodiac}
                     </span>
-                    <Image
-                      src={sitePath(entry.image)}
-                      alt={`${entry.title}，SEGA 官方商品示意图`}
-                      width={800}
-                      height={800}
-                      sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 340px"
-                      loading="lazy"
-                      unoptimized
-                    />
+                    <a
+                      href={entry.officialUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`查看 ${entry.title} 的 SEGA 商品资料（将在新标签页打开）`}
+                    >
+                      <Image
+                        src={sitePath(entry.image)}
+                        alt={`${entry.title}，SEGA 官方商品示意图`}
+                        width={800}
+                        height={800}
+                        sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 340px"
+                        loading="lazy"
+                        unoptimized
+                      />
+                    </a>
                     <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
                   </figure>
                   <div className={styles.fufuBody}>
-                    <p>ZODIAC / {entry.zodiac} · OWNER CONFIRMED</p>
+                    <p>ZODIAC / {entry.zodiac}</p>
                     <h3 id={titleId}>{entry.title}</h3>
-                    <a href={entry.officialUrl} target="_blank" rel="noreferrer">
-                      SEGA 正式资料（新窗口） ↗
-                    </a>
                   </div>
                 </article>
               </li>
@@ -166,14 +175,12 @@ export default function CollectionsFufuPage() {
           })}
         </ol>
 
-        <aside className={styles.fufuNotice} aria-label="Fufu 收藏资料说明">
-          <div>
-            <span>COLLECTION NOTE / 39</span>
-            <strong>{fufuCollectionMeta.sourceLabel}</strong>
-          </div>
+        <CollectionCredit
+          label="Fufu 图片与商品资料"
+          source="SEGA 官方商品图 · 非本人实拍"
+        >
           <p>{fufuCollectionMeta.rightsNote}</p>
-          <b>本人实拍待补充</b>
-        </aside>
+        </CollectionCredit>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />

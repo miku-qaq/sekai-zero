@@ -5,9 +5,9 @@
   margin-bottom: 18px;
   padding: 12px;
   border: 1px solid var(--border);
-  border-radius: 26px;
+  border-radius: var(--radius-medium);
   background: color-mix(in srgb, var(--surface) 88%, transparent);
-  box-shadow: 0 18px 48px rgb(56 45 83 / 8%);
+  box-shadow: var(--collection-shadow);
 }
 
 .intro {
@@ -53,18 +53,18 @@
 }
 
 .routes a {
-  --collection-accent: #ff7eb2;
+  --collection-accent: var(--pink);
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: 82px;
+  min-height: 72px;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 13px;
   padding: 15px 16px;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-small);
   background:
     radial-gradient(
       circle at 100% 0%,
@@ -79,19 +79,19 @@
 }
 
 .routes a[data-accent="violet"] {
-  --collection-accent: #806cf0;
+  --collection-accent: var(--secondary);
 }
 
 .routes a[data-accent="mint"] {
-  --collection-accent: #43d7c1;
+  --collection-accent: var(--accent);
 }
 
 .routes a[data-accent="amber"] {
-  --collection-accent: #f0bd47;
+  --collection-accent: var(--lemon);
 }
 
 .routes a[data-accent="blue"] {
-  --collection-accent: #62bfe9;
+  --collection-accent: var(--sky);
 }
 
 .routes a[aria-current="page"] {

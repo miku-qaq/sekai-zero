@@ -64,7 +64,7 @@ export default function CollectionsPage() {
             value: `${String(collectionRooms.length).padStart(2, "0")} 间`,
           },
           { label: "真实记录", value: `${collectionRecordCount} 条` },
-          { label: "展示原则", value: "不排名 / 不虚构" },
+          { label: "馆内漫游", value: "故事 / 日常 / 热爱" },
         ]}
       />
 

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import catalogStyles from "./catalog.module.css";
 import { useMemo, useState } from "react";
 import { gameCatalog } from "@/content/games";
 import { sitePath } from "@/lib/site-path";
@@ -40,16 +41,16 @@ export function GameCatalog() {
   }
 
   return (
-    <div className={styles.catalog}>
-      <div className={styles.catalogControls}>
+    <div className={catalogStyles.catalog} data-catalog="games">
+      <div className={catalogStyles.catalogControls}>
         <form
-          className={styles.toolbar}
+          className={catalogStyles.toolbar}
           role="search"
           onSubmit={(event) => event.preventDefault()}
         >
-          <label className={styles.search}>
+          <label className={catalogStyles.search}>
             <span>搜索 Steam 收藏</span>
-            <span className={styles.searchField}>
+            <span className={catalogStyles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
                 type="search"
@@ -60,19 +61,19 @@ export function GameCatalog() {
             </span>
           </label>
           {query.trim() ? (
-            <button className={styles.reset} type="button" onClick={resetSearch}>
+            <button className={catalogStyles.reset} type="button" onClick={resetSearch}>
               清除搜索
             </button>
           ) : null}
         </form>
 
-        <div className={styles.resultLine}>
+        <div className={catalogStyles.resultLine}>
           <p role="status" aria-live="polite" aria-atomic="true">
             已展示 <strong>{String(visibleGames.length).padStart(3, "0")}</strong> /
             找到 {String(filteredGames.length).padStart(3, "0")} / 总计{" "}
             {String(gameCatalog.length).padStart(3, "0")} 款
           </p>
-          <span>PLAYED ON STEAM · NO PLAYTIME · NO RANKING</span>
+          <span>点击封面，前往 Steam 商店 ↗</span>
         </div>
       </div>
 
@@ -85,7 +86,13 @@ export function GameCatalog() {
               return (
                 <li key={game.id}>
                   <article className={styles.card} aria-labelledby={titleId}>
-                    <div className={styles.cover}>
+                    <a
+                      className={styles.cover}
+                      href={game.storeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`在 Steam 商店查看 ${game.title}（将在新标签页打开）`}
+                    >
                       {game.image ? (
                         <Image
                           src={sitePath(game.image)}
@@ -106,18 +113,10 @@ export function GameCatalog() {
                       <span className={styles.cardIndex} aria-hidden="true">
                         {String(index + 1).padStart(3, "0")}
                       </span>
-                    </div>
+                    </a>
 
                     <div className={styles.cardBody}>
                       <h3 id={titleId}>{game.title}</h3>
-                      <a
-                        href={game.storeUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`在 Steam 商店查看 ${game.title}（将在新标签页打开）`}
-                      >
-                        查看官方商店页 <span aria-hidden="true">↗</span>
-                      </a>
                     </div>
                   </article>
                 </li>
@@ -126,9 +125,10 @@ export function GameCatalog() {
           </ol>
 
           {remaining > 0 ? (
-            <div className={styles.loadMore}>
+            <div className={catalogStyles.loadMore}>
               <p>还有 {remaining} 款游戏尚未展开。</p>
               <button
+                className="button button-primary"
                 type="button"
                 onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
               >
@@ -138,11 +138,11 @@ export function GameCatalog() {
           ) : null}
         </>
       ) : (
-        <div className={styles.empty}>
+        <div className={catalogStyles.empty}>
           <span aria-hidden="true">NO MATCHING GAME</span>
           <h3>没有找到对应的游戏。</h3>
           <p>检查一下名称，或恢复完整的 Steam 收藏。</p>
-          <button type="button" onClick={resetSearch}>
+          <button className="button button-primary" type="button" onClick={resetSearch}>
             清除搜索
           </button>
         </div>

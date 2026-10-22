@@ -1,3 +1,7 @@
+.collectionLayout {
+  --collection-shadow: 0 12px 32px rgb(47 36 72 / 7%);
+}
+
 .collectionLayout :global(.subpage-main .subpage-hero) {
   min-height: auto;
   grid-template-columns: 1fr;

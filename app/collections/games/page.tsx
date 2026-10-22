@@ -8,6 +8,7 @@ import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
 import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
+import { CollectionCredit } from "../collection-credit";
 import { CollectionNavigation } from "../collection-navigation";
 import { GameCatalog } from "../game-catalog";
 import styles from "../games.module.css";
@@ -55,10 +56,7 @@ export default function CollectionsGamesPage() {
             <p className="section-index">ROOM 02 / PLAYED GAMES</p>
             <h2 id="game-archive-title">从游戏库里找回旅程。</h2>
           </div>
-          <p>
-            按 Steam
-            当前显示的作品名整理，可直接搜索。这里不是时长榜或推荐榜，只记录确认过的游玩足迹。
-          </p>
+          <p>按游戏名搜索，或从封面重逢熟悉的世界。点击封面可以前往 Steam 商店。</p>
         </div>
 
         <CollectionNavigation current="games" />
@@ -82,33 +80,17 @@ export default function CollectionsGamesPage() {
             <span>02 / NEXT</span>
             <b>{switchCollectionPlaceholder.title}</b>
             <small>{switchCollectionPlaceholder.copy}</small>
-            <strong>内容待填充 · OWNER CONFIRMATION REQUIRED</strong>
+            <strong>正在整理中</strong>
           </div>
         </aside>
 
-        <aside className={styles.privacyNotice} aria-label="Steam 数据隐私说明">
-          <span aria-hidden="true">LOCK / LOCAL ONLY</span>
-          <div>
-            <h3>只留下适合公开的收藏信息。</h3>
-            <p>
-              同步脚本只把游戏
-              ID、名称、平台、本地封面与公开商店地址写入仓库；账号标识、游玩时长、最近上线与授权数据不会进入公开目录。
-            </p>
-          </div>
-        </aside>
-
-        <aside className={styles.sourceNotice} aria-label="游戏资料与封面来源说明">
-          <div>
-            <span>IMAGE &amp; DATA CREDIT</span>
-            <strong>{gameCatalogMeta.sourceLabel}</strong>
-          </div>
+        <CollectionCredit label="游戏资料与封面来源" source="Steam">
           <p>{gameCatalogMeta.rightsNote}</p>
+          <p>只留下适合公开的收藏信息：作品名称、封面和商店链接。</p>
           <a href={gameCatalogMeta.sourceUrl} target="_blank" rel="noreferrer">
-            打开 Steam 商店
-            <span aria-hidden="true">↗</span>
-            <span className="sr-only">（将在新标签页打开）</span>
+            打开 Steam 商店 ↗<span className="sr-only">（将在新标签页打开）</span>
           </a>
-        </aside>
+        </CollectionCredit>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />

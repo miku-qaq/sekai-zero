@@ -6,6 +6,7 @@ import { PageMasthead } from "../../components/page-masthead";
 import { SiteFooter } from "../../components/site-footer";
 import { AnimeCatalog } from "../anime-catalog";
 import styles from "../anime.module.css";
+import { CollectionCredit } from "../collection-credit";
 import { CollectionNavigation } from "../collection-navigation";
 
 type CatalogEntryView = {
@@ -90,26 +91,19 @@ export default function CollectionsAnimePage() {
             <p className="section-index">ROOM 01 / WATCHED ANIME</p>
             <h2 id="anime-archive-title">从封面里找回一段故事。</h2>
           </div>
-          <p>
-            这里不是榜单。搜索正式作品名，也可以用类型与年份缩小范围；“已看”只表示观看记录，不代表评分。
-          </p>
+          <p>按作品名、类型或年份，找回熟悉的故事。点击封面就能打开作品资料。</p>
         </div>
 
         <CollectionNavigation current="anime" />
         <AnimeCatalog />
 
-        <aside className={styles.sourceNotice} aria-label="动画资料与封面来源说明">
-          <div>
-            <span>IMAGE &amp; DATA CREDIT</span>
-            <strong>{metaText("sourceLabel")}</strong>
-          </div>
+        <CollectionCredit label="动画资料与封面来源" source="Bangumi">
+          <p>{metaText("sourceLabel")}</p>
           <p>{metaText("rightsNote")}</p>
           <a href={metaText("sourceUrl")} target="_blank" rel="noreferrer">
-            查看 Bangumi
-            <span aria-hidden="true">↗</span>
-            <span className="sr-only">（将在新标签页打开）</span>
+            查看 Bangumi ↗<span className="sr-only">（将在新标签页打开）</span>
           </a>
-        </aside>
+        </CollectionCredit>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />
