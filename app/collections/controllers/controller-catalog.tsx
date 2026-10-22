@@ -1,29 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import {
-  controllerCollection,
-  type ControllerCollectionEntry,
-} from "@/content/controllers";
+import { useState } from "react";
+import { controllerCollection } from "@/content/controllers";
 import { sitePath } from "@/lib/site-path";
 import styles from "./controllers.module.css";
+import { CollectionLightbox } from "../collection-lightbox";
+
+const previewItems = controllerCollection.map((entry) => ({
+  id: entry.id,
+  title: entry.title,
+  subtitle: entry.edition,
+  image: entry.image,
+  imageAlt: entry.imageAlt,
+  sourceUrl: entry.sourceUrl,
+}));
 
 export function ControllerCatalog() {
-  const [selected, setSelected] = useState<ControllerCollectionEntry | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    if (!selected) return;
-    const dialog = dialogRef.current;
-    const previousOverflow = document.body.style.overflow;
-    dialog?.showModal();
-    document.body.style.overflow = "hidden";
-    return () => {
-      dialog?.close();
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [selected]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
     <>
@@ -41,7 +35,7 @@ export function ControllerCatalog() {
               <div className={styles.photo}>
                 <button
                   type="button"
-                  onClick={() => setSelected(entry)}
+                  onClick={() => setSelectedId(entry.id)}
                   aria-label={`查看大图：${entry.title} · ${entry.edition}`}
                   aria-haspopup="dialog"
                 >
@@ -79,38 +73,14 @@ export function ControllerCatalog() {
           </li>
         ))}
       </ol>
-      <dialog
-        ref={dialogRef}
-        className={styles.lightbox}
-        aria-labelledby="controller-preview-title"
-        onClose={() => setSelected(null)}
-      >
-        {selected ? (
-          <>
-            <div className={styles.lightboxHeading}>
-              <div>
-                <h2 id="controller-preview-title">{selected.title}</h2>
-                <p>{selected.edition}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => dialogRef.current?.close()}
-                aria-label="关闭大图"
-              >
-                ×
-              </button>
-            </div>
-            <Image
-              src={sitePath(selected.image)}
-              alt={selected.imageAlt}
-              width={800}
-              height={800}
-              unoptimized
-            />
-            <p className={styles.lightboxNote}>商品展示图 · 非本人实拍</p>
-          </>
-        ) : null}
-      </dialog>
+      {selectedId ? (
+        <CollectionLightbox
+          items={previewItems}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+          onClose={() => setSelectedId(null)}
+        />
+      ) : null}
     </>
   );
 }

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { siteConfig } from "@/content/site";
 import { absoluteSiteUrl, resolveSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "./components/site-header";
+import { BackToTop } from "./components/back-to-top";
 import "./globals.css";
 import "./subpages.css";
 
@@ -92,6 +93,7 @@ export default function RootLayout({
         </a>
         <SiteHeader />
         {children}
+        <BackToTop />
       </body>
     </html>
   );

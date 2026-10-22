@@ -113,7 +113,12 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="brand" href={sitePath("/")} onClick={closeMenu}>
+        <a
+          className="brand"
+          href={sitePath("/")}
+          onClick={closeMenu}
+          aria-label={`${siteConfig.name} · 返回首页`}
+        >
           <span className="brand-mark" aria-hidden="true">
             00
           </span>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function LinksPage() {
   return (
-    <main id="main-content" className="subpage-main">
+    <main id="main-content" className="subpage-main navigation-page">
       <PageMasthead
         currentHref="/links/"
         title="我愿意再次打开的入口。"

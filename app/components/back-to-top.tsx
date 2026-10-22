@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "./collection-layout.module.css";
+import styles from "./back-to-top.module.css";
 
-export function CollectionBackToTop() {
+/** The same unobtrusive return point on every long page. */
+export function BackToTop() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const update = () => setVisible(window.scrollY > 700);
@@ -11,9 +12,11 @@ export function CollectionBackToTop() {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
+
   return visible ? (
-    <a className={styles.backToTop} href="#top" aria-label="回到本馆顶部">
-      ↑<span>回到顶部</span>
+    <a className={styles.backToTop} href="#top" aria-label="回到页面顶部">
+      <span aria-hidden="true">↑</span>
+      <span className={styles.label}>回到顶部</span>
     </a>
   ) : null;
 }

@@ -138,65 +138,7 @@
   border-radius: 999px;
   font-size: 12px;
 }
-.lightbox {
-  margin: auto;
-  width: min(850px, calc(100vw - 32px));
-  max-height: calc(100dvh - 32px);
-  padding: 20px;
-  border: 1px solid var(--border-strong);
-  border-radius: 22px;
-  background: var(--surface);
-  color: var(--foreground);
-  box-shadow: 0 24px 90px rgb(0 0 0 / 30%);
-}
-.lightbox::backdrop {
-  background: rgb(16 13 25 / 72%);
-  backdrop-filter: blur(6px);
-}
-.lightboxHeading {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 16px;
-}
-.lightboxHeading h2 {
-  margin: 0;
-  font-size: clamp(18px, 3vw, 24px);
-  line-height: 1.4;
-}
-.lightboxHeading p {
-  margin: 6px 0 14px;
-  font-size: 12px;
-  color: var(--muted);
-}
-.lightboxHeading button {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--border-strong);
-  border-radius: 50%;
-  background: var(--surface-muted);
-  color: var(--foreground);
-  font-size: 28px;
-  cursor: pointer;
-}
-.lightbox > img {
-  display: block;
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: min(65dvh, 800px);
-  margin: 0 auto;
-  object-fit: contain;
-  background: white;
-  border-radius: 12px;
-}
-.lightboxNote {
-  margin: 12px 0 0;
-  font-size: 11px;
-  color: var(--muted);
-  text-align: center;
-}
+
 @media (max-width: 700px) {
   .grid {
     grid-template-columns: 1fr;
@@ -207,9 +149,6 @@
   }
   .note {
     min-height: 0;
-  }
-  .lightbox {
-    padding: 14px;
   }
 }
 

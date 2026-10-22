@@ -21,11 +21,10 @@ export function LinkTerminal() {
   const [query, setQuery] = useState("");
   const [recommendedId, setRecommendedId] = useState<string | null>(null);
 
-  const visibleEntries = useMemo(() => {
+  const matchingEntries = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
 
     return linkEntries.filter((entry) => {
-      const inGroup = group === "all" || entry.group === group;
       const category = linkCategories.find((item) => item.id === entry.group);
       const haystack = [
         entry.label,
@@ -33,12 +32,24 @@ export function LinkTerminal() {
         entry.reason,
         category?.label,
         ...entry.tags,
+        ...(entry.aliases ?? []),
       ]
         .join(" ")
         .toLocaleLowerCase("zh-CN");
-      return inGroup && (!normalizedQuery || haystack.includes(normalizedQuery));
+      return !normalizedQuery || haystack.includes(normalizedQuery);
     });
-  }, [group, query]);
+  }, [query]);
+
+  const visibleEntries = matchingEntries.filter(
+    (entry) => group === "all" || entry.group === group,
+  );
+  const hasActiveFilters = group !== "all" || query.trim() !== "";
+
+  function resetFilters() {
+    setGroup("all");
+    setQuery("");
+    setRecommendedId(null);
+  }
 
   function recommendRandomEntry() {
     if (visibleEntries.length === 0) return;
@@ -81,8 +92,8 @@ export function LinkTerminal() {
               {item.label}
               <span aria-hidden="true">
                 {item.id === "all"
-                  ? linkEntries.length
-                  : linkEntries.filter((entry) => entry.group === item.id).length}
+                  ? matchingEntries.length
+                  : matchingEntries.filter((entry) => entry.group === item.id).length}
               </span>
             </button>
           ))}
@@ -110,13 +121,25 @@ export function LinkTerminal() {
         </button>
       </div>
 
-      <p className="terminal-count" aria-live="polite">
-        找到 {String(visibleEntries.length).padStart(2, "0")} 个入口
-        {` · ${String(visibleCategories.length).padStart(2, "0")} 个分类`}
-        {recommendedId
-          ? ` · 推荐：${linkEntries.find((entry) => entry.id === recommendedId)?.label ?? ""}`
-          : ""}
-      </p>
+      <div className="terminal-result-line">
+        <p
+          className="terminal-count"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          找到 {String(visibleEntries.length).padStart(2, "0")} 个入口
+          {` · ${String(visibleCategories.length).padStart(2, "0")} 个分类`}
+          {recommendedId
+            ? ` · 推荐：${linkEntries.find((entry) => entry.id === recommendedId)?.label ?? ""}`
+            : ""}
+        </p>
+        {hasActiveFilters ? (
+          <button type="button" className="terminal-reset" onClick={resetFilters}>
+            重置筛选 <span aria-hidden="true">↺</span>
+          </button>
+        ) : null}
+      </div>
 
       {visibleEntries.length > 0 ? (
         <div className="terminal-sections">
@@ -149,27 +172,31 @@ export function LinkTerminal() {
                     target={entry.external ? "_blank" : undefined}
                     rel={entry.external ? "noreferrer" : undefined}
                   >
-                    <span className="terminal-card-head">
+                    <div className="terminal-card-head">
                       <span className="terminal-card-icon" aria-hidden="true">
                         {entry.icon}
                       </span>
-                      <span className="terminal-card-number">
-                        {entry.external
-                          ? new URL(entry.href).hostname.replace(/^www\./, "")
-                          : "SEKAI / 00"}
-                      </span>
-                    </span>
-                    <p>{entry.eyebrow}</p>
-                    <h4>{entry.label}</h4>
+                      <div className="terminal-card-title">
+                        <h4>{entry.label}</h4>
+                        <span className="terminal-card-domain">
+                          {entry.external
+                            ? new URL(entry.href).hostname.replace(/^www\./, "")
+                            : "SEKAI / 00"}
+                        </span>
+                      </div>
+                    </div>
                     <span className="terminal-reason">{entry.reason}</span>
                     <ul aria-label={`${entry.label} 标签`}>
-                      {entry.tags.map((tag) => (
+                      {entry.tags.slice(0, 3).map((tag) => (
                         <li key={tag}>#{tag}</li>
                       ))}
                     </ul>
                     <strong>
                       {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
                       <span aria-hidden="true">↗</span>
+                      {entry.external ? (
+                        <span className="sr-only">（将在新标签页打开）</span>
+                      ) : null}
                     </strong>
                   </a>
                 ))}
@@ -180,17 +207,28 @@ export function LinkTerminal() {
       ) : (
         <div className="terminal-empty">
           <span aria-hidden="true">NO MATCHING ROUTE</span>
-          <h3>没有找到匹配的入口。</h3>
-          <p>试试“CS224N”“Bilibili”或“联系”，也可以清除筛选。</p>
+          <h3>
+            {matchingEntries.length > 0
+              ? "其他分类里有你要找的入口。"
+              : "没有找到匹配的入口。"}
+          </h3>
+          <p>
+            {matchingEntries.length > 0
+              ? `当前分类没有匹配项，其他分类共找到 ${matchingEntries.length} 个结果。`
+              : "试试“B站”“PDD”或“手办”，也可以清除筛选。"}
+          </p>
           <button
             type="button"
             onClick={() => {
+              if (matchingEntries.length === 0) {
+                resetFilters();
+                return;
+              }
               setGroup("all");
-              setQuery("");
               setRecommendedId(null);
             }}
           >
-            清除筛选
+            {matchingEntries.length > 0 ? "查看所有分类的结果" : "清除筛选"}
           </button>
         </div>
       )}

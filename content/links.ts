@@ -49,6 +49,7 @@ export type LinkEntry = {
   href: string;
   reason: string;
   tags: readonly string[];
+  aliases?: readonly string[];
   icon: string;
   action?: string;
   external?: boolean;
@@ -64,6 +65,7 @@ export const linkEntries: readonly LinkEntry[] = [
     href: "https://www.bilibili.com/",
     reason: "我最喜欢的视频平台，也是导航终端里的第一条真实偏好。",
     tags: ["视频", "动漫", "Bilibili"],
+    aliases: ["B站", "b站"],
     icon: "▶",
     action: "打开哔哩哔哩",
     external: true,
@@ -211,7 +213,8 @@ export const linkEntries: readonly LinkEntry[] = [
     eyebrow: "FIGURES / COLLECTION",
     href: "https://www.hpoi.net/",
     reason: "查询手办与模型资料，浏览官图、玩家晒图和周边资讯。",
-    tags: ["Hpoi", "hopi", "手办", "模型", "收藏"],
+    tags: ["手办", "模型", "收藏"],
+    aliases: ["hopi"],
     icon: "H",
     action: "打开 Hpoi",
     external: true,

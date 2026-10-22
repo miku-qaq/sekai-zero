@@ -1,0 +1,30 @@
+.backToTop {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: 0 6px 24px rgb(47 36 72 / 12%);
+  font-size: 18px;
+}
+.label {
+  font-size: 11px;
+}
+@media (max-width: 700px) {
+  .backToTop {
+    width: 46px;
+    padding: 10px;
+    justify-content: center;
+  }
+  .label {
+    display: none;
+  }
+}

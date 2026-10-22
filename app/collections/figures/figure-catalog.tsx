@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import catalogStyles from "../catalog.module.css";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { figureCollection, type FigureCollectionEntry } from "@/content/figures";
+import { useMemo, useState } from "react";
+import { figureCollection } from "@/content/figures";
 import { sitePath } from "@/lib/site-path";
 import styles from "./figures.module.css";
+import { CollectionLightbox, type CollectionImage } from "../collection-lightbox";
 
 type FigureFilter = "all" | "miku" | "others";
 
@@ -37,20 +38,7 @@ export function FigureCatalog() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<FigureFilter>("all");
 
-  const [selected, setSelected] = useState<FigureCollectionEntry | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    if (!selected) return;
-    const dialog = dialogRef.current;
-    const previousOverflow = document.body.style.overflow;
-    dialog?.showModal();
-    document.body.style.overflow = "hidden";
-    return () => {
-      dialog?.close();
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [selected]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const visibleEntries = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
@@ -68,6 +56,23 @@ export function FigureCatalog() {
       return matchesGroup && (!normalizedQuery || searchable.includes(normalizedQuery));
     });
   }, [filter, query]);
+
+  const previewItems: CollectionImage[] = visibleEntries.flatMap((entry) =>
+    entry.product?.image
+      ? [
+          {
+            id: entry.id,
+            title: entry.product.title,
+            subtitle: [entry.product.manufacturer, entry.product.scale]
+              .filter(Boolean)
+              .join(" · "),
+            image: entry.product.image,
+            imageAlt: entry.product.imageAlt ?? entry.product.title,
+            sourceUrl: entry.product.productUrl,
+          },
+        ]
+      : [],
+  );
 
   const hasActiveFilters = filter !== "all" || query.trim() !== "";
 
@@ -132,10 +137,7 @@ export function FigureCatalog() {
       </div>
 
       {visibleEntries.length > 0 ? (
-        <ol
-          className={styles.grid}
-          aria-label={`${figureCollection.length} 件手办收藏`}
-        >
+        <ol className={styles.grid} aria-label={`${visibleEntries.length} 件手办收藏`}>
           {visibleEntries.map((entry) => {
             const titleId = `${entry.id}-title`;
             const number = recordNumber(entry.id);
@@ -153,7 +155,7 @@ export function FigureCatalog() {
                       <button
                         type="button"
                         className={styles.photoButton}
-                        onClick={() => setSelected(entry)}
+                        onClick={() => setSelectedId(entry.id)}
                         aria-label={`查看大图：${entry.product.title}`}
                         aria-haspopup="dialog"
                       >
@@ -231,43 +233,14 @@ export function FigureCatalog() {
         </div>
       )}
 
-      <dialog
-        ref={dialogRef}
-        className={styles.lightbox}
-        aria-labelledby="figure-preview-title"
-        onClose={() => setSelected(null)}
-      >
-        {selected?.product ? (
-          <>
-            <div className={styles.lightboxHeading}>
-              <div>
-                <h2 id="figure-preview-title">{selected.product.title}</h2>
-                <p>
-                  {selected.product.manufacturer}
-                  {selected.product.scale ? ` · ${selected.product.scale}` : ""}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => dialogRef.current?.close()}
-                aria-label="关闭大图"
-              >
-                ×
-              </button>
-            </div>
-            {selected.product.image ? (
-              <Image
-                src={sitePath(selected.product.image)}
-                alt={selected.product.imageAlt ?? selected.product.title}
-                width={800}
-                height={900}
-                unoptimized
-              />
-            ) : null}
-            <p className={styles.lightboxNote}>商品展示图 · 非本人实拍</p>
-          </>
-        ) : null}
-      </dialog>
+      {selectedId ? (
+        <CollectionLightbox
+          items={previewItems}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+          onClose={() => setSelectedId(null)}
+        />
+      ) : null}
     </div>
   );
 }
