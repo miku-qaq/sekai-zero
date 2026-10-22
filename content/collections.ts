@@ -1,11 +1,12 @@
 import { animeCatalog } from "./anime";
+import { controllerCollection } from "./controllers";
 import { figureCollection } from "./figures";
 import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
 
-export type CollectionRoomId = "anime" | "games" | "figures" | "fufu";
+export type CollectionRoomId = "anime" | "games" | "figures" | "fufu" | "controllers";
 
-/** Canonical registry for the four rooms inside the Wonder Collection. */
+/** Canonical registry for the rooms inside the Wonder Collection. */
 export const collectionRooms = [
   {
     id: "anime",
@@ -38,7 +39,7 @@ export const collectionRooms = [
     unit: "件收藏",
     motif: "◇",
     tone: "mint",
-    description: "角色与作品出处已完成核对，正式商品资料等待盒照或实拍确认。",
+    description: "逐件核对款式与商品图，按角色、作品或厂商发现收藏。",
   },
   {
     id: "fufu",
@@ -50,6 +51,17 @@ export const collectionRooms = [
     motif: "ふ",
     tone: "amber",
     description: "从虎生肖开始，单独整理初音未来 Fufu 与每年的生肖成员。",
+  },
+  {
+    id: "controllers",
+    index: "05",
+    href: "/collections/controllers/",
+    label: "手柄收藏",
+    count: controllerCollection.length,
+    unit: "只手柄",
+    motif: "＋",
+    tone: "blue",
+    description: "从 Xbox 与两代 Switch Pro，到八重神子联名款，收藏握在手里的喜欢。",
   },
 ] as const;
 

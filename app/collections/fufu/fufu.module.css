@@ -130,7 +130,7 @@
   align-items: stretch;
 }
 
-.zodiacRibbon > span {
+.zodiacRibbon > a {
   --ribbon-accent: var(--fufu-mint);
   position: relative;
   display: grid;
@@ -144,7 +144,7 @@
   background: color-mix(in srgb, var(--ribbon-accent) 12%, var(--surface-muted));
 }
 
-.zodiacRibbon > span::after {
+.zodiacRibbon > a::after {
   position: absolute;
   bottom: 12px;
   left: 50%;
@@ -156,19 +156,19 @@
   transform: translateX(-50%);
 }
 
-.zodiacRibbon > span[data-tone="pink"] {
+.zodiacRibbon > a[data-tone="pink"] {
   --ribbon-accent: var(--fufu-pink);
 }
 
-.zodiacRibbon > span[data-tone="violet"] {
+.zodiacRibbon > a[data-tone="violet"] {
   --ribbon-accent: var(--fufu-violet);
 }
 
-.zodiacRibbon > span[data-tone="amber"] {
+.zodiacRibbon > a[data-tone="amber"] {
   --ribbon-accent: var(--fufu-amber);
 }
 
-.zodiacRibbon > span[data-tone="blue"] {
+.zodiacRibbon > a[data-tone="blue"] {
   --ribbon-accent: var(--fufu-blue);
 }
 
@@ -627,5 +627,106 @@
 @media (prefers-reduced-motion: reduce) {
   .fufuCard {
     transition: none;
+  }
+}
+
+.productPhoto {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: 16px;
+  background: #fff;
+  color: #595467;
+  border-bottom: 1px solid var(--border);
+}
+.productPhoto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.productPhoto figcaption {
+  padding: 10px 0 2px;
+  font-size: 11px;
+  text-align: center;
+}
+.yearBadge {
+  position: absolute;
+  z-index: 1;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  border: 1px solid #ddd4e9;
+  border-radius: 30px;
+  background: #fff9fd;
+  color: #353149;
+  font-size: 12px;
+  font-weight: 750;
+}
+.fufuGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.fufuCard {
+  height: 100%;
+}
+.largeFufu {
+  align-items: center;
+}
+@media (max-width: 1000px) {
+  .fufuGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .fufuGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 24px;
+}
+.timeline > p {
+  flex: 1;
+  min-width: 220px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.timeline .zodiacRibbon {
+  grid-template-columns: repeat(5, minmax(54px, 1fr));
+  gap: 8px;
+}
+.timeline .zodiacRibbon > a {
+  min-height: 76px;
+  padding: 10px 14px;
+  gap: 2px;
+}
+.timeline .zodiacRibbon > a::after {
+  display: none;
+}
+.timeline .zodiacRibbon b {
+  font-size: 24px;
+}
+.timeline .zodiacRibbon small {
+  font-size: 11px;
+}
+@media (max-width: 700px) {
+  .timeline .zodiacRibbon {
+    width: 100%;
+  }
+  .timeline .zodiacRibbon > a {
+    min-height: 66px;
+    padding: 8px;
+  }
+  .largeFufu .productPhoto img {
+    max-height: 300px;
   }
 }

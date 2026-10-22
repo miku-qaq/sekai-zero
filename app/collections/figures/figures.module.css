@@ -36,111 +36,26 @@
   background: color-mix(in srgb, var(--figure-pink) 10%, transparent);
 }
 
-.auditPanel {
-  display: grid;
-  grid-template-columns: minmax(220px, 1.25fr) repeat(3, minmax(130px, 0.55fr));
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 12px;
-  border: 1px solid var(--border-strong);
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at 4% 0%, rgb(67 215 193 / 15%), transparent 30%),
-    color-mix(in srgb, var(--surface) 91%, transparent);
-  box-shadow: 0 18px 46px rgb(52 39 81 / 8%);
-}
-
-.auditIntro,
-.auditStat {
-  min-width: 0;
-  border: 1px solid var(--border);
-  border-radius: 19px;
-  background: color-mix(in srgb, var(--surface-muted) 92%, transparent);
-}
-
-.auditIntro {
-  display: grid;
-  align-content: center;
-  gap: 7px;
-  padding: 21px 22px;
-}
-
-.auditIntro > span,
-.auditStat > span,
-.catalogControls label > span:first-child,
-.filterGroup b,
-.resultLine,
-.recordId,
-.workTag,
-.shelfMark,
-.verifyLine,
-.sourcePanel span,
-.sourcePanel b {
-  font-family: var(--font-geist-mono), monospace;
-}
-
-.auditIntro > span {
-  color: color-mix(in srgb, var(--figure-mint) 42%, var(--foreground));
-  font-size: 10px;
-  font-weight: 820;
-  letter-spacing: 0.1em;
-}
-
-.auditIntro strong {
-  font-size: clamp(20px, 2.4vw, 30px);
-  letter-spacing: -0.045em;
-}
-
-.auditIntro p,
-.auditStat p {
-  margin: 0;
+.galleryNote {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  margin: 0 0 18px;
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.7;
 }
-
-.auditIntro a {
-  width: fit-content;
-  min-height: 44px;
-  margin-top: 3px;
-  padding: 11px 14px;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 760;
+.galleryNote p {
+  margin: 0;
 }
-
-.auditStat {
-  display: grid;
-  align-content: center;
-  gap: 5px;
-  min-height: 150px;
-  padding: 19px;
+.galleryNote a {
+  padding: 12px 0;
+  color: var(--foreground);
 }
-
-.auditStat:nth-child(2) {
-  background: color-mix(in srgb, var(--figure-violet) 9%, var(--surface-muted));
-}
-
-.auditStat:nth-child(3) {
-  background: color-mix(in srgb, var(--figure-mint) 9%, var(--surface-muted));
-}
-
-.auditStat:nth-child(4) {
-  background: color-mix(in srgb, var(--figure-pink) 8%, var(--surface-muted));
-}
-
-.auditStat > span {
-  color: var(--muted);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.09em;
-}
-
-.auditStat strong {
-  font-size: clamp(28px, 3vw, 42px);
-  letter-spacing: -0.06em;
-  line-height: 1.05;
+.galleryNote span {
+  color: var(--figure-mint);
+  margin-right: 6px;
 }
 
 .catalog {
@@ -335,84 +250,49 @@
   place-items: center;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
-  background:
-    radial-gradient(
-      circle at 50% 43%,
-      color-mix(in srgb, var(--figure-accent) 38%, white),
-      transparent 28%
-    ),
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--figure-accent) 16%, var(--surface-muted)),
-      var(--surface)
-    );
-  background-size:
-    auto,
-    20px 20px,
-    20px 20px,
-    auto;
+  background: #f4f3f6;
 }
-
-.visual::before,
-.visual::after {
+.photoButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.photoButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  border: 1px solid color-mix(in srgb, var(--figure-accent) 48%, transparent);
-  border-radius: 50%;
-  content: "";
+  inset: 0;
+  object-fit: contain;
 }
-
-.visual::before {
-  width: 74%;
-  aspect-ratio: 1;
-  transform: rotate(-11deg);
+.photoButton:focus-visible {
+  outline: 3px solid var(--figure-violet);
+  outline-offset: -4px;
 }
-
-.visual::after {
-  width: 54%;
-  aspect-ratio: 1;
-  transform: rotate(19deg);
-}
-
 .recordId,
-.workTag,
-.shelfMark {
+.zoomHint {
   position: absolute;
-  z-index: 3;
+  z-index: 1;
+  border: 1px solid rgb(47 41 63 / 12%);
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: rgb(255 255 255 / 90%);
   color: #343044;
   font-size: 10px;
-  font-weight: 820;
-  letter-spacing: 0.075em;
+  pointer-events: none;
 }
-
-.recordId,
-.workTag {
-  top: 13px;
-  padding: 7px 9px;
-  border: 1px solid rgb(47 41 63 / 18%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 78%);
-  backdrop-filter: blur(10px);
-}
-
 .recordId {
-  left: 13px;
+  top: 12px;
+  left: 12px;
+  font-family: var(--font-geist-mono), monospace;
 }
-
-.workTag {
-  right: 13px;
-  max-width: 49%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.shelfMark {
-  right: 14px;
-  bottom: 13px;
-  color: rgb(52 45 67 / 67%);
-  font-size: 9px;
+.zoomHint {
+  right: 12px;
+  bottom: 12px;
 }
 
 .orbit {
@@ -473,7 +353,7 @@
 .cardBody {
   display: grid;
   min-height: 190px;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto auto 1fr auto;
   align-content: start;
   padding: 18px 17px 20px;
   background: linear-gradient(
@@ -500,13 +380,20 @@
 }
 
 .cardBody h3 {
-  margin: 10px 0 13px;
+  margin: 10px 0 6px;
   font-size: clamp(20px, 2vw, 27px);
   letter-spacing: -0.045em;
   line-height: 1.25;
   overflow-wrap: anywhere;
 }
 
+.variant {
+  min-height: 2.8em;
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
 .cardBody dl {
   display: grid;
   align-self: end;
@@ -635,159 +522,158 @@
 
   .filterGroup button:hover,
   .reset:hover,
-  .empty button:hover,
-  .auditIntro a:hover {
+  .empty button:hover {
     border-color: color-mix(in srgb, var(--figure-mint) 54%, var(--border));
   }
 }
 
-@media (max-width: 1120px) {
-  .auditPanel {
-    grid-template-columns: minmax(240px, 1fr) repeat(3, minmax(120px, 0.48fr));
-  }
+.lightbox {
+  margin: auto;
+  width: min(900px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: 22px;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: 0 24px 90px rgb(0 0 0 / 30%);
+}
+.lightbox::backdrop {
+  background: rgb(16 13 25 / 72%);
+  backdrop-filter: blur(6px);
+}
+.lightboxHeading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.lightboxHeading h2 {
+  margin: 0;
+  font-size: clamp(18px, 3vw, 24px);
+  line-height: 1.4;
+}
+.lightboxHeading p {
+  margin: 6px 0 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.lightboxHeading button {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--foreground);
+  font-size: 28px;
+  cursor: pointer;
+}
+.lightbox > img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(70dvh, 800px);
+  margin: 0 auto;
+  object-fit: contain;
+  background: #f4f3f6;
+  border-radius: 12px;
+}
+.lightboxNote {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+}
+.figurePage :global(.subpage-hero) {
+  min-height: auto;
+  padding-top: 108px;
+  padding-bottom: 24px;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.figurePage :global(.subpage-visual) {
+  display: none;
+}
+.figurePage :global(.subpage-copy h1) {
+  max-width: 900px;
+  font-size: clamp(32px, 4.3vw, 54px);
+}
+.figurePage :global(.subpage-meta) {
+  grid-row: auto;
+  margin-top: 0;
+}
+.figurePage .archive {
+  padding-top: 28px;
+}
 
+@media (max-width: 1120px) {
   .toolbar {
     grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr);
   }
-
   .reset {
     grid-column: 1 / -1;
     width: fit-content;
   }
-
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
-
 @media (max-width: 860px) {
-  .auditPanel {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .auditIntro {
-    grid-column: 1 / -1;
-  }
-
   .toolbar {
     grid-template-columns: 1fr;
   }
-
-  .filterGroup {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .reset {
     grid-column: auto;
   }
-
   .sourcePanel {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
-
   .sourcePanel b {
     width: fit-content;
   }
-}
-
-@media (max-width: 700px) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
   }
-
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .visual {
+    aspect-ratio: 1;
+  }
+  .cardBody {
+    padding: 20px;
+  }
+  .cardBody h3 {
+    font-size: 24px;
+  }
+  .variant {
+    min-height: 0;
+  }
   .resultLine {
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
   }
-}
-
-@media (max-width: 560px) {
-  .auditPanel {
-    grid-template-columns: 1fr;
-  }
-
-  .auditIntro {
-    grid-column: auto;
-  }
-
-  .auditStat {
-    min-height: 118px;
-  }
-
-  .filterGroup {
-    grid-template-columns: 1fr;
-  }
-
   .filterGroup button {
-    min-height: 44px;
+    padding: 0 9px;
+    gap: 4px;
+  }
+  .filterGroup span {
+    font-size: 11px;
+  }
+  .lightbox {
+    padding: 14px;
+  }
+  .figurePage :global(.subpage-copy h1) {
+    font-size: 34px;
   }
 }
-
-@media (max-width: 420px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    grid-template-columns: minmax(120px, 0.42fr) minmax(0, 0.58fr);
-    grid-template-rows: 1fr;
-  }
-
-  .visual {
-    min-height: 280px;
-    aspect-ratio: auto;
-    border-right: 1px solid var(--border);
-    border-bottom: 0;
-  }
-
-  .recordId {
-    top: 10px;
-    left: 10px;
-  }
-
-  .workTag {
-    display: none;
-  }
-
-  .shelfMark {
-    right: 9px;
-    bottom: 10px;
-    max-width: 80%;
-    text-align: right;
-  }
-
-  .orbit {
-    width: min(86px, 58%);
-  }
-
-  .cardBody {
-    min-height: 280px;
-    padding: 16px 14px;
-  }
-
-  .cardBody h3 {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 340px) {
-  .card {
-    grid-template-columns: 1fr;
-  }
-
-  .visual {
-    min-height: 270px;
-    border-right: 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .cardBody {
-    min-height: 210px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .card {
     transition: none;

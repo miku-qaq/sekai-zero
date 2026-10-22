@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { sitePath } from "@/lib/site-path";
 import { fufuCollection, fufuCollectionMeta } from "@/content/fufu";
 import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../../components/journey-navigation";
@@ -57,38 +59,28 @@ export default function CollectionsFufuPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 04 / FUFU PLUSH COLLECTION</p>
-            <h2 id="fufu-archive-title">从一只大 Fufu，到每年延续的生肖队列。</h2>
+            <h2 id="fufu-archive-title">一只大 Fufu，与每年延续的生肖队列。</h2>
           </div>
           <p>
-            “Fufu”是本站使用的收藏称呼；每张生肖卡都保留 SEGA
-            公布的正式商品名，不自行添加别名或猜测购买信息。
+            大个子的毛绒伙伴，和每年不同的生肖装扮。这里保留它们各自的正式名字与模样。
           </p>
         </div>
 
         <CollectionNavigation current="fufu" />
 
-        <div className={styles.originPanel}>
-          <div className={styles.originYear} aria-hidden="true">
-            <span>COLLECTION START</span>
-            <strong>{firstZodiac?.year ?? "—"}</strong>
-            <i>{firstZodiac?.zodiac ?? "始"}</i>
-          </div>
-          <div className={styles.originCopy}>
-            <span>OWNER CONFIRMED / ZODIAC LINE</span>
-            <h3>我的生肖 Fufu 收藏，从虎年开始。</h3>
-            <p>
-              {zodiacLabels}依次连接成{zodiacFufu.length}
-              年的收藏时间线。这里记录“我拥有哪一只”和官方正式名称；价格、订单、商家与购入日期继续保持私有。
-            </p>
-          </div>
-          <div className={styles.zodiacRibbon} aria-label="生肖收藏顺序">
+        <div className={styles.timeline}>
+          <p>
+            从虎年开始，{zodiacLabels}串起{zodiacFufu.length}
+            年的生肖收藏。选一个年份，直接去看它。
+          </p>
+          <nav className={styles.zodiacRibbon} aria-label="生肖收藏顺序">
             {zodiacFufu.map((entry) => (
-              <span key={entry.id} data-tone={entry.tone}>
+              <a key={entry.id} href={`#${entry.id}`} data-tone={entry.tone}>
                 <b>{entry.zodiac}</b>
                 <small>{entry.year}</small>
-              </span>
+              </a>
             ))}
-          </div>
+          </nav>
         </div>
 
         {largeFufu ? (
@@ -96,21 +88,23 @@ export default function CollectionsFufuPage() {
             className={styles.largeFufu}
             aria-labelledby={`${largeFufu.id}-title`}
           >
-            <div className={styles.largeVisual} aria-hidden="true">
-              <span>FUFU / BIG</span>
-              <div className={styles.plushFace}>
-                <i />
-                <b>• ◡ •</b>
-                <em>39</em>
-              </div>
-              <strong>大</strong>
-            </div>
+            <figure className={styles.productPhoto}>
+              <Image
+                src={sitePath(largeFufu.image)}
+                alt={`${largeFufu.title}，SEGA 官方商品示意图`}
+                width={800}
+                height={800}
+                sizes="(max-width: 760px) 90vw, 480px"
+                loading="lazy"
+                unoptimized
+              />
+              <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
+            </figure>
             <div className={styles.largeCopy}>
-              <span>MOVED FROM FIGURE ROOM / OWNER CONFIRMED</span>
+              <span>THE BIG ONE / MIKU FUFU</span>
               <h3 id={`${largeFufu.id}-title`}>{largeFufu.title}</h3>
               <p>
-                这只就是之前记录在手办区的大 Fufu。现在它回到独立的 Fufu
-                分馆，并保留原记录编号，因此不会在两个展柜里重复计数。
+                毛绒小队里的大个子，和每年的生肖伙伴一起，组成我的初音未来 Fufu 收藏。
               </p>
               <a href={largeFufu.officialUrl} target="_blank" rel="noreferrer">
                 查看 SEGA 正式商品资料（新窗口） ↗
@@ -134,21 +128,31 @@ export default function CollectionsFufuPage() {
           className={styles.fufuGrid}
           aria-label={`${zodiacFufu.length} 只生肖 Fufu 收藏`}
         >
-          {zodiacFufu.map((entry, index) => {
+          {zodiacFufu.map((entry) => {
             const titleId = `${entry.id}-title`;
             return (
               <li key={entry.id}>
                 <article
+                  id={entry.id}
                   className={styles.fufuCard}
                   data-tone={entry.tone}
                   aria-labelledby={titleId}
                 >
-                  <div className={styles.fufuVisual} aria-hidden="true">
-                    <span>FUFU / {String(index + 1).padStart(2, "0")}</span>
-                    <strong>{entry.motif}</strong>
-                    <div className={styles.miniFace}>• ω •</div>
-                    <i>{entry.year}</i>
-                  </div>
+                  <figure className={styles.productPhoto}>
+                    <span className={styles.yearBadge}>
+                      {entry.year} · {entry.zodiac}
+                    </span>
+                    <Image
+                      src={sitePath(entry.image)}
+                      alt={`${entry.title}，SEGA 官方商品示意图`}
+                      width={800}
+                      height={800}
+                      sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 340px"
+                      loading="lazy"
+                      unoptimized
+                    />
+                    <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
+                  </figure>
                   <div className={styles.fufuBody}>
                     <p>ZODIAC / {entry.zodiac} · OWNER CONFIRMED</p>
                     <h3 id={titleId}>{entry.title}</h3>

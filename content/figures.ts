@@ -1,9 +1,9 @@
 export type FigureProductDetails = {
-  /** Single official product name; aliases do not belong in the catalog. */
+  /** Single matched product name; aliases do not belong in the catalog. */
   title: string;
   manufacturer: string;
   scale: string | null;
-  officialUrl: string;
+  productUrl: string;
   image: string | null;
   imageAlt: string | null;
 };
@@ -33,14 +33,9 @@ export type FigureCollectionEntry =
     });
 
 /**
- * Public allow-list derived from two owner-provided collection screenshots.
- *
- * The screenshots contain third-party product imagery, prices and date fields,
- * so the public model deliberately keeps only the deduplicated record and the
- * character and source-work information that can be identified with
- * confidence. Product names, manufacturers and scales remain null until the
- * owner supplies a box photo or one exact product page. Prices, dates and order
- * details never belong in this public model.
+ * Public catalog matched against the owner's two screenshots and the linked
+ * product pages. Images depict these exact products, not the owner's copies.
+ * Keep purchase information and the original screenshots out of this model.
  */
 export const figureCollection: readonly FigureCollectionEntry[] = [
   {
@@ -48,8 +43,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "赛车初音 2024 Ver.",
+      manufacturer: "GOODSMILE RACING",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/en/product/36455/",
+      image: "/figures/figure-001.webp",
+      imageAlt: "赛车初音 2024 Ver. 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "mint",
   },
@@ -58,18 +60,32 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "初音未来 feat. 米山舞",
+      manufacturer: "Good Smile Company",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/ja/product/60248/",
+      image: "/figures/figure-002.webp",
+      imageAlt: "初音未来 feat. 米山舞 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "mint",
   },
   {
     id: "figure-004",
     character: "吉普莉尔",
-    work: "游戏人生",
+    work: "游戏人生 -Zero-",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "吉普莉尔 大战 Ver.",
+      manufacturer: "Good Smile Company",
+      scale: "1/8",
+      productUrl: "https://www.goodsmile.com/en/product/6261/",
+      image: "/figures/figure-004.webp",
+      imageAlt: "吉普莉尔 大战 Ver. 商品展示图，非本人实拍",
+    },
     motif: "翼",
     tone: "violet",
   },
@@ -78,8 +94,16 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "立华奏",
     work: "Angel Beats!",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "Coreful 立华奏",
+      manufacturer: "TAITO",
+      scale: null,
+      productUrl:
+        "https://www.figurechoice.com/products/coreful-figure-angel-kanade-tachibana-angel-beats-official-statue-taito",
+      image: "/figures/figure-005.webp",
+      imageAlt: "Coreful 立华奏 商品展示图，非本人实拍",
+    },
     motif: "奏",
     tone: "violet",
   },
@@ -88,28 +112,49 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "白",
     work: "游戏人生",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "Aqua Float Girls 白",
+      manufacturer: "TAITO",
+      scale: null,
+      productUrl: "https://www.taito.co.jp/taito-prize/0451621300",
+      image: "/figures/figure-006.webp",
+      imageAlt: "Aqua Float Girls 白 商品展示图，非本人实拍",
+    },
     motif: "白",
     tone: "pink",
   },
   {
     id: "figure-007",
-    character: "初音未来",
-    work: "初音未来",
+    character: "超天酱",
+    work: "主播女孩重度依赖",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
-    motif: "39",
-    tone: "mint",
+    verification: "product-confirmed",
+    product: {
+      title: "POP UP PARADE 超天酱",
+      manufacturer: "Good Smile Company",
+      scale: null,
+      productUrl: "https://www.goodsmile.com/en/product/11091/",
+      image: "/figures/figure-007.webp",
+      imageAlt: "POP UP PARADE 超天酱 商品展示图，非本人实拍",
+    },
+    motif: "†",
+    tone: "pink",
   },
   {
     id: "figure-008",
     character: "伊蕾娜",
     work: "魔女之旅",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "AMP+ 伊蕾娜 魔女服 Ver.",
+      manufacturer: "TAITO",
+      scale: null,
+      productUrl: "https://www.taito.co.jp/taito-prize/0451839700",
+      image: "/figures/figure-008.webp",
+      imageAlt: "AMP+ 伊蕾娜 魔女服 Ver. 商品展示图，非本人实拍",
+    },
     motif: "旅",
     tone: "violet",
   },
@@ -118,8 +163,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "胡桃",
     work: "原神",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "胡桃·雪霁梅香 Ver.",
+      manufacturer: "APEX-TOYS",
+      scale: "1/7",
+      productUrl: "https://www.amiami.jp/top/detail/review?gcode=FIGURE-171184",
+      image: "/figures/figure-009.webp",
+      imageAlt: "胡桃·雪霁梅香 Ver. 商品展示图，非本人实拍",
+    },
     motif: "蝶",
     tone: "pink",
   },
@@ -128,8 +180,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "初音未来 常世 Ver.",
+      manufacturer: "Good Smile Company",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/en/product/9369/",
+      image: "/figures/figure-010.webp",
+      imageAlt: "初音未来 常世 Ver. 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "mint",
   },
@@ -138,8 +197,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "焰",
     work: "异度神剑2",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "焰",
+      manufacturer: "Good Smile Company",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/en/product/4687/",
+      image: "/figures/figure-011.webp",
+      imageAlt: "焰 商品展示图，非本人实拍",
+    },
     motif: "焰",
     tone: "pink",
   },
@@ -148,8 +214,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "光",
     work: "异度神剑2",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "光",
+      manufacturer: "Good Smile Company",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/en/product/4912/",
+      image: "/figures/figure-012.webp",
+      imageAlt: "光 商品展示图，非本人实拍",
+    },
     motif: "光",
     tone: "amber",
   },
@@ -158,8 +231,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "洛琪希·米格路迪亚",
     work: "无职转生",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "洛琪希·米格路迪亚",
+      manufacturer: "寿屋 / Kotobukiya",
+      scale: "1/8",
+      productUrl: "https://shop.kotobukiya.co.jp/shop/g/g4934054070169/",
+      image: "/figures/figure-013.webp",
+      imageAlt: "洛琪希·米格路迪亚 商品展示图，非本人实拍",
+    },
     motif: "魔",
     tone: "violet",
   },
@@ -168,8 +248,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "芙莉莲",
     work: "葬送的芙莉莲",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "芙莉莲 黄昏色的魔法",
+      manufacturer: "Good Smile Company",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/en/product/56125/",
+      image: "/figures/figure-014.webp",
+      imageAlt: "芙莉莲 黄昏色的魔法 商品展示图，非本人实拍",
+    },
     motif: "芙",
     tone: "amber",
   },
@@ -178,8 +265,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "赛车初音 2023 Ver.",
+      manufacturer: "GOODSMILE RACING",
+      scale: "1/7",
+      productUrl: "https://www.goodsmile.com/ja/product/56065/",
+      image: "/figures/figure-015.webp",
+      imageAlt: "赛车初音 2023 Ver. 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "mint",
   },
@@ -188,8 +282,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "初音未来交响乐 5th Anniversary Ver.",
+      manufacturer: "Good Smile Company",
+      scale: null,
+      productUrl: "https://www.goodsmile.com/en/product/9449/",
+      image: "/figures/figure-016.webp",
+      imageAlt: "初音未来交响乐 5th Anniversary Ver. 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "mint",
   },
@@ -198,8 +299,15 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
     character: "初音未来",
     work: "初音未来",
     format: "手办",
-    verification: "identity-confirmed",
-    product: null,
+    verification: "product-confirmed",
+    product: {
+      title: "樱初音 赏花穿搭 Ver.",
+      manufacturer: "Good Smile Company",
+      scale: "1/6",
+      productUrl: "https://www.goodsmile.com/en/product/54788/",
+      image: "/figures/figure-017.webp",
+      imageAlt: "樱初音 赏花穿搭 Ver. 商品展示图，非本人实拍",
+    },
     motif: "39",
     tone: "pink",
   },
@@ -208,8 +316,8 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
 export const figureCollectionMeta = {
   title: "Mikureina 的手办收藏",
   summary:
-    "两张收藏记录去重后共有 17 条实体收藏：1 只大 Fufu 已迁入独立分馆，本页保留 16 件手办。现在可以确认全部角色与作品出处，正式商品名、厂商和比例继续等待盒照或本人实拍核对。",
-  sourceLabel: "Mikureina 提供的收藏记录",
+    "十六件手办，六种初音未来的模样，还有来自不同作品的伙伴。把喜欢的角色与细节，收进这个小小展柜。",
+  sourceLabel: "Mikureina 的收藏 · 商品资料逐件核对",
   rightsNote:
-    "角色与商品形象版权归各自权利方所有；本站仅进行非商业性的个人收藏记录。价格、订单、购买平台与日期不公开，未来优先使用本人实拍补全具体商品资料。",
+    "图片来自厂商及商品资料页，用于展示对应款式，非本人实拍；角色、商品设计与图片版权归各自权利方。每张卡片保留资料入口，个人购买信息不公开。",
 } as const;

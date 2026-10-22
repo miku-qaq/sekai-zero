@@ -30,7 +30,7 @@ export const gameCatalogMeta = {
   description:
     "从这台电脑的 Steam 本地记录整理实际玩过的游戏；只公开作品名称与识别封面，不公开账号、时长或最近上线信息。",
   updatedAt: gameCatalogFile.updatedAt,
-  sourceLabel: "Steam 客户端本地缓存",
+  sourceLabel: "Steam 本地记录与官方商店封面",
   sourceUrl: "https://store.steampowered.com/",
   rightsNote:
     "游戏名称与封面版权归各自权利方所有；Steam 商店链接用于核对作品，本站不声称拥有这些素材。",

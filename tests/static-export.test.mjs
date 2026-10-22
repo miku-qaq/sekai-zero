@@ -96,6 +96,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>Fufu 收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
     {
+      path: "collections/controllers/index.html",
+      title: /<title>手柄收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
@@ -116,7 +120,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>世界线日志 · SEKAI<\/title>/i,
     },
   ];
-  assert.equal(pages.length, 13, "Pages should expose exactly 13 public routes");
+  assert.equal(pages.length, 14, "Pages should expose exactly 14 public routes");
 
   const exported = new Map();
   for (const page of pages) {
@@ -200,12 +204,14 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(study, /LEARNING QUEUE|learning-queue/i);
 
   const collections = exported.get("collections/index.html");
-  assert.match(collections, /04 间/);
-  assert.match(collections, /257 条/);
+  assert.match(collections, /05 间/);
+  assert.match(collections, /261 条/);
   assert.match(collections, /动画展柜/);
   assert.match(collections, /游戏展柜/);
   assert.match(collections, /手办收藏/);
   assert.match(collections, /Fufu 收藏/);
+  assert.match(collections, /手柄收藏/);
+  assert.match(collections, new RegExp(`href="${basePath}/collections/controllers/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/games/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/figures/"`));
@@ -245,7 +251,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const games = exported.get("collections/games/index.html");
   assert.match(games, /146 款/);
-  assert.match(games, /104 张/);
+  assert.match(games, /146 张/);
   assert.match(games, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(games, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(games, new RegExp(`href="${basePath}/collections/figures/"`));
@@ -269,9 +275,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const figures = exported.get("collections/figures/index.html");
   const visibleFigures = figures.replaceAll("<!-- -->", "");
-  assert.match(figures, /去重记录<\/dt><dd>16 件<\/dd>/);
-  assert.match(figures, /初音未来<\/dt><dd>07 件<\/dd>/);
-  assert.match(figures, /角色核对<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(figures, /展柜收藏<\/dt><dd>16 件<\/dd>/);
+  assert.match(figures, /初音未来<\/dt><dd>06 件<\/dd>/);
+  assert.match(figures, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
   assert.match(figures, /aria-label="16 件手办收藏核对目录"/);
   assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(figures, /id="figure-003-title"/);
@@ -318,13 +324,23 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     ],
   );
   assert.match(figures, new RegExp(`href="${basePath}/collections/fufu/"`));
-  assert.match(figures, /搜索角色或作品/);
+  assert.match(figures, /搜索角色、作品或款式/);
   assert.match(figures, /aria-label="筛选手办角色"/);
   assert.match(figures, /初音未来/);
   assert.match(figures, /伊蕾娜/);
   assert.match(figures, /芙莉莲/);
   assert.match(figures, /Angel Beats!/);
-  assert.equal(figures.match(/角色已核对/g)?.length, 16);
+  assert.equal(figures.match(/款式已核对<\/p>/g)?.length, 16);
+  assert.equal(
+    [
+      ...figures.matchAll(
+        new RegExp(`src="${basePath}/figures/figure-\\d{3}\\.webp"`, "g"),
+      ),
+    ].length,
+    16,
+  );
+  assert.match(figures, /超天酱/);
+  assert.match(figures, /商品展示图 · 非本人实拍/);
   assert.doesNotMatch(
     figures,
     /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/,
@@ -365,7 +381,25 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(fufu, /(?:order|订单)[-_:#：\s]*[A-Z0-9]{6,}/i);
   assert.doesNotMatch(fufu, /<time\b|data-(?:price|order|date|purchased-at)=/i);
 
+  const controllers = exported.get("collections/controllers/index.html");
+  assert.match(controllers, /aria-label="4 只手柄收藏"/);
+  assert.equal(controllers.match(/<h3[^>]*id="controller-[^"]+-title"/g)?.length, 4);
+  assert.equal(
+    controllers.match(new RegExp(`src="${basePath}/controllers/[^"\\s]+\\.webp"`, "g"))
+      ?.length,
+    4,
+  );
+  assert.match(controllers, /Series X\|S 标准款 · 碳黑/);
+  assert.match(controllers, /Nintendo Switch 2 Pro 手柄/);
+  assert.match(controllers, /《原神》八重神子联名版/);
+  assert.match(controllers, /商品展示图 · 非本人实拍/);
+  assert.doesNotMatch(
+    controllers,
+    /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i,
+  );
+
   for (const [html, expectedPath] of [
+    [controllers, `${basePath}/collections/controllers/`],
     [collections, `${basePath}/collections/`],
     [anime, `${basePath}/collections/anime/`],
     [games, `${basePath}/collections/games/`],

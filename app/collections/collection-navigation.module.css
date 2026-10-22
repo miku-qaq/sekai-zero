@@ -1,6 +1,6 @@
 .switcher {
   display: grid;
-  grid-template-columns: minmax(190px, 0.48fr) minmax(0, 1.52fr);
+  grid-template-columns: 1fr;
   gap: 12px;
   margin-bottom: 18px;
   padding: 12px;
@@ -11,10 +11,11 @@
 }
 
 .intro {
-  display: grid;
-  align-content: center;
-  gap: 5px;
-  padding: 12px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 6px 8px;
 }
 
 .intro span,
@@ -37,7 +38,7 @@
 
 .intro a {
   width: fit-content;
-  margin-top: 6px;
+  margin-left: auto;
   color: var(--muted);
   font-size: 11px;
   text-decoration: underline;
@@ -47,7 +48,7 @@
 
 .routes {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -87,6 +88,10 @@
 
 .routes a[data-accent="amber"] {
   --collection-accent: #f0bd47;
+}
+
+.routes a[data-accent="blue"] {
+  --collection-accent: #62bfe9;
 }
 
 .routes a[aria-current="page"] {
@@ -143,7 +148,7 @@
   }
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1120px) {
   .switcher {
     grid-template-columns: 1fr;
   }
@@ -153,35 +158,56 @@
   }
 
   .routes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
   .routes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
   }
-}
-
-@media (max-width: 470px) {
-  .routes {
-    grid-auto-columns: minmax(210px, 84vw);
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    overflow-x: auto;
-    padding: 1px 1px 6px;
-    scroll-snap-type: x proximity;
-    scrollbar-width: thin;
-  }
-
   .routes a {
-    min-height: 72px;
-    scroll-snap-align: start;
+    grid-template-columns: 1fr;
+    min-height: 60px;
+    padding: 10px 12px;
+    gap: 0;
+  }
+  .routeIndex,
+  .routeArrow,
+  .intro span {
+    display: none;
+  }
+  .routeName strong {
+    font-size: 12px;
+  }
+  .routeName small {
+    font-size: 10px;
+  }
+  .intro {
+    padding: 4px 8px;
   }
 }
-
+@media (max-width: 470px) {
+  .switcher {
+    padding: 8px;
+    border-radius: 20px;
+  }
+  .intro strong {
+    font-size: 14px;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .routes a {
     transition: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .routes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .routes a:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }

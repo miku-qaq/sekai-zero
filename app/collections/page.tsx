@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { animeCatalog } from "@/content/anime";
 import { collectionRecordCount, collectionRooms } from "@/content/collections";
+import { controllerCollection } from "@/content/controllers";
 import { figureCollection } from "@/content/figures";
 import { fufuCollection } from "@/content/fufu";
 import { gameCatalog } from "@/content/games";
@@ -16,7 +17,7 @@ import styles from "./collections.module.css";
 export const dynamic = "force-static";
 
 const description =
-  "Mikureina 的奇妙收藏馆：统一整理看过的动画、玩过的游戏、真实手办与初音未来 Fufu 收藏。";
+  "Mikureina 的奇妙收藏馆：统一整理看过的动画、玩过的游戏、手办、初音未来 Fufu 与手柄收藏。";
 
 export const metadata: Metadata = {
   title: "奇妙收藏馆",
@@ -30,12 +31,9 @@ const animePreview = animeCatalog.slice(0, 4);
 const gamePreview = gameCatalog.filter((entry) => entry.image).slice(0, 4);
 const figurePreviewIds = [
   "figure-001",
-  "figure-004",
-  "figure-005",
-  "figure-008",
+  "figure-002",
+  "figure-007",
   "figure-009",
-  "figure-013",
-  "figure-014",
 ] as const;
 const figurePreview = figurePreviewIds.flatMap((id) =>
   figureCollection.filter((entry) => entry.id === id),
@@ -59,7 +57,7 @@ export default function CollectionsPage() {
         currentHref="/collections/"
         animate={false}
         title="把喜欢的世界，收进同一座馆。"
-        lead="奇妙收藏馆把动画、游戏、手办与 Fufu 放进同一条清晰的浏览路径；每个展区保留自己的检索方式、内容模型与真实性边界。"
+        lead="有些喜欢留在故事里，有些陪在身边。这里收藏看过的动画、玩过的游戏，以及我的手办、初音未来 Fufu 和手柄。"
         meta={[
           {
             label: "独立展柜",
@@ -77,142 +75,136 @@ export default function CollectionsPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">00 / COLLECTION DIRECTORY</p>
-            <h2 id="collection-directory-title">从一张馆内导览开始。</h2>
+            <h2 id="collection-directory-title">今天，想逛哪一间？</h2>
           </div>
-          <p>
-            顶层导航只保留一座收藏馆；动画、游戏、手办和 Fufu
-            各自进入独立展柜，因此内容不会再散落，也不会混成一条难以浏览的长墙。
-          </p>
+          <p>看过的故事、玩过的世界，还有留在身边的小小收藏。选一间展柜，慢慢逛。</p>
         </div>
 
-        <div className={styles.rooms}>
+        <div className={styles.exhibits}>
           {collectionRooms.map((room) => (
-            <CollectionLink href={room.href} key={room.id} data-tone={room.tone}>
-              <span>{room.index} / ROOM</span>
-              <strong aria-hidden="true">{room.motif}</strong>
-              <div>
-                <h3>{room.label}</h3>
-                <b>
+            <CollectionLink
+              href={room.href}
+              key={room.id}
+              className={styles.exhibit}
+              data-tone={room.tone}
+              data-room={room.id}
+            >
+              <div className={styles.exhibitHeading}>
+                <span>{room.index} / ROOM</span>
+                <span>
                   {room.count} {room.unit}
-                </b>
-                <p>{room.description}</p>
+                </span>
               </div>
-              <i aria-hidden="true">↗</i>
+              <div className={styles.exhibitArtwork} aria-hidden="true">
+                {room.id === "anime" || room.id === "games" ? (
+                  <div className={styles.coverShelf}>
+                    {(room.id === "anime" ? animePreview : gamePreview).map((entry) => (
+                      <Image
+                        key={entry.id}
+                        src={sitePath(entry.image ?? "")}
+                        alt=""
+                        width={280}
+                        height={420}
+                        sizes="(max-width: 600px) 22vw, (max-width: 900px) 20vw, 12vw"
+                        loading="lazy"
+                        unoptimized
+                      />
+                    ))}
+                  </div>
+                ) : room.id === "figures" ? (
+                  <div className={styles.figureShelf}>
+                    {figurePreview.slice(0, 4).map((entry) => (
+                      <span key={entry.id}>
+                        {entry.product?.image ? (
+                          <Image
+                            src={sitePath(entry.product.image)}
+                            alt=""
+                            width={200}
+                            height={260}
+                            sizes="(max-width: 600px) 22vw, 12vw"
+                            loading="lazy"
+                            unoptimized
+                          />
+                        ) : (
+                          <strong>{entry.motif}</strong>
+                        )}
+                        <b>{entry.character}</b>
+                      </span>
+                    ))}
+                  </div>
+                ) : room.id === "fufu" ? (
+                  <div className={styles.plushShelf}>
+                    {fufuPreview.map((entry) => (
+                      <span key={entry.id}>
+                        <Image
+                          src={sitePath(entry.image)}
+                          alt=""
+                          width={160}
+                          height={160}
+                          sizes="(max-width: 600px) 24vw, 120px"
+                          loading="lazy"
+                          unoptimized
+                        />
+                        <b>{entry.year ?? "BIG"}</b>
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <div className={styles.controllerShelf}>
+                    {controllerCollection.map((entry) => (
+                      <span key={entry.id}>
+                        <Image
+                          src={sitePath(entry.image)}
+                          alt=""
+                          width={200}
+                          height={160}
+                          sizes="(max-width: 600px) 22vw, 160px"
+                          loading="lazy"
+                          unoptimized
+                        />
+                        <b>{entry.shortName}</b>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className={styles.exhibitCopy}>
+                <h3>{room.label}</h3>
+                <p>
+                  {room.id === "anime"
+                    ? `${animeCatalog.length} 部已经看过的动画。按作品名、年份和类型，找回熟悉的故事。`
+                    : room.id === "games"
+                      ? `${gameCatalog.length} 款真实 Steam 游玩记录。从封面认出熟悉的世界，也可以直接搜索作品。`
+                      : room.id === "figures"
+                        ? `${figureCollection.length} 件手办，${figureMikuCount} 件初音未来。每件都配上对应款式的商品图，慢慢看清收藏的细节。`
+                        : room.id === "fufu"
+                          ? `从虎生肖开始，${fufuTimeline}，和大 Fufu 一起组成 ${fufuCollection.length} 只毛绒的小队。`
+                          : `${controllerCollection.length} 只手柄，从 Xbox、两代 Switch Pro，到八爪鱼 4 八重神子联名款。把通往游戏世界的手感也收进来。`}
+                </p>
+                <div className={styles.exhibitFooter}>
+                  <span>
+                    {room.id === "anime"
+                      ? "作品搜索 · 年份 / 类型筛选"
+                      : room.id === "games"
+                        ? "名称搜索 · Steam 商店入口"
+                        : room.id === "figures"
+                          ? "款式搜索 · 点击查看大图"
+                          : room.id === "fufu"
+                            ? "生肖时间线 · 官方资料"
+                            : "标准款与角色联名 · 商品图鉴"}
+                  </span>
+                  <b>
+                    进入展柜 <span aria-hidden="true">↗</span>
+                  </b>
+                </div>
+              </div>
             </CollectionLink>
           ))}
         </div>
-      </section>
-
-      <section
-        className={`${styles.previewSection} section-shell section-pad`}
-        aria-labelledby="collection-preview-title"
-      >
-        <div className="section-heading horizontal-heading">
-          <div>
-            <p className="section-index">01 / CURATOR&apos;S PREVIEW</p>
-            <h2 id="collection-preview-title">四间展柜，各有自己的观看方式。</h2>
-          </div>
-          <p>这里仅展示少量预览；完整搜索、筛选、来源与隐私说明都保留在对应分馆。</p>
-        </div>
-
-        <div className={styles.mediaPreviews}>
-          <article className={styles.previewCard}>
-            <div className={styles.previewMedia}>
-              {animePreview.map((entry) => (
-                <Image
-                  key={entry.id}
-                  src={sitePath(entry.image)}
-                  alt=""
-                  aria-hidden="true"
-                  width={320}
-                  height={480}
-                  sizes="(max-width: 700px) 22vw, 120px"
-                  loading="lazy"
-                  unoptimized
-                />
-              ))}
-            </div>
-            <div className={styles.previewCopy}>
-              <span>ROOM 01 / ANIME</span>
-              <h3>{animeCatalog.length} 部已经看过的动画。</h3>
-              <p>保留正式名称、年份、类型与 Bangumi 资料来源，不做分数排行。</p>
-              <CollectionLink href="/collections/anime/">进入动画展柜 ↗</CollectionLink>
-            </div>
-          </article>
-
-          <article className={styles.previewCard}>
-            <div className={styles.previewMedia}>
-              {gamePreview.map((entry) => (
-                <Image
-                  key={entry.id}
-                  src={sitePath(entry.image ?? "")}
-                  alt=""
-                  aria-hidden="true"
-                  width={280}
-                  height={420}
-                  sizes="(max-width: 700px) 22vw, 120px"
-                  loading="lazy"
-                  unoptimized
-                />
-              ))}
-            </div>
-            <div className={styles.previewCopy}>
-              <span>ROOM 02 / GAMES</span>
-              <h3>{gameCatalog.length} 款真实 Steam 游玩记录。</h3>
-              <p>只公开作品名、识别封面与商店入口；账号、时长与最近上线保持私有。</p>
-              <CollectionLink href="/collections/games/">进入游戏展柜 ↗</CollectionLink>
-            </div>
-          </article>
-        </div>
-
-        <article className={`${styles.previewCard} ${styles.figurePreview}`}>
-          <div className={styles.previewCopy}>
-            <span>ROOM 03 / FIGURE COLLECTION</span>
-            <h3>手办收藏，已经逐件对回角色与作品。</h3>
-            <p>
-              大 Fufu 迁出后，这里保留 {figureCollection.length} 件手办，其中{" "}
-              {figureMikuCount}
-              件是初音未来。正式商品名与厂商只会在盒照或本人实拍确认后补充。
-            </p>
-            <CollectionLink href="/collections/figures/">
-              查看 {figureCollection.length} 件手办记录 ↗
-            </CollectionLink>
-          </div>
-          <div className={styles.figurePreviewRail} aria-hidden="true">
-            {figurePreview.map((entry) => (
-              <span key={entry.id} data-tone={entry.tone}>
-                <i>F-{entry.id.slice(-3)}</i>
-                <strong>{entry.motif}</strong>
-                <b>{entry.character}</b>
-              </span>
-            ))}
-          </div>
-        </article>
-
-        <article
-          className={`${styles.previewCard} ${styles.figurePreview} ${styles.fufuPreview}`}
-        >
-          <div className={styles.previewCopy}>
-            <span>ROOM 04 / FUFU PLUSH COLLECTION</span>
-            <h3>大 Fufu 与 {zodiacFufu.length} 只生肖成员，集合。</h3>
-            <p>
-              从{fufuTimeline}，生肖 Fufu 连成持续更新的时间线；之前的大 Fufu
-              也从手办区迁回自己的展柜。
-            </p>
-            <CollectionLink href="/collections/fufu/">
-              查看 {fufuCollection.length} 只 Fufu ↗
-            </CollectionLink>
-          </div>
-          <div className={styles.fufuPreviewRail} aria-hidden="true">
-            {fufuPreview.map((entry) => (
-              <span key={entry.id} data-tone={entry.tone}>
-                <i>{entry.year ?? "BIG"}</i>
-                <strong>{entry.motif}</strong>
-                <b>{entry.zodiac ?? "大 Fufu"}</b>
-              </span>
-            ))}
-          </div>
-        </article>
+        <p className={styles.collectionNote}>
+          每一条都是我的真实收藏或观看、游玩记录。这里不做评分排名；手办、Fufu 与手柄
+          使用对应款式的商品展示图，并保留资料来源。
+        </p>
       </section>
 
       <JourneyNavigation currentHref="/collections/" />

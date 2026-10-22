@@ -2,7 +2,7 @@ import { collectionRooms, type CollectionRoomId } from "@/content/collections";
 import { CollectionLink } from "./collection-link";
 import styles from "./collection-navigation.module.css";
 
-/** Shared doorway between the four rooms inside the Wonder Collection. */
+/** Shared doorway between the collection rooms inside the Wonder Collection. */
 export function CollectionNavigation({ current }: { current?: CollectionRoomId }) {
   return (
     <nav className={styles.switcher} aria-label="奇妙收藏馆分馆导航">

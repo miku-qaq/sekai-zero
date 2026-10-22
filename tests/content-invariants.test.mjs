@@ -35,13 +35,13 @@ test("keeps the generated Steam catalog public, deterministic and private by des
   const referencedCovers = catalog.items
     .map((game) => game.image)
     .filter((image) => image !== null);
-  assert.equal(referencedCovers.length, 104);
-  assert.equal(new Set(referencedCovers).size, 104);
+  assert.equal(referencedCovers.length, 146);
+  assert.equal(new Set(referencedCovers).size, 146);
 
   const coverFiles = (await readdir(new URL("public/games/", projectUrl)))
     .filter((filename) => filename.endsWith(".webp"))
     .toSorted();
-  assert.equal(coverFiles.length, 104);
+  assert.equal(coverFiles.length, 146);
   assert.deepEqual(
     coverFiles,
     referencedCovers.map((image) => image.split("/").at(-1)).toSorted(),
@@ -146,7 +146,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, four collection rooms and EP.018 as the latest release", async () => {
+test("keeps five top-level worlds, five collection rooms and EP.018 as the latest release", async () => {
   const [site, collections, figures, fufu, releases, animeCatalogRaw, gameCatalogRaw] =
     await Promise.all([
       readProjectFile("content/site.ts"),
@@ -166,18 +166,21 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
   assert.deepEqual(hrefs, ["about", "collections", "study", "links", "logs"]);
   assert.doesNotMatch(worldRoutes[1], /href: "\/(?:anime|games)\/"/);
 
-  const roomIds = [...collections.matchAll(/id: "(anime|games|figures|fufu)"/g)].map(
-    (match) => match[1],
-  );
-  const roomHrefs = [
-    ...collections.matchAll(/href: "\/collections\/(anime|games|figures|fufu)\/"/g),
+  const roomIds = [
+    ...collections.matchAll(/id: "(anime|games|figures|fufu|controllers)"/g),
   ].map((match) => match[1]);
-  assert.deepEqual(roomIds, ["anime", "games", "figures", "fufu"]);
-  assert.deepEqual(roomHrefs, ["anime", "games", "figures", "fufu"]);
+  const roomHrefs = [
+    ...collections.matchAll(
+      /href: "\/collections\/(anime|games|figures|fufu|controllers)\/"/g,
+    ),
+  ].map((match) => match[1]);
+  assert.deepEqual(roomIds, ["anime", "games", "figures", "fufu", "controllers"]);
+  assert.deepEqual(roomHrefs, ["anime", "games", "figures", "fufu", "controllers"]);
   assert.match(collections, /count: animeCatalog\.length/);
   assert.match(collections, /count: gameCatalog\.length/);
   assert.match(collections, /count: figureCollection\.length/);
   assert.match(collections, /count: fufuCollection\.length/);
+  assert.match(collections, /count: controllerCollection\.length/);
   assert.match(
     collections,
     /export const collectionRecordCount = collectionRooms\.reduce/,
@@ -220,18 +223,25 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
     "work",
   ];
   for (const entry of figureEntries) {
-    const keys = [...`id: "${entry[1]}",${entry[2]}`.matchAll(/^\s*(\w+):/gm)].map(
+    const keys = [...`    id: "${entry[1]}",${entry[2]}`.matchAll(/^ {4}(\w+):/gm)].map(
       (match) => match[1],
     );
     assert.deepEqual(keys.toSorted(), allowedFigureKeys);
   }
   const figureEntrySource = figureEntries.map((entry) => entry[0]).join("\n");
   assert.equal(
-    figureEntrySource.match(/verification: "identity-confirmed"/g)?.length,
+    figureEntrySource.match(/verification: "product-confirmed"/g)?.length,
     16,
   );
-  assert.equal(figureEntrySource.match(/product: null/g)?.length, 16);
-  assert.equal(figureEntrySource.match(/character: "初音未来"/g)?.length, 7);
+  assert.equal(
+    figureEntrySource.match(/image: "\/figures\/figure-\d{3}\.webp"/g)?.length,
+    16,
+  );
+  assert.match(
+    figures,
+    /id: "figure-007"[^]*?character: "超天酱"[^]*?work: "主播女孩重度依赖"/,
+  );
+  assert.equal(figureEntrySource.match(/character: "初音未来"/g)?.length, 6);
   assert.match(
     figures,
     /id: "figure-017"[^]*?character: "初音未来"[^]*?work: "初音未来"/,
@@ -267,6 +277,7 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
   const allowedFufuKeys = [
     "character",
     "id",
+    "image",
     "kind",
     "motif",
     "officialUrl",
@@ -277,7 +288,7 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
     "zodiac",
   ];
   for (const entry of fufuEntries) {
-    const keys = [...`id: "${entry[1]}",${entry[2]}`.matchAll(/^\s*(\w+):/gm)].map(
+    const keys = [...`    id: "${entry[1]}",${entry[2]}`.matchAll(/^ {4}(\w+):/gm)].map(
       (match) => match[1],
     );
     assert.deepEqual(keys.toSorted(), allowedFufuKeys);
@@ -328,7 +339,36 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
   const gameCount = JSON.parse(gameCatalogRaw).items.length;
   assert.equal(animeCount, 89);
   assert.equal(gameCount, 146);
-  assert.equal(animeCount + gameCount + figureEntries.length + fufuEntries.length, 257);
+  const controllers = await readProjectFile("content/controllers.ts");
+  const controllerEntries = [
+    ...controllers.matchAll(/\{\s+id: "(controller-[^"]+)",([^]*?)\n {2}\},/g),
+  ];
+  assert.deepEqual(
+    controllerEntries.map((entry) => entry[1]),
+    [
+      "controller-xbox-carbon-black",
+      "controller-switch-pro",
+      "controller-switch2-pro",
+      "controller-apex4-yae-miko",
+    ],
+  );
+  assert.equal(controllers.match(/collaboration: true/g)?.length, 1);
+  for (const entry of controllerEntries) {
+    assert.doesNotMatch(
+      entry[0],
+      /^\s*(?:price|cost|purchaseDate|purchasedAt|order|serialNumber|shop):/im,
+    );
+    assert.match(entry[0], /image: "\/controllers\/[^"\s]+\.webp"/);
+    assert.match(entry[0], /sourceUrl:\s*"https:/);
+  }
+  assert.equal(
+    animeCount +
+      gameCount +
+      figureEntries.length +
+      fufuEntries.length +
+      controllerEntries.length,
+    261,
+  );
 
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
@@ -347,4 +387,79 @@ test("keeps five top-level worlds, four collection rooms and EP.018 as the lates
   assert.match(releases, /episode: "EP\.014"[^]*?奇妙收藏馆/);
   assert.match(releases, /NAVIGATION TERMINAL \/ ROUTE 05/);
   assert.match(releases, /GAMES \/ 146 · CV-001/);
+});
+
+test("supplemented collection images resolve locally and retain traceable provenance", async () => {
+  const sources = JSON.parse(
+    await readProjectFile("content/collection-image-sources.json"),
+  );
+  assert.equal(sources.filter((item) => item.kind === "official-product").length, 6);
+  assert.equal(
+    sources.filter((item) => item.kind === "official-game-cover").length,
+    42,
+  );
+  assert.equal(sources.filter((item) => item.kind === "product-photo").length, 16);
+  assert.equal(sources.filter((item) => item.kind === "controller-product").length, 4);
+  assert.equal(new Set(sources.map((item) => item.image)).size, sources.length);
+  for (const item of sources) {
+    assert.match(
+      item.image,
+      /^\/(?:games|fufu|figures|controllers)\/[a-z0-9-]+\.webp$/,
+    );
+    const image = await readFile(new URL(`public${item.image}`, projectUrl));
+    assert.equal(image.toString("ascii", 0, 4), "RIFF");
+    assert.equal(image.toString("ascii", 8, 12), "WEBP");
+    assert.ok(image.length < 250000, `${item.image} exceeds the image budget`);
+    const source = new URL(item.url);
+    assert.equal(source.protocol, "https:");
+    if (item.kind === "official-product") {
+      assert.ok(["segaplaza.jp", "info.miku.sega.jp"].includes(source.hostname));
+      assert.ok(
+        ["segaplaza.jp", "info.miku.sega.jp"].includes(new URL(item.page).hostname),
+      );
+    } else if (item.kind === "product-photo") {
+      assert.ok(
+        [
+          "www.goodsmile.com",
+          "www.taito.co.jp",
+          "img.amiami.jp",
+          "shop.kotobukiya.co.jp",
+          "img.staticdj.com",
+        ].includes(source.hostname),
+      );
+      assert.ok(
+        [
+          "www.goodsmile.com",
+          "www.taito.co.jp",
+          "www.amiami.jp",
+          "shop.kotobukiya.co.jp",
+          "www.figurechoice.com",
+        ].includes(new URL(item.page).hostname),
+      );
+      const catalog = await readProjectFile("content/figures.ts");
+      assert.ok(catalog.includes(`image: "${item.image}"`));
+    } else if (item.kind === "controller-product") {
+      assert.ok(
+        ["cdn-dynmedia-1.microsoft.com", "www.nintendo.com", "whotao.com"].includes(
+          source.hostname,
+        ),
+      );
+      assert.ok(
+        ["www.microsoft.com", "www.nintendo.com", "whotao.com"].includes(
+          new URL(item.page).hostname,
+        ),
+      );
+      const catalog = await readProjectFile("content/controllers.ts");
+      assert.ok(catalog.includes(`image: "${item.image}"`));
+    } else {
+      assert.equal(item.kind, "official-game-cover");
+      assert.ok(
+        ["shared.fastly.steamstatic.com", "shared.akamai.steamstatic.com"].includes(
+          source.hostname,
+        ),
+      );
+      assert.ok(source.pathname.includes(`/apps/${item.id.replace("steam-", "")}/`));
+      assert.equal(new URL(item.page).hostname, "store.steampowered.com");
+    }
+  }
 });

@@ -32,7 +32,7 @@ export const worldRoutes = [
     navLabel: "奇妙收藏馆",
     eyebrow: "WONDER COLLECTION",
     title: "奇妙收藏馆",
-    description: "把看过的动画、玩过的游戏、真实手办与初音未来 Fufu 收进同一座馆。",
+    description: "把看过的动画、玩过的游戏、手办、初音未来 Fufu 与手柄收进同一座馆。",
     action: "进入收藏馆",
     motif: "✦",
     tone: "pink",
@@ -122,7 +122,7 @@ export const homepageFacts = [
     label: "WONDER / COLLECTION",
     soundEffect: "好き",
     motif: "✦",
-    copy: "喜欢动漫与游戏，也把动画、Steam 足迹、手办和 Fufu 整理进奇妙收藏馆。",
+    copy: "喜欢动漫与游戏，也把动画、Steam 足迹、手办、Fufu 和手柄整理进奇妙收藏馆。",
     tone: "pink",
   },
 ] as const;

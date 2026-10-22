@@ -23,6 +23,8 @@ export type FufuCollectionEntry = {
   tone: "mint" | "violet" | "pink" | "amber" | "blue";
   verification: "owner-confirmed";
   officialUrl: string;
+  /** SEGA product image, not an owner photograph. */
+  image: string;
 };
 
 /**
@@ -37,6 +39,7 @@ export type FufuCollectionEntry = {
 export const fufuCollection: readonly FufuCollectionEntry[] = [
   {
     id: "figure-003",
+    image: "/fufu/figure-003.webp",
     title: "初音ミクシリーズ　初音ミク　ふわぷち　どでかジャンボぬいぐるみ",
     character: "初音未来",
     kind: "large",
@@ -49,6 +52,7 @@ export const fufuCollection: readonly FufuCollectionEntry[] = [
   },
   {
     id: "fufu-zodiac-2022-tiger",
+    image: "/fufu/fufu-zodiac-2022-tiger.webp",
     title: "初音ミク　寅2022　ふわふわぬいぐるみ(LL)",
     character: "初音未来",
     kind: "zodiac",
@@ -61,6 +65,7 @@ export const fufuCollection: readonly FufuCollectionEntry[] = [
   },
   {
     id: "fufu-zodiac-2023-rabbit",
+    image: "/fufu/fufu-zodiac-2023-rabbit.webp",
     title: "初音ミク　卯2023　ふわぷち　ぬいぐるみ（LL）",
     character: "初音未来",
     kind: "zodiac",
@@ -73,6 +78,7 @@ export const fufuCollection: readonly FufuCollectionEntry[] = [
   },
   {
     id: "fufu-zodiac-2024-dragon",
+    image: "/fufu/fufu-zodiac-2024-dragon.webp",
     title: "初音ミク　辰2024　ふわぷち　ぬいぐるみ（LL）",
     character: "初音未来",
     kind: "zodiac",
@@ -85,6 +91,7 @@ export const fufuCollection: readonly FufuCollectionEntry[] = [
   },
   {
     id: "fufu-zodiac-2025-snake",
+    image: "/fufu/fufu-zodiac-2025-snake.webp",
     title: "初音ミク　巳2025　ふわぷち　ぬいぐるみ（ＬＬ）",
     character: "初音未来",
     kind: "zodiac",
@@ -97,6 +104,7 @@ export const fufuCollection: readonly FufuCollectionEntry[] = [
   },
   {
     id: "fufu-zodiac-2026-horse",
+    image: "/fufu/fufu-zodiac-2026-horse.webp",
     title: "初音ミク　午2026　ふわぷち　ぬいぐるみ（LL）",
     character: "初音未来",
     kind: "zodiac",
@@ -119,7 +127,7 @@ const collectionRangeSummary =
 
 export const fufuCollectionMeta = {
   title: "Mikureina 的 Fufu 毛绒收藏",
-  summary: `单独记录我的初音未来 Fufu 毛绒：${collectionRangeSummary}，也把原先记录在手办区的大 Fufu 迁回这里。`,
+  summary: `我的初音未来 Fufu 毛绒：${collectionRangeSummary}，还有一只大 Fufu，组成软乎乎的收藏小队。`,
   sourceLabel: "本人确认的收藏范围与 SEGA 商品资料",
   rightsNote:
     "Fufu 是本站使用的收藏称呼；商品卡保留 SEGA 公布的正式名称。角色与商品形象版权归各自权利方所有，本站仅作非商业性的个人收藏记录。",

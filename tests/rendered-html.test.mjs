@@ -23,7 +23,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("builds the exact 13-route Worker manifest", async () => {
+test("builds the exact 14-route Worker manifest", async () => {
   const workerSource = await readFile(
     new URL("../dist/server/index.js", import.meta.url),
     "utf8",
@@ -38,6 +38,7 @@ test("builds the exact 13-route Worker manifest", async () => {
     "/anime",
     "/collections",
     "/collections/anime",
+    "/collections/controllers",
     "/collections/figures",
     "/collections/fufu",
     "/collections/games",
@@ -162,7 +163,7 @@ test("server-renders the five canonical top-level routes with clear purposes", a
   }
 });
 
-test("server-renders the four canonical rooms inside the Wonder Collection", async () => {
+test("server-renders the five canonical rooms inside the Wonder Collection", async () => {
   const rooms = [
     {
       pathname: "/collections/anime",
@@ -188,6 +189,12 @@ test("server-renders the four canonical rooms inside the Wonder Collection", asy
       copy: /从寅 2022/,
       subpage: "Fufu 收藏",
     },
+    {
+      pathname: "/collections/controllers",
+      title: /<title>手柄收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+      copy: /把冒险，握在手里/,
+      subpage: "手柄收藏",
+    },
   ];
 
   for (const room of rooms) {
@@ -207,6 +214,7 @@ test("server-renders the four canonical rooms inside the Wonder Collection", asy
     assert.match(html, /href="\/collections\/games\/"/);
     assert.match(html, /href="\/collections\/figures\/"/);
     assert.match(html, /href="\/collections\/fufu\/"/);
+    assert.match(html, /href="\/collections\/controllers\/"/);
     assert.match(html, /class="journey-navigation section-shell"/);
   }
 });
@@ -347,13 +355,13 @@ test("publishes confirmed links plus one honest future placeholder", async () =>
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 });
 
-test("keeps the Wonder Collection hub concise while linking all four rooms", async () => {
+test("keeps the Wonder Collection hub concise while linking all five rooms", async () => {
   const response = await render("/collections");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /04 间/);
-  assert.match(html, /257 条/);
+  assert.match(html, /05 间/);
+  assert.match(html, /261 条/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
   assert.match(html, /手办收藏/);
@@ -362,6 +370,7 @@ test("keeps the Wonder Collection hub concise while linking all four rooms", asy
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
+  assert.match(html, /href="\/collections\/controllers\/"/);
   assert.match(html, /从虎生肖开始/);
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /16 件/);
@@ -401,6 +410,7 @@ test("publishes all 89 watched anime while initially rendering only 24 cards", a
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
+  assert.match(html, /href="\/collections\/controllers\/"/);
   assert.match(html, /已展示 <strong>24<\/strong>/);
   assert.match(html, /还有 (?:<!-- -->)?65(?:<!-- -->)? 部动画尚未展开/);
   assert.match(html, /灵笼 上半季/);
@@ -426,7 +436,7 @@ test("publishes 146 played Steam games while keeping private activity data local
   const html = await response.text();
 
   assert.match(html, /146 款/);
-  assert.match(html, /104 张/);
+  assert.match(html, /146 张/);
   assert.match(html, /MIKUREINA&#x27;S WONDER COLLECTION/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
@@ -435,6 +445,7 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.match(html, /href="\/collections\/anime\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
+  assert.match(html, /href="\/collections\/controllers\/"/);
   assert.match(html, /实际游玩记录/);
   assert.match(html, /玩过 \/ 不排名/);
   assert.match(html, /只留下适合公开的收藏信息/);
@@ -457,15 +468,15 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.doesNotMatch(html, /STEAM \/ APP\s+\d+/i);
 });
 
-test("publishes 16 character-verified figures with stable archive numbers", async () => {
+test("publishes 16 product-matched figures with stable archive numbers", async () => {
   const response = await render("/collections/figures");
   assert.equal(response.status, 200);
   const html = await response.text();
   const visibleHtml = html.replaceAll("<!-- -->", "");
 
-  assert.match(html, /去重记录<\/dt><dd>16 件<\/dd>/);
-  assert.match(html, /初音未来<\/dt><dd>07 件<\/dd>/);
-  assert.match(html, /角色核对<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(html, /展柜收藏<\/dt><dd>16 件<\/dd>/);
+  assert.match(html, /初音未来<\/dt><dd>06 件<\/dd>/);
+  assert.match(html, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
   assert.match(html, /aria-label="16 件手办收藏核对目录"/);
   assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(html, /id="figure-003-title"/);
@@ -512,14 +523,19 @@ test("publishes 16 character-verified figures with stable archive numbers", asyn
     ],
   );
   assert.match(html, /href="\/collections\/fufu\/"/);
-  assert.match(html, /搜索角色或作品/);
+  assert.match(html, /href="\/collections\/controllers\/"/);
+  assert.match(html, /搜索角色、作品或款式/);
   assert.match(html, /aria-label="筛选手办角色"/);
   assert.match(visibleHtml, /当前展示 <strong>16<\/strong> \/\s*总计 16 件/);
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /芙莉莲/);
   assert.match(html, /Angel Beats!/);
-  assert.equal(html.match(/角色已核对/g)?.length, 16);
+  assert.equal(html.match(/款式已核对<\/p>/g)?.length, 16);
+  assert.equal(html.match(/src="\/figures\/figure-\d{3}\.webp"/g)?.length, 16);
+  assert.equal(html.match(/aria-haspopup="dialog"/g)?.length, 16);
+  assert.match(html, /超天酱/);
+  assert.match(html, /商品展示图 · 非本人实拍/);
   assert.doesNotMatch(html, /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/);
   assert.doesNotMatch(html, /NEXT \/ 03[^]{0,160}本人拍摄的实物照片/);
 
@@ -553,6 +569,8 @@ test("publishes the six owner-confirmed Fufu with formal names and no transactio
   assert.match(html, /初音ミク\u3000巳2025\u3000ふわぷち\u3000ぬいぐるみ（ＬＬ）/);
   assert.match(html, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(html, /商品卡保留 SEGA 公布的正式名称/);
+  assert.equal(html.match(/<img[^>]+src="\/fufu\/[^"]+\.webp"/g)?.length, 6);
+  assert.match(html, /SEGA 官方商品图 · 非本人实拍/);
   assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
   assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/16431"/);
   assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/17297"/);
@@ -869,12 +887,15 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.ok(figureCollectionSource, "figures.ts should expose the typed collection");
   assert.equal(figuresContent.match(/id: "figure-\d{3}"/g)?.length, 16);
   assert.doesNotMatch(figuresContent, /id: "figure-003"/);
-  assert.equal(figureCollectionSource[1].match(/character: "初音未来"/g)?.length, 7);
+  assert.equal(figureCollectionSource[1].match(/character: "初音未来"/g)?.length, 6);
   assert.equal(
-    figureCollectionSource[1].match(/verification: "identity-confirmed"/g)?.length,
+    figureCollectionSource[1].match(/verification: "product-confirmed"/g)?.length,
     16,
   );
-  assert.equal(figureCollectionSource[1].match(/product: null/g)?.length, 16);
+  assert.equal(
+    figureCollectionSource[1].match(/image: "\/figures\/figure-\d{3}\.webp"/g)?.length,
+    16,
+  );
   assert.match(figuresContent, /work: string;/);
   assert.match(figuresContent, /product: FigureProductDetails;/);
   assert.match(
@@ -960,4 +981,28 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     mobileStyles,
     /\.channel-option-symbol\s*\{[^}]*grid-row:\s*auto;[^}]*grid-column:\s*auto;/,
   );
+});
+
+test("publishes exactly the four owner-confirmed controllers with local product images", async () => {
+  const response = await render("/collections/controllers");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /收藏手柄<\/dt><dd>04 只<\/dd>/);
+  assert.match(html, /品牌<\/dt><dd>03 个<\/dd>/);
+  assert.match(html, /角色联名<\/dt><dd>01 款<\/dd>/);
+  assert.match(html, /aria-label="4 只手柄收藏"/);
+  assert.equal(html.match(/<h3[^>]*id="controller-[^"]+-title"/g)?.length, 4);
+  assert.equal(html.match(/src="\/controllers\/[^"\s]+\.webp"/g)?.length, 4);
+  assert.equal(html.match(/aria-haspopup="dialog"/g)?.length, 4);
+  for (const name of [
+    "Xbox 无线手柄",
+    "Series X|S 标准款 · 碳黑",
+    "Nintendo Switch Pro 手柄",
+    "Nintendo Switch 2 Pro 手柄",
+    "飞智八爪鱼 4",
+    "《原神》八重神子联名版",
+  ])
+    assert.ok(html.includes(name));
+  assert.match(html, /商品展示图 · 非本人实拍/);
+  assert.doesNotMatch(html, /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i);
 });

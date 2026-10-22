@@ -1,0 +1,546 @@
+[
+  {
+    "id": "figure-003",
+    "image": "/fufu/figure-003.webp",
+    "page": "https://segaplaza.jp/goods/120696/",
+    "url": "https://segaplaza.jp/images-v3/goods/120696_fddb02/large/120696_01.webp",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "fufu-zodiac-2022-tiger",
+    "image": "/fufu/fufu-zodiac-2022-tiger.webp",
+    "page": "https://info.miku.sega.jp/16431",
+    "url": "https://info.miku.sega.jp/wp-content/uploads/2021/12/276a1b219017a48fdbb29b30a83e4251.jpg",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "fufu-zodiac-2023-rabbit",
+    "image": "/fufu/fufu-zodiac-2023-rabbit.webp",
+    "page": "https://info.miku.sega.jp/17297",
+    "url": "https://info.miku.sega.jp/wp-content/uploads/2023/03/08f267929417f7035b42c728172120c6.jpg",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "fufu-zodiac-2024-dragon",
+    "image": "/fufu/fufu-zodiac-2024-dragon.webp",
+    "page": "https://segaplaza.jp/goods/120142/",
+    "url": "https://segaplaza.jp/images-v3/goods/120142_366278/large/120142_01.webp",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "fufu-zodiac-2025-snake",
+    "image": "/fufu/fufu-zodiac-2025-snake.webp",
+    "page": "https://segaplaza.jp/goods/120683/",
+    "url": "https://segaplaza.jp/images-v3/goods/120683_042c57/large/120683_01.webp",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "fufu-zodiac-2026-horse",
+    "image": "/fufu/fufu-zodiac-2026-horse.webp",
+    "page": "https://segaplaza.jp/goods/120684/",
+    "url": "https://segaplaza.jp/images-v3/goods/120684_1312bc/large/120684_01.webp",
+    "kind": "official-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2344520",
+    "image": "/games/steam-2344520.webp",
+    "page": "https://store.steampowered.com/app/2344520/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2344520/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-292030",
+    "image": "/games/steam-292030.webp",
+    "page": "https://store.steampowered.com/app/292030/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/292030/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1517290",
+    "image": "/games/steam-1517290.webp",
+    "page": "https://store.steampowered.com/app/1517290/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1517290/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-359550",
+    "image": "/games/steam-359550.webp",
+    "page": "https://store.steampowered.com/app/359550/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/359550/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-322330",
+    "image": "/games/steam-322330.webp",
+    "page": "https://store.steampowered.com/app/322330/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/322330/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3447040",
+    "image": "/games/steam-3447040.webp",
+    "page": "https://store.steampowered.com/app/3447040/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3447040/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2767030",
+    "image": "/games/steam-2767030.webp",
+    "page": "https://store.steampowered.com/app/2767030/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2767030/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1085660",
+    "image": "/games/steam-1085660.webp",
+    "page": "https://store.steampowered.com/app/1085660/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1085660/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3101040",
+    "image": "/games/steam-3101040.webp",
+    "page": "https://store.steampowered.com/app/3101040/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3101040/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1687950",
+    "image": "/games/steam-1687950.webp",
+    "page": "https://store.steampowered.com/app/1687950/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1687950/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2543180",
+    "image": "/games/steam-2543180.webp",
+    "page": "https://store.steampowered.com/app/2543180/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2543180/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-740130",
+    "image": "/games/steam-740130.webp",
+    "page": "https://store.steampowered.com/app/740130/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/740130/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-477160",
+    "image": "/games/steam-477160.webp",
+    "page": "https://store.steampowered.com/app/477160/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/477160/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1091500",
+    "image": "/games/steam-1091500.webp",
+    "page": "https://store.steampowered.com/app/1091500/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1938090",
+    "image": "/games/steam-1938090.webp",
+    "page": "https://store.steampowered.com/app/1938090/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1938090/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2001120",
+    "image": "/games/steam-2001120.webp",
+    "page": "https://store.steampowered.com/app/2001120/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3167020",
+    "image": "/games/steam-3167020.webp",
+    "page": "https://store.steampowered.com/app/3167020/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3167020/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1392860",
+    "image": "/games/steam-1392860.webp",
+    "page": "https://store.steampowered.com/app/1392860/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1392860/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1203220",
+    "image": "/games/steam-1203220.webp",
+    "page": "https://store.steampowered.com/app/1203220/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1203220/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1172470",
+    "image": "/games/steam-1172470.webp",
+    "page": "https://store.steampowered.com/app/1172470/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1172470/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1274570",
+    "image": "/games/steam-1274570.webp",
+    "page": "https://store.steampowered.com/app/1274570/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1274570/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-570",
+    "image": "/games/steam-570.webp",
+    "page": "https://store.steampowered.com/app/570/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/570/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-239140",
+    "image": "/games/steam-239140.webp",
+    "page": "https://store.steampowered.com/app/239140/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/239140/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-1145350",
+    "image": "/games/steam-1145350.webp",
+    "page": "https://store.steampowered.com/app/1145350/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1145350/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-553850",
+    "image": "/games/steam-553850.webp",
+    "page": "https://store.steampowered.com/app/553850/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/553850/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-367520",
+    "image": "/games/steam-367520.webp",
+    "page": "https://store.steampowered.com/app/367520/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3097560",
+    "image": "/games/steam-3097560.webp",
+    "page": "https://store.steampowered.com/app/3097560/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3097560/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-424840",
+    "image": "/games/steam-424840.webp",
+    "page": "https://store.steampowered.com/app/424840/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/424840/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2246340",
+    "image": "/games/steam-2246340.webp",
+    "page": "https://store.steampowered.com/app/2246340/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2246340/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3287520",
+    "image": "/games/steam-3287520.webp",
+    "page": "https://store.steampowered.com/app/3287520/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3287520/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2627260",
+    "image": "/games/steam-2627260.webp",
+    "page": "https://store.steampowered.com/app/2627260/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2627260/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-275850",
+    "image": "/games/steam-275850.webp",
+    "page": "https://store.steampowered.com/app/275850/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/275850/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-578080",
+    "image": "/games/steam-578080.webp",
+    "page": "https://store.steampowered.com/app/578080/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/578080/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2868840",
+    "image": "/games/steam-2868840.webp",
+    "page": "https://store.steampowered.com/app/2868840/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2868840/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-244850",
+    "image": "/games/steam-244850.webp",
+    "page": "https://store.steampowered.com/app/244850/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/244850/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-780310",
+    "image": "/games/steam-780310.webp",
+    "page": "https://store.steampowered.com/app/780310/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/780310/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-236390",
+    "image": "/games/steam-236390.webp",
+    "page": "https://store.steampowered.com/app/236390/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/236390/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-230410",
+    "image": "/games/steam-230410.webp",
+    "page": "https://store.steampowered.com/app/230410/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/230410/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-2183900",
+    "image": "/games/steam-2183900.webp",
+    "page": "https://store.steampowered.com/app/2183900/",
+    "url": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2183900/library_600x900.jpg",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3768760",
+    "image": "/games/steam-3768760.webp",
+    "page": "https://store.steampowered.com/app/3768760/",
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3768760/c5b553fd05ba41aefa6daeddac95849a10c93022/header_alt_assets_4.jpg?t=1791886607",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3527290",
+    "image": "/games/steam-3527290.webp",
+    "page": "https://store.steampowered.com/app/3527290/",
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3527290/31bac6b2eccf09b368f5e95ce510bae2baf3cfcd/header.jpg?t=1790591892",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "steam-3764200",
+    "image": "/games/steam-3764200.webp",
+    "page": "https://store.steampowered.com/app/3764200/",
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3764200/ce5437442768e38eb575f205ab9397d0264017b0/header.jpg?t=1779840172",
+    "kind": "official-game-cover",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-001",
+    "image": "/figures/figure-001.webp",
+    "page": "https://www.goodsmile.com/en/product/36455/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/36455/4tFJ1RvSL5xDZnEebN8Vza6QdsCAXcKY.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-002",
+    "image": "/figures/figure-002.webp",
+    "page": "https://www.goodsmile.com/ja/product/60248/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/60248/evpQGB234WidyLKFUr8sHbZqDt7Suh9x.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-004",
+    "image": "/figures/figure-004.webp",
+    "page": "https://www.goodsmile.com/en/product/6261/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20190717/8554/61933/large/4af8b217a6e1a05828dbeb2a73fa1a5e.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-005",
+    "image": "/figures/figure-005.webp",
+    "page": "https://www.figurechoice.com/products/coreful-figure-angel-kanade-tachibana-angel-beats-official-statue-taito",
+    "url": "https://img.staticdj.com/c5899c58c26fdbb9347b687f922ecbdd_2056.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-006",
+    "image": "/figures/figure-006.webp",
+    "page": "https://www.taito.co.jp/taito-prize/0451621300",
+    "url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/c76effca-dd5d-4855-937a-124223ee0ac1_p_01_ja.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-007",
+    "image": "/figures/figure-007.webp",
+    "page": "https://www.goodsmile.com/en/product/11091/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20221014/13406/106452/large/70c83728f20c914b28c41833980ed2d2.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-008",
+    "image": "/figures/figure-008.webp",
+    "page": "https://www.taito.co.jp/taito-prize/0451839700",
+    "url": "https://www.taito.co.jp/Content/images/zone/2/item/201407/99b5e0b1-5002-4bfa-8fcb-e6e70edf2a8d_p_01_ja.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-009",
+    "image": "/figures/figure-009.webp",
+    "page": "https://www.amiami.jp/top/detail/review?gcode=FIGURE-171184",
+    "url": "https://img.amiami.jp/images/product/review/242/FIGURE-171184_01.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-010",
+    "image": "/figures/figure-010.webp",
+    "page": "https://www.goodsmile.com/en/product/9369/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20210820/11680/89060/large/3cea941a4c76071ff9fcfd1214708742.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-011",
+    "image": "/figures/figure-011.webp",
+    "page": "https://www.goodsmile.com/en/product/4687/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20171220/6966/49530/large/a059308515a4c5e136d99f829ff58a67.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-012",
+    "image": "/figures/figure-012.webp",
+    "page": "https://www.goodsmile.com/en/product/4912/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20180409/7196/51347/large/f336376e337d625a016d28d4d42a8df0.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-013",
+    "image": "/figures/figure-013.webp",
+    "page": "https://shop.kotobukiya.co.jp/shop/g/g4934054070169/",
+    "url": "https://shop.kotobukiya.co.jp/img/goods/L/4934054070169_2.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-014",
+    "image": "/figures/figure-014.webp",
+    "page": "https://www.goodsmile.com/en/product/56125/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/56125/v3LJV4PNCHG12maxkh8BQiwuE0KrpqFD.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-015",
+    "image": "/figures/figure-015.webp",
+    "page": "https://www.goodsmile.com/ja/product/56065/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/56065/XdbkTPxEpLc6wtYJs1iQSMuKvgBmW8Nr.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-016",
+    "image": "/figures/figure-016.webp",
+    "page": "https://www.goodsmile.com/en/product/9449/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/product/20210908/11760/90085/large/55748228d858527a3ac0878d919a419b.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "figure-017",
+    "image": "/figures/figure-017.webp",
+    "page": "https://www.goodsmile.com/en/product/54788/",
+    "url": "https://www.goodsmile.com/gsc-webrevo-sdk-storage-prd/product/image/54788/291e42812bf98ebdedfe76f78e71b5da.jpg",
+    "kind": "product-photo",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "controller-xbox-carbon-black",
+    "image": "/controllers/xbox-carbon-black.webp",
+    "page": "https://www.microsoft.com/en-us/d/xbox-wireless-controller/8xn59crbsqgz",
+    "url": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Xbox-Cntrl-Black-b00?qlt=90&hei=900&wid=900&bgc=FFFFFFFF&fmt=jpg",
+    "kind": "controller-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "controller-switch-pro",
+    "image": "/controllers/switch-pro.webp",
+    "page": "https://www.nintendo.com/hk/hardware/switch/accessories/",
+    "url": "https://www.nintendo.com/hk/hardware/switch/accessories/img/controller/pro-con_image-01.jpg",
+    "kind": "controller-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "controller-switch2-pro",
+    "image": "/controllers/switch2-pro.webp",
+    "page": "https://www.nintendo.com/hk/hardware/switch2/accessories/index.html",
+    "url": "https://www.nintendo.com/hk/hardware/switch2/accessories/assets/img/top/controller_switcher_img01.png",
+    "kind": "controller-product",
+    "retrievedAt": "2026-10-22"
+  },
+  {
+    "id": "controller-apex4-yae-miko",
+    "image": "/controllers/apex4-yae-miko.webp",
+    "page": "https://whotao.com/products/genshin-impact-yae-miko-astute-amusement-game-controller-apex-4",
+    "url": "https://whotao.com/cdn/shop/files/yaemiko-astute-amusement-game-controller-apex-4-official-merch-genshin-2.webp?v=1721529639",
+    "kind": "controller-product",
+    "retrievedAt": "2026-10-22"
+  }
+]

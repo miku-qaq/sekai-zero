@@ -100,7 +100,7 @@ export function GameCatalog() {
                         <div className={styles.coverFallback} aria-hidden="true">
                           <span>STEAM</span>
                           <strong>{coverInitial(game.title)}</strong>
-                          <i>封面待缓存</i>
+                          <i>封面待补充</i>
                         </div>
                       )}
                       <span className={styles.cardIndex} aria-hidden="true">

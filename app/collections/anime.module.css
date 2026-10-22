@@ -552,3 +552,33 @@
     transition: none;
   }
 }
+
+@media (max-width: 700px) {
+  .resultLine {
+    gap: 4px;
+    font-size: 10px;
+  }
+  .resultLine > span {
+    display: none;
+  }
+  .loadMore {
+    align-items: center;
+    gap: 12px;
+  }
+}
+@media (max-width: 460px) {
+  .toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .search,
+  .reset {
+    grid-column: 1 / -1;
+  }
+  .selectField {
+    grid-column: auto;
+  }
+  .selectField select {
+    padding-right: 24px;
+  }
+}

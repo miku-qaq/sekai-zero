@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { figureCollection } from "@/content/figures";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { figureCollection, type FigureCollectionEntry } from "@/content/figures";
+import { sitePath } from "@/lib/site-path";
 import styles from "./figures.module.css";
 
 type FigureFilter = "all" | "miku" | "others";
@@ -34,6 +36,21 @@ export function FigureCatalog() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<FigureFilter>("all");
 
+  const [selected, setSelected] = useState<FigureCollectionEntry | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (!selected) return;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    dialog?.showModal();
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog?.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selected]);
+
   const visibleEntries = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
 
@@ -42,7 +59,10 @@ export function FigureCatalog() {
         filter === "all" ||
         (filter === "miku" && entry.character === "初音未来") ||
         (filter === "others" && entry.character !== "初音未来");
-      const searchable = `${entry.character} ${entry.work}`.toLocaleLowerCase("zh-CN");
+      const searchable =
+        `${entry.character} ${entry.work} ${entry.product?.title ?? ""} ${entry.product?.manufacturer ?? ""}`.toLocaleLowerCase(
+          "zh-CN",
+        );
 
       return matchesGroup && (!normalizedQuery || searchable.includes(normalizedQuery));
     });
@@ -64,14 +84,14 @@ export function FigureCatalog() {
           onSubmit={(event) => event.preventDefault()}
         >
           <label className={styles.search}>
-            <span>搜索角色或作品</span>
+            <span>搜索角色、作品或款式</span>
             <span className={styles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="例如：初音未来、游戏人生"
+                placeholder="例如：初音未来、赛车、TAITO"
               />
             </span>
           </label>
@@ -102,7 +122,7 @@ export function FigureCatalog() {
             当前展示 <strong>{String(visibleEntries.length).padStart(2, "0")}</strong> /
             总计 {String(figureCollection.length).padStart(2, "0")} 件
           </p>
-          <span>{figureCollection.length} CHARACTER &amp; WORK RECORDS VERIFIED</span>
+          <span>{figureCollection.length} MATCHED PRODUCT PHOTOS</span>
         </div>
       </div>
 
@@ -123,39 +143,68 @@ export function FigureCatalog() {
                   data-miku={entry.character === "初音未来" || undefined}
                   aria-labelledby={titleId}
                 >
-                  <div className={styles.visual} aria-hidden="true">
+                  <div className={styles.visual}>
+                    {entry.product?.image ? (
+                      <button
+                        type="button"
+                        className={styles.photoButton}
+                        onClick={() => setSelected(entry)}
+                        aria-label={`查看大图：${entry.product.title}`}
+                        aria-haspopup="dialog"
+                      >
+                        <Image
+                          src={sitePath(entry.product.image)}
+                          alt={entry.product.imageAlt ?? entry.product.title}
+                          width={800}
+                          height={900}
+                          sizes="(max-width: 600px) 90vw, (max-width: 1120px) 30vw, 24vw"
+                          loading="lazy"
+                          unoptimized
+                        />
+                        <span className={styles.zoomHint} aria-hidden="true">
+                          查看大图 ↗
+                        </span>
+                      </button>
+                    ) : (
+                      <div className={styles.orbit} aria-hidden="true">
+                        <strong>{entry.motif}</strong>
+                      </div>
+                    )}
                     <span className={styles.recordId}>FIG / {number}</span>
-                    <span className={styles.workTag}>{entry.work}</span>
-                    <div className={styles.orbit}>
-                      <i />
-                      <strong>{entry.motif}</strong>
-                    </div>
-                    <b className={styles.shelfMark}>SEKAI / SHELF {number}</b>
                   </div>
 
                   <div className={styles.cardBody}>
                     <p className={styles.verifyLine}>
-                      <span aria-hidden="true">●</span> 角色已核对
+                      <span aria-hidden="true">●</span> 款式已核对
                     </p>
                     <h3 id={titleId}>{entry.character}</h3>
+                    {entry.product ? (
+                      <p className={styles.variant}>{entry.product.title}</p>
+                    ) : null}
                     <dl>
                       <div>
                         <dt>作品</dt>
                         <dd>{entry.work}</dd>
                       </div>
                       <div>
-                        <dt>类型</dt>
-                        <dd>{entry.format}</dd>
+                        <dt>厂商</dt>
+                        <dd>{entry.product?.manufacturer ?? "待补充"}</dd>
                       </div>
+                      {entry.product?.scale ? (
+                        <div>
+                          <dt>比例</dt>
+                          <dd>{entry.product.scale}</dd>
+                        </div>
+                      ) : null}
                     </dl>
 
                     {entry.product ? (
                       <a
-                        href={entry.product.officialUrl}
+                        href={entry.product.productUrl}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {entry.product.title} <span aria-hidden="true">↗</span>
+                        商品资料 <span aria-hidden="true">↗</span>
                         <span className="sr-only">（将在新标签页打开）</span>
                       </a>
                     ) : null}
@@ -169,12 +218,50 @@ export function FigureCatalog() {
         <div className={styles.empty}>
           <span aria-hidden="true">NO MATCHING FIGURE</span>
           <h3>没有找到对应的收藏。</h3>
-          <p>换一个角色或作品名称，也可以恢复完整展柜。</p>
+          <p>换一个角色、作品或款式名称，也可以恢复完整展柜。</p>
           <button type="button" onClick={resetFilters}>
             查看全部手办
           </button>
         </div>
       )}
+
+      <dialog
+        ref={dialogRef}
+        className={styles.lightbox}
+        aria-labelledby="figure-preview-title"
+        onClose={() => setSelected(null)}
+      >
+        {selected?.product ? (
+          <>
+            <div className={styles.lightboxHeading}>
+              <div>
+                <h2 id="figure-preview-title">{selected.product.title}</h2>
+                <p>
+                  {selected.product.manufacturer}
+                  {selected.product.scale ? ` · ${selected.product.scale}` : ""}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => dialogRef.current?.close()}
+                aria-label="关闭大图"
+              >
+                ×
+              </button>
+            </div>
+            {selected.product.image ? (
+              <Image
+                src={sitePath(selected.product.image)}
+                alt={selected.product.imageAlt ?? selected.product.title}
+                width={800}
+                height={900}
+                unoptimized
+              />
+            ) : null}
+            <p className={styles.lightboxNote}>商品展示图 · 非本人实拍</p>
+          </>
+        ) : null}
+      </dialog>
     </div>
   );
 }

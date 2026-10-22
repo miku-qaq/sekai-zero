@@ -35,13 +35,13 @@ export default function CollectionsGamesPage() {
         animate={false}
         subpageLabel="游戏展柜"
         title="玩过的世界，也值得收藏。"
-        lead="这里整理我在 Steam 留下实际游玩记录的作品。页面只公开游戏名称与识别封面，不公开账号、游玩时长、最近上线或好友信息。"
+        lead="这里整理我在 Steam 留下实际游玩记录的作品。从封面里认出熟悉的世界，也把下一次想重温的旅程找回来。"
         meta={[
           {
             label: "Steam 记录",
             value: `${String(gameCatalog.length).padStart(3, "0")} 款`,
           },
-          { label: "本地封面", value: `${String(coverCount).padStart(3, "0")} 张` },
+          { label: "作品封面", value: `${String(coverCount).padStart(3, "0")} 张` },
           { label: "展示方式", value: "玩过 / 不排名" },
         ]}
       />
@@ -63,6 +63,8 @@ export default function CollectionsGamesPage() {
 
         <CollectionNavigation current="games" />
 
+        <GameCatalog />
+
         <aside className={styles.platformShelf} aria-label="游戏平台收藏状态">
           <div className={styles.platformIntro}>
             <span>PLATFORM SHELVES</span>
@@ -83,8 +85,6 @@ export default function CollectionsGamesPage() {
             <strong>内容待填充 · OWNER CONFIRMATION REQUIRED</strong>
           </div>
         </aside>
-
-        <GameCatalog />
 
         <aside className={styles.privacyNotice} aria-label="Steam 数据隐私说明">
           <span aria-hidden="true">LOCK / LOCAL ONLY</span>
