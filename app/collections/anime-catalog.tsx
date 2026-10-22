@@ -179,7 +179,13 @@ export function AnimeCatalog() {
               return (
                 <li key={entry.id}>
                   <article className={styles.card} aria-labelledby={titleId}>
-                    <div className={styles.cover}>
+                    <a
+                      className={styles.cover}
+                      href={entry.source.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`查看${entry.title}的${entry.source.label}资料（将在新标签页打开）`}
+                    >
                       <Image
                         src={sitePath(entry.image)}
                         alt={`${entry.title} 的动画封面`}
@@ -192,7 +198,7 @@ export function AnimeCatalog() {
                       <span className={styles.cardIndex} aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                    </div>
+                    </a>
 
                     <div className={styles.cardBody}>
                       <div className={styles.cardMeta}>
@@ -200,16 +206,6 @@ export function AnimeCatalog() {
                         <span>{yearFor(entry)}</span>
                       </div>
                       <h3 id={titleId}>{entry.title}</h3>
-                      <a
-                        className={styles.sourceLink}
-                        href={entry.source.url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        查看 {entry.source.label} 资料
-                        <span aria-hidden="true">↗</span>
-                        <span className="sr-only">（将在新标签页打开）</span>
-                      </a>
                     </div>
                   </article>
                 </li>

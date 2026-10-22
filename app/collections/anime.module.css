@@ -214,6 +214,7 @@
 
 .cover {
   position: relative;
+  display: block;
   overflow: hidden;
   aspect-ratio: 2 / 3;
   border-bottom: 1px solid color-mix(in srgb, var(--card-accent) 18%, var(--border));
@@ -224,6 +225,11 @@
       transparent
     ),
     var(--surface-muted);
+}
+
+.cover:focus-visible {
+  outline: 3px solid var(--anime-violet);
+  outline-offset: -3px;
 }
 
 .cover::after {
@@ -266,7 +272,7 @@
 
 .cardBody {
   display: flex;
-  min-height: 158px;
+  min-height: 112px;
   flex-direction: column;
   padding: 16px 15px 17px;
   background:
@@ -299,35 +305,6 @@
   letter-spacing: -0.035em;
   line-height: 1.28;
   overflow-wrap: anywhere;
-}
-
-.sourceLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 18px;
-  color: color-mix(in srgb, var(--muted) 74%, var(--foreground));
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
-  font-weight: 760;
-  letter-spacing: 0.06em;
-}
-
-.sourceLink::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-}
-
-.sourceLink > span[aria-hidden="true"] {
-  color: var(--card-accent);
-  font-size: 15px;
-}
-
-.sourceLink:hover {
-  color: var(--foreground);
 }
 
 .sourceNotice {
@@ -493,7 +470,7 @@
   }
 
   .cardBody {
-    min-height: 148px;
+    min-height: 104px;
     padding: 14px 12px 16px;
   }
 
