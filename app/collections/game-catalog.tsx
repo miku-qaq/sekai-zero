@@ -49,7 +49,7 @@ export function GameCatalog() {
           onSubmit={(event) => event.preventDefault()}
         >
           <label className={catalogStyles.search}>
-            <span>搜索 Steam 收藏</span>
+            <span>搜索游戏</span>
             <span className={catalogStyles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
@@ -69,9 +69,8 @@ export function GameCatalog() {
 
         <div className={catalogStyles.resultLine}>
           <p role="status" aria-live="polite" aria-atomic="true">
-            已展示 <strong>{String(visibleGames.length).padStart(3, "0")}</strong> /
-            找到 {String(filteredGames.length).padStart(3, "0")} / 总计{" "}
-            {String(gameCatalog.length).padStart(3, "0")} 款
+            已显示 <strong>{visibleGames.length}</strong> / {filteredGames.length} 款
+            {query.trim() ? ` · 共 ${gameCatalog.length} 款` : null}
           </p>
           <span>点击封面，前往 Steam 商店 ↗</span>
         </div>
@@ -126,14 +125,14 @@ export function GameCatalog() {
 
           {remaining > 0 ? (
             <div className={catalogStyles.loadMore}>
-              <p>还有 {remaining} 款游戏尚未展开。</p>
+              <p>剩余 {remaining} 款</p>
               <div className={catalogStyles.loadMoreActions}>
                 <button
                   className="button button-primary"
                   type="button"
                   onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
                 >
-                  再展开 {Math.min(PAGE_SIZE, remaining)} 款
+                  展开 {Math.min(PAGE_SIZE, remaining)} 款
                 </button>
                 <button
                   className="button button-ghost"
@@ -148,9 +147,8 @@ export function GameCatalog() {
         </>
       ) : (
         <div className={catalogStyles.empty}>
-          <span aria-hidden="true">NO MATCHING GAME</span>
-          <h3>没有找到对应的游戏。</h3>
-          <p>检查一下名称，或恢复完整的 Steam 收藏。</p>
+          <h3>未找到游戏</h3>
+          <p>换个关键词试试。</p>
           <button className="button button-primary" type="button" onClick={resetSearch}>
             清除搜索
           </button>

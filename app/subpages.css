@@ -1869,7 +1869,7 @@
   }
 
   .world-route-card[data-layout="featured"] {
-    min-height: 340px;
+    min-height: 280px;
     grid-column: auto;
   }
 

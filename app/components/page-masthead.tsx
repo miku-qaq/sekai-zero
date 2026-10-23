@@ -81,7 +81,10 @@ export function PageMasthead({
         </div>
       )}
       {meta.length > 0 ? (
-        <dl className={`subpage-meta${reveal("reveal-four")}`}>
+        <dl
+          className={`subpage-meta${reveal("reveal-four")}`}
+          style={{ gridTemplateColumns: `repeat(${meta.length}, minmax(0, 1fr))` }}
+        >
           {meta.map((item) => (
             <div key={item.label}>
               <dt>{item.label}</dt>

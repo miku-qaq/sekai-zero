@@ -7,9 +7,8 @@ export const projectCaseStudy = {
   code: "CASE / 001",
   status: "ACTIVE · LONG-TERM BUILD",
   title: "SEKAI / 00",
-  subtitle: "把一个喜欢二次元的念头，做成可以长期维护的个人世界。",
-  summary:
-    "从一张首页慢慢长大，记录学习与兴趣。使用 React 与 TypeScript，持续更新到 Sites 和 GitHub Pages。",
+  subtitle: "从喜欢二次元，到拥有自己的小世界。",
+  summary: "从一张首页慢慢长大，把学习与收藏放在一起。",
   facts: [
     { label: "项目类型", value: "长期个人网站" },
     { label: "核心技术", value: "TypeScript / React" },
@@ -42,17 +41,17 @@ export const projectEvidence = [
 export const projectFeatures = [
   {
     code: "FEATURE / 01",
-    title: "清晰的多页面内容",
+    title: "各有一页",
     copy: "个人介绍、收藏、学习、导航与日志，各有自己的页面。",
   },
   {
     code: "FEATURE / 02",
-    title: "可检索的兴趣与学习",
+    title: "随时查找",
     copy: "收藏与笔记支持搜索、分类，也能直接分享笔记链接。",
   },
   {
     code: "FEATURE / 03",
-    title: "可参与的二次元主题",
+    title: "角色与配色",
     copy: "切换角色频道与配色，偏好保存在当前设备。",
   },
   {
@@ -64,18 +63,18 @@ export const projectFeatures = [
 
 export const projectDecisions = [
   {
-    question: "为什么先用 Git 管内容，而不是立即接 CMS？",
+    question: "为什么用 Git 管内容？",
     decision:
-      "当前内容规模仍适合强类型文件。它没有额外账号、数据库和编辑器维护成本，也能让每次内容变化跟随代码一起审查；当长篇笔记明显增多并需要独立文章能力时，再评估构建期 MDX。",
+      "当前规模适合用强类型文件保存内容，改动与代码一起记录。等长篇笔记增多，再考虑 MDX。",
   },
   {
-    question: "为什么不把所有组件都放到客户端？",
+    question: "哪些内容需要 JavaScript？",
     decision:
-      "只有确实依赖浏览器状态的交互才需要客户端 JavaScript。其余内容保持静态渲染，可以降低运行负担，并在脚本失败时仍然保留可读正文。",
+      "搜索、筛选和主题切换需要浏览器交互；正文保持静态，减少加载负担，脚本失效时也能阅读。",
   },
   {
-    question: "为什么同时保留 Worker 与静态 Pages？",
+    question: "为什么保留两种发布方式？",
     decision:
-      "Worker 为未来登录、数据和服务端能力保留空间；Pages 验证内容层和路由没有被平台绑死，也提供更简单的公开备用出口。两者共享源码，但发布适配层彼此隔离。",
+      "Worker 留出服务端扩展空间，GitHub Pages 提供静态访问入口。两者共用源码，各自构建。",
   },
 ] as const;

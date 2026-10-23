@@ -850,119 +850,6 @@ main {
 }
 
 /* --------------------------------------------------------------------------
-   Manga beat cards
-   -------------------------------------------------------------------------- */
-
-.manga-moments {
-  display: grid;
-  grid-template-columns: 1.15fr 0.9fr 1fr;
-  gap: 13px;
-  margin-top: clamp(38px, 5vw, 72px);
-}
-
-.manga-moment {
-  --panel-color: var(--accent);
-  position: relative;
-  display: flex;
-  overflow: hidden;
-  min-height: 238px;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px;
-  border: 2px solid var(--foreground);
-  border-radius: 3px;
-  background:
-    radial-gradient(circle at 1px 1px, rgb(20 24 33 / 16%) 1px, transparent 1.4px) 0 0 /
-      8px 8px,
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--panel-color) 9%, var(--surface)) 34%,
-      color-mix(in srgb, var(--panel-color) 34%, var(--surface))
-    );
-  box-shadow: 7px 7px 0 var(--foreground);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.manga-moment:nth-child(2) {
-  min-height: 270px;
-  transform: translateY(18px) rotate(0.8deg);
-}
-
-.manga-moment:hover {
-  box-shadow: 4px 4px 0 var(--foreground);
-  transform: translate(3px, 3px);
-}
-
-.manga-moment:nth-child(2):hover {
-  transform: translate(3px, 21px) rotate(0.2deg);
-}
-
-.manga-mint {
-  --panel-color: #20cdb6;
-}
-
-.manga-violet {
-  --panel-color: #9376f6;
-}
-
-.manga-pink {
-  --panel-color: #ff6fa7;
-}
-
-.manga-moment-meta {
-  position: absolute;
-  top: 16px;
-  right: 17px;
-  left: 17px;
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
-  font-weight: 760;
-  letter-spacing: 0.12em;
-}
-
-.manga-moment-motif {
-  position: absolute;
-  top: 40px;
-  right: 18px;
-  color: var(--panel-color);
-  font-size: clamp(72px, 9vw, 118px);
-  font-weight: 850;
-  line-height: 1;
-  opacity: 0.9;
-  text-shadow: 4px 4px 0 var(--foreground);
-  transform: rotate(7deg);
-}
-
-.manga-moment h3 {
-  position: relative;
-  z-index: 2;
-  max-width: 270px;
-  margin: 0;
-  padding: 11px 13px;
-  border: 2px solid var(--foreground);
-  background: var(--surface);
-  font-size: clamp(17px, 1.8vw, 23px);
-  letter-spacing: -0.035em;
-  line-height: 1.45;
-}
-
-.manga-sfx {
-  position: absolute;
-  top: 46px;
-  left: 18px;
-  color: var(--foreground);
-  font-size: clamp(24px, 3.2vw, 46px);
-  font-weight: 900;
-  letter-spacing: -0.1em;
-  writing-mode: vertical-rl;
-  transform: rotate(-7deg);
-}
-
-/* --------------------------------------------------------------------------
    Shared section typography
    -------------------------------------------------------------------------- */
 
@@ -2080,7 +1967,12 @@ main {
   }
 
   .section-pad {
-    padding-block: 72px;
+    padding-block: 56px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(32px, 9vw, 42px);
+    line-height: 1.12;
   }
 
   .header-cta {
@@ -2098,7 +1990,7 @@ main {
   }
 
   .hero h1 {
-    font-size: clamp(49px, 14vw, 64px);
+    font-size: clamp(40px, 12vw, 56px);
   }
 
   .hero-description br {
@@ -2157,7 +2049,7 @@ main {
 
   .horizontal-heading {
     display: block;
-    margin-bottom: 38px;
+    margin-bottom: 28px;
   }
 
   .horizontal-heading > p {
@@ -2167,22 +2059,6 @@ main {
   .principles-grid,
   .project-grid {
     grid-template-columns: 1fr;
-  }
-
-  .manga-moments {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-top: 40px;
-  }
-
-  .manga-moment,
-  .manga-moment:nth-child(2) {
-    min-height: 205px;
-    transform: none;
-  }
-
-  .manga-moment:nth-child(2):hover {
-    transform: translate(3px, 3px);
   }
 
   .gacha-machine {

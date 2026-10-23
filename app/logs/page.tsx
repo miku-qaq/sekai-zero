@@ -25,15 +25,14 @@ export default function LogsPage() {
       <HashDetailsController />
       <PageMasthead
         currentHref="/logs/"
-        title="网站怎样成长，都记录在这里。"
-        lead="记下 SEKAI / 00 的制作选择与每次更新。"
+        title="记录小世界的成长。"
+        lead="SEKAI / 00 的制作选择与更新。"
         meta={[
           {
             label: "收录话数",
             value: `${String(buildLogs.length).padStart(2, "0")} EPISODES`,
           },
           { label: "当前话", value: buildLogs[0].episode },
-          { label: "更新节奏", value: "随每次有效迭代" },
         ]}
       />
 
@@ -102,7 +101,7 @@ export default function LogsPage() {
         <div className="logs-decisions" aria-labelledby="project-decisions-title">
           <div>
             <p className="section-index">PROJECT DECISIONS</p>
-            <h3 id="project-decisions-title">影响长期维护的选择。</h3>
+            <h3 id="project-decisions-title">制作中的选择。</h3>
           </div>
           <div>
             {projectDecisions.map((item, index) => (
@@ -126,9 +125,8 @@ export default function LogsPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">02 / EPISODE INDEX</p>
-            <h2 id="logs-title">从最新世界线开始追更。</h2>
+            <h2 id="logs-title">更新记录</h2>
           </div>
-          <p>展开查看改动与取舍。</p>
         </div>
         <div className="logs-list">
           {buildLogs.map((log, index) => (

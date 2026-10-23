@@ -144,7 +144,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(homepage, new RegExp(`src="${basePath}/hero-anime-v3\\.webp"`));
   assert.match(homepage, /Mikureina/);
   assert.match(homepage, /南京大学 CS 在读/);
-  assert.match(homepage, /Stanford CS224N/);
+  assert.match(homepage, /CS224N/);
   assert.match(homepage, /我的三位二次元老婆/);
   assert.match(homepage, /初音未来/);
   assert.match(homepage, /伊蕾娜/);
@@ -236,8 +236,11 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(anime, new RegExp(`href="${basePath}/collections/games/"`));
   assert.match(anime, new RegExp(`href="${basePath}/collections/figures/"`));
   assert.match(anime, new RegExp(`href="${basePath}/collections/fufu/"`));
-  assert.match(anime, /已展示 <strong>24<\/strong>/);
-  assert.match(anime, /还有 (?:<!-- -->)?65(?:<!-- -->)? 部动画尚未展开/);
+  assert.match(
+    anime.replaceAll("<!-- -->", ""),
+    /已显示 <strong>24<\/strong> \/ 89 部/,
+  );
+  assert.match(anime, /剩余 (?:<!-- -->)?65(?:<!-- -->)? 部/);
   assert.match(anime, /灵笼 上半季/);
   assert.match(anime, /魔女之旅/);
   assert.match(anime, /樱花庄的宠物女孩/);
@@ -437,7 +440,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
-  assert.match(logs, /记下 SEKAI \/ 00 的制作选择与每次更新/);
+  assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
   assert.match(logs, /18 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);

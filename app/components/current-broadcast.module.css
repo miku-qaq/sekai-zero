@@ -256,12 +256,12 @@
   }
 
   .episodePanel {
-    min-height: 330px;
+    min-height: 260px;
   }
 
   .episodeNumber {
     right: 18px;
-    font-size: clamp(96px, 32vw, 145px);
+    font-size: clamp(90px, 28vw, 128px);
   }
 
   .episodeCopy p {

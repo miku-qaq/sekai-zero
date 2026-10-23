@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { currentBroadcast } from "@/content/now";
 import { publicProfile } from "@/content/profile";
-import { homepageFacts } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import { CurrentBroadcast } from "./components/current-broadcast";
 import { DimensionalGacha } from "./components/dimensional-gacha";
@@ -39,7 +38,7 @@ export default function Home() {
               className="button button-primary"
               href={sitePath("/study/#cs224n-nlp-word-vectors")}
             >
-              继续当前学习
+              阅读笔记
               <span aria-hidden="true">↘</span>
             </a>
             <a className="button button-ghost" href={sitePath("/about/")}>
@@ -119,27 +118,6 @@ export default function Home() {
         </div>
       </div>
 
-      <section
-        className="manga-moments section-shell"
-        aria-label="Mikureina 的三条个人信息"
-      >
-        {homepageFacts.map((moment) => (
-          <article className={`manga-moment manga-${moment.tone}`} key={moment.index}>
-            <div className="manga-moment-meta">
-              <span>FRAME {moment.index}</span>
-              <span>{moment.label}</span>
-            </div>
-            <span className="manga-moment-motif" aria-hidden="true">
-              {moment.motif}
-            </span>
-            <h3>{moment.copy}</h3>
-            <span className="manga-sfx" lang="ja" aria-hidden="true">
-              {moment.soundEffect}
-            </span>
-          </article>
-        ))}
-      </section>
-
       <CurrentBroadcast />
 
       <WorldMap />
@@ -153,7 +131,7 @@ export default function Home() {
           <div className="section-heading favorites-heading">
             <p className="section-index">03 / FAVORITE FREQUENCIES</p>
             <h2 id="favorites-title">我的三位二次元老婆</h2>
-            <p>初音未来、伊蕾娜、波奇，各自接通一条喜欢的频道。</p>
+            <p>音乐、远行与摇滚，三种喜欢。</p>
           </div>
           <FavoriteChannels />
         </div>
@@ -169,7 +147,7 @@ export default function Home() {
             <p className="section-index">BONUS TRACK / DIMENSIONAL GACHA</p>
             <h2 id="gacha-title">抽一张今天的次元签。</h2>
           </div>
-          <p>灵感来自音乐、远行与摇滚。原创小签，非角色台词。</p>
+          <p>来自音乐、远行与摇滚的原创小签。</p>
         </div>
         <DimensionalGacha />
       </section>
@@ -186,7 +164,7 @@ export default function Home() {
             className="button button-primary"
             href={sitePath("/study/#cs224n-nlp-word-vectors")}
           >
-            阅读当前笔记 <span aria-hidden="true">↗</span>
+            阅读笔记 <span aria-hidden="true">↗</span>
           </a>
           <a className="button button-ghost" href={sitePath("/about/#contact")}>
             联系我

@@ -32,15 +32,14 @@ export default function StudyPage() {
     <main id="main-content" className={`subpage-main ${styles.studyPage}`}>
       <PageMasthead
         currentHref="/study/"
-        title="把学到的东西，整理成可以返回的地图。"
-        lead="自学 CS224N，回顾 CS231n。用例子、实验与回忆题，记下自己的理解。"
+        title="把所学，记成自己的理解。"
+        lead="自学 CS224N，回顾 CS231n。用例子与实验，把概念想明白。"
         meta={[
           {
             label: "当前笔记",
             value: `${String(studyNotes.length).padStart(2, "0")} ENTRIES`,
           },
           { label: "当前主线", value: "Stanford CS224N / NLP" },
-          { label: "更新方式", value: "自学中 / 理解后再整理" },
         ]}
       />
 
@@ -51,7 +50,6 @@ export default function StudyPage() {
               <p className="section-index">01 / STUDY NOTES</p>
               <h2 id="archive-title">学习笔记</h2>
             </div>
-            <p>解释、例子、回忆题与来源，都在笔记里。</p>
           </div>
           <StudyNotebook />
         </div>

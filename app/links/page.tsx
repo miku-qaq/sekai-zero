@@ -18,8 +18,8 @@ export default function LinksPage() {
     <main id="main-content" className="subpage-main navigation-page">
       <PageMasthead
         currentHref="/links/"
-        title="我愿意再次打开的入口。"
-        lead="娱乐、购物与学习，我常去的地方都在这里。"
+        title="常去的地方。"
+        lead="娱乐、购物与学习，随时回来逛逛。"
         meta={[
           {
             label: "已收录",
@@ -29,7 +29,6 @@ export default function LinksPage() {
             label: "分类整理",
             value: `${String(linkCategories.length).padStart(2, "0")} 个分区`,
           },
-          { label: "可以使用", value: "分类 / 搜索 / 随机推荐" },
         ]}
       />
 
@@ -40,7 +39,7 @@ export default function LinksPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">01 / NAVIGATION TERMINAL</p>
-            <h2 id="route-title">常用网站，分门别类。</h2>
+            <h2 id="route-title">常用网站</h2>
           </div>
         </div>
         <LinkTerminal />

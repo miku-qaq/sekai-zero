@@ -95,37 +95,6 @@ export const siteConfig = {
 } as const;
 
 /**
- * Three compact manga beats used directly below the hero. They establish the
- * site's anime language before visitors reach the more detailed collection.
- */
-export const homepageFacts = [
-  {
-    index: "01",
-    label: "NJU / CS",
-    soundEffect: "学ぶ",
-    motif: "{ }",
-    copy: "南京大学 CS 在读，边学边做。",
-    tone: "mint",
-  },
-  {
-    index: "02",
-    label: "CURRENT / NLP",
-    soundEffect: "進行中",
-    motif: "NLP",
-    copy: "自学 CS224N，从词向量开始。",
-    tone: "violet",
-  },
-  {
-    index: "03",
-    label: "WONDER / COLLECTION",
-    soundEffect: "好き",
-    motif: "✦",
-    copy: "喜欢动漫与游戏，也喜欢把热爱收藏起来。",
-    tone: "pink",
-  },
-] as const;
-
-/**
  * Expandable card pool for the dimensional gacha. These are original prompts
  * inspired by the emotional qualities the owner enjoys in three characters;
  * they are not quotations from the source works.

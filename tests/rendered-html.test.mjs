@@ -75,9 +75,9 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
   assert.match(html, /你好，我是[^]*?Mikureina/);
   assert.match(html, /南京大学 · CS 在读/);
-  assert.match(html, /Stanford CS224N · Word Vectors/);
+  assert.match(html, /CS224N · 词向量/);
   assert.match(html, /Nintendo Switch · Steam/);
-  assert.match(html, /哔哩哔哩 · Bilibili/);
+  assert.match(html, /哔哩哔哩/);
   assert.match(html, /href="\/study\/#cs224n-nlp-word-vectors"/);
   assert.match(html, /href="\/links\/#route-bilibili"/);
   assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v5\.jpg/);
@@ -137,19 +137,19 @@ test("server-renders the five canonical top-level routes with clear purposes", a
     {
       pathname: "/study",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
-      copy: /把学到的东西，整理成可以返回的地图/,
+      copy: /把所学，记成自己的理解/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>学习笔记<\/span>/,
     },
     {
       pathname: "/links",
       title: /<title>导航终端 · SEKAI<\/title>/i,
-      copy: /我愿意再次打开的入口/,
+      copy: /常去的地方/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>导航终端<\/span>/,
     },
     {
       pathname: "/logs",
       title: /<title>世界线日志 · SEKAI<\/title>/i,
-      copy: /网站怎样成长，都记录在这里/,
+      copy: /记录小世界的成长/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>日志<\/span>/,
     },
   ];
@@ -245,7 +245,7 @@ test("keeps the former projects URL as a Logs compatibility page", async () => {
   assert.match(html, /id="ep-012"/);
   assert.match(html, /id="ep-011"/);
   assert.match(html, /id="ep-010"/);
-  assert.match(html, /网站怎样成长，都记录在这里/);
+  assert.match(html, /记录小世界的成长/);
   assert.doesNotMatch(html, />制作档案</);
 });
 
@@ -285,7 +285,7 @@ test("publishes the project overview and complete release history only in Logs",
 
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
-  assert.match(logs, /记下 SEKAI \/ 00 的制作选择与每次更新/);
+  assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
   assert.match(logs, /18 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
@@ -432,8 +432,8 @@ test("publishes all 89 watched anime while initially rendering only 24 cards", a
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /href="\/collections\/controllers\/"/);
-  assert.match(html, /已展示 <strong>24<\/strong>/);
-  assert.match(html, /还有 (?:<!-- -->)?65(?:<!-- -->)? 部动画尚未展开/);
+  assert.match(html.replaceAll("<!-- -->", ""), /已显示 <strong>24<\/strong> \/ 89 部/);
+  assert.match(html, /剩余 (?:<!-- -->)?65(?:<!-- -->)? 部/);
   assert.match(html, /灵笼 上半季/);
   assert.match(html, /魔女之旅/);
   assert.match(html, /樱花庄的宠物女孩/);
@@ -766,7 +766,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     readFile(new URL("../vite.config.ts", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /from "@\/content\/site"/);
   assert.match(siteContent, /export const worldRoutes/);
   assert.match(siteContent, /href: "\/about\/"/);
   assert.match(siteContent, /href: "\/collections\/"/);
@@ -774,7 +773,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(siteContent, /href: "\/links\/"/);
   assert.match(siteContent, /href: "\/logs\/"/);
   assert.doesNotMatch(siteContent, /href: "\/(?:anime|games|projects)\/"/);
-  assert.match(siteContent, /homepageFacts/);
   assert.match(siteContent, /favoriteChannels/);
   assert.match(siteContent, /dimensionalFortunes/);
   assert.match(siteContent, /href: "\/logs\/#project-overview"/);

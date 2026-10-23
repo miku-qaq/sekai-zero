@@ -115,20 +115,20 @@ export function AnimeCatalog() {
           onSubmit={(event) => event.preventDefault()}
         >
           <label className={catalogStyles.search}>
-            <span>搜索收藏</span>
+            <span>搜索动画</span>
             <span className={catalogStyles.searchField}>
               <i aria-hidden="true">⌕</i>
               <input
                 type="search"
                 value={query}
                 onChange={(event) => updateQuery(event.target.value)}
-                placeholder="搜索正式作品名"
+                placeholder="输入动画名称"
               />
             </span>
           </label>
 
           <label className={catalogStyles.selectField}>
-            <span>作品类型</span>
+            <span>类型</span>
             <select
               value={format}
               onChange={(event) => updateFormat(event.target.value)}
@@ -143,7 +143,7 @@ export function AnimeCatalog() {
           </label>
 
           <label className={catalogStyles.selectField}>
-            <span>作品年份</span>
+            <span>年份</span>
             <select value={year} onChange={(event) => updateYear(event.target.value)}>
               <option value={ALL}>全部年份</option>
               {years.map((item) => (
@@ -167,9 +167,8 @@ export function AnimeCatalog() {
 
         <div className={catalogStyles.resultLine}>
           <p role="status" aria-live="polite" aria-atomic="true">
-            已展示 <strong>{String(displayedEntries.length).padStart(2, "0")}</strong> /
-            找到 {String(visibleEntries.length).padStart(2, "0")} / 总计{" "}
-            {String(entries.length).padStart(2, "0")} 部
+            已显示 <strong>{displayedEntries.length}</strong> / {visibleEntries.length}{" "}
+            部{hasActiveFilters ? ` · 共 ${entries.length} 部` : null}
           </p>
           <span>点击封面，打开作品资料 ↗</span>
         </div>
@@ -219,14 +218,14 @@ export function AnimeCatalog() {
           </ol>
           {remaining > 0 ? (
             <div className={catalogStyles.loadMore}>
-              <p>还有 {remaining} 部动画尚未展开。</p>
+              <p>剩余 {remaining} 部</p>
               <div className={catalogStyles.loadMoreActions}>
                 <button
                   className="button button-primary"
                   type="button"
                   onClick={() => setVisibleLimit((limit) => limit + PAGE_SIZE)}
                 >
-                  再展开 {Math.min(PAGE_SIZE, remaining)} 部
+                  展开 {Math.min(PAGE_SIZE, remaining)} 部
                 </button>
                 <button
                   className="button button-ghost"
@@ -241,15 +240,14 @@ export function AnimeCatalog() {
         </>
       ) : (
         <div className={catalogStyles.empty}>
-          <span aria-hidden="true">NO MATCHING ANIME</span>
-          <h3>这组条件下还没有作品。</h3>
-          <p>换个关键词或年份试试，也可以恢复完整收藏墙。</p>
+          <h3>未找到动画</h3>
+          <p>换个关键词或筛选条件试试。</p>
           <button
             className="button button-primary"
             type="button"
             onClick={resetFilters}
           >
-            清除全部筛选
+            清除筛选
           </button>
         </div>
       )}

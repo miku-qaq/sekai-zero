@@ -99,7 +99,6 @@ export default function CollectionsFufuPage() {
                   unoptimized
                 />
               </a>
-              <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
             </figure>
             <div className={styles.largeCopy}>
               <span>THE BIG ONE / MIKU FUFU</span>
@@ -150,7 +149,6 @@ export default function CollectionsFufuPage() {
                         unoptimized
                       />
                     </a>
-                    <figcaption>SEGA 官方商品图 · 非本人实拍</figcaption>
                   </figure>
                   <div className={styles.fufuBody}>
                     <p>ZODIAC / {entry.zodiac}</p>
