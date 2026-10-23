@@ -28,7 +28,7 @@ export default function CollectionsControllersPage() {
         subpageLabel="手柄收藏"
         animate={false}
         title="把冒险，握在手里。"
-        lead="从 Xbox 的碳黑，到两代 Switch Pro，再到八重神子的樱粉。游戏之外，也收藏通往那些世界的手柄。"
+        lead="从 Xbox 的碳黑，到八重神子的樱粉，都是喜欢的手感。"
         meta={[
           {
             label: "收藏手柄",
@@ -51,9 +51,9 @@ export default function CollectionsControllersPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 05 / CONTROLLER COLLECTION</p>
-            <h2 id="controller-archive-title">不同的手感，同一份喜欢。</h2>
+            <h2 id="controller-archive-title">手柄图鉴</h2>
           </div>
-          <p>日常款与角色联名，一起留在这个小小展柜里。点击图片可以放大查看。</p>
+          <p>点击图片查看大图。</p>
         </div>
         <CollectionNavigation current="controllers" />
         <p className={styles.imageNote}>商品展示图 · 非本人实拍</p>

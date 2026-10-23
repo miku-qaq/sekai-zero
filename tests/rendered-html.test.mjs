@@ -280,7 +280,7 @@ test("publishes the project overview and complete release history only in Logs",
 
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
-  assert.match(logs, /原“制作档案”已并入日志/);
+  assert.match(logs, /记下 SEKAI \/ 00 的制作选择与每次更新/);
   assert.match(logs, /18 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
@@ -341,7 +341,8 @@ test("publishes the categorized directory with all confirmed destinations", asyn
     /href="https:\/\/www\.nintendo\.com\/hk\/hardware\/switch\/index\.html"/,
   );
   assert.match(links, /Nintendo Switch 官方网站/);
-  assert.match(links, /Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台/);
+  assert.match(links, /我最喜欢的游戏平台之一/);
+  assert.match(links, /和 Steam 并列的最爱/);
   assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /id="route-cs231n-course"/);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
@@ -386,12 +387,12 @@ test("keeps the Wonder Collection hub concise while linking all five rooms", asy
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /href="\/collections\/controllers\/"/);
-  assert.match(html, /从虎生肖开始/);
+  assert.match(html, /寅 2022 到 午 2026/);
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /16 件/);
   assert.match(visibleHtml, /6 只毛绒/);
-  assert.match(html, /89(?:<!-- -->)? 部已经看过的动画/);
-  assert.match(html, /146(?:<!-- -->)? 款真实 Steam 游玩记录/);
+  assert.match(visibleHtml, /89 部已看/);
+  assert.match(visibleHtml, /146 款记录/);
 
   // The hub is an overview, not a duplicate rendering of the full archives.
   assert.equal(html.match(/src="\/anime\/[^"]+\.webp"/g)?.length, 4);
@@ -461,9 +462,9 @@ test("publishes 146 played Steam games while keeping private activity data local
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /href="\/collections\/controllers\/"/);
-  assert.match(html, /实际游玩记录/);
+  assert.match(html, /我的 Steam 游玩记录/);
   assert.match(html, /玩过 \/ 不排名/);
-  assert.match(html, /只留下适合公开的收藏信息/);
+  assert.match(html, /游戏名称与封面版权归各自权利方所有/);
   assert.match(html, /Nintendo Switch 收藏待补充/);
   assert.match(html, /正在整理中/);
   assert.match(html, /https:\/\/store\.steampowered\.com\/app\//);

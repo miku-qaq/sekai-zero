@@ -32,7 +32,7 @@ export default function Home() {
         <div className="hero-details">
           <p className="hero-description reveal reveal-three">
             {publicProfile.academicStatus}，喜欢{publicProfile.interests.join("和")}
-            。这里收录我的计算机学习笔记、 兴趣收藏，以及想长期保存的生活与思考。
+            。在这里记下所学，也收藏喜欢。
           </p>
           <div className="hero-actions reveal reveal-four">
             <a
@@ -152,14 +152,8 @@ export default function Home() {
         <div className="section-shell favorites-layout">
           <div className="section-heading favorites-heading">
             <p className="section-index">03 / FAVORITE FREQUENCIES</p>
-            <h2 id="favorites-title">
-              我的三位二次元老婆
-              <br />
-              各自接通一条频道。
-            </h2>
-            <p>
-              初音未来、伊蕾娜和波奇是我最喜欢的三个角色。本站用薄荷音符、雾紫星轨与樱粉节拍，为她们设计了三个原创主题频道。
-            </p>
+            <h2 id="favorites-title">我的三位二次元老婆</h2>
+            <p>初音未来、伊蕾娜、波奇，各自接通一条喜欢的频道。</p>
           </div>
           <FavoriteChannels />
         </div>
@@ -175,9 +169,7 @@ export default function Home() {
             <p className="section-index">BONUS TRACK / DIMENSIONAL GACHA</p>
             <h2 id="gacha-title">抽一张今天的次元签。</h2>
           </div>
-          <p>
-            不是角色原台词，而是从音乐、远行与摇滚精神延伸出的原创小签；给今天一个轻松但可以执行的开场。
-          </p>
+          <p>灵感来自音乐、远行与摇滚。原创小签，非角色台词。</p>
         </div>
         <DimensionalGacha />
       </section>
@@ -188,7 +180,7 @@ export default function Home() {
           <span className="status-dot" /> THANKS FOR VISITING
         </p>
         <h2 id="finale-title">谢谢你逛到这里。</h2>
-        <p>想继续了解我，可以阅读当前 CS224N 学习笔记，或在关于页面找到联系邮箱。</p>
+        <p>读一篇笔记，或来打个招呼。</p>
         <div className="finale-actions">
           <a
             className="button button-primary"

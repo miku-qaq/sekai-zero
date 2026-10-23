@@ -122,12 +122,12 @@ const firstZodiacFufu = zodiacFufu.at(0);
 const latestZodiacFufu = zodiacFufu.at(-1);
 const collectionRangeSummary =
   firstZodiacFufu && latestZodiacFufu
-    ? `从${firstZodiacFufu.zodiac} ${firstZodiacFufu.year} 生肖款开始连续收藏到 ${latestZodiacFufu.zodiac} ${latestZodiacFufu.year}`
+    ? `从${firstZodiacFufu.zodiac} ${firstZodiacFufu.year} 收藏到 ${latestZodiacFufu.zodiac} ${latestZodiacFufu.year}`
     : "生肖收藏时间线仍待补充";
 
 export const fufuCollectionMeta = {
   title: "Mikureina 的 Fufu 毛绒收藏",
-  summary: `我的初音未来 Fufu 毛绒：${collectionRangeSummary}，还有一只大 Fufu，组成软乎乎的收藏小队。`,
+  summary: `${collectionRangeSummary}，还有一只大 Fufu。`,
   sourceLabel: "本人确认的收藏范围与 SEGA 商品资料",
   rightsNote:
     "Fufu 是本站使用的收藏称呼；商品卡保留 SEGA 公布的正式名称。角色与商品形象版权归各自权利方所有，本站仅作非商业性的个人收藏记录。",

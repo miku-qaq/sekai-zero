@@ -20,7 +20,7 @@ export default function AboutPage() {
       <PageMasthead
         currentHref="/about/"
         title="你好，我是 Mikureina。"
-        lead="南京大学 CS 在读。平时喜欢动漫和游戏，也在这里记录计算机学习、兴趣收藏与一座长期生长的个人次元站。"
+        lead="南京大学 CS 在读，喜欢动漫和游戏，也喜欢把所学与热爱记下来。"
         meta={[
           { label: "CN 名", value: publicProfile.handle },
           { label: "当前状态", value: publicProfile.academicStatus },
@@ -34,10 +34,7 @@ export default function AboutPage() {
       >
         <div className="section-heading profile-heading">
           <p className="section-index">01 / ABOUT ME</p>
-          <h2 id="profile-title">先从这些小事认识我。</h2>
-          <p>
-            这里整理我的学习状态、兴趣、常玩平台和联系方式，方便第一次来访的人快速了解我。
-          </p>
+          <h2 id="profile-title">我的小档案</h2>
         </div>
         <div className="profile-sheet">
           <article className="profile-id-card" aria-labelledby="profile-handle">
@@ -85,7 +82,7 @@ export default function AboutPage() {
                   ) : (
                     <strong>{fact.value}</strong>
                   )}
-                  <span>{fact.note}</span>
+                  {fact.note ? <span>{fact.note}</span> : null}
                 </dd>
               </div>
             ))}
@@ -104,7 +101,7 @@ export default function AboutPage() {
               <p className="section-index">02 / INFLUENCE SIGNALS</p>
               <h2 id="influence-title">我喜欢的三个角色频道。</h2>
             </div>
-            <p>角色姓名表达个人喜好；配色、图形与介绍文案均由本站原创设计。</p>
+            <p>音乐、远行与摇滚，是这个小世界的三种颜色。</p>
           </div>
           <div className="influence-grid">
             {influenceSignals.map((signal) => (
@@ -134,7 +131,7 @@ export default function AboutPage() {
       >
         <div className="section-heading">
           <p className="section-index">03 / DIALOGUE OPTIONS</p>
-          <h2 id="dialogue-title">想继续了解的话，选一句对白。</h2>
+          <h2 id="dialogue-title">再聊几句。</h2>
         </div>
         <div className="dialogue-list">
           {profileQuestions.map((item, index) => (

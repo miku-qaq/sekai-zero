@@ -38,5 +38,5 @@ export const gameCatalogMeta = {
 
 export const switchCollectionPlaceholder = {
   title: "Nintendo Switch 收藏待补充",
-  copy: "Nintendo Switch 是我的常玩平台之一；具体游戏会在我确认清单后逐项加入，不根据热度或猜测代填。",
+  copy: "游戏清单整理中。",
 } as const;

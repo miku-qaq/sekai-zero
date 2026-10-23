@@ -58,9 +58,8 @@ export default function CollectionsFiguresPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 03 / FIGURE COLLECTION</p>
-            <h2 id="figure-archive-title">每一件喜欢，都有具体的模样。</h2>
+            <h2 id="figure-archive-title">手办图鉴</h2>
           </div>
-          <p>点击图片看清细节，也可以按角色、作品、款式或厂商寻找收藏。</p>
         </div>
 
         <CollectionNavigation current="figures" />

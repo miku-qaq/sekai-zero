@@ -216,7 +216,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(collections, new RegExp(`href="${basePath}/collections/games/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/figures/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/fufu/"`));
-  assert.match(collections, /从虎生肖开始/);
+  assert.match(collections, /寅 2022 到 午 2026/);
   const visibleCollections = collections.replaceAll("<!-- -->", "");
   assert.match(visibleCollections, /16 件/);
   assert.match(visibleCollections, /6 只毛绒/);
@@ -256,7 +256,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(games, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(games, new RegExp(`href="${basePath}/collections/figures/"`));
   assert.match(games, new RegExp(`href="${basePath}/collections/fufu/"`));
-  assert.match(games, /实际游玩记录/);
+  assert.match(games, /我的 Steam 游玩记录/);
   assert.match(games, /玩过 \/ 不排名/);
   assert.match(games, /Nintendo Switch 收藏待补充/);
   assert.match(games, /正在整理中/);
@@ -421,7 +421,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     /href="https:\/\/www\.nintendo\.com\/hk\/hardware\/switch\/index\.html"/,
   );
   assert.match(links, /Nintendo Switch 官方网站/);
-  assert.match(links, /Steam 与 Nintendo Switch（NS）是我最喜欢的两个游戏平台/);
+  assert.match(links, /我最喜欢的游戏平台之一/);
   assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
   assert.match(links, /id="terminal-category-shopping"/);
@@ -437,7 +437,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
-  assert.match(logs, /原“制作档案”已并入日志/);
+  assert.match(logs, /记下 SEKAI \/ 00 的制作选择与每次更新/);
   assert.match(logs, /18 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);

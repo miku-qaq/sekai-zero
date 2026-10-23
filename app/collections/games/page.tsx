@@ -36,7 +36,7 @@ export default function CollectionsGamesPage() {
         animate={false}
         subpageLabel="游戏展柜"
         title="玩过的世界，也值得收藏。"
-        lead="这里整理我在 Steam 留下实际游玩记录的作品。从封面里认出熟悉的世界，也把下一次想重温的旅程找回来。"
+        lead="我的 Steam 游玩记录，总有一段想重温的旅程。"
         meta={[
           {
             label: "Steam 记录",
@@ -54,9 +54,8 @@ export default function CollectionsGamesPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 02 / PLAYED GAMES</p>
-            <h2 id="game-archive-title">从游戏库里找回旅程。</h2>
+            <h2 id="game-archive-title">Steam 游戏库</h2>
           </div>
-          <p>按游戏名搜索，或从封面重逢熟悉的世界。点击封面可以前往 Steam 商店。</p>
         </div>
 
         <CollectionNavigation current="games" />
@@ -86,7 +85,6 @@ export default function CollectionsGamesPage() {
 
         <CollectionCredit label="游戏资料与封面来源" source="Steam">
           <p>{gameCatalogMeta.rightsNote}</p>
-          <p>只留下适合公开的收藏信息：作品名称、封面和商店链接。</p>
           <a href={gameCatalogMeta.sourceUrl} target="_blank" rel="noreferrer">
             打开 Steam 商店 ↗<span className="sr-only">（将在新标签页打开）</span>
           </a>

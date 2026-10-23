@@ -27,8 +27,7 @@ export const animeCatalog = catalog as readonly AnimeCatalogEntry[];
 
 export const animeCatalogMeta = {
   title: "Mikureina 的动画展柜",
-  description:
-    "按我看过的动画清单整理，共收录 89 部作品。这里不是评分榜，每个名称只对应一条观看记录；多季作品暂不拆分季度。",
+  description: "我的已看动画清单。多季作品暂不拆分，不做评分。",
   updatedAt: "2026.08.26",
   sourceLabel: "封面与作品资料索引来自 Bangumi",
   sourceUrl: "https://bgm.tv/",

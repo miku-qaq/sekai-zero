@@ -17,12 +17,6 @@ export function CurrentBroadcast() {
         </div>
         <div className={styles.intro}>
           <p>{currentBroadcast.summary}</p>
-          <p className={styles.updated}>
-            LAST VERIFIED /{" "}
-            <time dateTime={currentBroadcast.updatedAt.replaceAll(".", "-")}>
-              {currentBroadcast.updatedAt}
-            </time>
-          </p>
         </div>
       </div>
 
@@ -31,7 +25,10 @@ export function CurrentBroadcast() {
           <div className={styles.episodeTopline}>
             <span>{currentBroadcast.panel.eyebrow}</span>
             <span>
-              <i aria-hidden="true" /> UPDATED {currentBroadcast.updatedAt}
+              <i aria-hidden="true" /> 更新于{" "}
+              <time dateTime={currentBroadcast.updatedAt.replaceAll(".", "-")}>
+                {currentBroadcast.updatedAt}
+              </time>
             </span>
           </div>
           <span className={styles.episodeNumber} aria-hidden="true">

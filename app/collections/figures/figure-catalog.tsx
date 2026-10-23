@@ -132,7 +132,7 @@ export function FigureCatalog() {
             当前展示 <strong>{String(visibleEntries.length).padStart(2, "0")}</strong> /
             总计 {String(figureCollection.length).padStart(2, "0")} 件
           </p>
-          <span>点击图片，查看收藏细节</span>
+          <span>点击图片查看大图</span>
         </div>
       </div>
 

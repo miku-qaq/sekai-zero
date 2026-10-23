@@ -61,7 +61,7 @@ const yearSpan =
 
 const archiveLead =
   metaText("description", "summary", "note") ??
-  "这是我的已看动画收藏。可以按正式作品名、类型和年份寻找作品；这里只记录看过的作品，不用分数替喜好排队。";
+  "我的已看动画清单。只记录喜欢，不做评分。";
 
 export default function CollectionsAnimePage() {
   return (
@@ -89,9 +89,8 @@ export default function CollectionsAnimePage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 01 / WATCHED ANIME</p>
-            <h2 id="anime-archive-title">从封面里找回一段故事。</h2>
+            <h2 id="anime-archive-title">已看动画</h2>
           </div>
-          <p>按作品名、类型或年份，找回熟悉的故事。点击封面就能打开作品资料。</p>
         </div>
 
         <CollectionNavigation current="anime" />

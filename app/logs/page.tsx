@@ -26,7 +26,7 @@ export default function LogsPage() {
       <PageMasthead
         currentHref="/logs/"
         title="网站怎样成长，都记录在这里。"
-        lead="这里集中收录 SEKAI / 00 的项目说明、制作选择与每次有效更新。首页负责让访客认识我，工程细节只在这条世界线展开。"
+        lead="记下 SEKAI / 00 的制作选择与每次更新。"
         meta={[
           {
             label: "收录话数",
@@ -47,9 +47,6 @@ export default function LogsPage() {
             <p className="section-index">01 / PROJECT OVERVIEW</p>
             <h2 id="project-overview-title">关于 SEKAI / 00 的制作记录。</h2>
           </div>
-          <p>
-            原“制作档案”已并入日志。这里保留项目目标、现有能力与关键取舍，完整变化按话数继续向下追更。
-          </p>
         </div>
 
         <article className="logs-project-card">
@@ -131,7 +128,7 @@ export default function LogsPage() {
             <p className="section-index">02 / EPISODE INDEX</p>
             <h2 id="logs-title">从最新世界线开始追更。</h2>
           </div>
-          <p>展开任意一条记录，可以查看改动摘要与当时的主要取舍。</p>
+          <p>展开查看改动与取舍。</p>
         </div>
         <div className="logs-list">
           {buildLogs.map((log, index) => (

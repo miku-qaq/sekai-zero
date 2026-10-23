@@ -19,7 +19,7 @@ export default function LinksPage() {
       <PageMasthead
         currentHref="/links/"
         title="我愿意再次打开的入口。"
-        lead="看视频、逛社区、找手办、挑东西，或是继续今天的学习。把常用的网站分门别类，想去哪里，都从这里出发。"
+        lead="娱乐、购物与学习，我常去的地方都在这里。"
         meta={[
           {
             label: "已收录",
@@ -42,7 +42,6 @@ export default function LinksPage() {
             <p className="section-index">01 / NAVIGATION TERMINAL</p>
             <h2 id="route-title">常用网站，分门别类。</h2>
           </div>
-          <p>常用网站按用途归位。选择分类、搜索名字，或让随机推荐带来一点灵感。</p>
         </div>
         <LinkTerminal />
       </section>

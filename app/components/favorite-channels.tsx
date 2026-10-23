@@ -140,8 +140,7 @@ export function FavoriteChannels() {
         })}
       </div>
       <p className="channel-hint">
-        <span aria-hidden="true">↳</span>{" "}
-        点击角色卡会切换整站信号色，也会接通一条真实的站内节目。
+        <span aria-hidden="true">↳</span> 点选角色，切换主题色与频道。
       </p>
     </div>
   );

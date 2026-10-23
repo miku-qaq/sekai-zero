@@ -20,7 +20,6 @@ const zodiacRange =
   firstZodiac && latestZodiac
     ? `${firstZodiac.zodiac} ${firstZodiac.year} → ${latestZodiac.zodiac} ${latestZodiac.year}`
     : "等待生肖记录";
-const zodiacLabels = zodiacFufu.map((entry) => entry.zodiac).join("、");
 const description = `Mikureina 的 Fufu 毛绒收藏：大 Fufu 与 ${zodiacRange} 的 ${zodiacFufu.length} 只初音未来生肖 Fufu。`;
 
 export const metadata: Metadata = {
@@ -60,20 +59,14 @@ export default function CollectionsFufuPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">ROOM 04 / FUFU PLUSH COLLECTION</p>
-            <h2 id="fufu-archive-title">一只大 Fufu，与每年延续的生肖队列。</h2>
+            <h2 id="fufu-archive-title">Fufu 小队</h2>
           </div>
-          <p>
-            大个子的毛绒伙伴，和每年不同的生肖装扮。这里保留它们各自的正式名字与模样。
-          </p>
         </div>
 
         <CollectionNavigation current="fufu" />
 
         <div className={styles.timeline}>
-          <p>
-            从虎年开始，{zodiacLabels}串起{zodiacFufu.length}
-            年的生肖收藏。选一个年份，直接去看它。
-          </p>
+          <p>跳到喜欢的年份</p>
           <nav className={styles.zodiacRibbon} aria-label="生肖收藏顺序">
             {zodiacFufu.map((entry) => (
               <a key={entry.id} href={`#${entry.id}`} data-tone={entry.tone}>
@@ -111,9 +104,7 @@ export default function CollectionsFufuPage() {
             <div className={styles.largeCopy}>
               <span>THE BIG ONE / MIKU FUFU</span>
               <h3 id={`${largeFufu.id}-title`}>{largeFufu.title}</h3>
-              <p>
-                毛绒小队里的大个子，和每年的生肖伙伴一起，组成我的初音未来 Fufu 收藏。
-              </p>
+              <p>毛绒小队里的大个子。</p>
             </div>
           </article>
         ) : null}
@@ -123,10 +114,6 @@ export default function CollectionsFufuPage() {
             <span>ANNUAL LINEUP / {String(zodiacFufu.length).padStart(2, "0")}</span>
             <h3>生肖 Fufu 时间线</h3>
           </div>
-          <p>
-            从第一弹{firstZodiac?.zodiac ?? "起点"}
-            年款开始，按生肖年份排列；首款保留正式名称中的“ふわふわ”。
-          </p>
         </div>
 
         <ol

@@ -9,7 +9,7 @@ export const projectCaseStudy = {
   title: "SEKAI / 00",
   subtitle: "把一个喜欢二次元的念头，做成可以长期维护的个人世界。",
   summary:
-    "这个项目不是一次性简历模板。它从一张首页开始，逐步建立独立路由、强类型内容、可访问交互、自动质量检查与双目标发布，让每次更新都能成为下一次更新的地基。",
+    "从一张首页慢慢长大，记录学习与兴趣。使用 React 与 TypeScript，持续更新到 Sites 和 GitHub Pages。",
   facts: [
     { label: "项目类型", value: "长期个人网站" },
     { label: "核心技术", value: "TypeScript / React" },
@@ -43,22 +43,22 @@ export const projectFeatures = [
   {
     code: "FEATURE / 01",
     title: "清晰的多页面内容",
-    copy: "关于、奇妙收藏馆、学习、导航终端与日志各有独立职责，首页只负责介绍、兴趣互动和清晰引导。",
+    copy: "个人介绍、收藏、学习、导航与日志，各有自己的页面。",
   },
   {
     code: "FEATURE / 02",
     title: "可检索的兴趣与学习",
-    copy: "奇妙收藏馆统一入口，动画与 Steam 游戏仍各自搜索；计算机笔记也能按主题筛选并通过深链接展开。",
+    copy: "收藏与笔记支持搜索、分类，也能直接分享笔记链接。",
   },
   {
     code: "FEATURE / 03",
     title: "可参与的二次元主题",
-    copy: "三角色频道会改变整站配色并连接真实内容，选择只保存在当前设备。",
+    copy: "切换角色频道与配色，偏好保存在当前设备。",
   },
   {
     code: "FEATURE / 04",
     title: "适配不同设备",
-    copy: "桌面与手机共享同一套内容结构，同时保留键盘操作、主题切换与静态访问。",
+    copy: "适配电脑与手机，支持键盘操作和明暗主题。",
   },
 ] as const;
 

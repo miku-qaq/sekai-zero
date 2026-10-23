@@ -13,9 +13,6 @@ export function WorldMap() {
           <p className="section-index">02 / EXPLORE</p>
           <h2 id="world-map-title">从这里开始浏览。</h2>
         </div>
-        <p>
-          每个页面只负责一件事。先认识我，进入奇妙收藏馆，读学习笔记，打开导航终端，或查看完整世界线日志。
-        </p>
       </div>
       <div className="world-route-grid">
         {worldRoutes.map((route) => (

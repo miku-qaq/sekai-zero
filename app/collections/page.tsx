@@ -57,13 +57,13 @@ export default function CollectionsPage() {
         currentHref="/collections/"
         animate={false}
         title="把喜欢的世界，收进同一座馆。"
-        lead="有些喜欢留在故事里，有些陪在身边。这里收藏看过的动画、玩过的游戏，以及我的手办、初音未来 Fufu 和手柄。"
+        lead="看过的动画、玩过的游戏，和陪在身边的小小收藏。"
         meta={[
           {
             label: "独立展柜",
             value: `${String(collectionRooms.length).padStart(2, "0")} 间`,
           },
-          { label: "真实记录", value: `${collectionRecordCount} 条` },
+          { label: "收藏记录", value: `${collectionRecordCount} 条` },
           { label: "馆内漫游", value: "故事 / 日常 / 热爱" },
         ]}
       />
@@ -77,7 +77,6 @@ export default function CollectionsPage() {
             <p className="section-index">00 / COLLECTION DIRECTORY</p>
             <h2 id="collection-directory-title">今天，想逛哪一间？</h2>
           </div>
-          <p>看过的故事、玩过的世界，还有留在身边的小小收藏。选一间展柜，慢慢逛。</p>
         </div>
 
         <div className={styles.exhibits}>
@@ -172,14 +171,14 @@ export default function CollectionsPage() {
                 <h3>{room.label}</h3>
                 <p>
                   {room.id === "anime"
-                    ? `${animeCatalog.length} 部已经看过的动画。按作品名、年份和类型，找回熟悉的故事。`
+                    ? `看过的故事，留在这一面封面墙。`
                     : room.id === "games"
-                      ? `${gameCatalog.length} 款真实 Steam 游玩记录。从封面认出熟悉的世界，也可以直接搜索作品。`
+                      ? `Steam 里的足迹，总有想重温的世界。`
                       : room.id === "figures"
-                        ? `${figureCollection.length} 件手办，${figureMikuCount} 件初音未来。每件都配上对应款式的商品图，慢慢看清收藏的细节。`
+                        ? `${figureMikuCount} 种初音未来，还有来自不同作品的伙伴。`
                         : room.id === "fufu"
-                          ? `从虎生肖开始，${fufuTimeline}，和大 Fufu 一起组成 ${fufuCollection.length} 只毛绒的小队。`
-                          : `${controllerCollection.length} 只手柄，从 Xbox、两代 Switch Pro，到八爪鱼 4 八重神子联名款。把通往游戏世界的手感也收进来。`}
+                          ? `从${fufuTimeline}，还有一只大 Fufu。`
+                          : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
                 </p>
                 <div className={styles.exhibitFooter}>
                   <span>
@@ -202,8 +201,7 @@ export default function CollectionsPage() {
           ))}
         </div>
         <p className={styles.collectionNote}>
-          每一条都是我的真实收藏或观看、游玩记录。这里不做评分排名；手办、Fufu 与手柄
-          使用对应款式的商品展示图，并保留资料来源。
+          手办、Fufu 与手柄使用商品展示图，非本人实拍。
         </p>
       </section>
 

@@ -315,8 +315,7 @@ export const figureCollection: readonly FigureCollectionEntry[] = [
 
 export const figureCollectionMeta = {
   title: "Mikureina 的手办收藏",
-  summary:
-    "十六件手办，六种初音未来的模样，还有来自不同作品的伙伴。把喜欢的角色与细节，收进这个小小展柜。",
+  summary: "初音未来与来自不同作品的伙伴，在这里相聚。",
   sourceLabel: "Mikureina 的收藏 · 商品资料逐件核对",
   rightsNote:
     "图片来自厂商及商品资料页，用于展示对应款式，非本人实拍；角色、商品设计与图片版权归各自权利方。每张卡片保留资料入口，个人购买信息不公开。",

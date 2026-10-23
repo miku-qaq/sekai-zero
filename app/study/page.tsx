@@ -33,7 +33,7 @@ export default function StudyPage() {
       <PageMasthead
         currentHref="/study/"
         title="把学到的东西，整理成可以返回的地图。"
-        lead="当前正在自学 Stanford CS224N 的公开课程资料，也会回顾此前学习过的 CS231n。这里不把课程目录包装成个人完成度，而是用知识地图、最小实验与主动回忆，整理真正理解过的内容。"
+        lead="自学 CS224N，回顾 CS231n。用例子、实验与回忆题，记下自己的理解。"
         meta={[
           {
             label: "当前笔记",
@@ -49,11 +49,9 @@ export default function StudyPage() {
           <div className="section-heading horizontal-heading">
             <div>
               <p className="section-index">01 / STUDY NOTES</p>
-              <h2 id="archive-title">先读已经整理好的笔记。</h2>
+              <h2 id="archive-title">学习笔记</h2>
             </div>
-            <p>
-              按分类筛选或直接搜索概念；展开后可以查看解释、例子、易错边界、回忆问题与一手来源。
-            </p>
+            <p>解释、例子、回忆题与来源，都在笔记里。</p>
           </div>
           <StudyNotebook />
         </div>
@@ -66,12 +64,8 @@ export default function StudyPage() {
         <div className="section-heading horizontal-heading">
           <div>
             <p className="section-index">02 / HOW I TAKE NOTES</p>
-            <h2 id="protocol-title">每篇笔记怎样整理。</h2>
+            <h2 id="protocol-title">我的笔记方法</h2>
           </div>
-          <p>
-            目前收录 AI、计算机视觉与 NLP，以及 Web、Git、TypeScript
-            和编码基础；所有笔记都保留摘要、回忆题与一手来源。
-          </p>
         </div>
         <div className={styles.principleGrid}>
           {studyPrinciples.map((principle) => (

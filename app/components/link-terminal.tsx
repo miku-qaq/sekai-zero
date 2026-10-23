@@ -186,11 +186,6 @@ export function LinkTerminal() {
                       </div>
                     </div>
                     <span className="terminal-reason">{entry.reason}</span>
-                    <ul aria-label={`${entry.label} 标签`}>
-                      {entry.tags.slice(0, 3).map((tag) => (
-                        <li key={tag}>#{tag}</li>
-                      ))}
-                    </ul>
                     <strong>
                       {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
                       <span aria-hidden="true">↗</span>
