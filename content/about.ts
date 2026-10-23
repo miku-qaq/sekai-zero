@@ -1,33 +1,3 @@
-export const influenceSignals = [
-  {
-    index: "39",
-    channel: "音乐频道",
-    name: "初音未来",
-    romanized: "HATSUNE MIKU",
-    copy: "薄荷色音符，唱向未来。",
-    tone: "mint",
-    motif: "♪",
-  },
-  {
-    index: "07",
-    channel: "旅行频道",
-    name: "伊蕾娜",
-    romanized: "ELAINA",
-    copy: "沿着雾紫星轨，去看新的风景。",
-    tone: "violet",
-    motif: "✦",
-  },
-  {
-    index: "06",
-    channel: "摇滚频道",
-    name: "波奇",
-    romanized: "BOCCHI",
-    copy: "樱粉色节拍，也有摇滚的勇气。",
-    tone: "pink",
-    motif: "♬",
-  },
-] as const;
-
 export const profileQuestions = [
   {
     question: "为什么要做这个网站？",

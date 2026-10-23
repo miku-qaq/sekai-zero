@@ -260,3 +260,12 @@ export const favoriteChannels = [
     },
   },
 ] as const;
+
+/** One banner shared by About and social previews. */
+export const characterBanner = {
+  src: "/artwork/sekai-friends-wide.webp",
+  socialImage: "og-v5.jpg",
+  width: 1723,
+  height: 913,
+  alt: "初音未来、伊蕾娜与波奇的同人群像，音乐、远行与摇滚的三个频道",
+} as const;

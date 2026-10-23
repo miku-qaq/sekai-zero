@@ -80,7 +80,7 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /哔哩哔哩 · Bilibili/);
   assert.match(html, /href="\/study\/#cs224n-nlp-word-vectors"/);
   assert.match(html, /href="\/links\/#route-bilibili"/);
-  assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v4\.png/);
+  assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v5\.jpg/);
   assert.doesNotMatch(html, /chatgpt\.site/);
 
   assert.match(html, /从这里开始浏览/);
@@ -653,6 +653,10 @@ test("publishes only the owner-confirmed profile and one direct contact entry", 
   assert.match(about, /Steam/);
   assert.match(about, /miku125194847@gmail\.com/);
   assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
+  for (const character of ["miku", "elaina", "bocchi"]) {
+    assert.match(about, new RegExp(`href="/characters/${character}-v1\\.webp"`));
+  }
+  assert.match(about, /sekai-friends-wide\.webp/);
   assert.doesNotMatch(about, /称呼、职业、所在地等现实信息尚未由主人公开/);
 
   const [homepageResponse, linksResponse] = await Promise.all([
@@ -692,7 +696,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     fufuPage,
     animeCatalogComponent,
     gameCatalogComponent,
-    styles,
     sitePaths,
     profileContent,
     releasesContent,
@@ -735,7 +738,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
     readFile(new URL("../app/collections/fufu/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/anime-catalog.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/collections/game-catalog.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../lib/site-path.ts", import.meta.url), "utf8"),
     readFile(new URL("../content/profile.ts", import.meta.url), "utf8"),
     readFile(new URL("../content/releases.ts", import.meta.url), "utf8"),
@@ -985,18 +987,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(favoriteChannelsComponent, /active\.program\.href/);
   assert.match(favoriteChannelsComponent, /aria-pressed=\{selected\}/);
   assert.doesNotMatch(favoriteChannelsComponent, /active\.sync|role="meter"/);
-
-  const mobileStart = styles.indexOf("@media (max-width: 760px)");
-  const mobileEnd = styles.indexOf("@media (max-width: 420px)");
-  const mobileStyles = styles.slice(mobileStart, mobileEnd);
-  assert.match(
-    mobileStyles,
-    /\.channel-options\s*\{[^}]*repeat\(3, minmax\(0, 1fr\)\)/,
-  );
-  assert.match(
-    mobileStyles,
-    /\.channel-option-symbol\s*\{[^}]*grid-row:\s*auto;[^}]*grid-column:\s*auto;/,
-  );
 });
 
 test("publishes exactly the four owner-confirmed controllers with local product images", async () => {

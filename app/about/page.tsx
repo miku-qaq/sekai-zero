@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { currentFocus, influenceSignals, profileQuestions } from "@/content/about";
+import Image from "next/image";
+import { currentFocus, profileQuestions } from "@/content/about";
 import { profileFacts, publicProfile } from "@/content/profile";
+import { characterBanner, favoriteChannels } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
@@ -19,13 +21,9 @@ export default function AboutPage() {
     <main id="main-content" className="subpage-main">
       <PageMasthead
         currentHref="/about/"
-        title="你好，我是 Mikureina。"
+        artwork={characterBanner}
+        title={`你好，我是 ${publicProfile.handle}。`}
         lead="南京大学 CS 在读，喜欢动漫和游戏，也喜欢把所学与热爱记下来。"
-        meta={[
-          { label: "CN 名", value: publicProfile.handle },
-          { label: "当前状态", value: publicProfile.academicStatus },
-          { label: "兴趣频道", value: publicProfile.interests.join(" × ") },
-        ]}
       />
 
       <section
@@ -37,32 +35,6 @@ export default function AboutPage() {
           <h2 id="profile-title">我的小档案</h2>
         </div>
         <div className="profile-sheet">
-          <article className="profile-id-card" aria-labelledby="profile-handle">
-            <div className="profile-id-topline">
-              <span>MIKUREINA / PUBLIC PROFILE</span>
-              <strong>ONLINE</strong>
-            </div>
-            <div className="profile-id-body">
-              <span className="profile-id-mark" aria-hidden="true">
-                {publicProfile.monogram}
-              </span>
-              <div>
-                <p>CN / MIKUREINA</p>
-                <h3 id="profile-handle">{publicProfile.handle}</h3>
-                <span>{publicProfile.academicStatus}</span>
-              </div>
-            </div>
-            <ul className="profile-id-tags" aria-label="公开兴趣与常玩平台">
-              {[...publicProfile.interests, ...publicProfile.gamingPlatforms].map(
-                (item) => (
-                  <li key={item}>{item}</li>
-                ),
-              )}
-            </ul>
-            <p className="profile-id-status">
-              <span aria-hidden="true" /> WELCOME TO MY SEKAI
-            </p>
-          </article>
           <dl className="profile-facts">
             {profileFacts.map((fact, index) => (
               <div id={fact.id} key={fact.label}>
@@ -99,26 +71,38 @@ export default function AboutPage() {
           <div className="section-heading horizontal-heading">
             <div>
               <p className="section-index">02 / INFLUENCE SIGNALS</p>
-              <h2 id="influence-title">我喜欢的三个角色频道。</h2>
+              <h2 id="influence-title">喜欢的角色。</h2>
             </div>
-            <p>音乐、远行与摇滚，是这个小世界的三种颜色。</p>
+            <p>音乐、远行与摇滚，组成这个小世界。</p>
           </div>
           <div className="influence-grid">
-            {influenceSignals.map((signal) => (
+            {favoriteChannels.map((signal) => (
               <article
-                className={`influence-card influence-${signal.tone}`}
-                key={signal.name}
+                className={`influence-card influence-${signal.id}`}
+                key={signal.id}
               >
-                <div className="influence-topline">
-                  <span>CH / {signal.index}</span>
-                  <span>{signal.channel}</span>
+                <a
+                  className="influence-artwork"
+                  href={sitePath(signal.image)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`查看${signal.name}插画大图（新标签页）`}
+                >
+                  <Image
+                    src={sitePath(signal.image)}
+                    alt={signal.imageAlt}
+                    width={1024}
+                    height={1536}
+                    sizes="(max-width: 760px) 44vw, 30vw"
+                  />
+                  <span aria-hidden="true">↗</span>
+                </a>
+                <div className="influence-caption">
+                  <span className="influence-topline">{signal.index} / FAVORITES</span>
+                  <p>{signal.romanized}</p>
+                  <h3>{signal.name}</h3>
+                  <span className="influence-copy">{signal.note}</span>
                 </div>
-                <span className="influence-motif" aria-hidden="true">
-                  {signal.motif}
-                </span>
-                <p>{signal.romanized}</p>
-                <h3>{signal.name}</h3>
-                <span className="influence-copy">{signal.copy}</span>
               </article>
             ))}
           </div>
@@ -151,7 +135,7 @@ export default function AboutPage() {
         <div className="section-shell timeline-layout">
           <div className="section-heading">
             <p className="section-index">04 / CURRENT FOCUS</p>
-            <h2 id="focus-title">最近在投入的事情。</h2>
+            <h2 id="focus-title">最近在做。</h2>
           </div>
           <ol>
             {currentFocus.map((item, index) => (

@@ -181,7 +181,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(about, /南京大学 · CS 在读/);
   assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
   assert.doesNotMatch(about, /href="[^"]*\/mailto:/);
-  assert.match(about, /最近在投入的事情/);
+  assert.match(about, /最近在做/);
   assert.match(about, new RegExp(`href="${basePath}/collections/"`));
 
   const study = exported.get("study/index.html");
@@ -534,6 +534,6 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   );
 
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
-  await access(new URL("../dist/pages/og-v4.png", import.meta.url));
+  await access(new URL("../dist/pages/og-v5.jpg", import.meta.url));
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));
 });

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { siteConfig } from "@/content/site";
+import { characterBanner, siteConfig } from "@/content/site";
 import { absoluteSiteUrl, resolveSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "./components/site-header";
 import { BackToTop } from "./components/back-to-top";
@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
 const themeInitializationScript = `try{const theme=localStorage.getItem("sekai-theme");if(theme==="light"||theme==="dark"){document.documentElement.dataset.theme=theme}const channel=localStorage.getItem("sekai-channel");if(channel==="miku"||channel==="elaina"||channel==="bocchi"){document.documentElement.dataset.channel=channel}}catch{}`;
 
 const metadataBase = resolveSiteUrl();
-const socialImage = absoluteSiteUrl("og-v4.png");
+const socialImage = absoluteSiteUrl(characterBanner.socialImage);
 const favicon = absoluteSiteUrl("favicon.svg");
 
 export const metadata: Metadata = {
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: socialImage,
-        alt: "SEKAI / 00 白昼动画杂志风格分享卡片",
-        width: 1200,
-        height: 630,
+        alt: characterBanner.alt,
+        width: characterBanner.width,
+        height: characterBanner.height,
       },
     ],
   },

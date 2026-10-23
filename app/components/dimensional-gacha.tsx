@@ -55,9 +55,7 @@ export function DimensionalGacha() {
         <div>
           <p className="gacha-control-label">DIMENSIONAL GACHA / 6 CARDS</p>
           <h3>今天会抽到哪一种能量？</h3>
-          <p>
-            六张原创行动小签，分别回应音乐、旅行与摇滚带来的勇气。每次抽取都会避开当前卡片。
-          </p>
+          <p>给今天一点灵感。</p>
         </div>
         <button className="gacha-button" type="button" onClick={drawFortune}>
           抽取下一张

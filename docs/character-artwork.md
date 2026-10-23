@@ -1,5 +1,19 @@
 # 角色插画 · 2026-10-23
 
+## 横向群像 · 关于我和分享预览
+
+内置 imagegen 以已确认的竖版群像为参考生成横向版本。单独修正初音身上误加的蓝黄方块发夹，保留波奇本人的发夹。最终文件：`public/artwork/sekai-friends-wide.webp`、`public/og-v5.jpg`；本机原图 `work/artwork/final/sekai-friends-wide-v1.png`。
+
+### 横向重构提示词
+
+Use case: stylized-concept. Create a new wide landscape 1.91:1 anime fan-art illustration, approximately 1536 by 804 pixels, for a personal website About page banner and social share card. The input is the already approved vertical hero: use it as the exact character identity, clothing, color and illustration-style reference. Recompose into a wide scene; do not simply crop or stretch the input. Exactly THREE characters together, all with clear complete faces and important accessories inside a safe central area: Elaina on viewer left, Hatsune Miku at center, Hitori Gotoh/Bocchi on viewer right. Friendly waist-up group portrait with similar face sizes, the whole Elaina hat and its dangling golden charm visible with headroom. Show Miku's turquoise extremely long twin tails, black/magenta hair ornaments, headset microphone, silver-gray sleeveless collared blouse and teal tie, black detached sleeves, red 01 on her left upper arm. Elaina's ash-silver long hair, blue-violet eyes, charcoal purple broad witch hat with pink underside and pale pink hatband, MUSTARD GOLD neck bow, white blouse, ash-purple robe, gold star chest brooch; exactly one pink bow on her viewer-left front hair lock and one gold tie on the viewer-right front hair lock. Bocchi's long pink hair, blue eyes, blue/yellow cube hair clips on viewer-left side of her head, pink zip-up tracksuit jacket with white sleeve stripes and a recognizable black single-cut Les Paul style electric guitar with cream binding and gold hardware. Miku smiles warmly, Elaina has gentle confident composure, Bocchi shy and slightly tucked shoulders. Keep the approved refined anime line work, luminous pastel cel shading and subtle painted textures. Soft ivory, mint, lavender and blush evening sky, very faint distant city and gentle tiny stars; lighter and airier than input, uncluttered. No crowded foreground flowers, no decorative frame. All character faces and hat comfortably inside frame, no extreme foreshortening or prominent outstretched hand. Wholesome natural poses. No text, title, watermark, logo, brand label, UI, extra people, panels or collage. This is ONE seamless landscape illustration, not three separate posters.
+
+### 局部修正提示词
+
+Edit the supplied landscape illustration with ONE tiny targeted correction. On HATSUNE MIKU (the turquoise-haired CENTER character), remove ONLY the mistakenly added blue cube and yellow cube above her black-magenta hair ornament on the viewer-right side of her head (approximately x=63%, y=27% of image). Replace those two erroneous cubes naturally with the existing turquoise hair and background. Preserve BOTH of Miku's correct BLACK/MAGENTA rectangular hair accessories and her headset. The true BOCCHI is the PINK-haired character on viewer right; KEEP her correct BLUE and YELLOW hair clips at approximately x=67%, y=42% completely unchanged. Do not transfer them again. Everything else must remain unchanged: exact faces, expressions, clothing, hands, composition, Elaina's hat and gold accessories, colors, background, image dimensions and aspect ratio. No new accessories, no text. Only remove the TWO erroneous colored cubes from Miku.
+
+## 竖版主视觉与单人插画
+
 使用内置 imagegen，以官方立绘为角色参考生成同人插画；官方参考图只用于内部核对，不作为本站生成作品发布。网页保留角色经典设定，并采用薄荷、雾紫和樱粉色背景。
 
 ## 参考
