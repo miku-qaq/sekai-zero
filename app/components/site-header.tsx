@@ -78,6 +78,7 @@ export function SiteHeader() {
     clientPathSnapshot,
     serverPathSnapshot,
   );
+  const headerRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -90,8 +91,29 @@ export function SiteHeader() {
       }
     }
 
+    // This is a disclosure navigation, not a modal: leaving it closes the panel
+    // without trapping focus or interrupting the visitor's next action.
+    function closeOutsideHeader(event: Event) {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    const mobileViewport = window.matchMedia("(max-width: 1040px)");
+    function closeOnDesktop(event: MediaQueryListEvent) {
+      if (!event.matches) setMenuOpen(false);
+    }
+
     window.addEventListener("keydown", closeWithEscape);
-    return () => window.removeEventListener("keydown", closeWithEscape);
+    document.addEventListener("pointerdown", closeOutsideHeader);
+    document.addEventListener("focusin", closeOutsideHeader);
+    mobileViewport.addEventListener("change", closeOnDesktop);
+    return () => {
+      window.removeEventListener("keydown", closeWithEscape);
+      document.removeEventListener("pointerdown", closeOutsideHeader);
+      document.removeEventListener("focusin", closeOutsideHeader);
+      mobileViewport.removeEventListener("change", closeOnDesktop);
+    };
   }, [menuOpen]);
 
   function toggleTheme() {
@@ -111,7 +133,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header className="site-header" ref={headerRef}>
       <div className="header-inner">
         <a
           className="brand"
@@ -149,12 +171,13 @@ export function SiteHeader() {
             title={theme === "dark" ? "切换到浅色主题" : "切换到深色主题"}
             suppressHydrationWarning
           >
-            <span className="sun-icon" aria-hidden="true">
-              ☼
-            </span>
-            <span className="moon-icon" aria-hidden="true">
-              ◐
-            </span>
+            <svg className="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+            <svg className="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z" />
+            </svg>
           </button>
           <a className="header-cta" href={sitePath("/study/#cs224n-nlp-word-vectors")}>
             正在学 CS224N
@@ -169,8 +192,9 @@ export function SiteHeader() {
             aria-label={menuOpen ? "关闭导航菜单" : "打开导航菜单"}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span />
-            <span />
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d={menuOpen ? "M6 6l12 12M6 18 18 6" : "M4 7h16M4 12h16M4 17h16"} />
+            </svg>
           </button>
         </div>
       </div>

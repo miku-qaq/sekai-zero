@@ -677,12 +677,27 @@
 
   .principleGrid article,
   .principleGrid article:last-child {
-    min-height: 235px;
+    display: grid;
+    min-height: 0;
     grid-column: auto;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    padding: 22px;
   }
 
   .principleGrid h3 {
-    margin-top: 50px;
+    margin: 0;
+    font-size: 25px;
+  }
+
+  .principleGrid p {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+
+  .search input {
+    font-size: 16px;
   }
 
   .notebook {
@@ -760,10 +775,6 @@
 }
 
 @media (max-width: 420px) {
-  .search input {
-    font-size: 12px;
-  }
-
   .noteIntro > ul {
     gap: 8px;
   }

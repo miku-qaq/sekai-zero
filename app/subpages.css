@@ -1981,36 +1981,55 @@
     min-height: 250px;
   }
 
+  .subpage-hero {
+    grid-template-rows: auto auto auto;
+    gap: 24px;
+    padding-top: 102px;
+    padding-bottom: 32px;
+  }
+
   .subpage-copy h1 {
-    font-size: clamp(49px, 14vw, 70px);
+    font-size: clamp(32px, 8.6vw, 48px);
+    line-height: 1.16;
+    text-wrap: balance;
   }
 
   .subpage-lead {
-    margin-top: 25px;
-    font-size: 16px;
+    margin-top: 18px;
+    font-size: 15px;
   }
 
   .subpage-visual {
-    width: min(320px, 82vw);
-    border-radius: 46% 46% 24px 24px;
-    box-shadow: 8px 8px 0 var(--foreground);
+    display: none;
   }
 
   .subpage-meta {
-    grid-template-columns: 1fr;
+    grid-row: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .subpage-meta div:first-child,
-  .subpage-meta div:last-child {
-    border-radius: 0;
+  .subpage-meta div {
+    padding: 14px 12px;
+  }
+
+  .subpage-meta dd {
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .subpage-meta div:first-child {
-    border-radius: calc(var(--radius-medium) - 1px) calc(var(--radius-medium) - 1px) 0 0;
+    border-radius: calc(var(--radius-medium) - 1px) 0 0 calc(var(--radius-medium) - 1px);
   }
 
   .subpage-meta div:last-child {
-    border-radius: 0 0 calc(var(--radius-medium) - 1px) calc(var(--radius-medium) - 1px);
+    border-radius: 0 calc(var(--radius-medium) - 1px) calc(var(--radius-medium) - 1px) 0;
+  }
+
+  .terminal-search input {
+    font-size: 16px;
   }
 
   .profile-facts > div {
