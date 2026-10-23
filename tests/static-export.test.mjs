@@ -141,7 +141,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   }
 
   const homepage = exported.get("index.html");
-  assert.match(homepage, new RegExp(`src="${basePath}/hero-anime-v2\\.webp"`));
+  assert.match(homepage, new RegExp(`src="${basePath}/hero-anime-v3\\.webp"`));
   assert.match(homepage, /Mikureina/);
   assert.match(homepage, /南京大学 CS 在读/);
   assert.match(homepage, /Stanford CS224N/);

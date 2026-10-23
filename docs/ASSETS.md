@@ -68,7 +68,13 @@ EP.016 只将奇妙收藏馆入口升级为 `next/link` 客户端导航，并保
 - **未来素材**：优先由 Mikureina 本人实拍；照片进入 `public/fufu/` 前，需要记录拍摄者授权、文件映射、替代文本、尺寸与压缩方式。
 - **版权边界**：SEGA 商品页只作为正式名称与公开资料来源；角色、商品设计与官方图片版权归各自权利方，本站不声称拥有这些素材。
 
-## `public/hero-anime-v2.webp`
+## 2026-10-23 · 角色同人插画
+
+按站点所有者要求重绘主视觉，并为初音未来、伊蕾娜、波奇分别生成单人插画。使用内置 ImageGen，以角色官网立绘为设定参考；官方原图仅保存于忽略的 `work/artwork/references/`，未作为本站作品公开。生成插画用于首页，角色与原作设计归各自权利方；页面标注 FAN ART，不再把角色说成本站原创。
+
+成品为 `public/hero-anime-v3.webp` 与 `public/characters/{miku,elaina,bocchi}-v1.webp`。提示词、参考链接与本机原图位置见 [角色插画记录](character-artwork.md)。网页资源使用 WebP，主视觉优先加载，单人图延迟加载。
+
+## `public/hero-anime-v2.webp`（历史版，已停用）
 
 - **用途**：首页第 002 话原创动漫群像主视觉。
 - **创作方式**：OpenAI ImageGen 生成，未引用外部图片。

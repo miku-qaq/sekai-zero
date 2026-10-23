@@ -1,0 +1,266 @@
+.gallery {
+  min-width: 0;
+  padding: clamp(12px, 2vw, 20px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-large);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.artwork {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  grid-row: 1 / 3;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--accent-soft);
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+}
+
+.expand {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 84%);
+  color: #353149;
+  font-size: 16px;
+}
+
+.identity {
+  min-width: 0;
+  padding-top: 12px;
+}
+
+.index,
+.romanized {
+  display: block;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.09em;
+}
+
+.identity h3 {
+  margin: 15px 0 8px;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1.2;
+}
+
+.identity p {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.program {
+  display: block;
+  align-self: end;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-muted);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.program strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.program p {
+  margin: 7px 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.program > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.option {
+  overflow: hidden;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.option[aria-pressed="true"] {
+  border-color: var(--accent-deep);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 1px var(--accent-deep);
+}
+
+.thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.optionName {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 7px 10px;
+}
+
+.optionName strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.selected {
+  width: 12px;
+  flex: none;
+  color: var(--accent-deep);
+  font-size: 12px;
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .option:hover,
+  .program:hover {
+    border-color: var(--accent-deep);
+    background: var(--accent-soft);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery {
+    border-radius: 24px;
+  }
+
+  .spotlight {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .artwork {
+    grid-row: 1;
+    border-radius: 16px;
+  }
+
+  .identity {
+    padding-top: 0;
+  }
+
+  .index,
+  .romanized {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .identity h3 {
+    margin-top: 12px;
+    font-size: clamp(23px, 7vw, 34px);
+  }
+
+  .identity p {
+    margin-top: 16px;
+    font-size: 12px;
+  }
+
+  .program {
+    grid-column: 1 / -1;
+    padding: 13px 15px;
+  }
+
+  .program p {
+    margin-bottom: 8px;
+  }
+
+  .options {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .option {
+    border-radius: 12px;
+  }
+
+  .thumbnail {
+    aspect-ratio: 1;
+  }
+
+  .optionName {
+    gap: 2px;
+    padding-inline: 7px;
+  }
+
+  .optionName strong {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .selected {
+    width: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .option,
+  .program {
+    transition: none;
+  }
+}

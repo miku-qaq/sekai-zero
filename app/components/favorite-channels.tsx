@@ -1,8 +1,10 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import Image from "next/image";
 import { favoriteChannels } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import styles from "./favorite-channels.module.css";
 
 type ChannelId = (typeof favoriteChannels)[number]["id"];
 const CHANNEL_STORAGE_KEY = "sekai-channel";
@@ -36,11 +38,7 @@ function setClientChannel(channel: ChannelId) {
   window.dispatchEvent(new Event(CHANNEL_CHANGE_EVENT));
 }
 
-/**
- * A playful, copyright-conscious tribute. The original key visual establishes
- * the site's own cast; this selector references the owner's favorites through
- * editorial copy, palettes and motifs instead of reproducing official assets.
- */
+/** The selected character pairs a dedicated fan illustration with the site theme. */
 export function FavoriteChannels() {
   const activeChannel = useSyncExternalStore(
     subscribeToChannel,
@@ -55,93 +53,72 @@ export function FavoriteChannels() {
   const active = favoriteChannels.find((channel) => channel.id === activeChannel)!;
 
   return (
-    <div className="channel-console">
-      <div className="channel-screen" aria-live="polite">
-        <div className="channel-screen-grid" aria-hidden="true" />
-        <div className="channel-manga-burst" lang="ja" aria-hidden="true">
-          好き!
-        </div>
-        <div className="channel-screen-header">
-          <span>CHARACTER INSPIRATION ARCHIVE</span>
-          <span className="channel-live">
-            <i /> LIVE
+    <div className={styles.gallery}>
+      <div className={styles.spotlight}>
+        <a
+          className={styles.artwork}
+          href={sitePath(active.image)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`查看${active.name}插画大图（新标签页）`}
+        >
+          <Image
+            className={styles.portrait}
+            src={sitePath(active.image)}
+            alt={active.imageAlt}
+            width={1024}
+            height={1536}
+            sizes="(max-width: 600px) 48vw, (max-width: 1100px) 40vw, 280px"
+          />
+          <span className={styles.expand} aria-hidden="true">
+            ↗
           </span>
+        </a>
+        <div className={styles.identity} aria-live="polite" aria-atomic="true">
+          <span className={styles.index}>{active.index} / FAVORITES</span>
+          <h3>{active.name}</h3>
+          <span className={styles.romanized}>{active.romanized}</span>
+          <p>{active.note}</p>
         </div>
-        <div className="channel-rarity-row">
-          <span className="rarity-badge">{active.rarity} PICK</span>
-          <span>
-            CH.{active.index} / {active.chapter}
-          </span>
-        </div>
-        <div className="channel-screen-content">
-          <span className="channel-glyph" aria-hidden="true">
-            {active.motif}
-          </span>
-          <div>
-            <p>{active.signal}</p>
-            <h3>{active.name}</h3>
-            <span>{active.romanized}</span>
-          </div>
-        </div>
-        <p className="channel-quote">{active.note}</p>
-        <a className="channel-program" href={sitePath(active.program.href)}>
-          <span>NOW PLAYING / {active.program.label}</span>
+        <a className={styles.program} href={sitePath(active.program.href)}>
           <strong>{active.program.title}</strong>
           <p>{active.program.description}</p>
-          <i>
+          <span>
             {active.program.action} <span aria-hidden="true">↗</span>
-          </i>
+          </span>
         </a>
-        <div className="channel-screen-footer">
-          <ul className="channel-tags" aria-label={`${active.name} 频道关键词`}>
-            {active.tags.map((tag) => (
-              <li key={tag}>#{tag}</li>
-            ))}
-          </ul>
-          <div className="channel-connection" aria-label="主题频道已接通">
-            <span>CHANNEL CONNECTED</span>
-            <i aria-hidden="true">
-              <b style={{ width: "100%" }} />
-            </i>
-          </div>
-        </div>
-        <div className="equalizer" aria-hidden="true">
-          {Array.from({ length: 22 }, (_, index) => (
-            <i key={index} />
-          ))}
-        </div>
       </div>
 
-      <div className="channel-options" role="group" aria-label="切换喜爱角色主题">
+      <div className={styles.options} role="group" aria-label="切换喜爱角色主题">
         {favoriteChannels.map((channel) => {
           const selected = channel.id === activeChannel;
           return (
             <button
-              className={`channel-option channel-${channel.id}`}
+              className={styles.option}
               type="button"
               key={channel.id}
               aria-pressed={selected}
               onClick={() => selectChannel(channel.id)}
             >
-              <span className="channel-option-index">CH / {channel.index}</span>
-              <span className="channel-option-rarity">{channel.rarity}</span>
-              <span className="channel-option-symbol" aria-hidden="true">
-                {channel.motif}
-              </span>
-              <span className="channel-option-name">
+              <Image
+                className={styles.thumbnail}
+                src={sitePath(channel.image)}
+                alt=""
+                width={1024}
+                height={1536}
+                sizes="(max-width: 600px) 28vw, (max-width: 1100px) 29vw, 180px"
+              />
+              <span className={styles.optionName}>
                 <strong>{channel.name}</strong>
-                <small>{channel.romanized}</small>
-              </span>
-              <span className="channel-check" aria-hidden="true">
-                {selected ? "●" : "○"}
+                <span className={styles.selected} aria-hidden="true">
+                  {selected ? "✓" : ""}
+                </span>
               </span>
             </button>
           );
         })}
       </div>
-      <p className="channel-hint">
-        <span aria-hidden="true">↳</span> 点选角色，切换主题色与频道。
-      </p>
+      <p className={styles.hint}>点选角色，切换插画与主题色。</p>
     </div>
   );
 }

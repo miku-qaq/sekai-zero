@@ -88,12 +88,17 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /初音未来/);
   assert.match(html, /伊蕾娜/);
   assert.match(html, /波奇/);
-  assert.match(html, /CHANNEL CONNECTED/);
+  for (const character of ["miku", "elaina", "bocchi"]) {
+    assert.match(
+      html,
+      new RegExp(`(?:/|%2F)characters(?:/|%2F)${character}-v1\\.webp`),
+    );
+  }
   assert.match(html, /id="gacha"/);
   assert.match(html, /抽一张今天的次元签/);
   assert.match(html, /抽取下一张/);
   assert.match(html, /先让明天发出声音/);
-  assert.match(html, /hero-anime-v2\.webp/);
+  assert.match(html, /hero-anime-v3\.webp/);
 
   // Engineering history belongs to Logs, not the public-facing homepage.
   assert.doesNotMatch(html, /EP\.\d{3}/);
@@ -973,12 +978,12 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(linksContent, /id: "apple"/);
   assert.match(linksContent, /export const linkCategories/);
 
-  // Character channels use one honest connected state, not invented sync
-  // percentages that look like measured user data.
+  // Character portraits keep theme selection and useful destination links,
+  // without simulated connection or synchronization status.
   assert.match(favoriteChannelsComponent, /sekai-channel/);
-  assert.match(favoriteChannelsComponent, /NOW PLAYING/);
+  assert.match(favoriteChannelsComponent, /active\.image/);
   assert.match(favoriteChannelsComponent, /active\.program\.href/);
-  assert.match(favoriteChannelsComponent, /CHANNEL CONNECTED/);
+  assert.match(favoriteChannelsComponent, /aria-pressed=\{selected\}/);
   assert.doesNotMatch(favoriteChannelsComponent, /active\.sync|role="meter"/);
 
   const mobileStart = styles.indexOf("@media (max-width: 760px)");

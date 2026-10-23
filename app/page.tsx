@@ -10,7 +10,7 @@ import { FavoriteChannels } from "./components/favorite-channels";
 import { SiteFooter } from "./components/site-footer";
 import { WorldMap } from "./components/world-map";
 
-const heroImage = sitePath("/hero-anime-v2.webp");
+const heroImage = sitePath("/hero-anime-v3.webp");
 
 // The homepage has no request-time data. Declaring the contract explicitly
 // keeps Vinext's conservative static analyzer from skipping Pages export.
@@ -63,14 +63,14 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>ORIGINAL KEY VISUAL / 00</span>
+              <span>SEKAI FAN ART / 00</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
               <Image
                 className="hero-anime-image"
                 src={heroImage}
-                alt="原创动漫群像：青发电子歌者、银发旅行魔女与粉发吉他手置身星空舞台"
+                alt="初音未来、伊蕾娜与波奇的同人群像，保留经典服装与角色配饰"
                 width={1024}
                 height={1536}
                 sizes="(max-width: 760px) 300px, (max-width: 900px) 430px, 438px"
@@ -93,7 +93,7 @@ export default function Home() {
             </figcaption>
           </figure>
           <div className="speech-bubble speech-bubble-top">今天也要把未来唱出来！</div>
-          <div className="floating-label floating-label-top">原创次元主视觉</div>
+          <div className="floating-label floating-label-top">音乐 · 旅途 · 喜欢</div>
           <div className="floating-label floating-label-bottom" lang="ja">
             推しが尊い!
           </div>
