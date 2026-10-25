@@ -36,9 +36,19 @@
   letter-spacing: -0.025em;
 }
 
-.intro a {
-  width: fit-content;
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 16px;
   margin-left: auto;
+}
+
+.intro a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  width: fit-content;
   color: var(--muted);
   font-size: 11px;
   text-decoration: underline;

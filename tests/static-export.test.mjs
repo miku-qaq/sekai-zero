@@ -96,6 +96,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>Fufu 收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
     {
+      path: "collections/gallery/index.html",
+      title: /<title>收藏画册 · 奇妙收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "collections/controllers/index.html",
       title: /<title>手柄收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
@@ -120,7 +124,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>世界线日志 · SEKAI<\/title>/i,
     },
   ];
-  assert.equal(pages.length, 14, "Pages should expose exactly 14 public routes");
+  assert.equal(pages.length, 15, "Pages should expose exactly 15 public routes");
 
   const exported = new Map();
   for (const page of pages) {
@@ -222,13 +226,25 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(visibleCollections, /6 只毛绒/);
   assert.equal(
     collections.match(new RegExp(`src="${basePath}/anime/[^"]+\\.webp"`, "g"))?.length,
-    4,
+    8,
   );
   assert.equal(
     collections.match(new RegExp(`src="${basePath}/games/[^"]+\\.webp"`, "g"))?.length,
-    4,
+    5,
   );
   assert.doesNotMatch(collections, /https:\/\/store\.steampowered\.com\/app\//);
+
+  for (const theme of ["miku", "journeys", "from-screen"]) {
+    assert.match(
+      collections,
+      new RegExp(`href="${basePath}/collections/gallery/\\?exhibit=${theme}"`),
+    );
+  }
+  const gallery = exported.get("collections/gallery/index.html");
+  assert.match(gallery, /aria-label="画册分类"/);
+  assert.match(gallery, /搜索收藏画册/);
+  assert.equal((gallery.match(/aria-label="查看[^"]+大图"/g) ?? []).length, 24);
+  assert.match(gallery, new RegExp(`href="${basePath}/collections/"`));
 
   const anime = exported.get("collections/anime/index.html");
   assert.match(anime, /89 部/);
@@ -404,6 +420,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     [games, `${basePath}/collections/games/`],
     [figures, `${basePath}/collections/figures/`],
     [fufu, `${basePath}/collections/fufu/`],
+    [gallery, `${basePath}/collections/gallery/`],
   ]) {
     const match = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i);
     assert.ok(match, `${expectedPath} should expose a canonical URL`);

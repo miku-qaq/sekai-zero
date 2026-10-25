@@ -1,5 +1,12 @@
+import Image from "next/image";
+import { animeCatalog } from "@/content/anime";
 import { worldRoutes } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import styles from "./world-map.module.css";
+
+const collectionPreview = ["wandering-witch", "frieren", "bocchi-the-rock"]
+  .map((id) => animeCatalog.find((entry) => entry.id === id))
+  .filter((entry) => entry !== undefined);
 
 /** Homepage route teasers; detailed content lives on its own shareable URL. */
 export function WorldMap() {
@@ -17,15 +24,32 @@ export function WorldMap() {
       <div className="world-route-grid">
         {worldRoutes.map((route) => (
           <a
-            className={`world-route-card world-route-${route.tone}`}
+            className={`world-route-card world-route-${route.tone} ${route.href === "/collections/" ? styles.collectionCard : ""}`}
             href={sitePath(route.href)}
             key={route.href}
             data-layout={route.layout}
           >
             <span className="world-route-index">ROUTE / {route.index}</span>
-            <span className="world-route-motif" aria-hidden="true">
-              {route.motif}
-            </span>
+            {route.href === "/collections/" ? (
+              <div className={styles.coverStack} aria-hidden="true">
+                {collectionPreview.map((entry) => (
+                  <Image
+                    key={entry.id}
+                    src={sitePath(entry.image)}
+                    alt=""
+                    width={180}
+                    height={270}
+                    sizes="(max-width: 760px) 40px, 64px"
+                    loading="lazy"
+                    unoptimized
+                  />
+                ))}
+              </div>
+            ) : (
+              <span className="world-route-motif" aria-hidden="true">
+                {route.motif}
+              </span>
+            )}
             <div>
               <p>{route.eyebrow}</p>
               <h3>{route.title}</h3>

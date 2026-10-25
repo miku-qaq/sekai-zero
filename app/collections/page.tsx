@@ -12,6 +12,8 @@ import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
 import { CollectionLink } from "./collection-link";
+import { CollectionExhibitions } from "./collection-exhibitions";
+import { CollectionDiscovery } from "./collection-discovery";
 import styles from "./collections.module.css";
 
 export const dynamic = "force-static";
@@ -64,9 +66,21 @@ export default function CollectionsPage() {
             value: `${String(collectionRooms.length).padStart(2, "0")} 间`,
           },
           { label: "收藏记录", value: `${collectionRecordCount} 条` },
-          { label: "馆内漫游", value: "故事 / 日常 / 热爱" },
+          { label: "主题小展", value: "03 组" },
         ]}
       />
+
+      <nav className={`section-shell ${styles.quickLinks}`} aria-label="收藏馆浏览方式">
+        <CollectionLink href="/collections/gallery/">
+          画册模式 <span aria-hidden="true">↗</span>
+        </CollectionLink>
+        <a href="#exhibitions-title">
+          主题小展 <span aria-hidden="true">↓</span>
+        </a>
+        <a href="#collection-discovery">
+          随机逛一件 <span aria-hidden="true">↓</span>
+        </a>
+      </nav>
 
       <section
         className={`${styles.index} section-shell section-pad`}
@@ -204,6 +218,9 @@ export default function CollectionsPage() {
           手办、Fufu 与手柄使用商品展示图，非本人实拍。
         </p>
       </section>
+
+      <CollectionExhibitions />
+      <CollectionDiscovery />
 
       <JourneyNavigation currentHref="/collections/" />
       <SiteFooter />

@@ -1,0 +1,325 @@
+.archive {
+  padding-bottom: 40px;
+}
+.gallery {
+  min-width: 0;
+}
+.backLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.backLink:hover {
+  color: var(--accent-deep);
+}
+.controls {
+  margin-bottom: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  box-shadow: var(--collection-shadow);
+}
+.roomTabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.roomTabs button {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.roomTabs button[aria-pressed="true"] {
+  border-color: var(--border-strong);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+.roomTabs button:hover {
+  color: var(--accent-deep);
+}
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+}
+.searchField {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  min-height: 46px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface-muted);
+}
+.searchField > span:not(:global(.sr-only)) {
+  color: var(--accent-deep);
+  font-size: 22px;
+}
+.searchField input {
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+}
+.searchField:focus-within {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+.exhibitionField {
+  min-width: 0;
+}
+.exhibitionField select {
+  width: 100%;
+  max-width: 240px;
+  min-height: 46px;
+  padding: 0 30px 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-small);
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.clear {
+  flex-shrink: 0;
+  min-height: 46px;
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.resultLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+}
+.resultLine p {
+  margin: 0;
+  flex-shrink: 0;
+}
+.resultLine strong {
+  color: var(--accent-deep);
+  font-family: var(--font-geist-mono), monospace;
+}
+.resultLine > span {
+  text-align: right;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 28px 16px;
+  margin: 0;
+  padding: 2px;
+  list-style: none;
+}
+.grid > li {
+  min-width: 0;
+}
+.card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-medium);
+  background: transparent;
+  color: var(--foreground);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.imageFrame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-muted);
+  box-shadow: var(--collection-shadow);
+}
+.imageFrame[data-fit="contain"] {
+  background: #f4f3f6;
+}
+.imageFrame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease;
+}
+.imageFrame[data-fit="contain"] img {
+  padding: 10px;
+  object-fit: contain;
+}
+.openMark {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--foreground);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+.cardTitle {
+  display: block;
+  margin-top: 11px;
+  padding-inline: 2px;
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.card:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 5px;
+}
+.card:focus-visible .openMark {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: hover) {
+  .card:hover img {
+    transform: scale(1.025);
+  }
+  .card:hover .openMark {
+    opacity: 1;
+    transform: none;
+  }
+}
+.more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface-muted);
+}
+.more > span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.empty {
+  padding: 52px 20px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-medium);
+  text-align: center;
+}
+.empty > span {
+  color: var(--accent-deep);
+  font-size: 40px;
+}
+.empty h2 {
+  margin: 6px 0;
+  font-size: 20px;
+}
+.empty p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 12px;
+  }
+  .roomTabs {
+    gap: 2px;
+    padding-inline: 10px;
+  }
+  .roomTabs button {
+    padding-inline: 13px;
+    font-size: 12px;
+  }
+  .searchRow {
+    flex-wrap: wrap;
+    padding: 12px;
+  }
+  .searchField {
+    flex-basis: 100%;
+  }
+  .exhibitionField {
+    flex: 1;
+  }
+  .exhibitionField select {
+    max-width: none;
+    font-size: 16px;
+  }
+  .searchField input {
+    font-size: 16px;
+  }
+  .cardTitle {
+    font-size: 12px;
+  }
+  .imageFrame {
+    border-radius: 16px;
+  }
+  .imageFrame[data-fit="contain"] img {
+    padding: 6px;
+  }
+  .more {
+    gap: 12px;
+    padding: 18px 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .imageFrame img,
+  .openMark {
+    transition: none;
+  }
+}

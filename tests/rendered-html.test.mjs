@@ -23,7 +23,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("builds the exact 14-route Worker manifest", async () => {
+test("builds the exact 15-route Worker manifest", async () => {
   const workerSource = await readFile(
     new URL("../dist/server/index.js", import.meta.url),
     "utf8",
@@ -41,6 +41,7 @@ test("builds the exact 14-route Worker manifest", async () => {
     "/collections/controllers",
     "/collections/figures",
     "/collections/fufu",
+    "/collections/gallery",
     "/collections/games",
     "/games",
     "/links",
@@ -62,6 +63,30 @@ test("ships collection navigation as a hydrated client boundary", async () => {
   assert.ok(entry, "collection-link should be present in the client manifest");
   assert.equal(entry.isDynamicEntry, true);
   await access(new URL(`../dist/client/${entry.file}`, import.meta.url));
+});
+
+test("serves a bounded gallery on static and deep-linked requests", async () => {
+  for (const pathname of [
+    "/collections/gallery",
+    "/collections/gallery?room=controllers&item=controller-apex4-yae-miko",
+  ]) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /<title>收藏画册 · 奇妙收藏馆 · SEKAI<\/title>/);
+    assert.match(html, /aria-label="画册分类"/);
+    assert.match(html, /搜索收藏画册/);
+    assert.match(html, /初音的一角/);
+    assert.match(html, /旅途与魔法/);
+    assert.match(html, /从屏幕到身边/);
+    assert.equal((html.match(/aria-label="查看[^"]+大图"/g) ?? []).length, 24);
+    assert.match(html, /再翻 (?:<!-- -->)?24/);
+    assert.doesNotMatch(html, /<dialog\b/);
+    assert.doesNotMatch(
+      html,
+      /\b7656119\d{10}\b|"(?:playtime|lastPlayed|accountId|steamId|price|purchaseDate)"\s*:/i,
+    );
+  }
 });
 
 test("server-renders a visitor-first homepage with personal and playful content", async () => {
@@ -400,8 +425,8 @@ test("keeps the Wonder Collection hub concise while linking all five rooms", asy
   assert.match(visibleHtml, /146 款记录/);
 
   // The hub is an overview, not a duplicate rendering of the full archives.
-  assert.equal(html.match(/src="\/anime\/[^"]+\.webp"/g)?.length, 4);
-  assert.equal(html.match(/src="\/games\/[^"]+\.webp"/g)?.length, 4);
+  assert.equal(html.match(/src="\/anime\/[^"]+\.webp"/g)?.length, 8);
+  assert.equal(html.match(/src="\/games\/[^"]+\.webp"/g)?.length, 5);
   assert.doesNotMatch(html, /href="https:\/\/store\.steampowered\.com\/app\//);
 });
 

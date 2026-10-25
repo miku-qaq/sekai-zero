@@ -2,6 +2,38 @@
   position: relative;
 }
 
+.quickLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+}
+
+.quickLinks a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 720;
+}
+
+.quickLinks a:first-child {
+  background: color-mix(in srgb, var(--accent) 13%, var(--surface));
+}
+
+.quickLinks a:hover {
+  border-color: var(--border-strong);
+}
+.quickLinks span {
+  color: color-mix(in srgb, var(--accent) 40%, var(--foreground));
+}
+
 .collectionPage {
   --collection-pink: var(--pink);
   --collection-violet: var(--secondary);

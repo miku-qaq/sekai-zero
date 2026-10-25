@@ -1,0 +1,272 @@
+.discovery {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(20px, 3vw, 36px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-large);
+  background:
+    radial-gradient(circle at 0 0, var(--accent-soft), transparent 65%),
+    var(--surface-muted);
+  scroll-margin-top: 110px;
+}
+
+.controls {
+  min-width: 0;
+}
+
+.motif {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--accent-deep);
+  font-size: 20px;
+}
+
+.controls h2 {
+  margin: 16px 0 22px;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1.25;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter {
+  min-width: 0;
+}
+
+.filter select {
+  width: 100%;
+  min-height: 46px;
+  padding: 8px 30px 8px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.draw {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 19px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: linear-gradient(115deg, var(--accent-soft), var(--surface));
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.draw > span {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.card {
+  display: block;
+  overflow: hidden;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+  animation: discover 260ms ease-out;
+}
+
+.artwork {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--surface-muted);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 176px;
+}
+
+.identity {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 8px 8px 0;
+}
+
+.room {
+  color: var(--accent-deep);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
+.identity h3 {
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.identity p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.open {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  color: var(--accent-deep);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.filter select:focus-visible,
+.draw:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 4px;
+}
+
+@keyframes discover {
+  from {
+    opacity: 0.45;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: hover) {
+  .draw:hover,
+  .card:hover {
+    border-color: var(--accent-deep);
+  }
+
+  .draw:hover {
+    transform: translateY(-2px);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow);
+  }
+}
+
+@media (max-width: 760px) {
+  .discovery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+  }
+
+  .motif {
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+  }
+
+  .controls h2 {
+    margin: 0;
+    font-size: 26px;
+  }
+
+  .actions {
+    grid-column: 1 / -1;
+    margin-top: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .discovery {
+    padding: 20px 16px 16px;
+    border-radius: 24px;
+  }
+
+  .filter select {
+    font-size: 16px;
+  }
+
+  .preview {
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .image {
+    height: 144px;
+  }
+
+  .identity {
+    padding: 3px 0;
+  }
+
+  .identity h3 {
+    margin-top: 6px;
+    font-size: 15px;
+  }
+
+  .identity p {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview {
+    animation: none;
+  }
+
+  .draw,
+  .card {
+    transition: none;
+  }
+
+  .draw:hover {
+    transform: none;
+  }
+}

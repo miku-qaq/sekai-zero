@@ -24,7 +24,14 @@ export function CollectionNavigation({ current }: { current?: CollectionRoomId }
       <div className={styles.intro}>
         <span>MIKUREINA&apos;S WONDER COLLECTION</span>
         <strong>选择一间展柜</strong>
-        <CollectionLink href="/collections/">返回馆内导览</CollectionLink>
+        <div className={styles.actions}>
+          <CollectionLink
+            href={`/collections/gallery/${current ? `?room=${current}` : ""}`}
+          >
+            画册模式
+          </CollectionLink>
+          <CollectionLink href="/collections/">馆内导览</CollectionLink>
+        </div>
       </div>
       <div ref={routesRef} className={styles.routes}>
         {collectionRooms.map((room) => {
