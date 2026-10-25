@@ -7,6 +7,7 @@ import { deviceCollection } from "@/content/devices";
 import { figureCollection } from "@/content/figures";
 import { fufuCollection } from "@/content/fufu";
 import { gameCatalog } from "@/content/games";
+import { headphoneCollection } from "@/content/headphones";
 import { sitePath } from "@/lib/site-path";
 import { absoluteSiteUrl } from "@/lib/site-url";
 import { JourneyNavigation } from "../components/journey-navigation";
@@ -20,7 +21,7 @@ import styles from "./collections.module.css";
 export const dynamic = "force-static";
 
 const description =
-  "Mikureina 的奇妙收藏馆：动画、游戏、手办、初音未来 Fufu、手柄与设备收藏。";
+  "Mikureina 的奇妙收藏馆：动画、游戏、手办、初音未来 Fufu、手柄、设备与耳机收藏。";
 
 export const metadata: Metadata = {
   title: "奇妙收藏馆",
@@ -167,6 +168,25 @@ export default function CollectionsPage() {
                       </span>
                     ))}
                   </div>
+                ) : room.id === "headphones" ? (
+                  <div className={styles.controllerShelf}>
+                    {headphoneCollection.map((entry) => (
+                      <span key={entry.id}>
+                        {entry.image ? (
+                          <Image
+                            src={sitePath(entry.image)}
+                            alt=""
+                            width={200}
+                            height={160}
+                            sizes="(max-width: 600px) 22vw, 160px"
+                            loading="lazy"
+                            unoptimized
+                          />
+                        ) : null}
+                        <b>{entry.shortName}</b>
+                      </span>
+                    ))}
+                  </div>
                 ) : room.id === "devices" ? (
                   <div className={styles.deviceShelf}>
                     {devicePreview.map((entry) => (
@@ -220,7 +240,9 @@ export default function CollectionsPage() {
                           ? `从${fufuTimeline}，还有一只大 Fufu。`
                           : room.id === "devices"
                             ? "Apple 与 Nintendo，日常与游戏的陪伴。"
-                            : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
+                            : room.id === "headphones"
+                              ? "Sony 与 Apple，喜欢的声音常在耳边。"
+                              : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
                 </p>
                 <div className={styles.exhibitFooter}>
                   <span>
@@ -233,8 +255,10 @@ export default function CollectionsPage() {
                           : room.id === "fufu"
                             ? "生肖时间线 · 官方资料"
                             : room.id === "devices"
-                              ? "手机、平板、耳机与游戏主机"
-                              : "标准款与角色联名 · 商品图鉴"}
+                              ? "手机、平板与游戏主机"
+                              : room.id === "headphones"
+                                ? "头戴与入耳 · 声音收藏"
+                                : "标准款与角色联名 · 商品图鉴"}
                   </span>
                   <b>
                     进入展柜 <span aria-hidden="true">↗</span>
@@ -245,7 +269,7 @@ export default function CollectionsPage() {
           ))}
         </div>
         <p className={styles.collectionNote}>
-          手办、Fufu、手柄与设备使用展示图，非本人实拍。
+          手办、Fufu、手柄、设备与耳机使用展示图，非本人实拍。
         </p>
       </section>
 

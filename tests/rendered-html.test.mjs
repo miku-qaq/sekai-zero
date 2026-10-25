@@ -23,7 +23,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("builds the exact 16-route Worker manifest", async () => {
+test("builds the exact 17-route Worker manifest", async () => {
   const workerSource = await readFile(
     new URL("../dist/server/index.js", import.meta.url),
     "utf8",
@@ -44,6 +44,7 @@ test("builds the exact 16-route Worker manifest", async () => {
     "/collections/fufu",
     "/collections/gallery",
     "/collections/games",
+    "/collections/headphones",
     "/games",
     "/links",
     "/logs",
@@ -194,7 +195,7 @@ test("server-renders the five canonical top-level routes with clear purposes", a
   }
 });
 
-test("server-renders the six canonical rooms inside the Wonder Collection", async () => {
+test("server-renders the seven canonical rooms inside the Wonder Collection", async () => {
   const rooms = [
     {
       pathname: "/collections/anime",
@@ -232,6 +233,12 @@ test("server-renders the six canonical rooms inside the Wonder Collection", asyn
       copy: /日常与游戏，都有它们。/,
       subpage: "设备收藏",
     },
+    {
+      pathname: "/collections/headphones",
+      title: /<title>耳机收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+      copy: /喜欢的声音，留在耳边。/,
+      subpage: "耳机收藏",
+    },
   ];
 
   for (const room of rooms) {
@@ -253,6 +260,7 @@ test("server-renders the six canonical rooms inside the Wonder Collection", asyn
     assert.match(html, /href="\/collections\/fufu\/"/);
     assert.match(html, /href="\/collections\/controllers\/"/);
     assert.match(html, /href="\/collections\/devices\/"/);
+    assert.match(html, /href="\/collections\/headphones\/"/);
     assert.match(html, /class="journey-navigation section-shell"/);
   }
 });
@@ -409,24 +417,26 @@ test("publishes the categorized directory with all confirmed destinations", asyn
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 });
 
-test("keeps the Wonder Collection hub concise while linking all six rooms", async () => {
+test("keeps the Wonder Collection hub concise while linking all seven rooms", async () => {
   const response = await render("/collections");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /06 间/);
-  assert.match(html, /267 条/);
+  assert.match(html, /07 间/);
+  assert.match(html, /269 条/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
   assert.match(html, /手办收藏/);
   assert.match(html, /Fufu 收藏/);
   assert.match(html, /设备收藏/);
+  assert.match(html, /耳机收藏/);
   assert.match(html, /href="\/collections\/anime\/"/);
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /href="\/collections\/controllers\/"/);
   assert.match(html, /href="\/collections\/devices\/"/);
+  assert.match(html, /href="\/collections\/headphones\/"/);
   assert.match(html, /寅 2022 到 午 2026/);
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /16 件/);
@@ -1046,14 +1056,14 @@ test("publishes exactly the four owner-confirmed controllers with local product 
   assert.doesNotMatch(html, /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i);
 });
 
-test("publishes the six confirmed Apple and Nintendo devices without invented ownership details", async () => {
+test("publishes the four confirmed Apple and Nintendo devices without invented ownership details", async () => {
   const response = await render("/collections/devices");
   assert.equal(response.status, 200);
   const html = await response.text();
 
   assert.match(html, /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/);
   assert.match(html, /日常与游戏，都有它们。/);
-  assert.match(html, /aria-label="6 件设备收藏"/);
+  assert.match(html, /aria-label="4 件设备收藏"/);
   assert.match(html, /aria-label="设备品牌"/);
   assert.match(html, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
   for (const brand of ["Apple", "Nintendo"]) {
@@ -1067,8 +1077,6 @@ test("publishes the six confirmed Apple and Nintendo devices without invented ow
       "device-nintendo-switch-2",
       "device-iphone-17-pro",
       "device-ipad-pro-m5",
-      "device-airpods-pro-3",
-      "device-airpods-max-2",
     ],
   );
   for (const [id, title] of [
@@ -1076,8 +1084,6 @@ test("publishes the six confirmed Apple and Nintendo devices without invented ow
     ["device-nintendo-switch-2", "Nintendo Switch 2"],
     ["device-iphone-17-pro", "iPhone 17 Pro"],
     ["device-ipad-pro-m5", "iPad Pro"],
-    ["device-airpods-pro-3", "AirPods Pro 3"],
-    ["device-airpods-max-2", "AirPods Max 2"],
   ]) {
     assert.match(html, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
   }
@@ -1087,15 +1093,12 @@ test("publishes the six confirmed Apple and Nintendo devices without invented ow
   assert.match(html, /普通版/);
   assert.match(html, /星宇橙色/);
   assert.match(html, /13 英寸 · M5 · 深空黑色/);
-  assert.match(html, /午夜色/);
   assert.doesNotMatch(html, /版本待补充/);
   for (const officialUrl of [
     "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
     "https://www.nintendo.com/hk/hardware/switch2/index.html",
     "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
     "https://www.apple.com.cn/ipad-pro/",
-    "https://www.apple.com.cn/airpods-pro/",
-    "https://www.apple.com.cn/airpods-max/",
   ]) {
     assert.ok(
       html.includes(`href="${officialUrl}"`),
@@ -1114,5 +1117,68 @@ test("publishes the six confirmed Apple and Nintendo devices without invented ow
   assert.doesNotMatch(
     html,
     /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
+  );
+});
+
+test("publishes four headphones separately while preserving migrated Apple IDs", async () => {
+  const response = await render("/collections/headphones");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /<title>耳机收藏 · 奇妙收藏馆 · SEKAI<\/title>/);
+  assert.match(html, /喜欢的声音，留在耳边。/);
+  assert.match(html, /aria-label="4 副耳机收藏"/);
+  assert.match(html, /aria-label="耳机品牌"/);
+  assert.match(html, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
+  for (const brand of ["Sony", "Apple"]) {
+    assert.match(html, new RegExp(`<button\\b[^>]*>${brand}<\\/button>`));
+    assert.match(html.replaceAll("<!-- -->", ""), new RegExp(`${brand} 官方`));
+  }
+  const headphoneIds = [...html.matchAll(/<h3[^>]*id="([^"]+)-title"/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(headphoneIds.length, 4);
+  assert.equal(new Set(headphoneIds).size, 4);
+  assert.deepEqual(headphoneIds, [
+    "device-airpods-pro-3",
+    "device-airpods-max-2",
+    "headphone-sony-wh-1000xm5",
+    "headphone-sony-wh-1000xm6",
+  ]);
+  for (const [id, title] of [
+    ["device-airpods-pro-3", "AirPods Pro 3"],
+    ["device-airpods-max-2", "AirPods Max 2"],
+    ["headphone-sony-wh-1000xm5", "Sony WH-1000XM5"],
+    ["headphone-sony-wh-1000xm6", "Sony WH-1000XM6"],
+  ]) {
+    assert.ok(headphoneIds.includes(id), `${id} must retain its existing deep link`);
+    assert.match(html, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
+  }
+  assert.match(html, /午夜色/);
+  assert.match(html, /铂金银/);
+  assert.match(html, /黑色/);
+  for (const officialUrl of [
+    "https://www.apple.com.cn/airpods-pro/",
+    "https://www.apple.com.cn/airpods-max/",
+    "https://www.sonystyle.com.cn/products/headphone/wh_1000xm5/wh_1000xm5_s.html",
+    "https://www.sonystyle.com.cn/products/headphone/wh_1000xm6/wh_1000xm6_b.html",
+  ]) {
+    assert.ok(html.includes(`href="${officialUrl}"`));
+  }
+  assert.doesNotMatch(
+    html,
+    /[¥￥]\s*\d|\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i,
+  );
+  assert.doesNotMatch(html, /(?:序列号|购买日期|购入日期|订单号)/);
+  assert.doesNotMatch(
+    html,
+    /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
+  );
+  assert.match(html, /href="\/collections\/devices\/"/);
+  assert.match(html, /href="\/collections\/gallery\/\?room=headphones"/);
+  const canonicalMatch = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i);
+  assert.ok(canonicalMatch, "the headphones room should expose a canonical URL");
+  assert.equal(
+    new URL(canonicalMatch[1]).pathname,
+    "/sekai-zero/collections/headphones/",
   );
 });

@@ -3,7 +3,7 @@ export type DeviceCollectionEntry = {
   title: string;
   shortName: string;
   brand: "Nintendo" | "Apple";
-  category: "游戏主机" | "手机" | "平板" | "耳机";
+  category: "游戏主机" | "手机" | "平板";
   /** 仅填写本人确认的版本与配色。 */
   edition: string | null;
   tone: "mint" | "violet";
@@ -71,33 +71,5 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     imageAlt: "13 英寸 iPad Pro M5 深空黑色官方商品图，非本人实拍",
     imageNote: "官方商品图 · 非本人实拍",
     sourceUrl: "https://www.apple.com.cn/ipad-pro/",
-  },
-  {
-    id: "device-airpods-pro-3",
-    title: "AirPods Pro 3",
-    shortName: "AirPods Pro 3",
-    brand: "Apple",
-    category: "耳机",
-    edition: null,
-    tone: "mint",
-    // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509?wid=976&hei=916&fmt=jpeg&qlt=90&.v=cmp4MmZ6OWxOeHNNTXh4SzlBNUpEb1RucE9zZTI5eEREaWZpY29lSld3eWVDYXovZDMyN1dXU211bjZoVlVUcWJGcXNRQnFCV0w3WVRjTExvdm1ic1YxRUxFRmRlWDBITzhnRmZ5OTRmaVdKTExiOEFsRmxtQ2Nua0tRSC83MkI
-    image: "/devices/airpods-pro-3.jpg",
-    imageAlt: "AirPods Pro 3 白色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
-    sourceUrl: "https://www.apple.com.cn/airpods-pro/",
-  },
-  {
-    id: "device-airpods-max-2",
-    title: "AirPods Max 2",
-    shortName: "AirPods Max 2",
-    brand: "Apple",
-    category: "耳机",
-    edition: "午夜色",
-    tone: "violet",
-    // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-max-select-202409-midnight_FV1?wid=976&hei=916&fmt=jpeg&qlt=90&.v=azQxRkVJKzd6V3J0aGNqWFhLMzBmdmVWNWdHYnp5cHkwMldsSElEOHpyd0cyWGRFNFZ5QTk3bFlteis2Q2NNaWpENFdPQTN0TWQ4ejhtTWxrUHVDeElGZGV2eWhZaEljUzNSeDlxcDVuWGszbTFldUtUQzN0ellEWHZ3UUFYSS8
-    image: "/devices/airpods-max-2-midnight.jpg",
-    imageAlt: "AirPods Max 2 午夜色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
-    sourceUrl: "https://www.apple.com.cn/airpods-max/",
   },
 ];

@@ -13,7 +13,7 @@ import styles from "./devices.module.css";
 export const dynamic = "force-static";
 
 const description =
-  "Mikureina 的设备收藏：Apple 的手机、平板与耳机，以及 Nintendo 的游戏主机。";
+  "Mikureina 的设备收藏：Apple 的手机与平板，以及 Nintendo 的游戏主机。";
 
 export const metadata: Metadata = {
   title: "设备收藏 · 奇妙收藏馆",

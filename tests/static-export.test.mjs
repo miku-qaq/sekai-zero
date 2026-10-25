@@ -108,6 +108,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
     {
+      path: "collections/headphones/index.html",
+      title: /<title>耳机收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
@@ -128,7 +132,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>世界线日志 · SEKAI<\/title>/i,
     },
   ];
-  assert.equal(pages.length, 16, "Pages should expose exactly 16 public routes");
+  assert.equal(pages.length, 17, "Pages should expose exactly 17 public routes");
 
   const exported = new Map();
   for (const page of pages) {
@@ -212,14 +216,16 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(study, /LEARNING QUEUE|learning-queue/i);
 
   const collections = exported.get("collections/index.html");
-  assert.match(collections, /06 间/);
-  assert.match(collections, /267 条/);
+  assert.match(collections, /07 间/);
+  assert.match(collections, /269 条/);
   assert.match(collections, /动画展柜/);
   assert.match(collections, /游戏展柜/);
   assert.match(collections, /手办收藏/);
   assert.match(collections, /Fufu 收藏/);
   assert.match(collections, /手柄收藏/);
   assert.match(collections, /设备收藏/);
+  assert.match(collections, /耳机收藏/);
+  assert.match(collections, new RegExp(`href="${basePath}/collections/headphones/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/devices/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/controllers/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/anime/"`));
@@ -421,7 +427,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const devices = exported.get("collections/devices/index.html");
   assert.match(devices, /日常与游戏，都有它们。/);
-  assert.match(devices, /aria-label="6 件设备收藏"/);
+  assert.match(devices, /aria-label="4 件设备收藏"/);
   assert.match(devices, /aria-label="设备品牌"/);
   assert.match(devices, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
   for (const brand of ["Apple", "Nintendo"]) {
@@ -437,8 +443,6 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       "device-nintendo-switch-2",
       "device-iphone-17-pro",
       "device-ipad-pro-m5",
-      "device-airpods-pro-3",
-      "device-airpods-max-2",
     ],
   );
   for (const [id, title] of [
@@ -446,13 +450,19 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     ["device-nintendo-switch-2", "Nintendo Switch 2"],
     ["device-iphone-17-pro", "iPhone 17 Pro"],
     ["device-ipad-pro-m5", "iPad Pro"],
-    ["device-airpods-pro-3", "AirPods Pro 3"],
-    ["device-airpods-max-2", "AirPods Max 2"],
   ]) {
     assert.match(devices, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
   }
   assert.match(devices, /aria-label="奇妙收藏馆分馆导航"/);
-  for (const room of ["anime", "games", "figures", "fufu", "controllers", "devices"]) {
+  for (const room of [
+    "anime",
+    "games",
+    "figures",
+    "fufu",
+    "controllers",
+    "devices",
+    "headphones",
+  ]) {
     assert.match(devices, new RegExp(`href="${basePath}/collections/${room}/"`));
   }
   assert.match(
@@ -463,15 +473,12 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(devices, /普通版/);
   assert.match(devices, /星宇橙色/);
   assert.match(devices, /13 英寸 · M5 · 深空黑色/);
-  assert.match(devices, /午夜色/);
   assert.doesNotMatch(devices, /版本待补充/);
   for (const officialUrl of [
     "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
     "https://www.nintendo.com/hk/hardware/switch2/index.html",
     "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
     "https://www.apple.com.cn/ipad-pro/",
-    "https://www.apple.com.cn/airpods-pro/",
-    "https://www.apple.com.cn/airpods-max/",
   ]) {
     assert.ok(
       devices.includes(`href="${officialUrl}"`),
@@ -488,9 +495,65 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
   );
 
+  const headphones = exported.get("collections/headphones/index.html");
+  assert.match(headphones, /喜欢的声音，留在耳边。/);
+  assert.match(headphones, /aria-label="4 副耳机收藏"/);
+  assert.match(headphones, /aria-label="耳机品牌"/);
+  assert.match(headphones, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
+  for (const brand of ["Sony", "Apple"]) {
+    assert.match(headphones, new RegExp(`<button\\b[^>]*>${brand}<\\/button>`));
+    assert.match(headphones.replaceAll("<!-- -->", ""), new RegExp(`${brand} 官方`));
+  }
+  const headphoneIds = [...headphones.matchAll(/<h3[^>]*id="([^"]+)-title"/g)].map(
+    (match) => match[1],
+  );
+  assert.equal(headphoneIds.length, 4);
+  assert.equal(new Set(headphoneIds).size, 4);
+  assert.deepEqual(headphoneIds, [
+    "device-airpods-pro-3",
+    "device-airpods-max-2",
+    "headphone-sony-wh-1000xm5",
+    "headphone-sony-wh-1000xm6",
+  ]);
+  for (const [id, title] of [
+    ["device-airpods-pro-3", "AirPods Pro 3"],
+    ["device-airpods-max-2", "AirPods Max 2"],
+    ["headphone-sony-wh-1000xm5", "Sony WH-1000XM5"],
+    ["headphone-sony-wh-1000xm6", "Sony WH-1000XM6"],
+  ]) {
+    assert.ok(headphoneIds.includes(id), `${id} must retain its existing deep link`);
+    assert.match(headphones, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
+  }
+  assert.match(headphones, /午夜色/);
+  assert.match(headphones, /铂金银/);
+  assert.match(headphones, /黑色/);
+  for (const officialUrl of [
+    "https://www.apple.com.cn/airpods-pro/",
+    "https://www.apple.com.cn/airpods-max/",
+    "https://www.sonystyle.com.cn/products/headphone/wh_1000xm5/wh_1000xm5_s.html",
+    "https://www.sonystyle.com.cn/products/headphone/wh_1000xm6/wh_1000xm6_b.html",
+  ]) {
+    assert.ok(headphones.includes(`href="${officialUrl}"`));
+  }
+  assert.doesNotMatch(
+    headphones,
+    /[¥￥]\s*\d|\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i,
+  );
+  assert.doesNotMatch(headphones, /(?:序列号|购买日期|购入日期|订单号)/);
+  assert.doesNotMatch(
+    headphones,
+    /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
+  );
+  assert.match(headphones, new RegExp(`href="${basePath}/collections/devices/"`));
+  assert.match(
+    headphones,
+    new RegExp(`href="${basePath}/collections/gallery/\\?room=headphones"`),
+  );
+
   for (const [html, expectedPath] of [
     [controllers, `${basePath}/collections/controllers/`],
     [devices, `${basePath}/collections/devices/`],
+    [headphones, `${basePath}/collections/headphones/`],
     [collections, `${basePath}/collections/`],
     [anime, `${basePath}/collections/anime/`],
     [games, `${basePath}/collections/games/`],
@@ -620,6 +683,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     figures,
     fufu,
     devices,
+    headphones,
     study,
     links,
     logs,

@@ -6,6 +6,7 @@ import { deviceCollection } from "./devices";
 import { figureCollection } from "./figures";
 import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
+import { headphoneCollection } from "./headphones";
 
 export type CollectionItem = {
   id: string;
@@ -123,6 +124,32 @@ export const collectionItems: readonly CollectionItem[] = [
           {
             id: entry.id,
             room: "devices",
+            title: entry.title,
+            subtitle: entry.edition ?? entry.category,
+            image: entry.image,
+            imageAlt: entry.imageAlt,
+            sourceUrl: entry.sourceUrl,
+            sourceLabel: `${entry.brand} 官方资料`,
+            imageNote: entry.imageNote,
+            fit: "contain",
+            keywords: [
+              entry.title,
+              entry.shortName,
+              entry.brand,
+              entry.category,
+              entry.edition ?? "",
+            ],
+            story: collectionStories[entry.id] ?? "",
+          },
+        ]
+      : [],
+  ),
+  ...headphoneCollection.flatMap((entry): CollectionItem[] =>
+    entry.image
+      ? [
+          {
+            id: entry.id,
+            room: "headphones",
             title: entry.title,
             subtitle: entry.edition ?? entry.category,
             image: entry.image,

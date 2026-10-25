@@ -4,9 +4,10 @@ import { deviceCollection } from "./devices";
 import { figureCollection } from "./figures";
 import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
+import { headphoneCollection } from "./headphones";
 
 export type CollectionRoomId =
-  "anime" | "games" | "figures" | "fufu" | "controllers" | "devices";
+  "anime" | "games" | "figures" | "fufu" | "controllers" | "devices" | "headphones";
 
 /** Canonical registry for the rooms inside the Wonder Collection. */
 export const collectionRooms = [
@@ -75,6 +76,17 @@ export const collectionRooms = [
     motif: "▰",
     tone: "mint",
     description: "Apple 与 Nintendo，陪伴日常与游戏时光的设备。",
+  },
+  {
+    id: "headphones",
+    index: "07",
+    href: "/collections/headphones/",
+    label: "耳机收藏",
+    count: headphoneCollection.length,
+    unit: "副耳机",
+    motif: "♫",
+    tone: "violet",
+    description: "Sony 与 Apple，从头戴到入耳的声音收藏。",
   },
 ] as const;
 

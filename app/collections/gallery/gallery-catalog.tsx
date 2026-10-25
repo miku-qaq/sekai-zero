@@ -19,6 +19,7 @@ const rooms = [
   { id: "fufu", label: "Fufu" },
   { id: "controllers", label: "手柄" },
   { id: "devices", label: "设备" },
+  { id: "headphones", label: "耳机" },
 ] as const;
 
 function subscribeUrl(onChange: () => void) {

@@ -146,13 +146,14 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, six collection rooms and EP.018 as the latest release", async () => {
+test("keeps five top-level worlds, seven collection rooms and EP.018 as the latest release", async () => {
   const [
     site,
     collections,
     figures,
     fufu,
     devices,
+    headphones,
     releases,
     animeCatalogRaw,
     gameCatalogRaw,
@@ -162,6 +163,7 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
     readProjectFile("content/figures.ts"),
     readProjectFile("content/fufu.ts"),
     readProjectFile("content/devices.ts"),
+    readProjectFile("content/headphones.ts"),
     readProjectFile("content/releases.ts"),
     readProjectFile("content/anime-catalog.json"),
     readProjectFile("content/games-catalog.json"),
@@ -176,11 +178,13 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
   assert.doesNotMatch(worldRoutes[1], /href: "\/(?:anime|games)\/"/);
 
   const roomIds = [
-    ...collections.matchAll(/id: "(anime|games|figures|fufu|controllers|devices)"/g),
+    ...collections.matchAll(
+      /id: "(anime|games|figures|fufu|controllers|devices|headphones)"/g,
+    ),
   ].map((match) => match[1]);
   const roomHrefs = [
     ...collections.matchAll(
-      /href: "\/collections\/(anime|games|figures|fufu|controllers|devices)\/"/g,
+      /href: "\/collections\/(anime|games|figures|fufu|controllers|devices|headphones)\/"/g,
     ),
   ].map((match) => match[1]);
   assert.deepEqual(roomIds, [
@@ -190,6 +194,7 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
     "fufu",
     "controllers",
     "devices",
+    "headphones",
   ]);
   assert.deepEqual(roomHrefs, roomIds);
   assert.match(collections, /count: animeCatalog\.length/);
@@ -198,6 +203,7 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
   assert.match(collections, /count: fufuCollection\.length/);
   assert.match(collections, /count: controllerCollection\.length/);
   assert.match(collections, /count: deviceCollection\.length/);
+  assert.match(collections, /count: headphoneCollection\.length/);
   assert.match(
     collections,
     /export const collectionRecordCount = collectionRooms\.reduce/,
@@ -389,8 +395,6 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
       "device-nintendo-switch-2",
       "device-iphone-17-pro",
       "device-ipad-pro-m5",
-      "device-airpods-pro-3",
-      "device-airpods-max-2",
     ],
   );
   assert.deepEqual(
@@ -399,13 +403,47 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
       assert.ok(edition, `${entry[1]} should declare its confirmed edition`);
       return JSON.parse(edition[1]);
     }),
-    ["OLED 款式", "普通版", "星宇橙色", "13 英寸 · M5 · 深空黑色", null, "午夜色"],
+    ["OLED 款式", "普通版", "星宇橙色", "13 英寸 · M5 · 深空黑色"],
   );
   assert.deepEqual(
     deviceEntries.map((entry) => entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1]),
-    ["Nintendo", "Nintendo", "Apple", "Apple", "Apple", "Apple"],
+    ["Nintendo", "Nintendo", "Apple", "Apple"],
   );
-  for (const entry of deviceEntries) {
+  const headphoneEntries = [
+    ...headphones.matchAll(/\{\s+id: "([^"]+)",([^]*?)\n {2}\},/g),
+  ];
+  assert.deepEqual(
+    headphoneEntries.map((entry) => entry[1]),
+    [
+      "device-airpods-pro-3",
+      "device-airpods-max-2",
+      "headphone-sony-wh-1000xm5",
+      "headphone-sony-wh-1000xm6",
+    ],
+  );
+  for (const migratedId of ["device-airpods-pro-3", "device-airpods-max-2"]) {
+    assert.equal(headphoneEntries.filter((entry) => entry[1] === migratedId).length, 1);
+    assert.ok(!deviceEntries.some((entry) => entry[1] === migratedId));
+  }
+  assert.deepEqual(
+    headphoneEntries
+      .map((entry) => entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1])
+      .toSorted(),
+    ["Apple", "Apple", "Sony", "Sony"],
+  );
+  assert.deepEqual(
+    headphoneEntries.map((entry) => {
+      const edition = entry[2].match(/\n\s+edition: (null|"[^"]+")/);
+      assert.ok(edition, `${entry[1]} should declare its confirmed edition`);
+      return JSON.parse(edition[1]);
+    }),
+    [null, "午夜色", "铂金银", "黑色"],
+  );
+  assert.deepEqual(
+    headphoneEntries.map((entry) => entry[2].match(/\n\s+category: "([^"]+)"/)?.[1]),
+    ["入耳式", "头戴式", "头戴式", "头戴式"],
+  );
+  for (const entry of [...deviceEntries, ...headphoneEntries]) {
     assert.doesNotMatch(
       entry[0],
       /^\s*(?:price|cost|purchaseDate|purchasedAt|order|serialNumber|shop):/im,
@@ -414,13 +452,19 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
     assert.ok(source, `${entry[1]} should have official product information`);
     assert.equal(new URL(source[1]).protocol, "https:");
     const brand = entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1];
-    assert.equal(
-      new URL(source[1]).hostname,
-      brand === "Nintendo" ? "www.nintendo.com" : "www.apple.com.cn",
-    );
+    const officialHosts = {
+      Nintendo: "www.nintendo.com",
+      Apple: "www.apple.com.cn",
+      Sony: "www.sonystyle.com.cn",
+    };
+    assert.ok(Object.hasOwn(officialHosts, brand), `${entry[1]} needs a known brand`);
+    assert.equal(new URL(source[1]).hostname, officialHosts[brand]);
     const imagePath = entry[0].match(/image: "([^"\s]+)"/)?.[1];
     assert.ok(imagePath, `${entry[1]} should have a local product image`);
-    assert.match(imagePath, /^\/devices\/[a-z0-9-]+\.(?:jpe?g|png|webp)$/);
+    assert.match(
+      imagePath,
+      /^\/(?:devices|headphones)\/[a-z0-9-]+\.(?:jpe?g|png|webp)$/,
+    );
     const image = await readFile(new URL(`public${imagePath}`, projectUrl));
     if (imagePath.endsWith(".png")) {
       assert.deepEqual([...image.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -438,8 +482,24 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
       figureEntries.length +
       fufuEntries.length +
       controllerEntries.length +
-      deviceEntries.length,
-    267,
+      deviceEntries.length +
+      headphoneEntries.length,
+    269,
+  );
+  const collectionIds = [
+    ...JSON.parse(animeCatalogRaw).map((entry) => entry.id),
+    ...JSON.parse(gameCatalogRaw).items.map((entry) => entry.id),
+    ...figureEntries.map((entry) => entry[1]),
+    ...fufuEntries.map((entry) => entry[1]),
+    ...controllerEntries.map((entry) => entry[1]),
+    ...deviceEntries.map((entry) => entry[1]),
+    ...headphoneEntries.map((entry) => entry[1]),
+  ];
+  assert.equal(collectionIds.length, 269);
+  assert.equal(
+    new Set(collectionIds).size,
+    269,
+    "collection IDs must not repeat across rooms",
   );
 
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(

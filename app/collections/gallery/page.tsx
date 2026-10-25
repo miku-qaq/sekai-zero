@@ -9,7 +9,8 @@ import styles from "./gallery.module.css";
 
 export const dynamic = "force-static";
 
-const description = "一本可以慢慢翻的收藏画册：动画、游戏、手办、Fufu、手柄与设备。";
+const description =
+  "一本可以慢慢翻的收藏画册：动画、游戏、手办、Fufu、手柄、设备与耳机。";
 
 export const metadata: Metadata = {
   title: "收藏画册 · 奇妙收藏馆",

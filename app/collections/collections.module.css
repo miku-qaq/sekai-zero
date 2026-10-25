@@ -740,6 +740,31 @@
   font-size: 10px;
   overflow-wrap: anywhere;
 }
+.exhibit[data-room="headphones"] .exhibitArtwork {
+  height: auto;
+  min-height: 200px;
+}
+@media (min-width: 601px) {
+  .exhibit[data-room="headphones"] {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 901px) {
+  .exhibit[data-room="headphones"] {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .exhibit[data-room="headphones"] .exhibitHeading {
+    grid-column: 1 / -1;
+  }
+  .exhibit[data-room="headphones"] .exhibitArtwork {
+    height: 100%;
+    min-height: 230px;
+    align-items: center;
+    border-bottom: 0;
+    border-right: 1px solid var(--border);
+  }
+}
 @media (max-width: 600px) {
   .controllerShelf img {
     height: 92px;
