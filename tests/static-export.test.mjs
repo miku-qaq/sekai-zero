@@ -462,7 +462,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(devices, /OLED 款式/);
   assert.match(devices, /普通版/);
   assert.match(devices, /星宇橙色/);
-  assert.match(devices, /M5 · 深空黑色/);
+  assert.match(devices, /13 英寸 · M5 · 深空黑色/);
   assert.match(devices, /午夜色/);
   assert.doesNotMatch(devices, /版本待补充/);
   for (const officialUrl of [

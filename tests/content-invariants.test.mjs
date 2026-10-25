@@ -399,7 +399,7 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
       assert.ok(edition, `${entry[1]} should declare its confirmed edition`);
       return JSON.parse(edition[1]);
     }),
-    ["OLED 款式", "普通版", "星宇橙色", "M5 · 深空黑色", null, "午夜色"],
+    ["OLED 款式", "普通版", "星宇橙色", "13 英寸 · M5 · 深空黑色", null, "午夜色"],
   );
   assert.deepEqual(
     deviceEntries.map((entry) => entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1]),

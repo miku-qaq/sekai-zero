@@ -64,12 +64,12 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     shortName: "iPad Pro",
     brand: "Apple",
     category: "平板",
-    edition: "M5 · 深空黑色",
+    edition: "13 英寸 · M5 · 深空黑色",
     tone: "violet",
-    // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-pro-11-select-wifi-spaceblack-202405?wid=940&hei=1112&fmt=p-jpg&qlt=95&.v=cU5SNnZmTmg3VlFoaGg3dW5WUnQvOHpCNlo3Y2trYUx2VGtnRmoxbk1mRFcvUGs3Z3lJUWVHYk5KZW9nNkdxb1Q5NVJ4OStiQklybHZqYkJwOUI0UWt2aHJVVVRvS3hUQ0EwVk8wak9Ka0h1S1B4SGsvR3pUbytFaVc1Q2x1U3Y
+    // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=940&hei=1112&fmt=p-jpg&qlt=95&.v=T1BCOVhFWUx5RnVHWklQQWdsQTFDY3pCNlo3Y2trYUx2VGtnRmoxbk1mRFcvUGs3Z3lJUWVHYk5KZW9nNkdxb1Q5NVJ4OStiQklybHZqYkJwOUI0UWt2aHJVVVRvS3hUQ0EwVk8wak9Ka0g3djBPZUREMElRMHhHVnprUmxPLzg
     image: "/devices/ipad-pro-m5-space-black.jpg",
-    imageAlt: "iPad Pro M5 深空黑色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 尺寸示意 · 非本人实拍",
+    imageAlt: "13 英寸 iPad Pro M5 深空黑色官方商品图，非本人实拍",
+    imageNote: "官方商品图 · 非本人实拍",
     sourceUrl: "https://www.apple.com.cn/ipad-pro/",
   },
   {

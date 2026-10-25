@@ -1086,7 +1086,7 @@ test("publishes the six confirmed Apple and Nintendo devices without invented ow
   assert.match(html, /OLED 款式/);
   assert.match(html, /普通版/);
   assert.match(html, /星宇橙色/);
-  assert.match(html, /M5 · 深空黑色/);
+  assert.match(html, /13 英寸 · M5 · 深空黑色/);
   assert.match(html, /午夜色/);
   assert.doesNotMatch(html, /版本待补充/);
   for (const officialUrl of [
