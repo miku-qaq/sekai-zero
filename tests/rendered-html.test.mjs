@@ -229,7 +229,7 @@ test("server-renders the six canonical rooms inside the Wonder Collection", asyn
     {
       pathname: "/collections/devices",
       title: /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
-      copy: /陪我走进游戏世界。/,
+      copy: /日常与游戏，都有它们。/,
       subpage: "设备收藏",
     },
   ];
@@ -415,7 +415,7 @@ test("keeps the Wonder Collection hub concise while linking all six rooms", asyn
   const html = await response.text();
 
   assert.match(html, /06 间/);
-  assert.match(html, /263 条/);
+  assert.match(html, /267 条/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
   assert.match(html, /手办收藏/);
@@ -1046,21 +1046,38 @@ test("publishes exactly the four owner-confirmed controllers with local product 
   assert.doesNotMatch(html, /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i);
 });
 
-test("publishes the two confirmed Nintendo devices without invented ownership details", async () => {
+test("publishes the six confirmed Apple and Nintendo devices without invented ownership details", async () => {
   const response = await render("/collections/devices");
   assert.equal(response.status, 200);
   const html = await response.text();
 
   assert.match(html, /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/);
-  assert.match(html, /陪我走进游戏世界。/);
-  assert.match(html, /aria-label="2 台设备收藏"/);
+  assert.match(html, /日常与游戏，都有它们。/);
+  assert.match(html, /aria-label="6 件设备收藏"/);
+  assert.match(html, /aria-label="设备品牌"/);
+  assert.match(html, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
+  for (const brand of ["Apple", "Nintendo"]) {
+    assert.match(html, new RegExp(`<button\\b[^>]*>${brand}<\\/button>`));
+    assert.match(html.replaceAll("<!-- -->", ""), new RegExp(`${brand} 官方`));
+  }
   assert.deepEqual(
     [...html.matchAll(/<h3[^>]*id="(device-[^"]+)-title"/g)].map((match) => match[1]),
-    ["device-nintendo-switch", "device-nintendo-switch-2"],
+    [
+      "device-nintendo-switch",
+      "device-nintendo-switch-2",
+      "device-iphone-17-pro",
+      "device-ipad-pro-m5",
+      "device-airpods-pro-3",
+      "device-airpods-max-2",
+    ],
   );
   for (const [id, title] of [
     ["device-nintendo-switch", "Nintendo Switch"],
     ["device-nintendo-switch-2", "Nintendo Switch 2"],
+    ["device-iphone-17-pro", "iPhone 17 Pro"],
+    ["device-ipad-pro-m5", "iPad Pro"],
+    ["device-airpods-pro-3", "AirPods Pro 3"],
+    ["device-airpods-max-2", "AirPods Max 2"],
   ]) {
     assert.match(html, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
   }
@@ -1068,14 +1085,21 @@ test("publishes the two confirmed Nintendo devices without invented ownership de
   assert.match(html, /href="\/collections\/gallery\/\?room=devices"/);
   assert.match(html, /OLED 款式/);
   assert.match(html, /普通版/);
+  assert.match(html, /星宇橙色/);
+  assert.match(html, /M5 · 深空黑色/);
+  assert.match(html, /午夜色/);
   assert.doesNotMatch(html, /版本待补充/);
   for (const officialUrl of [
     "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
     "https://www.nintendo.com/hk/hardware/switch2/index.html",
+    "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
+    "https://www.apple.com.cn/ipad-pro/",
+    "https://www.apple.com.cn/airpods-pro/",
+    "https://www.apple.com.cn/airpods-max/",
   ]) {
     assert.ok(
       html.includes(`href="${officialUrl}"`),
-      `${officialUrl} should link to Nintendo's confirmed model information`,
+      `${officialUrl} should link to the confirmed model's official information`,
     );
   }
 

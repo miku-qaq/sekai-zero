@@ -124,11 +124,11 @@ export const collectionItems: readonly CollectionItem[] = [
             id: entry.id,
             room: "devices",
             title: entry.title,
-            subtitle: entry.edition ?? "版本待补充",
+            subtitle: entry.edition ?? entry.category,
             image: entry.image,
             imageAlt: entry.imageAlt,
             sourceUrl: entry.sourceUrl,
-            sourceLabel: "Nintendo 官方资料",
+            sourceLabel: `${entry.brand} 官方资料`,
             imageNote: entry.imageNote,
             fit: "contain",
             keywords: [

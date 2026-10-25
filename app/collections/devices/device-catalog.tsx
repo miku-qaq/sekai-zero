@@ -8,31 +8,62 @@ import { sitePath } from "@/lib/site-path";
 import { CollectionLightbox, type CollectionImage } from "../collection-lightbox";
 import styles from "./devices.module.css";
 
-const previewItems = deviceCollection.flatMap((entry): CollectionImage[] =>
-  entry.image
-    ? [
-        {
-          id: entry.id,
-          title: entry.title,
-          subtitle: entry.edition ?? "版本待补充",
-          image: entry.image,
-          imageAlt: entry.imageAlt,
-          sourceUrl: entry.sourceUrl,
-          sourceLabel: "Nintendo 官方",
-          imageNote: entry.imageNote,
-          story: collectionStories[entry.id] ?? "",
-        },
-      ]
-    : [],
-);
+const brands = [
+  { id: "all", label: "全部" },
+  { id: "Apple", label: "Apple" },
+  { id: "Nintendo", label: "Nintendo" },
+] as const;
+type BrandFilter = (typeof brands)[number]["id"];
+
+// 编号属于设备本身，切换品牌后不会按当前结果重新编号。
+const indexedDevices = deviceCollection.map((entry, index) => ({ entry, index }));
 
 export function DeviceCatalog() {
+  const [brand, setBrand] = useState<BrandFilter>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const filteredDevices = indexedDevices.filter(
+    ({ entry }) => brand === "all" || entry.brand === brand,
+  );
+  const previewItems = filteredDevices.flatMap(({ entry }): CollectionImage[] =>
+    entry.image
+      ? [
+          {
+            id: entry.id,
+            title: entry.title,
+            subtitle: entry.edition || entry.category,
+            image: entry.image,
+            imageAlt: entry.imageAlt,
+            sourceUrl: entry.sourceUrl,
+            sourceLabel: `${entry.brand} 官方`,
+            imageNote: entry.imageNote,
+            story: collectionStories[entry.id] ?? "",
+          },
+        ]
+      : [],
+  );
 
   return (
     <>
-      <ol className={styles.grid} aria-label={`${deviceCollection.length} 台设备收藏`}>
-        {deviceCollection.map((entry, index) => (
+      <div className={styles.filters} role="group" aria-label="设备品牌">
+        {brands.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            aria-pressed={brand === option.id}
+            onClick={() => {
+              setSelectedId(null);
+              setBrand(option.id);
+            }}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        显示 {filteredDevices.length} / {deviceCollection.length} 件设备收藏
+      </p>
+      <ol className={styles.grid} aria-label={`${filteredDevices.length} 件设备收藏`}>
+        {filteredDevices.map(({ entry, index }) => (
           <li key={entry.id}>
             <article
               className={styles.card}
@@ -69,7 +100,7 @@ export function DeviceCatalog() {
                     role="img"
                     aria-label={`${entry.title}暂无展示图`}
                   >
-                    <span>CONSOLE</span>
+                    <span>DEVICE</span>
                     <strong>{entry.shortName}</strong>
                   </div>
                 )}
@@ -83,12 +114,14 @@ export function DeviceCatalog() {
                   <span>{entry.category}</span>
                 </p>
                 <h3 id={`${entry.id}-title`}>{entry.title}</h3>
-                <p className={styles.edition}>{entry.edition ?? "版本待补充"}</p>
+                {entry.edition ? (
+                  <p className={styles.edition}>{entry.edition}</p>
+                ) : null}
                 {entry.image ? (
                   <p className={styles.imageNote}>{entry.imageNote}</p>
                 ) : null}
                 <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">
-                  Nintendo 官方 <span aria-hidden="true">↗</span>
+                  {entry.brand} 官方 <span aria-hidden="true">↗</span>
                   <span className="sr-only">（将在新标签页打开）</span>
                 </a>
               </div>

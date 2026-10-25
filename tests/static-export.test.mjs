@@ -213,7 +213,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   const collections = exported.get("collections/index.html");
   assert.match(collections, /06 间/);
-  assert.match(collections, /263 条/);
+  assert.match(collections, /267 条/);
   assert.match(collections, /动画展柜/);
   assert.match(collections, /游戏展柜/);
   assert.match(collections, /手办收藏/);
@@ -420,17 +420,34 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   );
 
   const devices = exported.get("collections/devices/index.html");
-  assert.match(devices, /陪我走进游戏世界。/);
-  assert.match(devices, /aria-label="2 台设备收藏"/);
+  assert.match(devices, /日常与游戏，都有它们。/);
+  assert.match(devices, /aria-label="6 件设备收藏"/);
+  assert.match(devices, /aria-label="设备品牌"/);
+  assert.match(devices, /<button\b[^>]*aria-pressed="true"[^>]*>全部<\/button>/);
+  for (const brand of ["Apple", "Nintendo"]) {
+    assert.match(devices, new RegExp(`<button\\b[^>]*>${brand}<\\/button>`));
+    assert.match(devices.replaceAll("<!-- -->", ""), new RegExp(`${brand} 官方`));
+  }
   assert.deepEqual(
     [...devices.matchAll(/<h3[^>]*id="(device-[^"]+)-title"/g)].map(
       (match) => match[1],
     ),
-    ["device-nintendo-switch", "device-nintendo-switch-2"],
+    [
+      "device-nintendo-switch",
+      "device-nintendo-switch-2",
+      "device-iphone-17-pro",
+      "device-ipad-pro-m5",
+      "device-airpods-pro-3",
+      "device-airpods-max-2",
+    ],
   );
   for (const [id, title] of [
     ["device-nintendo-switch", "Nintendo Switch"],
     ["device-nintendo-switch-2", "Nintendo Switch 2"],
+    ["device-iphone-17-pro", "iPhone 17 Pro"],
+    ["device-ipad-pro-m5", "iPad Pro"],
+    ["device-airpods-pro-3", "AirPods Pro 3"],
+    ["device-airpods-max-2", "AirPods Max 2"],
   ]) {
     assert.match(devices, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
   }
@@ -444,14 +461,21 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   );
   assert.match(devices, /OLED 款式/);
   assert.match(devices, /普通版/);
+  assert.match(devices, /星宇橙色/);
+  assert.match(devices, /M5 · 深空黑色/);
+  assert.match(devices, /午夜色/);
   assert.doesNotMatch(devices, /版本待补充/);
   for (const officialUrl of [
     "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
     "https://www.nintendo.com/hk/hardware/switch2/index.html",
+    "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
+    "https://www.apple.com.cn/ipad-pro/",
+    "https://www.apple.com.cn/airpods-pro/",
+    "https://www.apple.com.cn/airpods-max/",
   ]) {
     assert.ok(
       devices.includes(`href="${officialUrl}"`),
-      `${officialUrl} should link to Nintendo's confirmed model information`,
+      `${officialUrl} should link to the confirmed model's official information`,
     );
   }
   assert.doesNotMatch(

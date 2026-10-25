@@ -71,10 +71,10 @@ export const collectionRooms = [
     href: "/collections/devices/",
     label: "设备收藏",
     count: deviceCollection.length,
-    unit: "台设备",
+    unit: "件设备",
     motif: "▰",
     tone: "mint",
-    description: "从 Nintendo Switch 到 Switch 2，陪伴游戏时光的设备。",
+    description: "Apple 与 Nintendo，陪伴日常与游戏时光的设备。",
   },
 ] as const;
 

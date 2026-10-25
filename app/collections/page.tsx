@@ -44,6 +44,10 @@ const figurePreview = figurePreviewIds.flatMap((id) =>
 const figureMikuCount = figureCollection.filter(
   (entry) => entry.character === "初音未来",
 ).length;
+const devicePreviewIds = ["device-iphone-17-pro", "device-nintendo-switch-2"];
+const devicePreview = devicePreviewIds.flatMap((id) =>
+  deviceCollection.filter((entry) => entry.id === id),
+);
 const fufuPreview = fufuCollection;
 const zodiacFufu = fufuCollection.filter((entry) => entry.kind === "zodiac");
 const firstZodiacFufu = zodiacFufu.at(0);
@@ -165,7 +169,7 @@ export default function CollectionsPage() {
                   </div>
                 ) : room.id === "devices" ? (
                   <div className={styles.deviceShelf}>
-                    {deviceCollection.map((entry) => (
+                    {devicePreview.map((entry) => (
                       <span key={entry.id}>
                         {entry.image ? (
                           <Image
@@ -215,7 +219,7 @@ export default function CollectionsPage() {
                         : room.id === "fufu"
                           ? `从${fufuTimeline}，还有一只大 Fufu。`
                           : room.id === "devices"
-                            ? "从第一代 Switch，到 Switch 2。"
+                            ? "Apple 与 Nintendo，日常与游戏的陪伴。"
                             : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
                 </p>
                 <div className={styles.exhibitFooter}>
@@ -229,7 +233,7 @@ export default function CollectionsPage() {
                           : room.id === "fufu"
                             ? "生肖时间线 · 官方资料"
                             : room.id === "devices"
-                              ? "陪伴游戏时光的设备"
+                              ? "手机、平板、耳机与游戏主机"
                               : "标准款与角色联名 · 商品图鉴"}
                   </span>
                   <b>

@@ -13,7 +13,7 @@ import styles from "./devices.module.css";
 export const dynamic = "force-static";
 
 const description =
-  "Mikureina 的设备收藏：从第一代 Nintendo Switch，到 Nintendo Switch 2。";
+  "Mikureina 的设备收藏：Apple 的手机、平板与耳机，以及 Nintendo 的游戏主机。";
 
 export const metadata: Metadata = {
   title: "设备收藏 · 奇妙收藏馆",
@@ -30,8 +30,8 @@ export default function CollectionsDevicesPage() {
         currentHref="/collections/"
         subpageLabel="设备收藏"
         animate={false}
-        title="陪我走进游戏世界。"
-        lead="从第一代 Switch，到 Switch 2。"
+        title="日常与游戏，都有它们。"
+        lead={`Apple 与 Nintendo，陪伴我的 ${deviceCollection.length} 件设备。`}
       />
       <section
         className={`${styles.archive} section-shell section-pad`}
@@ -42,7 +42,7 @@ export default function CollectionsDevicesPage() {
             <p className="section-index">ROOM 06 / DEVICE COLLECTION</p>
             <h2 id="device-archive-title">设备图鉴</h2>
           </div>
-          <p>{deviceCollection.length} 台收藏</p>
+          <p>{deviceCollection.length} 件收藏</p>
         </div>
         <CollectionNavigation current="devices" />
         <DeviceCatalog />
@@ -54,8 +54,8 @@ export default function CollectionsDevicesPage() {
             设备画册 <span aria-hidden="true">→</span>
           </CollectionLink>
         </nav>
-        <CollectionCredit label="设备图片与资料" source="Nintendo 官方">
-          <p>图片与资料来自 Nintendo 官方，展示图非本人实拍。</p>
+        <CollectionCredit label="设备图片与资料" source="Apple · Nintendo 官方">
+          <p>图片与资料来自 Apple 与 Nintendo 官方，展示图非本人实拍。</p>
         </CollectionCredit>
       </section>
       <JourneyNavigation currentHref="/collections/" />

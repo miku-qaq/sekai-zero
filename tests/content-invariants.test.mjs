@@ -384,11 +384,26 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
   ];
   assert.deepEqual(
     deviceEntries.map((entry) => entry[1]),
-    ["device-nintendo-switch", "device-nintendo-switch-2"],
+    [
+      "device-nintendo-switch",
+      "device-nintendo-switch-2",
+      "device-iphone-17-pro",
+      "device-ipad-pro-m5",
+      "device-airpods-pro-3",
+      "device-airpods-max-2",
+    ],
   );
   assert.deepEqual(
-    deviceEntries.map((entry) => entry[2].match(/\n\s+edition: "([^"]+)"/)?.[1]),
-    ["OLED 款式", "普通版"],
+    deviceEntries.map((entry) => {
+      const edition = entry[2].match(/\n\s+edition: (null|"[^"]+")/);
+      assert.ok(edition, `${entry[1]} should declare its confirmed edition`);
+      return JSON.parse(edition[1]);
+    }),
+    ["OLED 款式", "普通版", "星宇橙色", "M5 · 深空黑色", null, "午夜色"],
+  );
+  assert.deepEqual(
+    deviceEntries.map((entry) => entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1]),
+    ["Nintendo", "Nintendo", "Apple", "Apple", "Apple", "Apple"],
   );
   for (const entry of deviceEntries) {
     assert.doesNotMatch(
@@ -398,7 +413,11 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
     const source = entry[0].match(/sourceUrl:\s*"([^"]+)"/);
     assert.ok(source, `${entry[1]} should have official product information`);
     assert.equal(new URL(source[1]).protocol, "https:");
-    assert.equal(new URL(source[1]).hostname, "www.nintendo.com");
+    const brand = entry[2].match(/\n\s+brand: "([^"]+)"/)?.[1];
+    assert.equal(
+      new URL(source[1]).hostname,
+      brand === "Nintendo" ? "www.nintendo.com" : "www.apple.com.cn",
+    );
     const imagePath = entry[0].match(/image: "([^"\s]+)"/)?.[1];
     assert.ok(imagePath, `${entry[1]} should have a local product image`);
     assert.match(imagePath, /^\/devices\/[a-z0-9-]+\.(?:jpe?g|png|webp)$/);
@@ -420,7 +439,7 @@ test("keeps five top-level worlds, six collection rooms and EP.018 as the latest
       fufuEntries.length +
       controllerEntries.length +
       deviceEntries.length,
-    263,
+    267,
   );
 
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
