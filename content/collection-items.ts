@@ -2,6 +2,7 @@ import { animeCatalog } from "./anime";
 import type { CollectionRoomId } from "./collections";
 import { collectionStories } from "./collection-stories";
 import { controllerCollection } from "./controllers";
+import { deviceCollection } from "./devices";
 import { figureCollection } from "./figures";
 import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
@@ -116,4 +117,30 @@ export const collectionItems: readonly CollectionItem[] = [
     keywords: [entry.title, entry.shortName, entry.brand, entry.edition],
     story: collectionStories[entry.id] ?? "",
   })),
+  ...deviceCollection.flatMap((entry): CollectionItem[] =>
+    entry.image
+      ? [
+          {
+            id: entry.id,
+            room: "devices",
+            title: entry.title,
+            subtitle: entry.edition ?? "版本待补充",
+            image: entry.image,
+            imageAlt: entry.imageAlt,
+            sourceUrl: entry.sourceUrl,
+            sourceLabel: "Nintendo 官方资料",
+            imageNote: entry.imageNote,
+            fit: "contain",
+            keywords: [
+              entry.title,
+              entry.shortName,
+              entry.brand,
+              entry.category,
+              entry.edition ?? "",
+            ],
+            story: collectionStories[entry.id] ?? "",
+          },
+        ]
+      : [],
+  ),
 ];

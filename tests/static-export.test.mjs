@@ -104,6 +104,10 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>手柄收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
     },
     {
+      path: "collections/devices/index.html",
+      title: /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+    },
+    {
       path: "study/index.html",
       title: /<title>计算机学习笔记 · SEKAI<\/title>/i,
     },
@@ -124,7 +128,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
       title: /<title>世界线日志 · SEKAI<\/title>/i,
     },
   ];
-  assert.equal(pages.length, 15, "Pages should expose exactly 15 public routes");
+  assert.equal(pages.length, 16, "Pages should expose exactly 16 public routes");
 
   const exported = new Map();
   for (const page of pages) {
@@ -208,13 +212,15 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.doesNotMatch(study, /LEARNING QUEUE|learning-queue/i);
 
   const collections = exported.get("collections/index.html");
-  assert.match(collections, /05 间/);
-  assert.match(collections, /261 条/);
+  assert.match(collections, /06 间/);
+  assert.match(collections, /263 条/);
   assert.match(collections, /动画展柜/);
   assert.match(collections, /游戏展柜/);
   assert.match(collections, /手办收藏/);
   assert.match(collections, /Fufu 收藏/);
   assert.match(collections, /手柄收藏/);
+  assert.match(collections, /设备收藏/);
+  assert.match(collections, new RegExp(`href="${basePath}/collections/devices/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/controllers/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/anime/"`));
   assert.match(collections, new RegExp(`href="${basePath}/collections/games/"`));
@@ -413,8 +419,54 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i,
   );
 
+  const devices = exported.get("collections/devices/index.html");
+  assert.match(devices, /陪我走进游戏世界。/);
+  assert.match(devices, /aria-label="2 台设备收藏"/);
+  assert.deepEqual(
+    [...devices.matchAll(/<h3[^>]*id="(device-[^"]+)-title"/g)].map(
+      (match) => match[1],
+    ),
+    ["device-nintendo-switch", "device-nintendo-switch-2"],
+  );
+  for (const [id, title] of [
+    ["device-nintendo-switch", "Nintendo Switch"],
+    ["device-nintendo-switch-2", "Nintendo Switch 2"],
+  ]) {
+    assert.match(devices, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
+  }
+  assert.match(devices, /aria-label="奇妙收藏馆分馆导航"/);
+  for (const room of ["anime", "games", "figures", "fufu", "controllers", "devices"]) {
+    assert.match(devices, new RegExp(`href="${basePath}/collections/${room}/"`));
+  }
+  assert.match(
+    devices,
+    new RegExp(`href="${basePath}/collections/gallery/\\?room=devices"`),
+  );
+  assert.match(devices, /OLED 款式/);
+  assert.match(devices, /普通版/);
+  assert.doesNotMatch(devices, /版本待补充/);
+  for (const officialUrl of [
+    "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
+    "https://www.nintendo.com/hk/hardware/switch2/index.html",
+  ]) {
+    assert.ok(
+      devices.includes(`href="${officialUrl}"`),
+      `${officialUrl} should link to Nintendo's confirmed model information`,
+    );
+  }
+  assert.doesNotMatch(
+    devices,
+    /[¥￥]\s*\d|\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i,
+  );
+  assert.doesNotMatch(devices, /(?:序列号|购买日期|购入日期|订单号)/);
+  assert.doesNotMatch(
+    devices,
+    /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
+  );
+
   for (const [html, expectedPath] of [
     [controllers, `${basePath}/collections/controllers/`],
+    [devices, `${basePath}/collections/devices/`],
     [collections, `${basePath}/collections/`],
     [anime, `${basePath}/collections/anime/`],
     [games, `${basePath}/collections/games/`],
@@ -543,6 +595,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     games,
     figures,
     fufu,
+    devices,
     study,
     links,
     logs,

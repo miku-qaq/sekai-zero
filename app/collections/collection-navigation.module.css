@@ -59,7 +59,7 @@
 .routes {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -71,8 +71,8 @@
   min-height: 72px;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 13px;
-  padding: 15px 16px;
+  gap: 8px;
+  padding: 14px 12px;
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-small);
@@ -118,8 +118,8 @@
 
 .routeIndex {
   display: grid;
-  min-width: 42px;
-  height: 42px;
+  min-width: 34px;
+  height: 34px;
   place-items: center;
   border: 1px solid var(--foreground);
   border-radius: 14px;
@@ -136,7 +136,7 @@
 }
 
 .routeName strong {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .routeName small {

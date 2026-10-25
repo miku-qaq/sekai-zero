@@ -23,7 +23,7 @@ async function render(pathname = "/") {
   );
 }
 
-test("builds the exact 15-route Worker manifest", async () => {
+test("builds the exact 16-route Worker manifest", async () => {
   const workerSource = await readFile(
     new URL("../dist/server/index.js", import.meta.url),
     "utf8",
@@ -39,6 +39,7 @@ test("builds the exact 15-route Worker manifest", async () => {
     "/collections",
     "/collections/anime",
     "/collections/controllers",
+    "/collections/devices",
     "/collections/figures",
     "/collections/fufu",
     "/collections/gallery",
@@ -193,7 +194,7 @@ test("server-renders the five canonical top-level routes with clear purposes", a
   }
 });
 
-test("server-renders the five canonical rooms inside the Wonder Collection", async () => {
+test("server-renders the six canonical rooms inside the Wonder Collection", async () => {
   const rooms = [
     {
       pathname: "/collections/anime",
@@ -225,6 +226,12 @@ test("server-renders the five canonical rooms inside the Wonder Collection", asy
       copy: /把冒险，握在手里/,
       subpage: "手柄收藏",
     },
+    {
+      pathname: "/collections/devices",
+      title: /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/i,
+      copy: /陪我走进游戏世界。/,
+      subpage: "设备收藏",
+    },
   ];
 
   for (const room of rooms) {
@@ -245,6 +252,7 @@ test("server-renders the five canonical rooms inside the Wonder Collection", asy
     assert.match(html, /href="\/collections\/figures\/"/);
     assert.match(html, /href="\/collections\/fufu\/"/);
     assert.match(html, /href="\/collections\/controllers\/"/);
+    assert.match(html, /href="\/collections\/devices\/"/);
     assert.match(html, /class="journey-navigation section-shell"/);
   }
 });
@@ -401,22 +409,24 @@ test("publishes the categorized directory with all confirmed destinations", asyn
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
 });
 
-test("keeps the Wonder Collection hub concise while linking all five rooms", async () => {
+test("keeps the Wonder Collection hub concise while linking all six rooms", async () => {
   const response = await render("/collections");
   assert.equal(response.status, 200);
   const html = await response.text();
 
-  assert.match(html, /05 间/);
-  assert.match(html, /261 条/);
+  assert.match(html, /06 间/);
+  assert.match(html, /263 条/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
   assert.match(html, /手办收藏/);
   assert.match(html, /Fufu 收藏/);
+  assert.match(html, /设备收藏/);
   assert.match(html, /href="\/collections\/anime\/"/);
   assert.match(html, /href="\/collections\/games\/"/);
   assert.match(html, /href="\/collections\/figures\/"/);
   assert.match(html, /href="\/collections\/fufu\/"/);
   assert.match(html, /href="\/collections\/controllers\/"/);
+  assert.match(html, /href="\/collections\/devices\/"/);
   assert.match(html, /寅 2022 到 午 2026/);
   const visibleHtml = html.replaceAll("<!-- -->", "");
   assert.match(visibleHtml, /16 件/);
@@ -1034,4 +1044,51 @@ test("publishes exactly the four owner-confirmed controllers with local product 
     assert.ok(html.includes(name));
   assert.match(html, /商品展示图 · 非本人实拍/);
   assert.doesNotMatch(html, /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i);
+});
+
+test("publishes the two confirmed Nintendo devices without invented ownership details", async () => {
+  const response = await render("/collections/devices");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>设备收藏 · 奇妙收藏馆 · SEKAI<\/title>/);
+  assert.match(html, /陪我走进游戏世界。/);
+  assert.match(html, /aria-label="2 台设备收藏"/);
+  assert.deepEqual(
+    [...html.matchAll(/<h3[^>]*id="(device-[^"]+)-title"/g)].map((match) => match[1]),
+    ["device-nintendo-switch", "device-nintendo-switch-2"],
+  );
+  for (const [id, title] of [
+    ["device-nintendo-switch", "Nintendo Switch"],
+    ["device-nintendo-switch-2", "Nintendo Switch 2"],
+  ]) {
+    assert.match(html, new RegExp(`<h3[^>]*id="${id}-title">${title}<\\/h3>`));
+  }
+  assert.match(html, /href="\/collections\/controllers\/"/);
+  assert.match(html, /href="\/collections\/gallery\/\?room=devices"/);
+  assert.match(html, /OLED 款式/);
+  assert.match(html, /普通版/);
+  assert.doesNotMatch(html, /版本待补充/);
+  for (const officialUrl of [
+    "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
+    "https://www.nintendo.com/hk/hardware/switch2/index.html",
+  ]) {
+    assert.ok(
+      html.includes(`href="${officialUrl}"`),
+      `${officialUrl} should link to Nintendo's confirmed model information`,
+    );
+  }
+
+  const canonicalMatch = html.match(/<link[^>]*rel="canonical"[^>]*href="([^"]+)"/i);
+  assert.ok(canonicalMatch, "the devices room should expose a canonical URL");
+  assert.equal(new URL(canonicalMatch[1]).pathname, "/sekai-zero/collections/devices/");
+  assert.doesNotMatch(
+    html,
+    /[¥￥]\s*\d|\b\d+(?:\.\d{1,2})?\s*(?:人民币|元|CNY|RMB)\b/i,
+  );
+  assert.doesNotMatch(html, /(?:序列号|购买日期|购入日期|订单号)/);
+  assert.doesNotMatch(
+    html,
+    /data-(?:price|serial(?:-number)?|order|date|purchased-at|purchase-date)=|"(?:price|serialNumber|serial|orderId|purchaseDate|purchasedAt)"\s*:/i,
+  );
 });

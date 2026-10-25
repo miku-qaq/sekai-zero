@@ -1,10 +1,12 @@
 import { animeCatalog } from "./anime";
 import { controllerCollection } from "./controllers";
+import { deviceCollection } from "./devices";
 import { figureCollection } from "./figures";
 import { fufuCollection } from "./fufu";
 import { gameCatalog } from "./games";
 
-export type CollectionRoomId = "anime" | "games" | "figures" | "fufu" | "controllers";
+export type CollectionRoomId =
+  "anime" | "games" | "figures" | "fufu" | "controllers" | "devices";
 
 /** Canonical registry for the rooms inside the Wonder Collection. */
 export const collectionRooms = [
@@ -62,6 +64,17 @@ export const collectionRooms = [
     motif: "＋",
     tone: "blue",
     description: "从 Xbox 与两代 Switch Pro，到八重神子联名款，收藏握在手里的喜欢。",
+  },
+  {
+    id: "devices",
+    index: "06",
+    href: "/collections/devices/",
+    label: "设备收藏",
+    count: deviceCollection.length,
+    unit: "台设备",
+    motif: "▰",
+    tone: "mint",
+    description: "从 Nintendo Switch 到 Switch 2，陪伴游戏时光的设备。",
   },
 ] as const;
 

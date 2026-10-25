@@ -3,6 +3,7 @@ import Image from "next/image";
 import { animeCatalog } from "@/content/anime";
 import { collectionRecordCount, collectionRooms } from "@/content/collections";
 import { controllerCollection } from "@/content/controllers";
+import { deviceCollection } from "@/content/devices";
 import { figureCollection } from "@/content/figures";
 import { fufuCollection } from "@/content/fufu";
 import { gameCatalog } from "@/content/games";
@@ -19,7 +20,7 @@ import styles from "./collections.module.css";
 export const dynamic = "force-static";
 
 const description =
-  "Mikureina 的奇妙收藏馆：统一整理看过的动画、玩过的游戏、手办、初音未来 Fufu 与手柄收藏。";
+  "Mikureina 的奇妙收藏馆：动画、游戏、手办、初音未来 Fufu、手柄与设备收藏。";
 
 export const metadata: Metadata = {
   title: "奇妙收藏馆",
@@ -162,6 +163,27 @@ export default function CollectionsPage() {
                       </span>
                     ))}
                   </div>
+                ) : room.id === "devices" ? (
+                  <div className={styles.deviceShelf}>
+                    {deviceCollection.map((entry) => (
+                      <span key={entry.id}>
+                        {entry.image ? (
+                          <Image
+                            src={sitePath(entry.image)}
+                            alt=""
+                            width={400}
+                            height={300}
+                            sizes="(max-width: 600px) 40vw, 22vw"
+                            loading="lazy"
+                            unoptimized
+                          />
+                        ) : (
+                          <strong>{entry.shortName}</strong>
+                        )}
+                        <b>{entry.shortName}</b>
+                      </span>
+                    ))}
+                  </div>
                 ) : (
                   <div className={styles.controllerShelf}>
                     {controllerCollection.map((entry) => (
@@ -192,7 +214,9 @@ export default function CollectionsPage() {
                         ? `${figureMikuCount} 种初音未来，还有来自不同作品的伙伴。`
                         : room.id === "fufu"
                           ? `从${fufuTimeline}，还有一只大 Fufu。`
-                          : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
+                          : room.id === "devices"
+                            ? "从第一代 Switch，到 Switch 2。"
+                            : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
                 </p>
                 <div className={styles.exhibitFooter}>
                   <span>
@@ -204,7 +228,9 @@ export default function CollectionsPage() {
                           ? "款式搜索 · 点击查看大图"
                           : room.id === "fufu"
                             ? "生肖时间线 · 官方资料"
-                            : "标准款与角色联名 · 商品图鉴"}
+                            : room.id === "devices"
+                              ? "陪伴游戏时光的设备"
+                              : "标准款与角色联名 · 商品图鉴"}
                   </span>
                   <b>
                     进入展柜 <span aria-hidden="true">↗</span>
@@ -215,7 +241,7 @@ export default function CollectionsPage() {
           ))}
         </div>
         <p className={styles.collectionNote}>
-          手办、Fufu 与手柄使用商品展示图，非本人实拍。
+          手办、Fufu、手柄与设备使用展示图，非本人实拍。
         </p>
       </section>
 

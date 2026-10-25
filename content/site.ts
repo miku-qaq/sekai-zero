@@ -31,7 +31,7 @@ export const worldRoutes = [
     navLabel: "奇妙收藏馆",
     eyebrow: "WONDER COLLECTION",
     title: "奇妙收藏馆",
-    description: "动画、游戏、手办、Fufu 与手柄，都是喜欢的形状。",
+    description: "从动画、游戏，到身边的藏品与设备。",
     action: "进入收藏馆",
     motif: "✦",
     tone: "pink",
