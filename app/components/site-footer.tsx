@@ -1,5 +1,6 @@
 import { siteConfig } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import { MotionToggle } from "./site-motion";
 
 /** A shared footer keeps every route connected to the same site map. */
 export function SiteFooter() {
@@ -21,9 +22,12 @@ export function SiteFooter() {
           </a>
         ))}
       </nav>
-      <p>
-        © {new Date().getFullYear()} {siteConfig.owner} · 持续更新中
-      </p>
+      <div className="footer-settings">
+        <p>
+          © {new Date().getFullYear()} {siteConfig.owner} · 持续更新中
+        </p>
+        <MotionToggle />
+      </div>
     </footer>
   );
 }

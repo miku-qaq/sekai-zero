@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { worldRoutes, type WorldRouteHref } from "@/content/site";
+import { favoriteChannels, worldRoutes, type WorldRouteHref } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import styles from "./page-masthead.module.css";
 
 type PageMastheadProps = {
   currentHref: WorldRouteHref;
@@ -31,12 +32,25 @@ export function PageMasthead({
 
   const fileCode = `FILE ${route.index}`;
   const reveal = (step: string) => (animate ? ` reveal ${step}` : "");
+  // 只在独立页面补充角色明信片，收藏分馆继续使用紧凑的开场。
+  const showPostcard = !artwork && animate && currentHref !== "/collections/";
+  const featuredCharacter =
+    currentHref === "/links/" ? "elaina" : currentHref === "/logs/" ? "bocchi" : "miku";
+  const supportingCharacters = favoriteChannels.filter(
+    (channel) => channel.id !== featuredCharacter,
+  );
+  const postcardCharacters = [
+    ...supportingCharacters.slice(0, 1),
+    ...favoriteChannels.filter((channel) => channel.id === featuredCharacter),
+    ...supportingCharacters.slice(1),
+  ];
 
   return (
     <section
-      className={`subpage-hero subpage-${route.tone} section-shell`}
+      className={`subpage-hero subpage-${route.tone} section-shell${showPostcard ? ` ${styles.masthead}` : ""}`}
       id="top"
       data-artwork={artwork ? true : undefined}
+      data-character-visual={showPostcard ? true : undefined}
     >
       <div className={`subpage-crumb${reveal("reveal-one")}`}>
         <a href={sitePath("/")}>首页</a>
@@ -72,6 +86,35 @@ export function PageMasthead({
             <span>好き × 3</span>
           </figcaption>
         </figure>
+      ) : showPostcard ? (
+        <div
+          className={`subpage-visual ${styles.postcard}${reveal("reveal-three")}`}
+          aria-hidden="true"
+        >
+          <span className={styles.postcardCode}>{fileCode} / FAVORITES</span>
+          <span className={styles.sparkle}>✦</span>
+          <div className={styles.portraits}>
+            {postcardCharacters.map((character) => (
+              <span
+                className={styles.portrait}
+                data-featured={character.id === featuredCharacter || undefined}
+                data-character={character.id}
+                key={character.id}
+              >
+                <Image
+                  src={sitePath(character.image)}
+                  alt=""
+                  width={1024}
+                  height={1536}
+                  sizes="(max-width: 900px) 110px, 140px"
+                />
+                <span>{character.name}</span>
+              </span>
+            ))}
+          </div>
+          <span className={styles.postcardCaption}>SONG · MAGIC · ROCK</span>
+          <span className={styles.postcardStamp}>好き × 3</span>
+        </div>
       ) : (
         <div className={`subpage-visual${reveal("reveal-three")}`} aria-hidden="true">
           <span className="subpage-visual-code">{fileCode}</span>

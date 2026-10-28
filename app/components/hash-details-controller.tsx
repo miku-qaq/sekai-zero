@@ -20,9 +20,9 @@ export function HashDetailsController() {
       target.open = true;
       if (!shouldScroll) return;
 
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+      const reduceMotion =
+        document.documentElement.dataset.motion === "off" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       target.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
         block: "start",

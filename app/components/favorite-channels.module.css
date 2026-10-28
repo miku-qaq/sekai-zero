@@ -264,3 +264,20 @@
     transition: none;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(:root:not([data-motion="off"])) .portrait {
+    animation: channel-arrive 420ms ease-out;
+  }
+}
+
+@keyframes channel-arrive {
+  from {
+    opacity: 0.45;
+    transform: scale(1.025);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

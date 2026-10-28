@@ -1,4 +1,5 @@
 import { currentBroadcast } from "@/content/now";
+import { currentRelease } from "@/content/releases";
 import { sitePath } from "@/lib/site-path";
 import styles from "./current-broadcast.module.css";
 
@@ -25,7 +26,7 @@ export function CurrentBroadcast() {
           <div className={styles.episodeTopline}>
             <span>{currentBroadcast.panel.eyebrow}</span>
             <span>
-              <i aria-hidden="true" /> 更新于{" "}
+              <i aria-hidden="true" /> 状态记录{" "}
               <time dateTime={currentBroadcast.updatedAt.replaceAll(".", "-")}>
                 {currentBroadcast.updatedAt}
               </time>
@@ -61,6 +62,19 @@ export function CurrentBroadcast() {
           ))}
         </div>
       </div>
+      <a
+        className={styles.latestRelease}
+        href={sitePath(`/logs/#ep-${currentRelease.number}`)}
+      >
+        <span className={styles.releaseLabel}>
+          世界线更新 · {currentRelease.episode}
+        </span>
+        <strong>{currentRelease.title}</strong>
+        <time dateTime={currentRelease.date.replaceAll(".", "-")}>
+          {currentRelease.date}
+        </time>
+        <span aria-hidden="true">↗</span>
+      </a>
     </section>
   );
 }

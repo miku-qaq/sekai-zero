@@ -11,6 +11,7 @@ import { HashDetailsController } from "../components/hash-details-controller";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
+import styles from "./logs.module.css";
 
 export const dynamic = "force-static";
 
@@ -37,94 +38,12 @@ export default function LogsPage() {
       />
 
       <section
-        id="project-overview"
-        className="logs-project section-shell section-pad"
-        aria-labelledby="project-overview-title"
-      >
-        <div className="section-heading horizontal-heading">
-          <div>
-            <p className="section-index">01 / PROJECT OVERVIEW</p>
-            <h2 id="project-overview-title">关于 SEKAI / 00 的制作记录。</h2>
-          </div>
-        </div>
-
-        <article className="logs-project-card">
-          <div className="logs-project-topline">
-            <span>{projectCaseStudy.code}</span>
-            <span>{projectCaseStudy.status}</span>
-          </div>
-          <div className="logs-project-intro">
-            <div>
-              <p>LONG-RUN PERSONAL SEKAI</p>
-              <h3>{projectCaseStudy.title}</h3>
-            </div>
-            <p>{projectCaseStudy.subtitle}</p>
-          </div>
-          <p className="logs-project-summary">{projectCaseStudy.summary}</p>
-          <dl className="logs-project-facts">
-            {projectCaseStudy.facts.map((fact) => (
-              <div key={fact.label}>
-                <dt>{fact.label}</dt>
-                <dd>{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <nav className="logs-project-evidence" aria-label="项目公开入口">
-            {projectEvidence.map((item) => (
-              <a
-                href={item.external ? item.href : sitePath(item.href)}
-                key={item.code}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                <span>{item.code}</span>
-                <strong>{item.label}</strong>
-                <i aria-hidden="true">↗</i>
-                {item.external ? (
-                  <span className="sr-only">（将在新标签页打开）</span>
-                ) : null}
-              </a>
-            ))}
-          </nav>
-        </article>
-
-        <div className="logs-feature-grid" aria-label="目前已经上线的功能">
-          {projectFeatures.map((feature) => (
-            <article key={feature.code}>
-              <span>{feature.code}</span>
-              <h3>{feature.title}</h3>
-              <p>{feature.copy}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="logs-decisions" aria-labelledby="project-decisions-title">
-          <div>
-            <p className="section-index">PROJECT DECISIONS</p>
-            <h3 id="project-decisions-title">制作中的选择。</h3>
-          </div>
-          <div>
-            {projectDecisions.map((item, index) => (
-              <details key={item.question} open={index === 0}>
-                <summary>
-                  <span>D{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.question}</strong>
-                  <i aria-hidden="true">＋</i>
-                </summary>
-                <p>{item.decision}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="logs-index section-shell section-pad"
+        className={`logs-index section-shell section-pad ${styles.episodeIndex}`}
         aria-labelledby="logs-title"
       >
         <div className="section-heading horizontal-heading">
           <div>
-            <p className="section-index">02 / EPISODE INDEX</p>
+            <p className="section-index">01 / EPISODE INDEX</p>
             <h2 id="logs-title">更新记录</h2>
           </div>
         </div>
@@ -161,6 +80,88 @@ export default function LogsPage() {
             </details>
           ))}
         </div>
+      </section>
+
+      <section className="logs-project section-shell section-pad">
+        <details id="project-overview" className={styles.production}>
+          <summary className={styles.productionSummary}>
+            <div>
+              <p className="section-index">02 / BEHIND THE SCENES</p>
+              <h2>关于 SEKAI / 00 的制作记录。</h2>
+            </div>
+            <span aria-hidden="true">＋</span>
+          </summary>
+          <div className={styles.productionBody}>
+            <article className="logs-project-card">
+              <div className="logs-project-topline">
+                <span>{projectCaseStudy.code}</span>
+                <span>{projectCaseStudy.status}</span>
+              </div>
+              <div className="logs-project-intro">
+                <div>
+                  <p>LONG-RUN PERSONAL SEKAI</p>
+                  <h3>{projectCaseStudy.title}</h3>
+                </div>
+                <p>{projectCaseStudy.subtitle}</p>
+              </div>
+              <p className="logs-project-summary">{projectCaseStudy.summary}</p>
+              <dl className="logs-project-facts">
+                {projectCaseStudy.facts.map((fact) => (
+                  <div key={fact.label}>
+                    <dt>{fact.label}</dt>
+                    <dd>{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <nav className="logs-project-evidence" aria-label="项目公开入口">
+                {projectEvidence.map((item) => (
+                  <a
+                    href={item.external ? item.href : sitePath(item.href)}
+                    key={item.code}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noreferrer" : undefined}
+                  >
+                    <span>{item.code}</span>
+                    <strong>{item.label}</strong>
+                    <i aria-hidden="true">↗</i>
+                    {item.external ? (
+                      <span className="sr-only">（将在新标签页打开）</span>
+                    ) : null}
+                  </a>
+                ))}
+              </nav>
+            </article>
+
+            <div className="logs-feature-grid" aria-label="目前已经上线的功能">
+              {projectFeatures.map((feature) => (
+                <article key={feature.code}>
+                  <span>{feature.code}</span>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.copy}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="logs-decisions" aria-labelledby="project-decisions-title">
+              <div>
+                <p className="section-index">PROJECT DECISIONS</p>
+                <h3 id="project-decisions-title">制作中的选择。</h3>
+              </div>
+              <div>
+                {projectDecisions.map((item, index) => (
+                  <details key={item.question} open={index === 0}>
+                    <summary>
+                      <span>D{String(index + 1).padStart(2, "0")}</span>
+                      <strong>{item.question}</strong>
+                      <i aria-hidden="true">＋</i>
+                    </summary>
+                    <p>{item.decision}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </div>
+        </details>
       </section>
 
       <JourneyNavigation currentHref="/logs/" />

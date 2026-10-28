@@ -72,9 +72,9 @@ export function StudyNotebook() {
 
     target.open = true;
     const frame = window.requestAnimationFrame(() => {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+      const reduceMotion =
+        document.documentElement.dataset.motion === "off" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       target.scrollIntoView({
         behavior: reduceMotion ? "auto" : targetScrollBehavior.current,
         block: "start",

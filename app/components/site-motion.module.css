@@ -1,0 +1,35 @@
+.toggle {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.toggle[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--accent-deep) 45%, var(--border));
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.toggle:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 3px;
+}
+
+.toggle:disabled {
+  cursor: default;
+}
+
+.mark {
+  font-size: 16px;
+  line-height: 1;
+}

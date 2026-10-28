@@ -58,9 +58,9 @@ export function LinkTerminal() {
 
     window.requestAnimationFrame(() => {
       const card = document.getElementById(`route-${entry.id}`);
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+      const reduceMotion =
+        document.documentElement.dataset.motion === "off" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       card?.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
         block: "center",

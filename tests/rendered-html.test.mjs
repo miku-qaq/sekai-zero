@@ -127,8 +127,10 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /先让明天发出声音/);
   assert.match(html, /hero-anime-v3\.webp/);
 
-  // Engineering history belongs to Logs, not the public-facing homepage.
-  assert.doesNotMatch(html, /EP\.\d{3}/);
+  // 首页只给出最新日志入口，完整制作档案仍留在日志页。
+  assert.match(html, /href="\/logs\/#ep-021"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.021"]);
+  assert.match(html, /动效已开启/);
   assert.doesNotMatch(html, /id="project-overview"/);
   assert.doesNotMatch(html, /id="works"|id="roadmap"/);
   assert.doesNotMatch(html, /\bPHASE\s*0\d\b/i);
@@ -327,7 +329,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /18 EPISODES/);
+  assert.match(logs, /21 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -363,7 +365,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 18);
+  assert.equal(episodeIds.length, 21);
+  assert.deepEqual(episodeIds.slice(0, 3), ["021", "020", "019"]);
+  assert.ok(logs.indexOf('id="ep-021"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 

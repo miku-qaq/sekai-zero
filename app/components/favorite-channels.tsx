@@ -63,6 +63,7 @@ export function FavoriteChannels() {
           aria-label={`查看${active.name}插画大图（新标签页）`}
         >
           <Image
+            key={active.id}
             className={styles.portrait}
             src={sitePath(active.image)}
             alt={active.imageAlt}
