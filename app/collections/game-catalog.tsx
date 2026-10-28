@@ -72,7 +72,7 @@ export function GameCatalog() {
             已显示 <strong>{visibleGames.length}</strong> / {filteredGames.length} 款
             {query.trim() ? ` · 共 ${gameCatalog.length} 款` : null}
           </p>
-          <span>点击封面，前往 Steam 商店 ↗</span>
+          <span>点击封面，前往 Steam 商店</span>
         </div>
       </div>
 

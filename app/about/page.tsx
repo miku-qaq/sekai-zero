@@ -49,7 +49,7 @@ export default function AboutPage() {
                       href={fact.href}
                       aria-label={fact.ariaLabel}
                     >
-                      {fact.value} <span aria-hidden="true">↗</span>
+                      {fact.value}
                     </a>
                   ) : (
                     <strong>{fact.value}</strong>
@@ -95,7 +95,6 @@ export default function AboutPage() {
                     height={1536}
                     sizes="(max-width: 760px) 44vw, 30vw"
                   />
-                  <span aria-hidden="true">↗</span>
                 </a>
                 <div className="influence-caption">
                   <span className="influence-topline">{signal.index} / FAVORITES</span>
@@ -146,7 +145,7 @@ export default function AboutPage() {
                   <h3>{item.title}</h3>
                   <span>{item.copy}</span>
                   <a className="section-text-link" href={sitePath(item.href)}>
-                    {item.action} <span aria-hidden="true">↗</span>
+                    {item.action}
                   </a>
                 </div>
               </li>

@@ -94,7 +94,7 @@ export function HeadphoneCatalog() {
                       unoptimized
                     />
                     <span className={styles.zoomHint} aria-hidden="true">
-                      查看大图 ↗
+                      查看大图
                     </span>
                   </button>
                 ) : (
@@ -124,7 +124,7 @@ export function HeadphoneCatalog() {
                   <p className={styles.imageNote}>{entry.imageNote}</p>
                 ) : null}
                 <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">
-                  {entry.brand} 官方 <span aria-hidden="true">↗</span>
+                  {entry.brand} 官方
                   <span className="sr-only">（将在新标签页打开）</span>
                 </a>
               </div>

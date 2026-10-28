@@ -18,7 +18,7 @@ export default function LinksPage() {
     <main id="main-content" className="subpage-main navigation-page">
       <PageMasthead
         currentHref="/links/"
-        title="常去的地方。"
+        title="通向外面的世界。"
         lead="娱乐、购物与学习，随时回来逛逛。"
         meta={[
           {

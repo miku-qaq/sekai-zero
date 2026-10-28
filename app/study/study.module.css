@@ -486,7 +486,7 @@
 
 .sources a {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 3px 12px;
   padding: 11px 0;
   border-top: 1px solid var(--border);
@@ -502,15 +502,6 @@
 .sources a > strong {
   grid-column: 1;
   font-size: 12px;
-}
-
-.sources a > i {
-  grid-row: 1 / 3;
-  grid-column: 2;
-  align-self: center;
-  color: var(--study-blue);
-  font-size: 18px;
-  font-style: normal;
 }
 
 .empty {

@@ -32,6 +32,9 @@ export const metadata: Metadata = {
 };
 
 const animePreview = animeCatalog.slice(0, 4);
+const controllerPreview = controllerCollection.filter(
+  (entry) => entry.id !== "controller-switch-pro",
+);
 const gamePreview = gameCatalog.filter((entry) => entry.image).slice(0, 4);
 const figurePreviewIds = [
   "figure-001",
@@ -77,15 +80,9 @@ export default function CollectionsPage() {
       />
 
       <nav className={`section-shell ${styles.quickLinks}`} aria-label="收藏馆浏览方式">
-        <CollectionLink href="/collections/gallery/">
-          画册模式 <span aria-hidden="true">↗</span>
-        </CollectionLink>
-        <a href="#exhibitions-title">
-          主题小展 <span aria-hidden="true">↓</span>
-        </a>
-        <a href="#collection-discovery">
-          随机逛一件 <span aria-hidden="true">↓</span>
-        </a>
+        <CollectionLink href="/collections/gallery/">画册模式</CollectionLink>
+        <a href="#exhibitions-title">主题小展</a>
+        <a href="#collection-discovery">随机逛一件</a>
       </nav>
 
       <section
@@ -107,14 +104,19 @@ export default function CollectionsPage() {
               className={styles.exhibit}
               data-tone={room.tone}
               data-room={room.id}
+              data-scene-reveal
             >
               <div className={styles.exhibitHeading}>
-                <span>{room.index} / ROOM</span>
+                <span className={styles.exhibitChapter}>COLLECTION {room.index}</span>
                 <span>
                   {room.count} {room.unit}
                 </span>
               </div>
-              <div className={styles.exhibitArtwork} aria-hidden="true">
+              <div
+                className={styles.exhibitArtwork}
+                data-number={room.index}
+                aria-hidden="true"
+              >
                 {room.id === "anime" || room.id === "games" ? (
                   <div className={styles.coverShelf}>
                     {(room.id === "anime" ? animePreview : gamePreview).map((entry) => (
@@ -132,7 +134,7 @@ export default function CollectionsPage() {
                   </div>
                 ) : room.id === "figures" ? (
                   <div className={styles.figureShelf}>
-                    {figurePreview.slice(0, 4).map((entry) => (
+                    {figurePreview.slice(0, 3).map((entry) => (
                       <span key={entry.id}>
                         {entry.product?.image ? (
                           <Image
@@ -210,7 +212,7 @@ export default function CollectionsPage() {
                   </div>
                 ) : (
                   <div className={styles.controllerShelf}>
-                    {controllerCollection.map((entry) => (
+                    {controllerPreview.map((entry) => (
                       <span key={entry.id}>
                         <Image
                           src={sitePath(entry.image)}
@@ -244,26 +246,7 @@ export default function CollectionsPage() {
                               ? "Sony 与 Apple，喜欢的声音常在耳边。"
                               : `Xbox、两代 Switch Pro，还有八重神子联名款。`}
                 </p>
-                <div className={styles.exhibitFooter}>
-                  <span>
-                    {room.id === "anime"
-                      ? "作品搜索 · 年份 / 类型筛选"
-                      : room.id === "games"
-                        ? "名称搜索 · Steam 商店入口"
-                        : room.id === "figures"
-                          ? "款式搜索 · 点击查看大图"
-                          : room.id === "fufu"
-                            ? "生肖时间线 · 官方资料"
-                            : room.id === "devices"
-                              ? "手机、平板与游戏主机"
-                              : room.id === "headphones"
-                                ? "头戴与入耳 · 声音收藏"
-                                : "标准款与角色联名 · 商品图鉴"}
-                  </span>
-                  <b>
-                    进入展柜 <span aria-hidden="true">↗</span>
-                  </b>
-                </div>
+                <span className={styles.exhibitAction}>打开这一柜</span>
               </div>
             </CollectionLink>
           ))}

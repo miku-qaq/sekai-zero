@@ -47,11 +47,9 @@ export default function CollectionsDevicesPage() {
         <CollectionNavigation current="devices" />
         <DeviceCatalog />
         <nav className={styles.related} aria-label="继续浏览相关收藏">
-          <CollectionLink href="/collections/controllers/">
-            手柄展柜 <span aria-hidden="true">→</span>
-          </CollectionLink>
+          <CollectionLink href="/collections/controllers/">手柄展柜</CollectionLink>
           <CollectionLink href="/collections/gallery/?room=devices">
-            设备画册 <span aria-hidden="true">→</span>
+            设备画册
           </CollectionLink>
         </nav>
         <CollectionCredit label="设备图片与资料" source="Apple · Nintendo 官方">

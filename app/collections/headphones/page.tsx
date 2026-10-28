@@ -46,11 +46,9 @@ export default function CollectionsHeadphonesPage() {
         <CollectionNavigation current="headphones" />
         <HeadphoneCatalog />
         <nav className={styles.related} aria-label="继续浏览相关收藏">
-          <CollectionLink href="/collections/devices/">
-            设备展柜 <span aria-hidden="true">→</span>
-          </CollectionLink>
+          <CollectionLink href="/collections/devices/">设备展柜</CollectionLink>
           <CollectionLink href="/collections/gallery/?room=headphones">
-            耳机画册 <span aria-hidden="true">→</span>
+            耳机画册
           </CollectionLink>
         </nav>
         <CollectionCredit label="耳机图片与资料" source="Sony · Apple 官方">

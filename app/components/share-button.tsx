@@ -41,7 +41,6 @@ export function ShareButton() {
   return (
     <div className="share-control">
       <button className="share-button" type="button" onClick={shareSite}>
-        <span aria-hidden="true">{status === "copied" ? "✓" : "↗"}</span>
         {status === "copied" ? "链接已复制" : "分享这一话"}
       </button>
       <span className="sr-only" role="status" aria-live="polite">

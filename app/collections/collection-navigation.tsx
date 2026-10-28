@@ -51,9 +51,6 @@ export function CollectionNavigation({ current }: { current?: CollectionRoomId }
                   {room.count} {room.unit}
                 </small>
               </span>
-              <span className={styles.routeArrow} aria-hidden="true">
-                {isCurrent ? "●" : "↗"}
-              </span>
             </CollectionLink>
           );
         })}

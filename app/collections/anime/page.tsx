@@ -100,7 +100,7 @@ export default function CollectionsAnimePage() {
           <p>{metaText("sourceLabel")}</p>
           <p>{metaText("rightsNote")}</p>
           <a href={metaText("sourceUrl")} target="_blank" rel="noreferrer">
-            查看 Bangumi ↗<span className="sr-only">（将在新标签页打开）</span>
+            查看 Bangumi<span className="sr-only">（将在新标签页打开）</span>
           </a>
         </CollectionCredit>
       </section>

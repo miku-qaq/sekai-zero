@@ -169,7 +169,7 @@ export function FigureCatalog() {
                           unoptimized
                         />
                         <span className={styles.zoomHint} aria-hidden="true">
-                          查看大图 ↗
+                          查看大图
                         </span>
                       </button>
                     ) : (
@@ -208,7 +208,7 @@ export function FigureCatalog() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        商品资料 <span aria-hidden="true">↗</span>
+                        商品资料
                         <span className="sr-only">（将在新标签页打开）</span>
                       </a>
                     ) : null}

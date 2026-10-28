@@ -172,7 +172,7 @@ test("server-renders the five canonical top-level routes with clear purposes", a
     {
       pathname: "/links",
       title: /<title>导航终端 · SEKAI<\/title>/i,
-      copy: /常去的地方/,
+      copy: /通向外面的世界/,
       breadcrumb: /首页<\/a><span[^>]*>\/<\/span><span>导航终端<\/span>/,
     },
     {

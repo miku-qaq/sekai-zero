@@ -17,9 +17,6 @@
   font-weight: 750;
   white-space: nowrap;
 }
-.galleryLink span {
-  color: color-mix(in srgb, var(--accent) 40%, var(--foreground));
-}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -94,7 +91,7 @@
 }
 .copy {
   position: relative;
-  padding: 22px 48px 22px 20px;
+  padding: 22px 20px;
 }
 .copy h3 {
   margin: 0 0 8px;
@@ -106,12 +103,6 @@
   color: var(--muted);
   font-size: 12px;
   line-height: 1.7;
-}
-.arrow {
-  position: absolute;
-  top: 23px;
-  right: 20px;
-  color: color-mix(in srgb, var(--accent) 40%, var(--foreground));
 }
 @media (hover: hover) {
   .exhibition:hover {

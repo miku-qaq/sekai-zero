@@ -187,9 +187,7 @@ export function StudyNotebook() {
                     {copiedNoteId === note.id ? "链接已复制" : "复制本篇链接"}
                     <span aria-hidden="true">⌁</span>
                   </button>
-                  <a href={sitePath("/study/#archive-title")}>
-                    回到笔记索引 <span aria-hidden="true">↑</span>
-                  </a>
+                  <a href={sitePath("/study/#archive-title")}>回到笔记索引</a>
                 </div>
                 <div className={styles.noteSections}>
                   {note.sections.map((section) => (
@@ -239,7 +237,6 @@ export function StudyNotebook() {
                             {source.label}
                             <span className="sr-only">（将在新标签页打开）</span>
                           </strong>
-                          <i aria-hidden="true">↗</i>
                         </a>
                       </li>
                     ))}

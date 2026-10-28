@@ -59,7 +59,6 @@ export function DimensionalGacha() {
         </div>
         <button className="gacha-button" type="button" onClick={drawFortune}>
           抽取下一张
-          <span aria-hidden="true">↻</span>
         </button>
         <p className="gacha-count" aria-live="polite">
           本次访问已抽取 {drawCount} 次

@@ -17,7 +17,7 @@ export function CollectionExhibitions() {
           <h2 id="exhibitions-title">换个角度，逛收藏。</h2>
         </div>
         <CollectionLink className={styles.galleryLink} href="/collections/gallery/">
-          打开画册 <span aria-hidden="true">↗</span>
+          打开画册
         </CollectionLink>
       </div>
       <div className={styles.grid}>
@@ -54,9 +54,6 @@ export function CollectionExhibitions() {
               <div className={styles.copy}>
                 <h3>{exhibition.title}</h3>
                 <p>{exhibition.description}</p>
-                <span className={styles.arrow} aria-hidden="true">
-                  ↗
-                </span>
               </div>
             </CollectionLink>
           );

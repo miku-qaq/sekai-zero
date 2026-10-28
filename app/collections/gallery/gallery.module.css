@@ -186,24 +186,6 @@
   padding: 10px;
   object-fit: contain;
 }
-.openMark {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  display: grid;
-  width: 30px;
-  height: 30px;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--foreground);
-  opacity: 0;
-  transform: translateY(4px);
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
-}
 .cardTitle {
   display: block;
   margin-top: 11px;
@@ -216,17 +198,9 @@
   outline: 2px solid var(--accent-deep);
   outline-offset: 5px;
 }
-.card:focus-visible .openMark {
-  opacity: 1;
-  transform: none;
-}
 @media (hover: hover) {
   .card:hover img {
     transform: scale(1.025);
-  }
-  .card:hover .openMark {
-    opacity: 1;
-    transform: none;
   }
 }
 .more {
@@ -318,8 +292,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .imageFrame img,
-  .openMark {
+  .imageFrame img {
     transition: none;
   }
 }

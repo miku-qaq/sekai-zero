@@ -55,9 +55,7 @@ export function WorldMap() {
               <h3>{route.title}</h3>
               <span>{route.description}</span>
             </div>
-            <strong>
-              {route.action} <span aria-hidden="true">↗</span>
-            </strong>
+            <strong>{route.action}</strong>
           </a>
         ))}
       </div>

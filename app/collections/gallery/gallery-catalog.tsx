@@ -227,9 +227,6 @@ export function GalleryCatalog() {
                       loading="lazy"
                       unoptimized
                     />
-                    <span className={styles.openMark} aria-hidden="true">
-                      ↗
-                    </span>
                   </span>
                   <span className={styles.cardTitle}>{item.title}</span>
                 </button>

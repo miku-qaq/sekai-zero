@@ -123,7 +123,6 @@ export default function LogsPage() {
                   >
                     <span>{item.code}</span>
                     <strong>{item.label}</strong>
-                    <i aria-hidden="true">↗</i>
                     {item.external ? (
                       <span className="sr-only">（将在新标签页打开）</span>
                     ) : null}

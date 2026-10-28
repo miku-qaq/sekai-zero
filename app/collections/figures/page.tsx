@@ -69,7 +69,7 @@ export default function CollectionsFiguresPage() {
             <span aria-hidden="true">◇</span> 商品展示图 · 非本人实拍
           </p>
           <CollectionLink href="/collections/fufu/">
-            毛绒伙伴在 Fufu 展柜 ↗
+            毛绒伙伴在 Fufu 展柜
           </CollectionLink>
         </div>
 

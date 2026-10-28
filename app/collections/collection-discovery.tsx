@@ -99,7 +99,7 @@ export function CollectionDiscovery() {
             </select>
           </label>
           <button className={styles.draw} type="button" onClick={() => draw(filter)}>
-            <span aria-hidden="true">↻</span> 换一件
+            换一件
           </button>
         </div>
       </div>
@@ -127,9 +127,7 @@ export function CollectionDiscovery() {
             <span className={styles.room}>{room.label}</span>
             <h3>{item.title}</h3>
             <p>{item.subtitle}</p>
-            <span className={styles.open}>
-              打开画册 <span aria-hidden="true">↗</span>
-            </span>
+            <span className={styles.open}>打开画册</span>
           </div>
         </div>
       </a>

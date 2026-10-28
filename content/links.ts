@@ -34,7 +34,7 @@ export const linkCategories = [
     id: "site",
     label: "本站相关",
     description: "源码与联系方式。",
-    icon: "↗",
+    icon: "00",
   },
 ] as const;
 

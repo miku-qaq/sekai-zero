@@ -39,7 +39,6 @@ export default function Home() {
               href={sitePath("/study/#cs224n-nlp-word-vectors")}
             >
               阅读笔记
-              <span aria-hidden="true">↘</span>
             </a>
             <a className="button button-ghost" href={sitePath("/about/")}>
               认识 Mikureina
@@ -164,7 +163,7 @@ export default function Home() {
             className="button button-primary"
             href={sitePath("/study/#cs224n-nlp-word-vectors")}
           >
-            阅读笔记 <span aria-hidden="true">↗</span>
+            阅读笔记
           </a>
           <a className="button button-ghost" href={sitePath("/about/#contact")}>
             联系我

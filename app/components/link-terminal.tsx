@@ -8,6 +8,7 @@ import {
   type LinkEntry,
 } from "@/content/links";
 import { sitePath } from "@/lib/site-path";
+import styles from "./link-terminal.module.css";
 
 type GroupId = (typeof linkGroups)[number]["id"];
 
@@ -76,7 +77,7 @@ export function LinkTerminal() {
     .filter((category) => category.entries.length > 0);
 
   return (
-    <div className="link-terminal">
+    <div className={`link-terminal ${styles.terminal}`}>
       <div className="terminal-toolbar">
         <div className="terminal-filters" role="group" aria-label="筛选导航入口">
           {linkGroups.map((item) => (
@@ -100,7 +101,10 @@ export function LinkTerminal() {
         </div>
         <label className="terminal-search">
           <span className="sr-only">搜索导航终端</span>
-          <span aria-hidden="true">⌕</span>
+          <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <path d="m16 16 4 4" />
+          </svg>
           <input
             type="search"
             value={query}
@@ -117,7 +121,7 @@ export function LinkTerminal() {
           onClick={recommendRandomEntry}
           disabled={visibleEntries.length === 0}
         >
-          随机推荐 <span aria-hidden="true">✦</span>
+          随机推荐
         </button>
       </div>
 
@@ -136,7 +140,7 @@ export function LinkTerminal() {
         </p>
         {hasActiveFilters ? (
           <button type="button" className="terminal-reset" onClick={resetFilters}>
-            重置筛选 <span aria-hidden="true">↺</span>
+            重置筛选
           </button>
         ) : null}
       </div>
@@ -145,14 +149,20 @@ export function LinkTerminal() {
         <div className="terminal-sections">
           {visibleCategories.map((category) => (
             <section
-              className="terminal-category"
+              className={`terminal-category ${styles.category}`}
               key={category.id}
+              data-category={category.id}
+              data-scene-reveal
               aria-labelledby={`terminal-category-${category.id}`}
             >
               <div className="terminal-category-heading">
                 <div>
                   <h3 id={`terminal-category-${category.id}`}>
-                    <span aria-hidden="true">{category.icon}</span>
+                    <span className={styles.chapterNumber} aria-hidden="true">
+                      {String(
+                        linkCategories.findIndex((item) => item.id === category.id) + 1,
+                      ).padStart(2, "0")}
+                    </span>
                     {category.label}
                   </h3>
                   <p>{category.description}</p>
@@ -164,7 +174,7 @@ export function LinkTerminal() {
               <div className="terminal-grid" data-count={category.entries.length}>
                 {category.entries.map((entry) => (
                   <a
-                    className={`terminal-card terminal-card-${entry.group}`}
+                    className={`terminal-card terminal-card-${entry.group} ${styles.card}`}
                     id={`route-${entry.id}`}
                     href={resolvedHref(entry)}
                     key={entry.id}
@@ -188,7 +198,6 @@ export function LinkTerminal() {
                     <span className="terminal-reason">{entry.reason}</span>
                     <strong>
                       {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
-                      <span aria-hidden="true">↗</span>
                       {entry.external ? (
                         <span className="sr-only">（将在新标签页打开）</span>
                       ) : null}

@@ -57,7 +57,7 @@ export const worldRoutes = [
     title: "导航终端",
     description: "娱乐、购物与学习，常用网站都在这里。",
     action: "进入终端",
-    motif: "↗",
+    motif: "NAV",
     tone: "violet",
     layout: "standard",
   },

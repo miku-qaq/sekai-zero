@@ -35,7 +35,7 @@ export default function CollectionGalleryPage() {
         aria-label="收藏画册"
       >
         <CollectionLink className={styles.backLink} href="/collections/">
-          <span aria-hidden="true">←</span> 收藏馆
+          收藏馆
         </CollectionLink>
         <GalleryCatalog />
       </section>

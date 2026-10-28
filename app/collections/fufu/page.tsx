@@ -18,7 +18,7 @@ const firstZodiac = zodiacFufu.at(0);
 const latestZodiac = zodiacFufu.at(-1);
 const zodiacRange =
   firstZodiac && latestZodiac
-    ? `${firstZodiac.zodiac} ${firstZodiac.year} → ${latestZodiac.zodiac} ${latestZodiac.year}`
+    ? `${firstZodiac.zodiac} ${firstZodiac.year} 至 ${latestZodiac.zodiac} ${latestZodiac.year}`
     : "等待生肖记录";
 const description = `Mikureina 的 Fufu 毛绒收藏：大 Fufu 与 ${zodiacRange} 的 ${zodiacFufu.length} 只初音未来生肖 Fufu。`;
 

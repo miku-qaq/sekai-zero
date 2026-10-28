@@ -1,0 +1,277 @@
+.terminal {
+  gap: 18px;
+}
+
+.terminal :global(.terminal-toolbar) {
+  gap: 14px;
+  padding: 20px;
+  border-color: var(--border);
+  border-radius: 24px;
+  background: linear-gradient(
+    125deg,
+    var(--surface),
+    color-mix(in srgb, var(--accent-soft) 32%, var(--surface))
+  );
+  box-shadow: 0 10px 30px rgb(65 45 95 / 4%);
+}
+
+.terminal :global(.terminal-filters) {
+  gap: 8px;
+}
+
+.terminal :global(.terminal-filters) button {
+  font-weight: 600;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.terminal :global(.terminal-filters) button[aria-pressed="true"] {
+  border-color: var(--accent-deep);
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+
+.terminal :global(.terminal-search) {
+  min-height: 48px;
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.terminal :global(.terminal-random) {
+  min-height: 48px;
+  padding-inline: 22px;
+  border-color: var(--border-strong);
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.terminal :global(.terminal-sections) {
+  gap: 28px;
+}
+
+.category {
+  --chapter-color: var(--accent);
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background:
+    radial-gradient(
+      ellipse at 0 0,
+      color-mix(in srgb, var(--chapter-color) 12%, transparent),
+      transparent 62%
+    ),
+    color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+.category[data-category="video"] {
+  --chapter-color: #ff75aa;
+}
+.category[data-category="games"] {
+  --chapter-color: #9279f6;
+}
+.category[data-category="community"] {
+  --chapter-color: #e789aa;
+}
+.category[data-category="shopping"] {
+  --chapter-color: #e8a45e;
+}
+.category[data-category="study"] {
+  --chapter-color: #4f8df7;
+}
+
+.category :global(.terminal-category-heading) {
+  margin-bottom: 22px;
+}
+
+.category :global(.terminal-category-heading) h3 {
+  font-size: 22px;
+  font-weight: 650;
+}
+
+.category :global(.terminal-category-heading) .chapterNumber {
+  width: auto;
+  height: auto;
+  margin-right: 4px;
+  border: 0;
+  border-bottom: 2px solid var(--chapter-color);
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font:
+    500 11px var(--font-geist-mono),
+    monospace;
+  line-height: 28px;
+}
+
+.category :global(.terminal-category-heading) p {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.terminal .card {
+  isolation: isolate;
+  min-height: 192px;
+  padding: 23px;
+  border-color: var(--border);
+  border-radius: 18px 28px 18px 18px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--terminal-color) 7%, var(--surface)),
+    var(--surface) 65%
+  );
+  box-shadow: 0 8px 24px rgb(57 40 82 / 4%);
+}
+
+.terminal .card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--terminal-color) 65%, var(--surface));
+  content: "";
+}
+
+.terminal .card::after {
+  z-index: -1;
+  top: 12px;
+  right: 15px;
+  bottom: auto;
+  width: 48px;
+  height: 18px;
+  border: 0;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--terminal-color) 11%, transparent) 0 3px,
+    transparent 3px 6px
+  );
+  rotate: 32deg;
+}
+
+.terminal .card :global(.terminal-card-icon) {
+  width: 42px;
+  height: 48px;
+  border-color: color-mix(in srgb, var(--terminal-color) 30%, var(--border));
+  border-radius: 9px 9px 15px 9px;
+  background: color-mix(in srgb, var(--terminal-color) 12%, var(--surface));
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--terminal-color) 10%, transparent);
+  transform: rotate(-4deg);
+  font-size: 13px;
+}
+
+.terminal .card h4 {
+  font-size: clamp(17px, 1.55vw, 21px);
+  font-weight: 650;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.terminal .card :global(.terminal-card-domain) {
+  font-size: 9px;
+}
+
+.terminal .card :global(.terminal-reason) {
+  margin: 18px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.terminal .card > strong {
+  align-self: flex-start;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in srgb, var(--terminal-color) 25%, var(--border));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--terminal-color) 7%, var(--surface));
+  color: var(--foreground);
+  font-size: 10px;
+  font-weight: 550;
+  line-height: 1.6;
+}
+
+.terminal .card[data-recommended="true"],
+.terminal .card:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 4px;
+  border-color: var(--border-strong);
+  background: var(--accent-soft);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--terminal-color) 18%, transparent);
+  transform: none;
+}
+
+@media (hover: hover) {
+  .terminal .card[href]:hover {
+    border-color: color-mix(in srgb, var(--terminal-color) 55%, var(--border));
+    box-shadow: 0 14px 32px color-mix(in srgb, var(--terminal-color) 17%, transparent);
+    transform: none;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="off"])) .terminal .card:hover {
+    transform: translateY(-4px);
+  }
+
+  :global(html:not([data-motion="off"])) .terminal .card :global(.terminal-card-icon) {
+    transition: transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  :global(html:not([data-motion="off"]))
+    .terminal
+    .card:hover
+    :global(.terminal-card-icon) {
+    transform: rotate(0deg) translateY(-2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .terminal :global(.terminal-toolbar) {
+    padding: 14px;
+  }
+
+  .category {
+    padding: 18px 14px;
+    border-radius: 22px;
+  }
+
+  .category :global(.terminal-category-heading) {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .category :global(.terminal-category-heading) h3 {
+    font-size: 20px;
+  }
+
+  .category :global(.terminal-category-count) {
+    padding-top: 6px;
+  }
+
+  .terminal .card {
+    min-height: 180px;
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal .card,
+  .terminal .card:hover,
+  .terminal .card :global(.terminal-card-icon) {
+    transition: none;
+    transform: none;
+  }
+}
+
+:global(html[data-motion="off"]) .terminal .card:hover {
+  transform: none;
+}

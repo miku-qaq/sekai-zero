@@ -55,9 +55,7 @@ export function CurrentBroadcast() {
               </div>
               <h3>{signal.title}</h3>
               <p>{signal.copy}</p>
-              <a href={sitePath(signal.href)}>
-                {signal.action} <span aria-hidden="true">↗</span>
-              </a>
+              <a href={sitePath(signal.href)}>{signal.action}</a>
             </article>
           ))}
         </div>
@@ -73,7 +71,6 @@ export function CurrentBroadcast() {
         <time dateTime={currentRelease.date.replaceAll(".", "-")}>
           {currentRelease.date}
         </time>
-        <span aria-hidden="true">↗</span>
       </a>
     </section>
   );

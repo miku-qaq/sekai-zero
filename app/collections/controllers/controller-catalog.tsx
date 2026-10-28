@@ -49,7 +49,7 @@ export function ControllerCatalog() {
                     unoptimized
                   />
                   <span className={styles.zoomHint} aria-hidden="true">
-                    查看大图 ↗
+                    查看大图
                   </span>
                 </button>
                 <span className={styles.recordId}>
@@ -65,7 +65,7 @@ export function ControllerCatalog() {
                 <p className={styles.edition}>{entry.edition}</p>
                 <p className={styles.note}>{entry.note}</p>
                 <a href={entry.sourceUrl} target="_blank" rel="noreferrer">
-                  商品资料 <span aria-hidden="true">↗</span>
+                  商品资料
                   <span className="sr-only">（将在新标签页打开）</span>
                 </a>
               </div>

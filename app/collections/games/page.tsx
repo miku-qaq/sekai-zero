@@ -86,7 +86,7 @@ export default function CollectionsGamesPage() {
         <CollectionCredit label="游戏资料与封面来源" source="Steam">
           <p>{gameCatalogMeta.rightsNote}</p>
           <a href={gameCatalogMeta.sourceUrl} target="_blank" rel="noreferrer">
-            打开 Steam 商店 ↗<span className="sr-only">（将在新标签页打开）</span>
+            打开 Steam 商店<span className="sr-only">（将在新标签页打开）</span>
           </a>
         </CollectionCredit>
       </section>

@@ -20,9 +20,7 @@ export function JourneyNavigation({ currentHref }: { currentHref: WorldRouteHref
     <nav className="journey-navigation section-shell" aria-label="继续浏览网站">
       <a className="journey-link journey-previous" href={sitePath(homeStop.href)}>
         <span>BACK TO HOME</span>
-        <strong>
-          <span aria-hidden="true">←</span> 返回首页
-        </strong>
+        <strong>返回首页</strong>
       </a>
 
       <div className="journey-progress" aria-label="当前页面位置">
@@ -35,9 +33,7 @@ export function JourneyNavigation({ currentHref }: { currentHref: WorldRouteHref
 
       <a className="journey-link journey-next" href={sitePath(next.href)}>
         <span>{next.href === "/" ? "FINISH" : `NEXT / ${next.index}`}</span>
-        <strong>
-          {next.navLabel} <span aria-hidden="true">→</span>
-        </strong>
+        <strong>{next.navLabel}</strong>
       </a>
     </nav>
   );

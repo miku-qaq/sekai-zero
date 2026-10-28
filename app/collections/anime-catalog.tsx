@@ -170,7 +170,7 @@ export function AnimeCatalog() {
             已显示 <strong>{displayedEntries.length}</strong> / {visibleEntries.length}{" "}
             部{hasActiveFilters ? ` · 共 ${entries.length} 部` : null}
           </p>
-          <span>点击封面，打开作品资料 ↗</span>
+          <span>点击封面，打开作品资料</span>
         </div>
       </div>
 

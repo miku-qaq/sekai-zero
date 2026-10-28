@@ -71,9 +71,6 @@ export function FavoriteChannels() {
             height={1536}
             sizes="(max-width: 600px) 48vw, (max-width: 1100px) 40vw, 280px"
           />
-          <span className={styles.expand} aria-hidden="true">
-            ↗
-          </span>
         </a>
         <div className={styles.identity} aria-live="polite" aria-atomic="true">
           <span className={styles.index}>{active.index} / FAVORITES</span>
@@ -84,9 +81,7 @@ export function FavoriteChannels() {
         <a className={styles.program} href={sitePath(active.program.href)}>
           <strong>{active.program.title}</strong>
           <p>{active.program.description}</p>
-          <span>
-            {active.program.action} <span aria-hidden="true">↗</span>
-          </span>
+          <span>{active.program.action}</span>
         </a>
       </div>
 
