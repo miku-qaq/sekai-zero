@@ -26,7 +26,7 @@ export function ControllerCatalog() {
         aria-label={`${controllerCollection.length} 只手柄收藏`}
       >
         {controllerCollection.map((entry, index) => (
-          <li key={entry.id}>
+          <li key={entry.id} data-collection-card={entry.id}>
             <article
               className={styles.card}
               data-tone={entry.tone}

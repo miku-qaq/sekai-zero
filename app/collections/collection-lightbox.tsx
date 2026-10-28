@@ -35,6 +35,8 @@ export function CollectionLightbox({
   const touchRef = useRef<{ x: number; y: number; time: number } | null>(null);
   const closingRef = useRef(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const slideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [previousItem, setPreviousItem] = useState<CollectionImage | null>(null);
   const [closing, setClosing] = useState(false);
   const [direction, setDirection] = useState("next");
   const titleId = useId();
@@ -50,6 +52,7 @@ export function CollectionLightbox({
 
     return () => {
       if (closeTimer.current) clearTimeout(closeTimer.current);
+      if (slideTimer.current) clearTimeout(slideTimer.current);
       dialog?.close();
       document.body.style.overflow = previousOverflow;
       if (trigger instanceof HTMLElement && trigger.isConnected) {
@@ -69,10 +72,18 @@ export function CollectionLightbox({
 
   function moveBy(offset: number) {
     const next = items[index + offset];
-    if (next && !closingRef.current) {
+    if (next && next.id !== item.id && !closingRef.current) {
       restoreThumbnailFocus.current =
         filmstripRef.current?.contains(document.activeElement) ?? false;
       setDirection(offset < 0 ? "previous" : "next");
+      if (slideTimer.current) clearTimeout(slideTimer.current);
+      const reduceMotion =
+        document.documentElement.dataset.motion === "off" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // 前一张短暂留在底层，翻页时不露出空白；快速连点也只保留一层。
+      setPreviousItem(reduceMotion ? null : item);
+      if (!reduceMotion)
+        slideTimer.current = setTimeout(() => setPreviousItem(null), 420);
       onSelect(next.id);
     }
   }
@@ -194,6 +205,23 @@ export function CollectionLightbox({
               }
             }}
           >
+            {previousItem ? (
+              <div
+                key={`previous-${previousItem.id}`}
+                className={`${styles.imageScene} ${styles.previousScene}`}
+                aria-hidden="true"
+              >
+                <Image
+                  className={styles.artwork}
+                  src={sitePath(previousItem.image)}
+                  alt=""
+                  width={900}
+                  height={900}
+                  unoptimized
+                  draggable={false}
+                />
+              </div>
+            ) : null}
             <div className={styles.imageScene} key={item.id} data-direction={direction}>
               <Image
                 className={styles.imageWash}
@@ -246,10 +274,7 @@ export function CollectionLightbox({
           ) : null}
         </div>
         <div className={styles.details}>
-          <div className={styles.heading}>
-            <span className={styles.eyebrow}>
-              COLLECTION / {String(index + 1).padStart(2, "0")}
-            </span>
+          <div className={styles.heading} key={`heading-${item.id}`}>
             <h2 id={titleId}>{item.title}</h2>
             {item.subtitle ? <p>{item.subtitle}</p> : null}
           </div>
@@ -267,7 +292,7 @@ export function CollectionLightbox({
             <button
               type="button"
               onClick={() => moveBy(-1)}
-              disabled={index === 0}
+              aria-disabled={index === 0}
               aria-label="上一件收藏"
             >
               上一件
@@ -275,7 +300,7 @@ export function CollectionLightbox({
             <button
               type="button"
               onClick={() => moveBy(1)}
-              disabled={index === items.length - 1}
+              aria-disabled={index === items.length - 1}
               aria-label="下一件收藏"
             >
               下一件
@@ -284,15 +309,20 @@ export function CollectionLightbox({
           <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
             第 {index + 1} 件，共 {items.length} 件：{item.title}
           </p>
-          <div className={styles.footer}>
-            <span>{item.imageNote ?? "商品展示图 · 非本人实拍"}</span>
-            {item.sourceUrl ? (
-              <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
-                {item.sourceLabel ?? "商品资料"}
-                <span className="sr-only">（将在新标签页打开）</span>
-              </a>
-            ) : null}
-          </div>
+          {item.sourceUrl || item.imageNote ? (
+            <details className={styles.credit}>
+              <summary>相关资料</summary>
+              <div>
+                {item.imageNote ? <p>{item.imageNote}</p> : null}
+                {item.sourceUrl ? (
+                  <a href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    {item.sourceLabel ?? "商品资料"}
+                    <span className="sr-only">（将在新标签页打开）</span>
+                  </a>
+                ) : null}
+              </div>
+            </details>
+          ) : null}
           {item.story ? (
             <details key={`story-${item.id}`} className={styles.story}>
               <summary>小故事</summary>

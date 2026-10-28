@@ -249,6 +249,7 @@ test("server-renders the seven canonical rooms inside the Wonder Collection", as
     const html = await response.text();
     assert.match(html, room.title);
     assert.match(html, room.copy);
+    assert.doesNotMatch(html, /非本人实拍/);
     assert.match(
       html,
       new RegExp(
@@ -542,7 +543,7 @@ test("publishes 16 product-matched figures with stable archive numbers", async (
 
   assert.match(html, /展柜收藏<\/dt><dd>16 件<\/dd>/);
   assert.match(html, /初音未来<\/dt><dd>06 件<\/dd>/);
-  assert.match(html, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(html, /其他角色<\/dt><dd>10 件<\/dd>/);
   assert.match(html, /aria-label="16 件手办收藏"/);
   assert.equal(html.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(html, /id="figure-003-title"/);
@@ -601,7 +602,8 @@ test("publishes 16 product-matched figures with stable archive numbers", async (
   assert.equal(html.match(/src="\/figures\/figure-\d{3}\.webp"/g)?.length, 16);
   assert.equal(html.match(/aria-haspopup="dialog"/g)?.length, 16);
   assert.match(html, /超天酱/);
-  assert.match(html, /商品展示图 · 非本人实拍/);
+  assert.match(html, /图片与资料/);
+  assert.match(html, /厂商与商品资料页/);
   assert.doesNotMatch(html, /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/);
   assert.doesNotMatch(html, /NEXT \/ 03[^]{0,160}本人拍摄的实物照片/);
 
@@ -636,7 +638,8 @@ test("publishes the six owner-confirmed Fufu with formal names and no transactio
   assert.match(html, /初音ミク\u3000午2026\u3000ふわぷち\u3000ぬいぐるみ（LL）/);
   assert.match(html, /商品卡保留 SEGA 公布的正式名称/);
   assert.equal(html.match(/<img[^>]+src="\/fufu\/[^"]+\.webp"/g)?.length, 6);
-  assert.match(html, /SEGA 官方商品图 · 非本人实拍/);
+  assert.match(html, /图片与资料/);
+  assert.match(html, /SEGA 官方资料/);
   assert.match(html, /href="https:\/\/segaplaza\.jp\/goods\/120696\/"/);
   assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/16431"/);
   assert.match(html, /href="https:\/\/info\.miku\.sega\.jp\/17297"/);
@@ -1056,7 +1059,8 @@ test("publishes exactly the four owner-confirmed controllers with local product 
     "《原神》八重神子联名版",
   ])
     assert.ok(html.includes(name));
-  assert.match(html, /商品展示图 · 非本人实拍/);
+  assert.match(html, /图片与资料/);
+  assert.match(html, /Xbox · Nintendo · WHOTAO/);
   assert.doesNotMatch(html, /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i);
 });
 

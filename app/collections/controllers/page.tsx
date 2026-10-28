@@ -56,13 +56,9 @@ export default function CollectionsControllersPage() {
           <p>点击图片查看大图。</p>
         </div>
         <CollectionNavigation current="controllers" />
-        <p className={styles.imageNote}>商品展示图 · 非本人实拍</p>
         <ControllerCatalog />
         <CollectionCredit label="手柄图片与商品资料" source="Xbox · Nintendo · WHOTAO">
-          <p>
-            Xbox 与 Nintendo 图片来自官方商品页；八重神子联名款使用 WHOTAO
-            商品资料图。每张卡片保留来源入口，图片与商品设计版权归各自权利方。
-          </p>
+          <p>每件收藏保留对应的商品资料入口，图片与商品设计版权归各自权利方。</p>
         </CollectionCredit>
       </section>
       <JourneyNavigation currentHref="/collections/" />

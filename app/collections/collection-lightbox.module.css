@@ -87,11 +87,25 @@
     var(--surface);
 }
 .imageScene {
+  position: relative;
   display: grid;
   width: 100%;
   height: 100%;
   place-items: center;
   padding: 20px;
+}
+.previousScene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+:global(html[data-motion="off"]) .previousScene {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .previousScene {
+    display: none;
+  }
 }
 .imageWash {
   position: absolute;
@@ -178,16 +192,8 @@
     ),
     var(--surface);
 }
-.eyebrow {
-  display: block;
-  color: var(--accent-deep);
-  font:
-    10px var(--font-geist-mono),
-    monospace;
-  letter-spacing: 0.12em;
-}
 .heading h2 {
-  margin: 22px 0 12px;
+  margin: 0 0 12px;
   font-size: clamp(24px, 2.5vw, 34px);
   font-weight: 650;
   letter-spacing: -0.035em;
@@ -245,20 +251,38 @@
   background: var(--accent-soft);
   border-color: color-mix(in srgb, var(--accent-deep) 35%, var(--border));
 }
-.navigation button:disabled {
+.navigation button[aria-disabled="true"] {
   opacity: 0.35;
   cursor: default;
 }
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
+.credit {
   margin-top: 26px;
+  border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
-.footer a {
+.credit summary {
+  min-height: 44px;
+  align-content: center;
+  cursor: pointer;
+  list-style: none;
+}
+.credit summary::-webkit-details-marker {
+  display: none;
+}
+.credit summary:hover,
+.credit[open] summary {
+  color: var(--accent-deep);
+}
+.credit > div {
+  padding-bottom: 8px;
+}
+.credit p {
+  margin: 0 0 8px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.credit a {
   display: inline-flex;
   min-height: 32px;
   align-items: center;
@@ -286,7 +310,8 @@
   white-space: pre-wrap;
 }
 .lightbox button:focus-visible,
-.lightbox a:focus-visible {
+.lightbox a:focus-visible,
+.credit summary:focus-visible {
   outline: 2px solid var(--accent-deep);
   outline-offset: 3px;
 }
@@ -299,7 +324,7 @@
     opacity: 1;
     translate: 0 -3px;
   }
-  .navigation button:not(:disabled):hover {
+  .navigation button:not([aria-disabled="true"]):hover {
     background: var(--accent-soft);
     translate: 0 -2px;
   }
@@ -312,10 +337,16 @@
     animation: backdrop-in 300ms ease both;
   }
   :global(html:not([data-motion="off"])) .imageScene {
-    animation: page-next 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: page-next 380ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   :global(html:not([data-motion="off"])) .imageScene[data-direction="previous"] {
     animation-name: page-previous;
+  }
+  :global(html:not([data-motion="off"])) .previousScene {
+    animation: page-leave 420ms ease-out both;
+  }
+  :global(html:not([data-motion="off"])) .heading {
+    animation: caption-arrive 300ms ease-out;
   }
   :global(html:not([data-motion="off"])) .lightbox[data-closing] {
     animation: album-close 180ms ease-in both;
@@ -354,7 +385,7 @@
 }
 @keyframes page-next {
   from {
-    opacity: 0.3;
+    opacity: 0;
     translate: 18px 0;
   }
   to {
@@ -364,8 +395,26 @@
 }
 @keyframes page-previous {
   from {
-    opacity: 0.3;
+    opacity: 0;
     translate: -18px 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes page-leave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes caption-arrive {
+  from {
+    opacity: 0.5;
+    translate: 0 5px;
   }
   to {
     opacity: 1;
@@ -409,7 +458,6 @@
     padding: 20px;
   }
   .heading h2 {
-    margin-top: 10px;
     font-size: 22px;
   }
   .heading p {
@@ -421,15 +469,7 @@
   .progress {
     margin-bottom: 14px;
   }
-  .footer {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
+  .credit {
     margin-top: 14px;
-  }
-  .footer a {
-    flex: none;
-    font-size: 11px;
   }
 }

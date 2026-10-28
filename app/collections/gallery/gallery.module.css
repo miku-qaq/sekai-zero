@@ -19,10 +19,14 @@
 .controls {
   margin-bottom: 24px;
   overflow: hidden;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-medium);
-  background: var(--surface);
-  box-shadow: var(--collection-shadow);
+  background: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--accent-soft) 30%, var(--surface)),
+    var(--surface)
+  );
+  box-shadow: 0 8px 24px rgb(47 36 72 / 5%);
 }
 .roomTabs {
   display: flex;
@@ -150,16 +154,22 @@
   min-width: 0;
 }
 .card {
-  display: block;
+  display: flex;
   width: 100%;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-medium);
-  background: transparent;
+  height: 100%;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
   color: var(--foreground);
+  box-shadow: 0 7px 20px rgb(47 36 72 / 5%);
   text-align: left;
   font: inherit;
   cursor: pointer;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 .imageFrame {
   position: relative;
@@ -168,28 +178,26 @@
   aspect-ratio: 2 / 3;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: var(--radius-medium);
+  border-radius: 15px;
   background: var(--surface-muted);
-  box-shadow: var(--collection-shadow);
 }
 .imageFrame[data-fit="contain"] {
-  background: #f4f3f6;
+  background: linear-gradient(140deg, var(--accent-soft), var(--surface-muted) 65%);
 }
 .imageFrame img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 220ms ease;
 }
 .imageFrame[data-fit="contain"] img {
-  padding: 10px;
+  padding: 8px;
   object-fit: contain;
 }
 .cardTitle {
   display: block;
-  margin-top: 11px;
-  padding-inline: 2px;
+  margin-top: 10px;
+  padding: 0 5px 5px;
   font-size: 13px;
   line-height: 1.65;
   overflow-wrap: anywhere;
@@ -199,8 +207,20 @@
   outline-offset: 5px;
 }
 @media (hover: hover) {
-  .card:hover img {
-    transform: scale(1.025);
+  .card:hover {
+    border-color: var(--accent-deep);
+    box-shadow: 0 14px 28px rgb(47 36 72 / 11%);
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="off"])) .card {
+    transition:
+      translate 280ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+  :global(html:not([data-motion="off"])) .card:hover {
+    translate: 0 -4px;
   }
 }
 .more {
@@ -280,8 +300,17 @@
   .cardTitle {
     font-size: 12px;
   }
+  .card {
+    padding: 6px;
+    border-radius: 18px;
+  }
   .imageFrame {
-    border-radius: 16px;
+    border-radius: 12px;
+  }
+  .cardTitle {
+    margin-top: 8px;
+    padding-inline: 3px;
+    font-size: 12px;
   }
   .imageFrame[data-fit="contain"] img {
     padding: 6px;

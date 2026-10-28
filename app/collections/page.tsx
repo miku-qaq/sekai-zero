@@ -251,9 +251,6 @@ export default function CollectionsPage() {
             </CollectionLink>
           ))}
         </div>
-        <p className={styles.collectionNote}>
-          手办、Fufu、手柄、设备与耳机使用展示图，非本人实拍。
-        </p>
       </section>
 
       <CollectionExhibitions />

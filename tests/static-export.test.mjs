@@ -304,7 +304,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const visibleFigures = figures.replaceAll("<!-- -->", "");
   assert.match(figures, /展柜收藏<\/dt><dd>16 件<\/dd>/);
   assert.match(figures, /初音未来<\/dt><dd>06 件<\/dd>/);
-  assert.match(figures, /款式配图<\/dt><dd>16 \/ 16<\/dd>/);
+  assert.match(figures, /其他角色<\/dt><dd>10 件<\/dd>/);
   assert.match(figures, /aria-label="16 件手办收藏"/);
   assert.equal(figures.match(/id="figure-\d{3}-title"/g)?.length, 16);
   assert.doesNotMatch(figures, /id="figure-003-title"/);
@@ -367,7 +367,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
     16,
   );
   assert.match(figures, /超天酱/);
-  assert.match(figures, /商品展示图 · 非本人实拍/);
+  assert.match(figures, /图片与资料/);
+  assert.match(figures, /厂商与商品资料页/);
+  assert.doesNotMatch(figures, /非本人实拍/);
   assert.doesNotMatch(
     figures,
     /角色待确认|NEEDS CONFIRMATION|PUBLIC \/ 01|PRIVATE \/ 02/,
@@ -419,7 +421,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(controllers, /Series X\|S 标准款 · 碳黑/);
   assert.match(controllers, /Nintendo Switch 2 Pro 手柄/);
   assert.match(controllers, /《原神》八重神子联名版/);
-  assert.match(controllers, /商品展示图 · 非本人实拍/);
+  assert.match(controllers, /图片与资料/);
+  assert.match(controllers, /Xbox · Nintendo · WHOTAO/);
+  assert.doesNotMatch(controllers, /非本人实拍/);
   assert.doesNotMatch(
     controllers,
     /[¥￥]\s*\d|data-(?:price|order|date|purchased-at)=/i,

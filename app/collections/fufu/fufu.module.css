@@ -374,7 +374,6 @@
   background: var(--surface);
   box-shadow: var(--collection-shadow);
   transition:
-    transform 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease;
 }
@@ -484,7 +483,6 @@
 
 @media (hover: hover) {
   .fufuCard:hover {
-    transform: translateY(-5px);
     border-color: color-mix(in srgb, var(--card-accent) 52%, var(--border));
     box-shadow: 0 21px 42px
       color-mix(in srgb, var(--card-accent) 14%, rgb(44 34 67 / 10%));
@@ -556,9 +554,20 @@
   position: relative;
   min-width: 0;
   margin: 0;
-  padding: 16px;
-  background: #fff;
-  color: #595467;
+  padding: 14px;
+  background:
+    radial-gradient(
+        circle,
+        color-mix(in srgb, var(--card-accent, var(--accent)) 17%, transparent) 0.7px,
+        transparent 0.9px
+      )
+      0 0 / 9px 9px,
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--card-accent, var(--accent)) 11%, var(--surface)),
+      var(--surface-muted)
+    );
+  color: var(--muted);
   border-bottom: 1px solid var(--border);
 }
 .productPhoto img {
@@ -570,7 +579,12 @@
 }
 .productPhoto a {
   display: block;
-  border-radius: var(--radius-small);
+  overflow: hidden;
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgb(47 36 72 / 6%);
 }
 .productPhoto a:focus-visible {
   outline: 3px solid var(--accent-deep);
@@ -579,13 +593,13 @@
 .yearBadge {
   position: absolute;
   z-index: 1;
-  top: 16px;
-  left: 16px;
-  padding: 6px 12px;
-  border: 1px solid #ddd4e9;
-  border-radius: 30px;
-  background: #fff9fd;
-  color: #353149;
+  top: 24px;
+  left: 24px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--foreground);
   font-size: 12px;
   font-weight: 750;
 }
@@ -657,5 +671,20 @@
   }
   .largeFufu .productPhoto img {
     max-height: 300px;
+  }
+}
+
+.fufuCard:focus-within {
+  border-color: var(--accent-deep);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="off"])) .productPhoto a {
+    transition:
+      translate 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      box-shadow 320ms ease;
+  }
+  :global(html:not([data-motion="off"])) .productPhoto a:hover {
+    translate: 0 -3px;
+    box-shadow: 0 12px 25px rgb(40 29 65 / 12%);
   }
 }

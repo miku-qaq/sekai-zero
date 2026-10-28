@@ -210,7 +210,7 @@ export function GalleryCatalog() {
         <>
           <ol className={styles.grid} aria-label="收藏图片">
             {visibleItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} data-collection-card={item.id}>
                 <button
                   className={styles.card}
                   type="button"

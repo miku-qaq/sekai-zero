@@ -6,10 +6,10 @@
 .catalogControls {
   overflow: hidden;
   margin-bottom: 24px;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-medium);
   background: var(--surface);
-  box-shadow: var(--collection-shadow);
+  box-shadow: 0 8px 24px rgb(47 36 72 / 5%);
 }
 
 /* Every column count divides the 24-card batch, including after a resize. */
@@ -32,7 +32,11 @@
   align-items: end;
   gap: 12px;
   padding: 16px;
-  background: linear-gradient(115deg, rgb(var(--accent-rgb) / 6%), transparent 65%);
+  background: linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--accent-soft) 35%, var(--surface)),
+    var(--surface)
+  );
 }
 
 [data-catalog="anime"] .toolbar {
@@ -75,9 +79,12 @@
   align-items: center;
   gap: 10px;
   padding: 0 14px;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border);
   border-radius: var(--radius-small);
   background: var(--surface);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .searchField i {
@@ -114,6 +121,7 @@
 .selectField select:focus-visible {
   outline: 2px solid var(--accent-deep);
   outline-offset: 2px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-soft) 55%, transparent);
 }
 
 .reset {

@@ -143,7 +143,7 @@ export function FigureCatalog() {
             const number = recordNumber(entry.id);
 
             return (
-              <li key={entry.id}>
+              <li key={entry.id} data-collection-card={entry.id}>
                 <article
                   className={styles.card}
                   data-tone={entry.tone}

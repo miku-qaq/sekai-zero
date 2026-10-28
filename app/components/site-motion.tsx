@@ -46,25 +46,80 @@ export function SiteMotion() {
 
   useEffect(() => {
     if (motion !== "on" || !("IntersectionObserver" in window)) return;
-    const targets = document.querySelectorAll(
-      ".section-heading, .logs-list > details, .finale, [data-scene-reveal]",
-    );
+    const selector =
+      ".section-heading, .logs-list > details, .finale, [data-scene-reveal], [data-collection-card]";
+    const targets = new Set<Element>();
+    const collection = document.querySelector("[data-collection-motion]");
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           observer.unobserve(entry.target);
-          if (played.current.has(entry.target)) continue;
+          if (!entry.target.isConnected || played.current.has(entry.target)) continue;
           played.current.add(entry.target);
-          entry.target.classList.add("scene-enter");
+          entry.target.classList.add(
+            entry.target.hasAttribute("data-collection-card")
+              ? "collection-enter"
+              : "scene-enter",
+          );
         }
       },
       { threshold: 0.08 },
     );
-    for (const target of targets) observer.observe(target);
+
+    function observe(target: Element) {
+      if (targets.has(target) || played.current.has(target)) return;
+      targets.add(target);
+      observer.observe(target);
+    }
+
+    function matchingElements(node: Node) {
+      if (!(node instanceof Element)) return [];
+      return [
+        ...(node.matches(selector) ? [node] : []),
+        ...node.querySelectorAll(selector),
+      ];
+    }
+
+    for (const target of document.querySelectorAll(selector)) observe(target);
+
+    // 只监听收藏馆内部增删的节点；筛选和加载更多也能沿用同一套入场。
+    const mutations = new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.removedNodes) {
+          for (const target of matchingElements(node)) {
+            if (target.isConnected) continue;
+            observer.unobserve(target);
+            targets.delete(target);
+          }
+        }
+        for (const node of record.addedNodes) {
+          for (const target of matchingElements(node)) observe(target);
+        }
+      }
+    });
+    if (collection) mutations.observe(collection, { childList: true, subtree: true });
+
+    function finishCollectionEntrance(event: Event) {
+      if (
+        event instanceof AnimationEvent &&
+        event.animationName === "collection-card-arrive" &&
+        event.target instanceof Element
+      ) {
+        event.target.classList.remove("collection-enter");
+      }
+    }
+    collection?.addEventListener("animationend", finishCollectionEntrance);
+    collection?.addEventListener("animationcancel", finishCollectionEntrance);
+
     return () => {
+      mutations.disconnect();
       observer.disconnect();
-      for (const target of targets) target.classList.remove("scene-enter");
+      collection?.removeEventListener("animationend", finishCollectionEntrance);
+      collection?.removeEventListener("animationcancel", finishCollectionEntrance);
+      for (const target of targets) {
+        target.classList.remove("scene-enter", "collection-enter");
+      }
     };
   }, [pathname, motion]);
 

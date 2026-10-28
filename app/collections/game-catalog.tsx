@@ -83,7 +83,7 @@ export function GameCatalog() {
               const titleId = `${game.id}-title`;
 
               return (
-                <li key={game.id}>
+                <li key={game.id} data-collection-card={game.id}>
                   <article className={styles.card} aria-labelledby={titleId}>
                     <a
                       className={styles.cover}

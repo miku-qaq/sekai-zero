@@ -13,14 +13,16 @@ export function CollectionCredit({
 }) {
   return (
     <details className={styles.credit}>
-      <summary>
-        <span>{label}</span>
-        <small>{source}</small>
+      <summary aria-label={`图片与资料：${label}`}>
+        <span>图片与资料</span>
         <span className={styles.indicator} aria-hidden="true">
           +
         </span>
       </summary>
-      <div className={styles.body}>{children}</div>
+      <div className={styles.body}>
+        <p className={styles.source}>{source}</p>
+        {children}
+      </div>
     </details>
   );
 }

@@ -80,6 +80,7 @@ export default function CollectionsFufuPage() {
         {largeFufu ? (
           <article
             className={styles.largeFufu}
+            data-collection-card={largeFufu.id}
             aria-labelledby={`${largeFufu.id}-title`}
           >
             <figure className={styles.productPhoto}>
@@ -91,7 +92,7 @@ export default function CollectionsFufuPage() {
               >
                 <Image
                   src={sitePath(largeFufu.image)}
-                  alt={`${largeFufu.title}，SEGA 官方商品示意图`}
+                  alt={largeFufu.title}
                   width={800}
                   height={800}
                   sizes="(max-width: 760px) 90vw, 480px"
@@ -122,7 +123,7 @@ export default function CollectionsFufuPage() {
           {zodiacFufu.map((entry) => {
             const titleId = `${entry.id}-title`;
             return (
-              <li key={entry.id}>
+              <li key={entry.id} data-collection-card={entry.id}>
                 <article
                   id={entry.id}
                   className={styles.fufuCard}
@@ -141,7 +142,7 @@ export default function CollectionsFufuPage() {
                     >
                       <Image
                         src={sitePath(entry.image)}
-                        alt={`${entry.title}，SEGA 官方商品示意图`}
+                        alt={entry.title}
                         width={800}
                         height={800}
                         sizes="(max-width: 600px) 90vw, (max-width: 1000px) 45vw, 340px"
@@ -160,10 +161,7 @@ export default function CollectionsFufuPage() {
           })}
         </ol>
 
-        <CollectionCredit
-          label="Fufu 图片与商品资料"
-          source="SEGA 官方商品图 · 非本人实拍"
-        >
+        <CollectionCredit label="Fufu 图片与商品资料" source="SEGA 官方资料">
           <p>{fufuCollectionMeta.rightsNote}</p>
         </CollectionCredit>
       </section>

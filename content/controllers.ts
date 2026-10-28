@@ -24,7 +24,7 @@ export const controllerCollection: readonly ControllerCollectionEntry[] = [
     collaboration: false,
     tone: "mint",
     image: "/controllers/xbox-carbon-black.webp",
-    imageAlt: "Xbox Series X|S 碳黑色无线手柄正面商品图，非本人实拍",
+    imageAlt: "Xbox Series X|S 碳黑色无线手柄正面",
     sourceUrl:
       "https://www.microsoft.com/en-us/d/xbox-wireless-controller/8xn59crbsqgz",
   },
@@ -38,7 +38,7 @@ export const controllerCollection: readonly ControllerCollectionEntry[] = [
     collaboration: false,
     tone: "violet",
     image: "/controllers/switch-pro.webp",
-    imageAlt: "Nintendo Switch Pro 标准款手柄商品图，非本人实拍",
+    imageAlt: "Nintendo Switch Pro 标准款手柄",
     sourceUrl: "https://www.nintendo.com/hk/hardware/switch/accessories/#procon",
   },
   {
@@ -51,7 +51,7 @@ export const controllerCollection: readonly ControllerCollectionEntry[] = [
     collaboration: false,
     tone: "blue",
     image: "/controllers/switch2-pro.webp",
-    imageAlt: "Nintendo Switch 2 Pro 标准款手柄正面商品图，非本人实拍",
+    imageAlt: "Nintendo Switch 2 Pro 标准款手柄正面",
     sourceUrl: "https://www.nintendo.com/hk/hardware/switch2/accessories/index.html",
   },
   {
@@ -64,7 +64,7 @@ export const controllerCollection: readonly ControllerCollectionEntry[] = [
     collaboration: true,
     tone: "pink",
     image: "/controllers/apex4-yae-miko.webp",
-    imageAlt: "飞智八爪鱼 4 八重神子联名手柄商品图，非本人实拍",
+    imageAlt: "飞智八爪鱼 4 八重神子联名手柄",
     sourceUrl:
       "https://whotao.com/products/genshin-impact-yae-miko-astute-amusement-game-controller-apex-4",
   },

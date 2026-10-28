@@ -25,8 +25,8 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     tone: "mint",
     // https://assets.nintendo.com/image/upload/q_auto/f_auto/dpr_2.0/ncom/en_US/products/hardware/nintendo-switch-oled-model-white-set/115461-switch-oled-white-console-front-1200x675
     image: "/devices/nintendo-switch-oled.jpg",
-    imageAlt: "Nintendo Switch OLED 款式官方商品图，白色配色示意，非本人实拍",
-    imageNote: "官方商品图 · 配色示意 · 非本人实拍",
+    imageAlt: "Nintendo Switch OLED 白色款外观",
+    imageNote: "Nintendo 官方资料",
     sourceUrl: "https://www.nintendo.com/hk/hardware/detail/switch-oled/index.html",
   },
   {
@@ -39,8 +39,8 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     tone: "violet",
     // https://www.nintendo.com/hk/hardware/switch2/assets/img/modal-more/block-portable-before.png
     image: "/devices/nintendo-switch-2.png",
-    imageAlt: "Nintendo Switch 2 普通版主机官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "Nintendo Switch 2 普通版主机",
+    imageNote: "Nintendo 官方资料",
     sourceUrl: "https://www.nintendo.com/hk/hardware/switch2/index.html",
   },
   {
@@ -53,8 +53,8 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     tone: "mint",
     // https://www.apple.com.cn/v/iphone/compare/an/images/overview/compare_iphone17_pro_cosmic_orange__dm1qripnvq82_large_2x.jpg
     image: "/devices/iphone-17-pro-orange.jpg",
-    imageAlt: "iPhone 17 Pro 星宇橙色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "iPhone 17 Pro 星宇橙色",
+    imageNote: "Apple 官方资料",
     sourceUrl:
       "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
   },
@@ -68,8 +68,8 @@ export const deviceCollection: readonly DeviceCollectionEntry[] = [
     tone: "violet",
     // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-pro-13-select-wifi-spaceblack-202405?wid=940&hei=1112&fmt=p-jpg&qlt=95&.v=T1BCOVhFWUx5RnVHWklQQWdsQTFDY3pCNlo3Y2trYUx2VGtnRmoxbk1mRFcvUGs3Z3lJUWVHYk5KZW9nNkdxb1Q5NVJ4OStiQklybHZqYkJwOUI0UWt2aHJVVVRvS3hUQ0EwVk8wak9Ka0g3djBPZUREMElRMHhHVnprUmxPLzg
     image: "/devices/ipad-pro-m5-space-black.jpg",
-    imageAlt: "13 英寸 iPad Pro M5 深空黑色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "13 英寸 iPad Pro M5 深空黑色",
+    imageNote: "Apple 官方资料",
     sourceUrl: "https://www.apple.com.cn/ipad-pro/",
   },
 ];

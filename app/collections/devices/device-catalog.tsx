@@ -64,7 +64,7 @@ export function DeviceCatalog() {
       </p>
       <ol className={styles.grid} aria-label={`${filteredDevices.length} 件设备收藏`}>
         {filteredDevices.map(({ entry, index }) => (
-          <li key={entry.id}>
+          <li key={entry.id} data-collection-card={entry.id}>
             <article
               className={styles.card}
               data-tone={entry.tone}
@@ -116,9 +116,6 @@ export function DeviceCatalog() {
                 <h3 id={`${entry.id}-title`}>{entry.title}</h3>
                 {entry.edition ? (
                   <p className={styles.edition}>{entry.edition}</p>
-                ) : null}
-                {entry.image ? (
-                  <p className={styles.imageNote}>{entry.imageNote}</p>
                 ) : null}
                 <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">
                   {entry.brand} 官方

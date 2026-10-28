@@ -24,8 +24,8 @@ export const headphoneCollection: readonly HeadphoneCollectionEntry[] = [
     tone: "mint",
     // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-3-hero-select-202509?wid=976&hei=916&fmt=jpeg&qlt=90&.v=cmp4MmZ6OWxOeHNNTXh4SzlBNUpEb1RucE9zZTI5eEREaWZpY29lSld3eWVDYXovZDMyN1dXU211bjZoVlVUcWJGcXNRQnFCV0w3WVRjTExvdm1ic1YxRUxFRmRlWDBITzhnRmZ5OTRmaVdKTExiOEFsRmxtQ2Nua0tRSC83MkI
     image: "/devices/airpods-pro-3.jpg",
-    imageAlt: "AirPods Pro 3 白色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "AirPods Pro 3 白色",
+    imageNote: "Apple 官方资料",
     sourceUrl: "https://www.apple.com.cn/airpods-pro/",
   },
   {
@@ -38,8 +38,8 @@ export const headphoneCollection: readonly HeadphoneCollectionEntry[] = [
     tone: "violet",
     // https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-max-select-202409-midnight_FV1?wid=976&hei=916&fmt=jpeg&qlt=90&.v=azQxRkVJKzd6V3J0aGNqWFhLMzBmdmVWNWdHYnp5cHkwMldsSElEOHpyd0cyWGRFNFZ5QTk3bFlteis2Q2NNaWpENFdPQTN0TWQ4ejhtTWxrUHVDeElGZGV2eWhZaEljUzNSeDlxcDVuWGszbTFldUtUQzN0ellEWHZ3UUFYSS8
     image: "/devices/airpods-max-2-midnight.jpg",
-    imageAlt: "AirPods Max 2 午夜色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "AirPods Max 2 午夜色",
+    imageNote: "Apple 官方资料",
     sourceUrl: "https://www.apple.com.cn/airpods-max/",
   },
   {
@@ -52,8 +52,8 @@ export const headphoneCollection: readonly HeadphoneCollectionEntry[] = [
     tone: "mint",
     // https://www.sonystyle.com.cn/content/dam/sonystyle/products/headphone/wh_1000xm5/product/1000xm5_800x800_s2.jpg
     image: "/headphones/wh-1000xm5-silver.jpg",
-    imageAlt: "Sony WH-1000XM5 铂金银官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "Sony WH-1000XM5 铂金银",
+    imageNote: "Sony 官方资料",
     sourceUrl:
       "https://www.sonystyle.com.cn/products/headphone/wh_1000xm5/wh_1000xm5_s.html",
   },
@@ -67,8 +67,8 @@ export const headphoneCollection: readonly HeadphoneCollectionEntry[] = [
     tone: "violet",
     // https://www.sonystyle.com.cn/content/dam/sonystyle/products/headphone/wh_1000xm6/product/wh_1000xm6_b1.jpg
     image: "/headphones/wh-1000xm6-black.jpg",
-    imageAlt: "Sony WH-1000XM6 黑色官方商品图，非本人实拍",
-    imageNote: "官方商品图 · 非本人实拍",
+    imageAlt: "Sony WH-1000XM6 黑色",
+    imageNote: "Sony 官方资料",
     sourceUrl:
       "https://www.sonystyle.com.cn/products/headphone/wh_1000xm6/wh_1000xm6_b.html",
   },

@@ -25,9 +25,6 @@ export const metadata: Metadata = {
 const mikuCount = figureCollection.filter(
   (entry) => entry.character === "初音未来",
 ).length;
-const productConfirmedCount = figureCollection.filter(
-  (entry) => entry.verification === "product-confirmed" && entry.product.image,
-).length;
 
 export default function CollectionsFiguresPage() {
   return (
@@ -45,8 +42,8 @@ export default function CollectionsFiguresPage() {
           },
           { label: "初音未来", value: `${String(mikuCount).padStart(2, "0")} 件` },
           {
-            label: "款式配图",
-            value: `${productConfirmedCount} / ${figureCollection.length}`,
+            label: "其他角色",
+            value: `${String(figureCollection.length - mikuCount).padStart(2, "0")} 件`,
           },
         ]}
       />
@@ -65,9 +62,6 @@ export default function CollectionsFiguresPage() {
         <CollectionNavigation current="figures" />
 
         <div className={styles.galleryNote}>
-          <p>
-            <span aria-hidden="true">◇</span> 商品展示图 · 非本人实拍
-          </p>
           <CollectionLink href="/collections/fufu/">
             毛绒伙伴在 Fufu 展柜
           </CollectionLink>
@@ -75,7 +69,7 @@ export default function CollectionsFiguresPage() {
 
         <FigureCatalog />
 
-        <CollectionCredit label="手办图片与款式资料" source="商品展示图 · 非本人实拍">
+        <CollectionCredit label="手办图片与款式资料" source="厂商与商品资料页">
           <p>{figureCollectionMeta.rightsNote}</p>
         </CollectionCredit>
       </section>

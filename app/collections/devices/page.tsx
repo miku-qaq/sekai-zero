@@ -53,7 +53,7 @@ export default function CollectionsDevicesPage() {
           </CollectionLink>
         </nav>
         <CollectionCredit label="设备图片与资料" source="Apple · Nintendo 官方">
-          <p>图片与资料来自 Apple 与 Nintendo 官方，展示图非本人实拍。</p>
+          <p>各卡片保留官方产品入口，图片与产品设计版权归各自权利方。</p>
         </CollectionCredit>
       </section>
       <JourneyNavigation currentHref="/collections/" />

@@ -181,7 +181,7 @@ export function AnimeCatalog() {
               const titleId = `anime-${entry.id}-title`;
 
               return (
-                <li key={entry.id}>
+                <li key={entry.id} data-collection-card={entry.id}>
                   <article className={styles.card} aria-labelledby={titleId}>
                     <a
                       className={styles.cover}
