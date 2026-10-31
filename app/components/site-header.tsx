@@ -180,7 +180,7 @@ export function SiteHeader() {
             </svg>
           </button>
           <a className="header-cta" href={sitePath("/study/#cs224n-nlp-word-vectors")}>
-            正在学 CS224N
+            CS224N 笔记
           </a>
           <button
             ref={menuButtonRef}

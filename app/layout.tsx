@@ -5,6 +5,7 @@ import { absoluteSiteUrl, resolveSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "./components/site-header";
 import { BackToTop } from "./components/back-to-top";
 import { SiteMotion } from "./components/site-motion";
+import { CharacterCompanion } from "./components/character-companion";
 import "./globals.css";
 import "./subpages.css";
 import "./motion.css";
@@ -102,6 +103,7 @@ export default function RootLayout({
         <SiteHeader />
         <SiteMotion />
         {children}
+        <CharacterCompanion />
         <BackToTop />
       </body>
     </html>

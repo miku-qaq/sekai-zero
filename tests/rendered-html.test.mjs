@@ -128,9 +128,11 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /hero-anime-v3\.webp/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-021"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.021"]);
+  assert.match(html, /href="\/logs\/#ep-022"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.022"]);
   assert.match(html, /动效已开启/);
+  assert.match(html, /陪逛已开启/);
+  assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
   assert.doesNotMatch(html, /id="project-overview"/);
   assert.doesNotMatch(html, /id="works"|id="roadmap"/);
   assert.doesNotMatch(html, /\bPHASE\s*0\d\b/i);
@@ -330,7 +332,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /21 EPISODES/);
+  assert.match(logs, /22 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -366,9 +368,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 21);
-  assert.deepEqual(episodeIds.slice(0, 3), ["021", "020", "019"]);
-  assert.ok(logs.indexOf('id="ep-021"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 22);
+  assert.deepEqual(episodeIds.slice(0, 3), ["022", "021", "020"]);
+  assert.ok(logs.indexOf('id="ep-022"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -923,9 +925,10 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(releasesContent, /ANIME COLLECTION \/ 89/);
   assert.match(releasesContent, /episode: "EP\.010"/);
   assert.match(releasesContent, /VISITOR-FIRST CONTENT/);
-  assert.match(nowContent, /LEARNING \/ NLP-001/);
-  assert.match(nowContent, /GAMES \/ NS \+ STEAM/);
-  assert.match(nowContent, /FAVORITE \/ VIDEO/);
+  assert.match(nowContent, /status: "学习笔记"/);
+  assert.match(nowContent, /status: "游戏平台"/);
+  assert.match(nowContent, /status: "常用网站"/);
+  assert.match(nowContent, /updatedAt: "2026\.08\.29"/);
   assert.doesNotMatch(nowContent, /EP\.010|最近更新/);
 
   assert.match(collectionsContent, /href: "\/collections\/anime\/"/);

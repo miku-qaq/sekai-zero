@@ -146,7 +146,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, seven collection rooms and EP.021 as the latest release", async () => {
+test("keeps five top-level worlds, seven collection rooms and EP.022 as the latest release", async () => {
   const [
     site,
     collections,
@@ -505,10 +505,10 @@ test("keeps five top-level worlds, seven collection rooms and EP.021 as the late
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 21);
-  assert.equal(new Set(episodes).size, 21);
-  assert.equal(episodes[0], "021");
-  assert.deepEqual(episodes.slice(0, 3), ["021", "020", "019"]);
+  assert.equal(episodes.length, 22);
+  assert.equal(new Set(episodes).size, 22);
+  assert.equal(episodes[0], "022");
+  assert.deepEqual(episodes.slice(0, 3), ["022", "021", "020"]);
   assert.match(releases, /episode: "EP\.018"[^]*?Mac/);
   assert.match(releases, /episode: "EP\.018"[^]*?(?:GitHub|环境自检)/);
   assert.match(releases, /episode: "EP\.017"[^]*?手办/);

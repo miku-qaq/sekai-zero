@@ -133,8 +133,8 @@ export default function AboutPage() {
       <section className="profile-timeline section-pad" aria-labelledby="focus-title">
         <div className="section-shell timeline-layout">
           <div className="section-heading">
-            <p className="section-index">04 / CURRENT FOCUS</p>
-            <h2 id="focus-title">最近在做。</h2>
+            <p className="section-index">04 / NOTES</p>
+            <h2 id="focus-title">学习与收藏。</h2>
           </div>
           <ol>
             {currentFocus.map((item, index) => (

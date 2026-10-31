@@ -1,6 +1,6 @@
 export type CurrentSignal = {
   code: string;
-  status: "正在学习" | "兴趣状态" | "个人收藏";
+  status: "学习笔记" | "游戏平台" | "常用网站";
   title: string;
   copy: string;
   href: string;
@@ -9,23 +9,23 @@ export type CurrentSignal = {
 };
 
 /**
- * A small, owner-verifiable snapshot of what is happening now. This deliberately
- * avoids invented watching, playing or progress data just to make the site busy.
+ * The owner's last confirmed interests and learning record. The date describes
+ * that record, not the latest site deployment or an inferred progress update.
  */
 export const currentBroadcast = {
   updatedAt: "2026.08.29",
-  headline: "最近在做。",
-  summary: "自学 CS224N，也回顾 CS231n。",
+  headline: "学习与日常。",
+  summary: "记下所学，也留住喜欢。",
   panel: {
-    eyebrow: "MIKUREINA / CURRENTLY",
-    mark: "NOW",
+    eyebrow: "MIKUREINA",
+    mark: "LIFE",
     title: "一边学习，一边收集喜欢。",
     copy: "南京大学 CS · 动漫 · 游戏",
   },
   signals: [
     {
-      code: "LEARNING / NLP-001",
-      status: "正在学习",
+      code: "01",
+      status: "学习笔记",
       title: "CS224N · 词向量",
       copy: "从词表示与分布式语义开始。",
       href: "/study/#cs224n-nlp-word-vectors",
@@ -33,21 +33,21 @@ export const currentBroadcast = {
       tone: "blue",
     },
     {
-      code: "GAMES / NS + STEAM",
-      status: "兴趣状态",
+      code: "02",
+      status: "游戏平台",
       title: "Nintendo Switch · Steam",
       copy: "Steam 游戏已收进收藏馆。",
       href: "/collections/games/",
-      action: "查看游戏收藏",
+      action: "逛游戏收藏",
       tone: "mint",
     },
     {
-      code: "FAVORITE / VIDEO",
-      status: "个人收藏",
+      code: "03",
+      status: "常用网站",
       title: "哔哩哔哩",
       copy: "我最喜欢的视频平台。",
       href: "/links/#route-bilibili",
-      action: "常用网站",
+      action: "打开导航终端",
       tone: "violet",
     },
   ] satisfies readonly CurrentSignal[],

@@ -3,7 +3,7 @@ import { currentRelease } from "@/content/releases";
 import { sitePath } from "@/lib/site-path";
 import styles from "./current-broadcast.module.css";
 
-/** A static, shareable snapshot of the owner's current verified priorities. */
+/** Confirmed personal notes stay separate from the site's latest release. */
 export function CurrentBroadcast() {
   return (
     <section
@@ -13,7 +13,7 @@ export function CurrentBroadcast() {
     >
       <div className={`section-heading horizontal-heading ${styles.heading}`}>
         <div>
-          <p className="section-index">01 / NOW</p>
+          <p className="section-index">01 / DAILY</p>
           <h2 id="current-title">{currentBroadcast.headline}</h2>
         </div>
         <div className={styles.intro}>
@@ -22,11 +22,11 @@ export function CurrentBroadcast() {
       </div>
 
       <div className={styles.console}>
-        <div className={styles.episodePanel} aria-label="Mikureina 的当前状态">
+        <div className={styles.episodePanel} aria-label="Mikureina 的学习与日常记录">
           <div className={styles.episodeTopline}>
             <span>{currentBroadcast.panel.eyebrow}</span>
             <span>
-              <i aria-hidden="true" /> 状态记录{" "}
+              <i aria-hidden="true" /> 记录于{" "}
               <time dateTime={currentBroadcast.updatedAt.replaceAll(".", "-")}>
                 {currentBroadcast.updatedAt}
               </time>
@@ -36,7 +36,6 @@ export function CurrentBroadcast() {
             {currentBroadcast.panel.mark}
           </span>
           <div className={styles.episodeCopy}>
-            <span>PERSONAL SNAPSHOT</span>
             <strong>{currentBroadcast.panel.title}</strong>
             <p>{currentBroadcast.panel.copy}</p>
           </div>

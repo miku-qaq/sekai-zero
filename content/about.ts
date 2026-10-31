@@ -8,8 +8,8 @@ export const profileQuestions = [
     answer: "动漫、游戏，以及初音未来、伊蕾娜和波奇。常玩 Nintendo Switch 与 Steam。",
   },
   {
-    question: "最近在投入什么？",
-    answer: "自学 CS224N，回顾 CS231n，也继续打理收藏馆。",
+    question: "这里会记录什么？",
+    answer: "CS224N 学习笔记、CS231n 回顾，以及慢慢充实的收藏馆。",
   },
 ] as const;
 
@@ -17,15 +17,15 @@ export const currentFocus = [
   {
     code: "LEARNING",
     title: "自然语言处理",
-    copy: "自学 CS224N，从词向量与分布式语义开始。",
+    copy: "CS224N 笔记，从词向量与分布式语义开始。",
     href: "/study/#cs224n-nlp-word-vectors",
-    action: "阅读当前笔记",
+    action: "阅读笔记",
   },
   {
     code: "COLLECTION",
     title: "奇妙收藏馆",
-    copy: "动画、游戏、手办、Fufu 与手柄，慢慢收进同一座馆。",
+    copy: "动画、游戏、手办，还有身边的设备。",
     href: "/collections/",
-    action: "进入奇妙收藏馆",
+    action: "逛逛收藏馆",
   },
 ] as const;

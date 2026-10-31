@@ -161,8 +161,8 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(homepage, /初音未来/);
   assert.match(homepage, /伊蕾娜/);
   assert.match(homepage, /波奇/);
-  assert.match(homepage, /FAVORITE FREQUENCIES/);
-  assert.match(homepage, /DIMENSIONAL GACHA/);
+  assert.match(homepage, /03 \/ FAVORITES/);
+  assert.match(homepage, /BONUS \/ GACHA/);
   assert.match(homepage, /抽一张今天的次元签/);
   assert.match(
     homepage,
@@ -193,7 +193,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(about, /南京大学 · CS 在读/);
   assert.match(about, /href="mailto:miku125194847@gmail\.com"/);
   assert.doesNotMatch(about, /href="[^"]*\/mailto:/);
-  assert.match(about, /最近在做/);
+  assert.match(about, /学习与收藏/);
   assert.match(about, new RegExp(`href="${basePath}/collections/"`));
 
   const study = exported.get("study/index.html");
@@ -601,7 +601,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /21 EPISODES/);
+  assert.match(logs, /22 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(logs, /id="ep-018"/);
@@ -632,9 +632,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
   assert.match(logs, /id="ep-009"/);
-  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 21);
-  assert.match(logs, /id="ep-021"/);
-  assert.ok(logs.indexOf('id="ep-021"') < logs.indexOf('id="project-overview"'));
+  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 22);
+  assert.match(logs, /id="ep-022"/);
+  assert.ok(logs.indexOf('id="ep-022"') < logs.indexOf('id="project-overview"'));
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);
@@ -702,5 +702,13 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
 
   await access(new URL("../dist/pages/og-study.png", import.meta.url));
   await access(new URL("../dist/pages/og-v5.jpg", import.meta.url));
+  for (const character of ["miku", "elaina", "bocchi"]) {
+    await access(
+      new URL(
+        `../dist/pages/characters/companions/${character}-v1.webp`,
+        import.meta.url,
+      ),
+    );
+  }
   await access(new URL("../dist/pages/.nojekyll", import.meta.url));
 });

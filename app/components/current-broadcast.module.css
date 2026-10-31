@@ -143,7 +143,7 @@
   align-self: center;
   color: var(--accent-ink);
   font-family: var(--font-geist-mono), monospace;
-  font-size: clamp(112px, 15vw, 215px);
+  font-size: clamp(100px, 11vw, 164px);
   font-weight: 900;
   letter-spacing: -0.13em;
   line-height: 0.8;

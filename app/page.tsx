@@ -22,7 +22,7 @@ export default function Home() {
         <div className="hero-heading">
           <p className="eyebrow reveal reveal-one">
             <span className="status-dot" aria-hidden="true" />
-            PERSONAL SEKAI · SIGNAL ONLINE
+            PERSONAL SEKAI
           </p>
           <h1 id="hero-title" className="reveal reveal-two">
             你好，我是 {publicProfile.handle}。<span>欢迎来到我的个人世界。</span>
@@ -46,7 +46,7 @@ export default function Home() {
           </div>
           <dl className="hero-meta reveal reveal-four">
             <div>
-              <dt>最近在学</dt>
+              <dt>学习笔记</dt>
               <dd>{currentBroadcast.signals[0].title}</dd>
             </div>
             <div>
@@ -61,7 +61,7 @@ export default function Home() {
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
             <div className="identity-card-topline">
-              <span>SEKAI FAN ART / 00</span>
+              <span>SEKAI / 00</span>
               <span className="online-label">ON AIR</span>
             </div>
             <div className="portrait-frame">
@@ -76,7 +76,7 @@ export default function Home() {
               />
               <div className="portrait-halftone" aria-hidden="true" />
               <span className="coordinate coordinate-a" aria-hidden="true">
-                SCENE / MAIN
+                MAIN VISUAL
               </span>
               <span className="coordinate coordinate-b" aria-hidden="true">
                 好き × 3
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             <figcaption className="identity-card-caption">
               <div>
-                <span>DIMENSIONAL STUDIO</span>
+                <span>MIKUREINA</span>
                 <strong>SONG · MAGIC · ROCK</strong>
               </div>
               <span className="identity-number">#SEKAI</span>
@@ -128,7 +128,7 @@ export default function Home() {
       >
         <div className="section-shell favorites-layout">
           <div className="section-heading favorites-heading">
-            <p className="section-index">03 / FAVORITE FREQUENCIES</p>
+            <p className="section-index">03 / FAVORITES</p>
             <h2 id="favorites-title">我的三位二次元老婆</h2>
             <p>音乐、远行与摇滚，三种喜欢。</p>
           </div>
@@ -143,10 +143,10 @@ export default function Home() {
       >
         <div className="section-heading horizontal-heading gacha-heading">
           <div>
-            <p className="section-index">BONUS TRACK / DIMENSIONAL GACHA</p>
+            <p className="section-index">BONUS / GACHA</p>
             <h2 id="gacha-title">抽一张今天的次元签。</h2>
           </div>
-          <p>来自音乐、远行与摇滚的原创小签。</p>
+          <p>给今天的一点灵感。</p>
         </div>
         <DimensionalGacha />
       </section>
