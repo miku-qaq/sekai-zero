@@ -1,3 +1,15 @@
+.topline {
+  display: flex;
+  min-height: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.collectionCard .topline {
+  max-width: calc(100% - 160px);
+}
+
 .coverStack {
   position: absolute;
   top: 24px;
@@ -37,20 +49,33 @@
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .collectionCard:hover .coverStack img:nth-child(1) {
+  :global(html:not([data-motion="off"]))
+    .collectionCard:hover
+    .coverStack
+    img:nth-child(1) {
     transform: translate(-4px, -3px) rotate(-14deg);
   }
 
-  .collectionCard:hover .coverStack img:nth-child(2) {
+  :global(html:not([data-motion="off"]))
+    .collectionCard:hover
+    .coverStack
+    img:nth-child(2) {
     transform: translateY(-5px) rotate(0deg);
   }
 
-  .collectionCard:hover .coverStack img:nth-child(3) {
+  :global(html:not([data-motion="off"]))
+    .collectionCard:hover
+    .coverStack
+    img:nth-child(3) {
     transform: translate(4px, -3px) rotate(15deg);
   }
 }
 
 @media (max-width: 1000px) {
+  .collectionCard .topline {
+    max-width: calc(100% - 92px);
+  }
+
   .coverStack {
     top: 18px;
     right: 22px;

@@ -3,6 +3,7 @@ import { animeCatalog } from "@/content/anime";
 import { worldRoutes } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import styles from "./world-map.module.css";
+import { RouteStamp } from "./roaming-notebook";
 
 const collectionPreview = ["wandering-witch", "frieren", "bocchi-the-rock"]
   .map((id) => animeCatalog.find((entry) => entry.id === id))
@@ -28,8 +29,12 @@ export function WorldMap() {
             href={sitePath(route.href)}
             key={route.href}
             data-layout={route.layout}
+            data-scene-reveal
           >
-            <span className="world-route-index">ROUTE / {route.index}</span>
+            <span className={styles.topline}>
+              <span className="world-route-index">ROUTE / {route.index}</span>
+              <RouteStamp href={route.href} />
+            </span>
             {route.href === "/collections/" ? (
               <div className={styles.coverStack} aria-hidden="true">
                 {collectionPreview.map((entry) => (

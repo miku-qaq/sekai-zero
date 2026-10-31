@@ -2,6 +2,7 @@ import { siteConfig } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import { MotionToggle } from "./site-motion";
 import { CompanionToggle } from "./character-companion";
+import { RoamingNotebook } from "./roaming-notebook";
 
 /** A shared footer keeps every route connected to the same site map. */
 export function SiteFooter() {
@@ -32,6 +33,7 @@ export function SiteFooter() {
           <MotionToggle />
         </div>
       </div>
+      <RoamingNotebook />
     </footer>
   );
 }

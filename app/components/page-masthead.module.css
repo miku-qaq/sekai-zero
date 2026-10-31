@@ -118,6 +118,8 @@
 
 .portrait {
   --portrait-tilt: -9deg;
+  --portrait-scale: 1;
+  --portrait-origin: 22px;
   position: relative;
   display: grid;
   width: 34%;
@@ -129,18 +131,36 @@
   border-radius: 9px;
   background: var(--surface-raised);
   box-shadow: 0 7px 20px color-mix(in srgb, var(--foreground) 13%, transparent);
-  transform: rotate(var(--portrait-tilt));
+  transform: rotate(var(--portrait-tilt)) scale(var(--portrait-scale));
+  transform-origin: 50% 85%;
+}
+
+.portrait::after {
+  position: absolute;
+  inset: 4px;
+  border-radius: 6px;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgb(255 255 255 / 34%) 48%,
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  content: "";
 }
 
 .portrait:nth-child(3) {
   --portrait-tilt: 9deg;
+  --portrait-origin: -22px;
 }
 
 .portrait[data-featured] {
   --portrait-tilt: -2deg;
+  --portrait-scale: 1.07;
+  --portrait-origin: 0px;
   z-index: 2;
   margin-top: -10px;
-  transform: rotate(var(--portrait-tilt)) scale(1.07);
 }
 
 .portrait img {
@@ -162,7 +182,8 @@
 
 @media (prefers-reduced-motion: no-preference) {
   :global(html:not([data-motion="off"])) .portrait {
-    animation: postcard-arrive 650ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: postcard-arrive 700ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+    transition: translate 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   :global(html:not([data-motion="off"])) .portrait:nth-child(2) {
@@ -176,16 +197,52 @@
   :global(html:not([data-motion="off"])) .sparkle {
     animation: sparkle-arrive 800ms ease-out both;
   }
+
+  :global(html:not([data-motion="off"])) .portrait::after {
+    animation: postcard-glint 850ms ease-out 550ms both;
+  }
+
+  :global(html:not([data-motion="off"])) .portrait[data-featured]::after {
+    animation-delay: 700ms;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="off"])) .postcard:hover .portrait[data-featured] {
+    translate: 0 -5px;
+  }
+
+  :global(html:not([data-motion="off"])) .postcard:hover .portrait:first-child {
+    translate: -3px 1px;
+  }
+
+  :global(html:not([data-motion="off"])) .postcard:hover .portrait:last-child {
+    translate: 3px 1px;
+  }
 }
 
 @keyframes postcard-arrive {
   from {
-    opacity: 0;
-    translate: 0 12px;
+    opacity: 0.25;
+    transform: translate(var(--portrait-origin), 14px) rotate(0deg) scale(0.96);
   }
   to {
     opacity: 1;
-    translate: 0 0;
+    transform: translate(0, 0) rotate(var(--portrait-tilt)) scale(var(--portrait-scale));
+  }
+}
+
+@keyframes postcard-glint {
+  0% {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+  35% {
+    opacity: 0.65;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(30%);
   }
 }
 

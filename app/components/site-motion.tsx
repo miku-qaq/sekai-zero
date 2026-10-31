@@ -46,6 +46,34 @@ export function SiteMotion() {
 
   useEffect(() => {
     if (motion !== "on" || !("IntersectionObserver" in window)) return;
+    const scenes = new Map<Element, boolean>();
+    function update() {
+      for (const [scene, visible] of scenes) {
+        scene.setAttribute("data-ambient-paused", String(document.hidden || !visible));
+      }
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) scenes.set(entry.target, entry.isIntersecting);
+        update();
+      },
+      { threshold: 0 },
+    );
+    for (const scene of document.querySelectorAll("[data-ambient-motion]")) {
+      scenes.set(scene, true);
+      observer.observe(scene);
+    }
+    update();
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+      for (const scene of scenes.keys()) scene.removeAttribute("data-ambient-paused");
+    };
+  }, [pathname, motion]);
+
+  useEffect(() => {
+    if (motion !== "on" || !("IntersectionObserver" in window)) return;
     const selector =
       ".section-heading, .logs-list > details, .finale, [data-scene-reveal], [data-collection-card]";
     const targets = new Set<Element>();

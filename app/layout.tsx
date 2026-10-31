@@ -6,6 +6,7 @@ import { SiteHeader } from "./components/site-header";
 import { BackToTop } from "./components/back-to-top";
 import { SiteMotion } from "./components/site-motion";
 import { CharacterCompanion } from "./components/character-companion";
+import { RoamingTracker } from "./components/roaming-notebook";
 import "./globals.css";
 import "./subpages.css";
 import "./motion.css";
@@ -102,6 +103,7 @@ export default function RootLayout({
         </a>
         <SiteHeader />
         <SiteMotion />
+        <RoamingTracker />
         {children}
         <CharacterCompanion />
         <BackToTop />

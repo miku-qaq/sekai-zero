@@ -56,7 +56,7 @@ export default function Home() {
           </dl>
         </div>
 
-        <div className="hero-visual reveal reveal-three">
+        <div className="hero-visual reveal reveal-three" data-ambient-motion>
           <div className="orbit orbit-one" aria-hidden="true" />
           <div className="orbit orbit-two" aria-hidden="true" />
           <figure className="identity-card anime-key-visual">
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="signal-strip" aria-label="网站主题关键词">
+      <div className="signal-strip" aria-label="网站主题关键词" data-ambient-motion>
         <div className="signal-track">
           {[0, 1].map((group) => (
             <div className="signal-group" key={group} aria-hidden={group === 1}>
