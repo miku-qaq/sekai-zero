@@ -156,7 +156,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(homepage, new RegExp(`src="${basePath}/hero-anime-v3\\.webp"`));
   assert.match(homepage, /Mikureina/);
   assert.match(homepage, /南京大学 CS 在读/);
-  assert.match(homepage, /CS224N/);
+  assert.match(homepage, /大模型分布式训练系统/);
   assert.match(homepage, /我的三位二次元老婆/);
   assert.match(homepage, /初音未来/);
   assert.match(homepage, /伊蕾娜/);
@@ -166,7 +166,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(homepage, /抽一张今天的次元签/);
   assert.match(
     homepage,
-    new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`),
+    new RegExp(`href="${basePath}/study/#distributed-training-transformer-tp"`),
   );
 
   for (const route of ["about", "collections", "study", "links", "logs"]) {
@@ -197,6 +197,32 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(about, new RegExp(`href="${basePath}/collections/"`));
 
   const study = exported.get("study/index.html");
+  assert.match(study, /大模型分布式训练系统/);
+  assert.match(study, /大模型系统/);
+  for (const chapter of [
+    "transformer-tp",
+    "collectives",
+    "parallelism",
+    "moe",
+    "parallel-folding",
+    "auto-parallel",
+    "engineering",
+    "questions",
+  ]) {
+    const id = `distributed-training-${chapter}`;
+    assert.match(study, new RegExp(`<details\\b[^>]*id="${id}"`));
+    assert.match(study, new RegExp(`href="(?:${basePath}/study/)?#${id}"`));
+  }
+  assert.match(
+    study,
+    /<details[^>]*id="distributed-training-transformer-tp"[^>]*data-current="true"/,
+  );
+  assert.equal(study.match(/data-current="true"/g)?.length, 1);
+  assert.match(study, /MoE Parallel Folding: Heterogeneous Parallelism Mappings/);
+  assert.match(
+    study,
+    /如何在 NVIDIA GPU 与 Ascend NPU 平台上开展可重复的分布式训练性能实验？/,
+  );
   assert.match(study, /NOTE \/ NLP-001/);
   assert.match(study, /AI · 视觉与语言/);
   assert.match(study, /CS224N 学习笔记 01：词语如何进入向量空间/);
@@ -587,13 +613,18 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(links, /我最喜欢的游戏平台之一/);
   assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
+  assert.match(links, /id="route-current-study-note"/);
+  assert.match(links, /大模型系统学习笔记/);
   assert.match(links, /id="terminal-category-shopping"/);
   assert.match(links, /id="route-netflix"/);
   assert.match(links, /id="route-hpoi"/);
   assert.match(links, /id="route-pinduoduo"/);
   assert.doesNotMatch(links, /terminal-card-placeholder/);
   assert.match(links, new RegExp(`href="${basePath}/about/#contact"`));
-  assert.match(links, new RegExp(`href="${basePath}/study/#cs224n-nlp-word-vectors"`));
+  assert.match(
+    links,
+    new RegExp(`href="${basePath}/study/#distributed-training-transformer-tp"`),
+  );
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
   assert.doesNotMatch(links, /miku125194847@gmail\.com/);
@@ -601,7 +632,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /23 EPISODES/);
+  assert.match(logs, /24 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(logs, /id="ep-018"/);
@@ -632,9 +663,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
   assert.match(logs, /id="ep-009"/);
-  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 23);
-  assert.match(logs, /id="ep-023"/);
-  assert.ok(logs.indexOf('id="ep-023"') < logs.indexOf('id="project-overview"'));
+  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 24);
+  assert.match(logs, /id="ep-024"/);
+  assert.ok(logs.indexOf('id="ep-024"') < logs.indexOf('id="project-overview"'));
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);

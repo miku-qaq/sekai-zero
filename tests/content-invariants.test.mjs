@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
+import ts from "typescript";
 
 const projectUrl = new URL("../", import.meta.url);
 
@@ -130,11 +131,62 @@ test("documents the Steam sync output allow-list and protects local authorizatio
   );
 });
 
-test("keeps CS224N as the only current note and CS231n as an official-source review", async () => {
-  const study = await readProjectFile("content/study.ts");
-
-  assert.equal(study.match(/current: true/g)?.length, 1);
-  assert.match(study, /id: "cs224n-nlp-word-vectors"[^]*?current: true/);
+test("keeps eight owner-provided systems chapters current while retaining earlier course notes", async () => {
+  const [study, distributed] = await Promise.all([
+    readProjectFile("content/study.ts"),
+    readProjectFile("content/distributed-study.ts"),
+  ]);
+  const compiled = ts.transpileModule(distributed, {
+    compilerOptions: { target: ts.ScriptTarget.ES2020, module: ts.ModuleKind.ESNext },
+  }).outputText;
+  const { distributedStudyNotes: notes } = await import(
+    `data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`
+  );
+  assert.deepEqual(
+    notes.map((note) => note.id),
+    [
+      "transformer-tp",
+      "collectives",
+      "parallelism",
+      "moe",
+      "parallel-folding",
+      "auto-parallel",
+      "engineering",
+      "questions",
+    ].map((id) => `distributed-training-${id}`),
+  );
+  assert.deepEqual(
+    notes.filter((note) => note.current).map((note) => note.id),
+    ["distributed-training-transformer-tp"],
+  );
+  assert.ok(notes.every((note) => note.category === "systems"));
+  assert.ok(notes.every((note) => note.updatedAt === "2026.10.31"));
+  assert.equal(
+    notes.at(-1).sections.flatMap((section) => section.points ?? []).length,
+    12,
+  );
+  assert.match(
+    distributed,
+    /MoE Parallel Folding: Heterogeneous Parallelism Mappings for Efficient Large-Scale MoE Model Training with Megatron Core/,
+  );
+  for (const topic of [
+    "Reduce-Scatter",
+    "Sequence Parallelism",
+    "Context Parallelism",
+    "Expert Parallelism",
+    "Expert Replication",
+    "MIQP",
+    "torch_npu",
+    "HCCL",
+  ]) {
+    assert.ok(
+      distributed.includes(topic),
+      `${topic} should remain in the owner's outline`,
+    );
+  }
+  assert.match(study, /\.\.\.distributedStudyNotes/);
+  assert.equal(study.match(/current: true/g)?.length ?? 0, 0);
+  assert.match(study, /id: "cs224n-nlp-word-vectors"/);
   assert.match(study, /id: "cs231n-image-classification-data-driven"/);
   assert.match(study, /NOTE \/ CV-001/);
   assert.match(study, /曾学习 · 回顾/);
@@ -146,7 +198,7 @@ test("keeps CS224N as the only current note and CS231n as an official-source rev
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, seven collection rooms and EP.023 as the latest release", async () => {
+test("keeps five top-level worlds, seven collection rooms and EP.024 as the latest release", async () => {
   const [
     site,
     collections,
@@ -505,10 +557,10 @@ test("keeps five top-level worlds, seven collection rooms and EP.023 as the late
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 23);
-  assert.equal(new Set(episodes).size, 23);
-  assert.equal(episodes[0], "023");
-  assert.deepEqual(episodes.slice(0, 3), ["023", "022", "021"]);
+  assert.equal(episodes.length, 24);
+  assert.equal(new Set(episodes).size, 24);
+  assert.equal(episodes[0], "024");
+  assert.deepEqual(episodes.slice(0, 3), ["024", "023", "022"]);
   assert.match(releases, /episode: "EP\.018"[^]*?Mac/);
   assert.match(releases, /episode: "EP\.018"[^]*?(?:GitHub|环境自检)/);
   assert.match(releases, /episode: "EP\.017"[^]*?手办/);

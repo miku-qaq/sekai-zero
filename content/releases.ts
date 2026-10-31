@@ -17,6 +17,23 @@ export type Release = {
  */
 export const releaseHistory = [
   {
+    episode: "EP.024",
+    number: "024",
+    date: "2026.10.31",
+    title: "把最近的学习，接进知识地图",
+    summary: "新增大模型分布式训练系统专题，串起八个主题与十二个研究问题。",
+    body: [
+      "整理近期学习的八个部分：Transformer 与张量并行、集合通信、多维并行、MoE、Parallel Folding、自动并行策略搜索、工程实现，以及正在深入的研究问题。保留各小节的知识点，按篇折叠，也能通过关键词检索。",
+      "首页、角色频道、关于我、页头和导航终端的当前学习入口统一更新到新专题。CS224N 笔记和 CS231n 回顾继续保留，学习记录沿着实际关注的方向生长。",
+    ],
+    decisions: [
+      "八个主题分篇整理，十二个研究问题单独成篇",
+      "学习内容与研究问题按本人提供的清单记录",
+      "统一当前入口，保留已有课程笔记与页面风格",
+    ],
+    evidence: "DISTRIBUTED TRAINING / EIGHT CHAPTERS",
+  },
+  {
     episode: "EP.023",
     number: "023",
     date: "2026.10.31",

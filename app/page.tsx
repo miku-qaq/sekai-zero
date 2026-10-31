@@ -36,7 +36,7 @@ export default function Home() {
           <div className="hero-actions reveal reveal-four">
             <a
               className="button button-primary"
-              href={sitePath("/study/#cs224n-nlp-word-vectors")}
+              href={sitePath("/study/#distributed-training-transformer-tp")}
             >
               阅读笔记
             </a>
@@ -161,7 +161,7 @@ export default function Home() {
         <div className="finale-actions">
           <a
             className="button button-primary"
-            href={sitePath("/study/#cs224n-nlp-word-vectors")}
+            href={sitePath("/study/#distributed-training-transformer-tp")}
           >
             阅读笔记
           </a>

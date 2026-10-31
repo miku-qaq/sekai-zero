@@ -1,4 +1,7 @@
-export type StudyCategoryId = "fundamentals" | "programming" | "web" | "tools" | "ai";
+import { distributedStudyNotes } from "./distributed-study";
+
+export type StudyCategoryId =
+  "fundamentals" | "programming" | "web" | "tools" | "ai" | "systems";
 
 export type StudyNoteSection = {
   heading: string;
@@ -30,6 +33,7 @@ export type StudyNote = {
 
 export const studyCategories = [
   { id: "all", label: "全部笔记", shortLabel: "ALL" },
+  { id: "systems", label: "大模型系统", shortLabel: "SYS" },
   { id: "fundamentals", label: "计算机基础", shortLabel: "CORE" },
   { id: "programming", label: "编程语言", shortLabel: "CODE" },
   { id: "web", label: "Web 开发", shortLabel: "WEB" },
@@ -43,9 +47,9 @@ export const studyCategories = [
  * enrollment unless the owner explicitly confirms those facts.
  */
 export const studyNotes: readonly StudyNote[] = [
+  ...distributedStudyNotes,
   {
     id: "cs224n-nlp-word-vectors",
-    current: true,
     category: "ai",
     chapter: "NOTE / NLP-001",
     title: "CS224N 学习笔记 01：词语如何进入向量空间？",

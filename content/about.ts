@@ -9,16 +9,17 @@ export const profileQuestions = [
   },
   {
     question: "这里会记录什么？",
-    answer: "CS224N 学习笔记、CS231n 回顾，以及慢慢充实的收藏馆。",
+    answer:
+      "最近在整理大模型分布式训练系统，也保留 CS224N 笔记、CS231n 回顾和喜欢的收藏。",
   },
 ] as const;
 
 export const currentFocus = [
   {
     code: "LEARNING",
-    title: "自然语言处理",
-    copy: "CS224N 笔记，从词向量与分布式语义开始。",
-    href: "/study/#cs224n-nlp-word-vectors",
+    title: "大模型分布式训练系统",
+    copy: "围绕 Megatron Core、MoE、Parallel Folding 与 UniAP，串起多维并行和性能实验。",
+    href: "/study/#distributed-training-transformer-tp",
     action: "阅读笔记",
   },
   {

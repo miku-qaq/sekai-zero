@@ -102,10 +102,10 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /<title>SEKAI \/ 00 · 个人次元站<\/title>/i);
   assert.match(html, /你好，我是[^]*?Mikureina/);
   assert.match(html, /南京大学 · CS 在读/);
-  assert.match(html, /CS224N · 词向量/);
+  assert.match(html, /大模型分布式训练系统/);
   assert.match(html, /Nintendo Switch · Steam/);
   assert.match(html, /哔哩哔哩/);
-  assert.match(html, /href="\/study\/#cs224n-nlp-word-vectors"/);
+  assert.match(html, /href="\/study\/#distributed-training-transformer-tp"/);
   assert.match(html, /href="\/links\/#route-bilibili"/);
   assert.match(html, /https:\/\/miku-qaq\.github\.io\/sekai-zero\/og-v5\.jpg/);
   assert.doesNotMatch(html, /chatgpt\.site/);
@@ -131,8 +131,8 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /hero-anime-v3\.webp/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-023"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.023"]);
+  assert.match(html, /href="\/logs\/#ep-024"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.024"]);
   assert.match(html, /动效已开启/);
   assert.match(html, /陪逛已开启/);
   assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
@@ -335,7 +335,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /23 EPISODES/);
+  assert.match(logs, /24 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -371,9 +371,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 23);
-  assert.deepEqual(episodeIds.slice(0, 3), ["023", "022", "021"]);
-  assert.ok(logs.indexOf('id="ep-023"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 24);
+  assert.deepEqual(episodeIds.slice(0, 3), ["024", "023", "022"]);
+  assert.ok(logs.indexOf('id="ep-024"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -402,7 +402,9 @@ test("publishes the categorized directory with all confirmed destinations", asyn
   assert.match(links, /terminal-card-icon[^>]*>NS</);
   assert.match(links, /id="route-cs231n-course"/);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
-  assert.match(links, /CS224N 当前笔记/);
+  assert.match(links, /大模型系统学习笔记/);
+  assert.match(links, /id="route-current-study-note"/);
+  assert.match(links, /href="\/study\/#distributed-training-transformer-tp"/);
   assert.match(links, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(links, /https:\/\/web\.stanford\.edu\/class\/cs224n\//);
   assert.equal(links.match(/<a[^>]*id="route-/g)?.length, 16);
@@ -666,11 +668,51 @@ test("publishes the six owner-confirmed Fufu with formal names and no transactio
   assert.doesNotMatch(html, /<time\b|data-(?:price|order|date|purchased-at)=/i);
 });
 
-test("renders current CS224N plus a bounded CS231n review with official sources", async () => {
+test("renders the distributed-training outline while preserving earlier course notes", async () => {
   const response = await render("/study");
   assert.equal(response.status, 200);
   const html = await response.text();
 
+  assert.match(html, /大模型分布式训练系统/);
+  assert.match(html, /大模型系统/);
+  for (const chapter of [
+    "transformer-tp",
+    "collectives",
+    "parallelism",
+    "moe",
+    "parallel-folding",
+    "auto-parallel",
+    "engineering",
+    "questions",
+  ]) {
+    const id = `distributed-training-${chapter}`;
+    const note = html.match(
+      new RegExp(`<details\\b[^>]*id="${id}"[^>]*>([^]*?)</details>`),
+    );
+    assert.ok(note, `${id} should be present in server-rendered notes`);
+    assert.match(html, new RegExp(`href="(?:/study/)?#${id}"`));
+    assert.doesNotMatch(note[1], /RECALL CHECK|SOURCE CHECK/);
+  }
+  assert.match(
+    html,
+    /<details[^>]*id="distributed-training-transformer-tp"[^>]*data-current="true"/,
+  );
+  assert.doesNotMatch(
+    html,
+    /<details[^>]*id="cs224n-nlp-word-vectors"[^>]*data-current="true"/,
+  );
+  assert.match(html, /Column Parallel Linear/);
+  assert.match(html, /Ring All-Reduce/);
+  assert.match(html, /Sequence Parallelism/);
+  assert.match(html, /Expert Replication/);
+  assert.match(html, /MoE Parallel Folding: Heterogeneous Parallelism Mappings/);
+  assert.match(html, /MIQP/);
+  assert.match(html, /torch_npu/);
+  assert.match(html, /为什么传统 Megatron 混合并行中的不同并行组存在设备映射约束？/);
+  assert.match(
+    html,
+    /如何在 NVIDIA GPU 与 Ascend NPU 平台上开展可重复的分布式训练性能实验？/,
+  );
   assert.match(html, /AI · 视觉与语言/);
   assert.match(html, /CURRENTLY LEARNING/);
   assert.match(html, /NOTE \/ NLP-001/);
@@ -870,7 +912,6 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(studyNotebook, /sitePath\("\/study\/#archive-title"\)/);
   assert.match(studyContent, /not course completion or formal/);
   assert.match(studyContent, /category: "ai"/);
-  assert.match(studyContent, /current: true/);
   assert.match(studyContent, /publisher: "Stanford University"/);
 
   // Compatibility URLs remain readable without becoming public navigation
@@ -931,7 +972,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
   assert.match(nowContent, /status: "学习笔记"/);
   assert.match(nowContent, /status: "游戏平台"/);
   assert.match(nowContent, /status: "常用网站"/);
-  assert.match(nowContent, /updatedAt: "2026\.08\.29"/);
+  assert.match(nowContent, /updatedAt: "2026\.10\.31"/);
   assert.doesNotMatch(nowContent, /EP\.010|最近更新/);
 
   assert.match(collectionsContent, /href: "\/collections\/anime\/"/);

@@ -84,6 +84,108 @@
   box-shadow: 10px 10px 0 color-mix(in srgb, var(--foreground) 88%, transparent);
 }
 
+.topic {
+  padding: clamp(20px, 3vw, 34px);
+  border-bottom: 1px solid var(--border-strong);
+  background:
+    radial-gradient(
+      ellipse at 92% 0,
+      color-mix(in srgb, var(--study-blue) 12%, transparent),
+      transparent 65%
+    ),
+    var(--surface);
+}
+
+.topicHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 22px;
+}
+
+.topicHeading h3 {
+  margin: 10px 0;
+  font-size: clamp(23px, 3vw, 34px);
+  line-height: 1.35;
+}
+
+.topicHeading p:not(:global(.section-index)),
+.topicHeading > span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.topicHeading > span {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.topicLinks {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.topicLinks a {
+  display: flex;
+  height: 100%;
+  min-height: 76px;
+  gap: 10px;
+  align-items: start;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--study-blue) 4%, var(--surface));
+}
+
+.topicLinks span {
+  color: var(--study-blue-deep);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+.topicLinks strong {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.topicLinks a:focus-visible {
+  outline: 2px solid var(--study-blue);
+  outline-offset: 3px;
+}
+
+.noteBody[data-outline="true"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.noteBody[data-outline="true"] .noteSections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 40px;
+  max-width: none;
+}
+
+.noteBody[data-outline="true"] .noteSections > section:only-child {
+  grid-column: 1 / -1;
+}
+
+.noteIntro,
+.noteSections {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .toolbar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.46fr);
@@ -592,6 +694,11 @@
 }
 
 @media (hover: hover) {
+  .topicLinks a:hover {
+    border-color: var(--study-blue);
+    background: color-mix(in srgb, var(--study-blue) 10%, var(--surface));
+  }
+
   .filters button:hover,
   .empty button:hover {
     border-color: var(--foreground);
@@ -608,6 +715,14 @@
 }
 
 @media (max-width: 900px) {
+  .topicLinks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .noteBody[data-outline="true"] .noteSections {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .principleGrid {
     grid-template-columns: 1fr 1fr;
   }
@@ -766,6 +881,12 @@
 }
 
 @media (max-width: 420px) {
+  .topicLinks a {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+  }
+
   .noteIntro > ul {
     gap: 8px;
   }

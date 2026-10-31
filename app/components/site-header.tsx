@@ -179,8 +179,11 @@ export function SiteHeader() {
               <path d="M20.9 13.1A9 9 0 0 1 10.9 3.1a9 9 0 1 0 10 10Z" />
             </svg>
           </button>
-          <a className="header-cta" href={sitePath("/study/#cs224n-nlp-word-vectors")}>
-            CS224N 笔记
+          <a
+            className="header-cta"
+            href={sitePath("/study/#distributed-training-transformer-tp")}
+          >
+            大模型系统
           </a>
           <button
             ref={menuButtonRef}

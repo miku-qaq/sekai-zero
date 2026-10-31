@@ -13,7 +13,7 @@ export type CurrentSignal = {
  * that record, not the latest site deployment or an inferred progress update.
  */
 export const currentBroadcast = {
-  updatedAt: "2026.08.29",
+  updatedAt: "2026.10.31",
   headline: "学习与日常。",
   summary: "记下所学，也留住喜欢。",
   panel: {
@@ -26,9 +26,9 @@ export const currentBroadcast = {
     {
       code: "01",
       status: "学习笔记",
-      title: "CS224N · 词向量",
-      copy: "从词表示与分布式语义开始。",
-      href: "/study/#cs224n-nlp-word-vectors",
+      title: "大模型分布式训练系统",
+      copy: "从多维并行到 MoE，沿着源码与实验继续深入。",
+      href: "/study/#distributed-training-transformer-tp",
       action: "阅读笔记",
       tone: "blue",
     },

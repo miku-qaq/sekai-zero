@@ -6,6 +6,7 @@ import { sitePath } from "@/lib/site-path";
 import styles from "../study/study.module.css";
 
 type FilterId = "all" | StudyCategoryId;
+const systemNotes = studyNotes.filter((note) => note.category === "systems");
 
 /** Client-side discovery only; the notes themselves remain static and indexable. */
 export function StudyNotebook() {
@@ -104,8 +105,41 @@ export function StudyNotebook() {
     }
   }
 
+  function openTopic(noteId: string) {
+    setFilter("all");
+    setQuery("");
+    targetScrollBehavior.current = "smooth";
+    setTargetNoteId(noteId);
+    // Reopening the same anchor must also work when its URL has not changed.
+    const target = document.getElementById(noteId);
+    if (target instanceof HTMLDetailsElement) target.open = true;
+  }
+
   return (
     <div className={styles.notebook}>
+      <nav className={styles.topic} aria-labelledby="system-topic-title">
+        <div className={styles.topicHeading}>
+          <div>
+            <p className="section-index">CURRENT / LEARNING ATLAS</p>
+            <h3 id="system-topic-title">大模型分布式训练系统</h3>
+            <p>从 Transformer 计算出发，串起并行、通信与工程实验。</p>
+          </div>
+          <span>{systemNotes.length} 个主题 · 持续整理</span>
+        </div>
+        <ol className={styles.topicLinks}>
+          {systemNotes.map((note, index) => (
+            <li key={note.id}>
+              <a
+                href={sitePath(`/study/#${note.id}`)}
+                onClick={() => openTopic(note.id)}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{note.title}</strong>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
       <form
         className={styles.toolbar}
         role="search"
@@ -181,7 +215,12 @@ export function StudyNotebook() {
                 </span>
               </summary>
 
-              <div className={styles.noteBody}>
+              <div
+                className={styles.noteBody}
+                data-outline={
+                  (!note.recall.length && !note.sources.length) || undefined
+                }
+              >
                 <div className={styles.noteActions}>
                   <button type="button" onClick={() => copyNoteLink(note.id)}>
                     {copiedNoteId === note.id ? "链接已复制" : "复制本篇链接"}
@@ -215,33 +254,37 @@ export function StudyNotebook() {
                   ))}
                 </div>
 
-                <aside className={styles.recall} aria-label="主动回忆问题">
-                  <span>RECALL CHECK</span>
-                  <h4>先别往下查，试着回答。</h4>
-                  <ol>
-                    {note.recall.map((question) => (
-                      <li key={question}>{question}</li>
-                    ))}
-                  </ol>
-                </aside>
+                {note.recall.length > 0 ? (
+                  <aside className={styles.recall} aria-label="主动回忆问题">
+                    <span>RECALL CHECK</span>
+                    <h4>先别往下查，试着回答。</h4>
+                    <ol>
+                      {note.recall.map((question) => (
+                        <li key={question}>{question}</li>
+                      ))}
+                    </ol>
+                  </aside>
+                ) : null}
 
-                <div className={styles.sources}>
-                  <span>SOURCE CHECK</span>
-                  <h4>继续向一手资料确认。</h4>
-                  <ul>
-                    {note.sources.map((source) => (
-                      <li key={source.href}>
-                        <a href={source.href} target="_blank" rel="noreferrer">
-                          <span>{source.publisher}</span>
-                          <strong>
-                            {source.label}
-                            <span className="sr-only">（将在新标签页打开）</span>
-                          </strong>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {note.sources.length > 0 ? (
+                  <div className={styles.sources}>
+                    <span>SOURCE CHECK</span>
+                    <h4>继续向一手资料确认。</h4>
+                    <ul>
+                      {note.sources.map((source) => (
+                        <li key={source.href}>
+                          <a href={source.href} target="_blank" rel="noreferrer">
+                            <span>{source.publisher}</span>
+                            <strong>
+                              {source.label}
+                              <span className="sr-only">（将在新标签页打开）</span>
+                            </strong>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </div>
             </details>
           ))}

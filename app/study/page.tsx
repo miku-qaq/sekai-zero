@@ -11,18 +11,18 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "计算机学习笔记",
   description:
-    "Mikureina 的计算机学习笔记：正在自学 Stanford CS224N，也回顾此前学习过的 Stanford CS231n，持续整理自然语言处理、计算机视觉与计算机基础。",
+    "Mikureina 的学习笔记：整理大模型分布式训练系统，从 Transformer、多维并行、MoE 与 Parallel Folding，到自动并行策略和 GPU/NPU 性能实验。保留 CS224N 与 CS231n 笔记。",
   openGraph: {
     title: "计算机学习舱 · SEKAI / 00",
     description:
-      "正在自学 Stanford CS224N，也回顾此前学习过的 CS231n；把视觉、语言与计算机基础整理成可以反复返回的知识地图。",
+      "大模型分布式训练系统：八个学习主题、十二个研究问题，连接 Transformer、并行训练、MoE 与工程实验。",
     images: [{ url: "og-study.png", alt: "SEKAI / 00 计算机学习舱分享卡片" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "计算机学习舱 · SEKAI / 00",
     description:
-      "正在自学 Stanford CS224N，也回顾此前学习过的 CS231n；把视觉、语言与计算机基础整理成可以反复返回的知识地图。",
+      "大模型分布式训练系统：八个学习主题、十二个研究问题，连接 Transformer、并行训练、MoE 与工程实验。",
     images: ["og-study.png"],
   },
 };
@@ -33,13 +33,13 @@ export default function StudyPage() {
       <PageMasthead
         currentHref="/study/"
         title="把所学，记成自己的理解。"
-        lead="自学 CS224N，回顾 CS231n。用例子与实验，把概念想明白。"
+        lead="最近在学大模型分布式训练系统。从计算原理到并行策略，再到源码与性能实验。"
         meta={[
           {
             label: "当前笔记",
             value: `${String(studyNotes.length).padStart(2, "0")} ENTRIES`,
           },
-          { label: "当前主线", value: "Stanford CS224N / NLP" },
+          { label: "当前主线", value: "大模型分布式训练系统" },
         ]}
       />
 
