@@ -18,7 +18,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "test:content": "node --test tests/content-invariants.test.mjs tests/environment-doctor.test.mjs tests/steam-snapshot-safety.test.mjs tests/character-companion.test.mjs tests/roaming-notebook.test.mjs tests/fortune-draw.test.mjs",
+    "test:content": "node --test tests/content-invariants.test.mjs tests/environment-doctor.test.mjs tests/steam-snapshot-safety.test.mjs tests/character-companion.test.mjs tests/roaming-notebook.test.mjs tests/fortune-draw.test.mjs tests/browser-timers.test.mjs",
     "test:render": "node --test tests/rendered-html.test.mjs",
     "test:pages": "node --test tests/static-export.test.mjs",
     "test": "npm run build && npm run test:content && npm run test:render",

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { browserTimers } from "@/lib/browser-timers";
 import {
   companionStorageKeys,
   createCompanionController,
@@ -105,8 +106,7 @@ export function CharacterCompanion() {
       storage,
       clock: {
         now: Date.now,
-        setTimeout: (callback, delay) => setTimeout(callback, delay),
-        clearTimeout,
+        ...browserTimers,
       },
       onChange: setAppearance,
       onPrepare(index) {

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { dimensionalFortunes } from "@/content/site";
+import { browserTimers } from "@/lib/browser-timers";
 import {
   createFortuneReveal,
   nextFortune,
@@ -82,10 +83,7 @@ export function DimensionalGacha() {
   useEffect(() => {
     const controller = createFortuneReveal({
       motionAllowed: allowsMotion,
-      clock: {
-        setTimeout: (callback, delay) => setTimeout(callback, delay),
-        clearTimeout,
-      },
+      clock: browserTimers,
       onPhase: setPhase,
       onSelect(id) {
         setActiveId(id);

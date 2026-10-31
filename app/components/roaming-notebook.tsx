@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
+import { browserTimers } from "@/lib/browser-timers";
 import {
   addRoamingVisit,
   createRoamingStorage,
@@ -57,7 +58,7 @@ export function RoamingTracker() {
 
   useEffect(() => {
     const tracker = createRoamingVisitTracker({
-      clock: { setTimeout, clearTimeout },
+      clock: browserTimers,
       record: markVisit,
     });
     trackerRef.current = tracker;
