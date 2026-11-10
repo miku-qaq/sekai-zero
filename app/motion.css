@@ -19,6 +19,7 @@
 
 /* Only decorative loops pause offscreen; the page's entrance never gets stuck. */
 [data-ambient-paused="true"] .orbit,
+[data-ambient-paused="true"] .subpage-orbit,
 [data-ambient-paused="true"] .signal-track {
   animation-play-state: paused;
 }

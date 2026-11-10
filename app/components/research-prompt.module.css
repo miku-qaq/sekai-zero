@@ -1,0 +1,235 @@
+.prompt {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.75fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: 20px 30px;
+  padding: clamp(20px, 3vw, 34px);
+  border-bottom: 1px solid var(--border-strong);
+  background: linear-gradient(
+    110deg,
+    color-mix(in srgb, var(--accent) 6%, var(--surface)),
+    color-mix(in srgb, var(--pink) 5%, var(--surface))
+  );
+}
+
+.intro {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.intro > div:last-child {
+  min-width: 0;
+}
+
+.character {
+  flex: 0 0 80px;
+}
+
+.character img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.label {
+  color: var(--muted);
+  font:
+    9px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.08em;
+}
+
+.intro h3 {
+  margin: 8px 0;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
+  font-weight: 650;
+}
+
+.intro p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.paper {
+  position: relative;
+  min-width: 0;
+  padding: 20px 22px 16px;
+  border: 1px solid var(--border);
+  border-radius: 4px 20px 20px 20px;
+  background:
+    repeating-linear-gradient(
+      transparent 0 27px,
+      color-mix(in srgb, var(--study-blue) 5%, transparent) 27px 28px
+    ),
+    var(--surface-raised);
+  box-shadow: 4px 5px 0 color-mix(in srgb, var(--study-blue) 6%, var(--surface));
+}
+
+.paper::before {
+  position: absolute;
+  top: -7px;
+  left: 24px;
+  width: 58px;
+  height: 15px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  transform: rotate(-4deg);
+  content: "";
+}
+
+.question {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 13px;
+  align-items: start;
+  min-height: 76px;
+  transform-origin: left center;
+}
+
+.question[data-revealed="true"] {
+  animation: reveal-note 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.number {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--study-blue) 8%, var(--surface));
+  color: var(--foreground);
+  font:
+    11px var(--font-geist-mono),
+    monospace;
+}
+
+.question p {
+  margin: 3px 0 12px;
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+  padding-top: 11px;
+  border-top: 1px dashed var(--border);
+}
+
+.actions button,
+.actions a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.draw {
+  padding: 9px 18px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.actions .draw {
+  font-weight: 650;
+}
+
+.actions a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--border-strong);
+}
+
+.actions :is(button, a):focus-visible {
+  outline: 2px solid var(--study-blue);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) {
+  .draw:hover {
+    border-color: var(--foreground);
+    background: color-mix(in srgb, var(--accent) 30%, var(--surface));
+  }
+
+  .actions a:hover {
+    color: var(--foreground);
+  }
+}
+
+@keyframes reveal-note {
+  from {
+    opacity: 0;
+    transform: translateY(7px) rotate(-1deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:global(html[data-motion="off"]) .question,
+:global(html[data-motion="off"]) .draw {
+  animation: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .question,
+  .draw {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .prompt {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .intro {
+    gap: 12px;
+  }
+
+  .character {
+    flex-basis: 64px;
+  }
+}
+
+@media (max-width: 420px) {
+  .paper {
+    padding: 20px 15px 14px;
+  }
+
+  .question {
+    gap: 10px;
+  }
+
+  .question p {
+    font-size: 13px;
+  }
+
+  .actions {
+    gap: 5px 12px;
+  }
+}

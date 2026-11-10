@@ -3,7 +3,7 @@
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   align-items: center;
   gap: clamp(24px, 5vw, 64px);
-  padding: clamp(20px, 3vw, 36px);
+  padding: clamp(20px, 3vw, 36px) clamp(20px, 3vw, 36px) clamp(24px, 3.5vw, 42px);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-large);
   background:
@@ -25,7 +25,19 @@
   border-radius: 50%;
   background: var(--surface);
   color: var(--accent-deep);
-  font-size: 20px;
+}
+
+.motif svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.motif rect {
+  fill: var(--surface);
 }
 
 .controls h2 {
@@ -63,6 +75,7 @@
 .draw {
   display: inline-flex;
   min-height: 46px;
+  min-width: 92px;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -80,12 +93,56 @@
     transform 180ms ease;
 }
 
-.draw > span {
-  font-size: 21px;
-  line-height: 1;
+.draw[aria-disabled="true"] {
+  cursor: progress;
+}
+
+.stage {
+  position: relative;
+  min-width: 0;
+  isolation: isolate;
+}
+
+.stage::before,
+.stage::after {
+  position: absolute;
+  z-index: -1;
+  right: 5px;
+  bottom: -5px;
+  left: 5px;
+  height: 60%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  background: var(--surface);
+  content: "";
+}
+
+.stage::after {
+  z-index: -2;
+  right: 10px;
+  bottom: -10px;
+  left: 10px;
+  background: var(--accent-soft);
+}
+
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.counter {
+  font-family: var(--font-geist-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
 }
 
 .card {
+  position: relative;
   display: block;
   overflow: hidden;
   min-width: 0;
@@ -98,11 +155,23 @@
     box-shadow 180ms ease;
 }
 
+.card::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(100deg, transparent 50%, var(--accent-soft)), var(--surface);
+  pointer-events: none;
+  transform: scaleX(0);
+  content: "";
+}
+
 .preview {
   display: grid;
   grid-template-columns: 132px minmax(0, 1fr);
+  min-height: 178px;
   gap: 20px;
-  animation: discover 260ms ease-out;
 }
 
 .artwork {
@@ -134,18 +203,26 @@
 }
 
 .identity h3 {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 8px 0;
   overflow-wrap: anywhere;
   font-size: 19px;
   font-weight: 600;
   line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .identity p {
+  display: -webkit-box;
+  overflow: hidden;
   margin: 0 0 12px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .open {
@@ -166,15 +243,48 @@
   outline-offset: 4px;
 }
 
-@keyframes discover {
+@keyframes page-close {
   from {
-    opacity: 0.45;
-    transform: translateY(5px);
+    transform: scaleX(0);
   }
+  to {
+    transform: scaleX(1);
+  }
+}
 
+@keyframes page-open {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes piece-arrive {
+  from {
+    opacity: 0.4;
+    transform: translateX(8px);
+  }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(:root:not([data-motion="off"])) .stage[data-phase="drawing"] .card::after {
+    transform-origin: right center;
+    animation: page-close 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  :global(:root:not([data-motion="off"])) .stage[data-phase="revealing"] .card::after {
+    transform-origin: left center;
+    animation: page-open 280ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  :global(:root:not([data-motion="off"])) .stage[data-phase="revealing"] .preview {
+    animation: piece-arrive 280ms ease-out both;
   }
 }
 
@@ -184,7 +294,7 @@
     border-color: var(--accent-deep);
   }
 
-  .draw:hover {
+  .draw:hover:not([aria-disabled="true"]) {
     transform: translateY(-2px);
   }
 
@@ -209,7 +319,11 @@
   .motif {
     width: 28px;
     height: 28px;
-    font-size: 17px;
+  }
+
+  .motif svg {
+    width: 22px;
+    height: 22px;
   }
 
   .controls h2 {
@@ -236,6 +350,7 @@
   .preview {
     grid-template-columns: 108px minmax(0, 1fr);
     gap: 14px;
+    min-height: 146px;
   }
 
   .image {
@@ -257,16 +372,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .preview {
-    animation: none;
-  }
-
   .draw,
   .card {
     transition: none;
   }
 
-  .draw:hover {
+  .draw:hover:not([aria-disabled="true"]) {
     transform: none;
   }
+}
+
+:global(:root[data-motion="off"]) .draw,
+:global(:root[data-motion="off"]) .card {
+  transition: none;
+}
+
+:global(:root[data-motion="off"]) .draw:hover {
+  transform: none;
 }

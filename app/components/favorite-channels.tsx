@@ -5,6 +5,7 @@ import Image from "next/image";
 import { favoriteChannels } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
 import styles from "./favorite-channels.module.css";
+import { CharacterAlbum } from "./character-album";
 
 type ChannelId = (typeof favoriteChannels)[number]["id"];
 const CHANNEL_STORAGE_KEY = "sekai-channel";
@@ -54,6 +55,7 @@ function setClientChannel(channel: ChannelId) {
 
 /** The selected character pairs a dedicated fan illustration with the site theme. */
 export function FavoriteChannels() {
+  const [albumChannel, setAlbumChannel] = useState<ChannelId | null>(null);
   const [transition, setTransition] = useState<ChannelTransition | null>(null);
   const transitionRef = useRef<ChannelTransition | null>(null);
   const departureTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -147,7 +149,22 @@ export function FavoriteChannels() {
           href={sitePath(active.image)}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`查看${active.name}插画大图（新标签页）`}
+          aria-label={`打开${active.name}角色画册`}
+          aria-haspopup="dialog"
+          onClick={(event) => {
+            if (
+              event.metaKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.altKey ||
+              event.button !== 0
+            )
+              return;
+            if (!("HTMLDialogElement" in window)) return;
+            event.preventDefault();
+            event.currentTarget.focus({ preventScroll: true });
+            setAlbumChannel(active.id);
+          }}
           data-turning={transition?.ready || undefined}
         >
           <Image
@@ -178,6 +195,7 @@ export function FavoriteChannels() {
               />
             </span>
           ) : null}
+          <span className={styles.albumLabel}>翻开角色画册</span>
         </a>
         <div className={styles.identity} aria-live="polite" aria-atomic="true">
           <div className={styles.identityPage} key={active.id}>
@@ -226,6 +244,14 @@ export function FavoriteChannels() {
         })}
       </div>
       <p className={styles.hint}>点选角色，切换插画与主题色。</p>
+      {albumChannel ? (
+        <CharacterAlbum
+          initialChannel={albumChannel}
+          selectedChannel={activeChannel}
+          onSelectTheme={selectChannel}
+          onClose={() => setAlbumChannel(null)}
+        />
+      ) : null}
     </div>
   );
 }

@@ -37,6 +37,21 @@
   position: relative;
 }
 
+.albumLabel {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: var(--foreground);
+  background: var(--surface);
+  font-size: 10px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgb(33 21 55 / 8%);
+}
+
 .currentPortrait[data-loading] {
   opacity: 0;
 }

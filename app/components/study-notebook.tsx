@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { studyCategories, studyNotes, type StudyCategoryId } from "@/content/study";
 import { sitePath } from "@/lib/site-path";
+import { ResearchPrompt } from "./research-prompt";
 import styles from "../study/study.module.css";
 
 type FilterId = "all" | StudyCategoryId;
@@ -140,6 +141,7 @@ export function StudyNotebook() {
           ))}
         </ol>
       </nav>
+      <ResearchPrompt onOpen={openTopic} />
       <form
         className={styles.toolbar}
         role="search"

@@ -125,14 +125,16 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /抽一张今天的次元签/);
   assert.match(html, /抽取下一张/);
   assert.match(html, /我的签册/);
+  assert.match(html, /aria-label="打开初音未来角色画册"/);
+  assert.match(html, /翻开角色画册/);
   assert.match(html, /漫游手帐/);
   assert.match(html, /清除本机印记/);
   assert.match(html, /先让明天发出声音/);
   assert.match(html, /hero-anime-v3\.webp/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-024"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.024"]);
+  assert.match(html, /href="\/logs\/#ep-025"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.025"]);
   assert.match(html, /动效已开启/);
   assert.match(html, /陪逛已开启/);
   assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
@@ -335,7 +337,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /24 EPISODES/);
+  assert.match(logs, /25 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -371,9 +373,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 24);
-  assert.deepEqual(episodeIds.slice(0, 3), ["024", "023", "022"]);
-  assert.ok(logs.indexOf('id="ep-024"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 25);
+  assert.deepEqual(episodeIds.slice(0, 3), ["025", "024", "023"]);
+  assert.ok(logs.indexOf('id="ep-025"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -701,6 +703,9 @@ test("renders the distributed-training outline while preserving earlier course n
     html,
     /<details[^>]*id="cs224n-nlp-word-vectors"[^>]*data-current="true"/,
   );
+  assert.match(html, /id="research-prompt-title"/);
+  assert.match(html, /抽一道研究问题/);
+  assert.match(html, /今天，想从哪里开始？/);
   assert.match(html, /Column Parallel Linear/);
   assert.match(html, /Ring All-Reduce/);
   assert.match(html, /Sequence Parallelism/);

@@ -116,7 +116,11 @@ export function PageMasthead({
           <span className={styles.postcardStamp}>好き × 3</span>
         </div>
       ) : (
-        <div className={`subpage-visual${reveal("reveal-three")}`} aria-hidden="true">
+        <div
+          className={`subpage-visual${reveal("reveal-three")}`}
+          aria-hidden="true"
+          data-ambient-motion
+        >
           <span className="subpage-visual-code">{fileCode}</span>
           <strong>{route.motif}</strong>
           <span className="subpage-visual-caption">{route.title}</span>
