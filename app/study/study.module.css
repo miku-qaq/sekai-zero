@@ -316,6 +316,7 @@
   padding: clamp(26px, 4vw, 44px);
   cursor: pointer;
   list-style: none;
+  scroll-margin-top: 110px;
   transition: background-color 180ms ease;
 }
 
@@ -471,6 +472,79 @@
   font-size: 15px;
 }
 
+.sectionNav {
+  grid-column: 1 / -1;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--study-blue) 4%, var(--surface));
+}
+
+.sectionNav > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.sectionNav > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.sectionNav button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--foreground);
+  background: var(--surface);
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.noteEnd {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.noteEnd button,
+.noteEnd a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--foreground);
+  background: var(--surface);
+  font: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.noteEnd button {
+  background: color-mix(in srgb, var(--study-blue) 10%, var(--surface));
+}
+
+.sectionNav button:focus-visible,
+.noteEnd :is(button, a):focus-visible,
+.note > summary:focus-visible {
+  outline: 2px solid var(--study-blue);
+  outline-offset: -3px;
+}
+
 .noteSections {
   max-width: 72ch;
 }
@@ -486,6 +560,16 @@
   margin: 0 0 14px;
   font-size: clamp(20px, 2.4vw, 27px);
   letter-spacing: -0.035em;
+}
+
+.noteSections h4 {
+  scroll-margin-top: 110px;
+}
+
+.noteSections h4:focus {
+  outline: 2px solid var(--study-blue);
+  outline-offset: 5px;
+  border-radius: 4px;
 }
 
 .noteSections p,
@@ -711,6 +795,12 @@
 
   .sources a:hover strong {
     color: var(--study-blue-deep);
+  }
+
+  .sectionNav button:hover,
+  .noteEnd :is(button, a):hover {
+    border-color: var(--study-blue);
+    background: color-mix(in srgb, var(--study-blue) 9%, var(--surface));
   }
 }
 

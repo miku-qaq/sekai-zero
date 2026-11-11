@@ -1,0 +1,538 @@
+.machine {
+  --mint-shell: color-mix(in srgb, #38d8c1 62%, var(--surface));
+  --pink-shell: color-mix(in srgb, #ff82b4 68%, var(--surface));
+  --violet-shell: color-mix(in srgb, #a58af5 65%, var(--surface));
+  --yellow-shell: color-mix(in srgb, #ffe08c 75%, var(--surface));
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 278px);
+  margin-inline: auto;
+  padding-bottom: 12px;
+}
+
+.cabinet {
+  position: relative;
+  aspect-ratio: 278 / 396;
+}
+
+.crown {
+  position: absolute;
+  z-index: 3;
+  inset: 0 9% auto;
+  display: flex;
+  height: 10.5%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-inline: 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: 24px 24px 8px 8px;
+  color: var(--foreground);
+  background: linear-gradient(var(--surface), var(--surface-muted));
+  box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--border) 40%, transparent);
+  font:
+    9px/1 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.1em;
+}
+
+.emblem {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--accent-soft);
+  font-size: 8px;
+  letter-spacing: 0;
+  transform: rotate(-10deg);
+}
+
+.crown > i {
+  width: 5px;
+  height: 5px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent-deep);
+}
+
+.globe {
+  position: absolute;
+  z-index: 1;
+  inset: 7% 12% auto;
+  height: 43%;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 32% 32% 16px 16px;
+  background:
+    linear-gradient(
+      105deg,
+      transparent 15%,
+      rgb(255 255 255 / 35%) 18%,
+      transparent 25%
+    ),
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--sky) 12%, var(--surface)),
+      var(--surface-muted)
+    );
+  box-shadow:
+    inset 6px 0 0 rgb(255 255 255 / 13%),
+    inset -6px 0 0 color-mix(in srgb, var(--border) 25%, transparent);
+}
+
+.glassMark {
+  position: absolute;
+  z-index: 1;
+  top: 19%;
+  width: 100%;
+  color: var(--muted);
+  font-size: 9px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.pile {
+  position: absolute;
+  inset: 30% 4% 0;
+  transform-origin: bottom center;
+}
+
+.capsule {
+  --shell: var(--mint-shell);
+  --roll: -18deg;
+  position: absolute;
+  width: 29%;
+  aspect-ratio: 1;
+  filter: drop-shadow(0 3px 2px rgb(55 42 74 / 10%));
+  transform: rotate(var(--roll));
+}
+.capsule[data-tone="pink"] {
+  --shell: var(--pink-shell);
+}
+.capsule[data-tone="violet"] {
+  --shell: var(--violet-shell);
+}
+.capsule[data-tone="yellow"] {
+  --shell: var(--yellow-shell);
+}
+.capsule:nth-child(1) {
+  left: 11%;
+  bottom: 47%;
+  --roll: -22deg;
+}
+.capsule:nth-child(2) {
+  left: 43%;
+  bottom: 51%;
+  --roll: 26deg;
+}
+.capsule:nth-child(3) {
+  left: 65%;
+  bottom: 25%;
+  --roll: 72deg;
+}
+.capsule:nth-child(4) {
+  left: 0;
+  bottom: 17%;
+  --roll: 38deg;
+}
+.capsule:nth-child(5) {
+  left: 23%;
+  bottom: -5%;
+  --roll: -40deg;
+}
+.capsule:nth-child(6) {
+  left: 48%;
+  bottom: 5%;
+  --roll: 15deg;
+}
+.capsule:nth-child(7) {
+  left: 73%;
+  bottom: -12%;
+  --roll: -26deg;
+}
+
+.cap,
+.base {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 53%;
+  border: 1px solid color-mix(in srgb, var(--foreground) 32%, transparent);
+  background: var(--shell);
+}
+.cap {
+  top: 0;
+  border-radius: 100px 100px 5px 5px;
+}
+.base {
+  bottom: 0;
+  border-radius: 5px 5px 100px 100px;
+  background: color-mix(in srgb, var(--shell) 14%, var(--surface));
+}
+.capsule > i {
+  position: absolute;
+  top: 12%;
+  left: 20%;
+  width: 25%;
+  height: 11%;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 68%);
+  transform: rotate(-24deg);
+}
+
+.glassShine {
+  position: absolute;
+  z-index: 2;
+  top: 27%;
+  left: 7%;
+  width: 7%;
+  height: 47%;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 52%);
+  pointer-events: none;
+}
+
+.body {
+  position: absolute;
+  inset: 47% 9% 3%;
+  border: 1px solid var(--border-strong);
+  border-radius: 13px 13px 24px 24px;
+  background: linear-gradient(
+    112deg,
+    var(--surface) 5%,
+    color-mix(in srgb, var(--accent-soft) 72%, var(--surface)) 65%,
+    var(--accent-soft)
+  );
+  box-shadow:
+    inset -8px 0 0 color-mix(in srgb, var(--accent) 8%, transparent),
+    5px 6px 0 color-mix(in srgb, var(--border) 32%, transparent);
+}
+.screw {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface);
+}
+.screw:last-child {
+  right: 10px;
+  left: auto;
+}
+.rim {
+  position: absolute;
+  z-index: 2;
+  inset: 46% 7% auto;
+  height: 4%;
+  border: 1px solid var(--border-strong);
+  border-radius: 5px;
+  background: var(--surface);
+  box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--border) 42%, transparent);
+}
+
+.sticker {
+  position: absolute;
+  top: 54%;
+  left: 17%;
+  width: 25%;
+  aspect-ratio: 1;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  transform: rotate(-10deg);
+  box-shadow: 1px 3px 0 color-mix(in srgb, var(--border) 35%, transparent);
+}
+.sticker img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.edition {
+  position: absolute;
+  top: 71%;
+  left: 17%;
+  width: 25%;
+  color: var(--muted);
+  text-align: center;
+  font:
+    6px/1.5 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.08em;
+}
+.edition strong {
+  display: block;
+  color: var(--accent-deep);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.handleButton {
+  position: absolute;
+  top: 52%;
+  right: 15%;
+  display: flex;
+  width: 31%;
+  min-width: 70px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px 4px;
+  border: 0;
+  border-radius: 50px 50px 12px 12px;
+  color: var(--foreground);
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.dial {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--surface-raised), var(--surface-muted));
+  box-shadow:
+    0 3px 0 var(--border),
+    inset 0 0 0 5px var(--surface);
+}
+.dialTicks {
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 50%;
+}
+.grip {
+  position: absolute;
+  z-index: 1;
+  top: 17%;
+  left: 38%;
+  width: 24%;
+  height: 66%;
+  border: 1px solid var(--border-strong);
+  border-radius: 30px;
+  background: linear-gradient(90deg, var(--surface-raised), var(--accent-soft));
+  box-shadow: 2px 1px 0 color-mix(in srgb, var(--border) 65%, transparent);
+  transform: rotate(30deg);
+}
+.hub {
+  position: absolute;
+  z-index: 2;
+  inset: 44%;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface-raised);
+}
+.buttonLabel {
+  font-size: 10px;
+  line-height: 1.4;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+}
+.handleButton[aria-disabled="true"] {
+  cursor: progress;
+}
+.handleButton:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 4px;
+}
+
+.outlet {
+  position: absolute;
+  z-index: 2;
+  inset: auto 22% 7.5%;
+  height: 13%;
+  border: 1px solid var(--border-strong);
+  border-radius: 24px 24px 7px 7px;
+  background: color-mix(in srgb, #353149 88%, var(--surface));
+  box-shadow:
+    inset 0 5px 0 rgb(0 0 0 / 13%),
+    0 3px 0 var(--surface-raised);
+}
+.chute {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.prize {
+  position: absolute;
+  bottom: 3px;
+  left: calc(50% - 22px);
+  width: 44px;
+  height: 44px;
+  opacity: 0;
+}
+.prizeTop,
+.prizeBottom {
+  position: absolute;
+  left: 0;
+  width: 44px;
+  height: 23px;
+  border: 1px solid color-mix(in srgb, #353149 60%, var(--surface));
+}
+.prizeTop {
+  top: 0;
+  border-radius: 40px 40px 4px 4px;
+  background: linear-gradient(135deg, var(--surface), var(--pink-shell) 50%);
+}
+.prizeBottom {
+  bottom: 0;
+  border-radius: 4px 4px 40px 40px;
+  background: color-mix(in srgb, var(--pink-shell) 18%, var(--surface));
+}
+.lip {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  left: -4px;
+  height: 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 3px 3px 6px 6px;
+  background: var(--surface-raised);
+}
+.machine[data-phase="dropping"] .prize,
+.machine[data-phase="revealing"] .prize,
+.machine[data-phase="idle"][data-used="true"] .prize {
+  opacity: 1;
+}
+.machine[data-phase="revealing"] .prizeTop,
+.machine[data-phase="idle"][data-used="true"] .prizeTop {
+  transform: translate(-10px, -3px) rotate(-25deg);
+}
+.machine[data-phase="revealing"] .prizeBottom,
+.machine[data-phase="idle"][data-used="true"] .prizeBottom {
+  transform: translate(9px, 3px) rotate(15deg);
+}
+
+.foot {
+  position: absolute;
+  right: 18%;
+  bottom: 1.6%;
+  left: 18%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5.8%;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 0 0 8px 8px;
+  background: var(--surface-muted);
+  color: var(--muted);
+  font:
+    8px/1 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.08em;
+}
+.statusLight {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-deep);
+}
+.floor {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 18px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent);
+}
+
+@media (hover: hover) {
+  .handleButton:not([aria-disabled="true"]):hover .dial {
+    border-color: var(--accent-deep);
+    box-shadow:
+      0 3px 0 var(--border),
+      inset 0 0 0 5px var(--accent-soft);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(html:not([data-motion="off"])) .machine[data-phase="turning"] .grip {
+    animation: turn-handle 420ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  :global(html:not([data-motion="off"])) .machine[data-phase="turning"] .pile {
+    animation: tumble-capsules 420ms ease-in-out both;
+  }
+  :global(html:not([data-motion="off"])) .machine[data-phase="dropping"] .prize {
+    animation: drop-capsule 380ms cubic-bezier(0.3, 0.2, 0.6, 1) both;
+  }
+  :global(html:not([data-motion="off"])) .machine[data-phase="revealing"] .prizeTop {
+    animation: open-top 260ms ease-out both;
+  }
+  :global(html:not([data-motion="off"])) .machine[data-phase="revealing"] .prizeBottom {
+    animation: open-bottom 260ms ease-out both;
+  }
+}
+@keyframes turn-handle {
+  from {
+    transform: rotate(30deg);
+  }
+  to {
+    transform: rotate(390deg);
+  }
+}
+@keyframes tumble-capsules {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-5deg);
+  }
+  65% {
+    transform: translateY(-6px) rotate(5deg);
+  }
+}
+@keyframes drop-capsule {
+  0% {
+    transform: translate(8px, -62px) rotate(-65deg);
+  }
+  65% {
+    transform: translate(0, 1px) rotate(10deg);
+  }
+  82% {
+    transform: translate(0, -8px) rotate(-5deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes open-top {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translate(-10px, -3px) rotate(-25deg);
+  }
+}
+@keyframes open-bottom {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translate(9px, 3px) rotate(15deg);
+  }
+}
+
+@media (max-width: 360px) {
+  .crown {
+    gap: 6px;
+    padding-inline: 9px;
+    font-size: 8px;
+    letter-spacing: 0.06em;
+  }
+  .glassMark {
+    font-size: 8px;
+  }
+}

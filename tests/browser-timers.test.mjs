@@ -8,6 +8,7 @@ const moduleNames = [
   "browser-timers",
   "roaming-notebook",
   "fortune-draw",
+  "capsule-draw",
   "character-companion",
 ];
 const compiled = new Map(
@@ -160,6 +161,34 @@ test("fortune reveal can cancel motion and destroy without an unbound clearTimeo
   const count = phases.length;
   clock.tick(280);
   assert.equal(phases.length, count);
+  assert.equal(clock.pending(), 0);
+});
+
+test("capsule turns and interrupted drops preserve browser timer receivers", () => {
+  const { timers, clock, load } = browserRealm();
+  const { createCapsuleDraw } = load("capsule-draw");
+  const selected = [];
+  let motion = true;
+  const draw = createCapsuleDraw({
+    clock: timers,
+    motionAllowed: () => motion,
+    onSelect: (id) => selected.push(id),
+    onPhase() {},
+  });
+  draw.draw("first");
+  clock.tick(500);
+  motion = false;
+  draw.motionChanged();
+  assert.deepEqual(selected, ["first"]);
+  assert.equal(clock.pending(), 0);
+  motion = true;
+  draw.draw("second");
+  clock.tick(1060);
+  assert.deepEqual(selected, ["first", "second"]);
+  draw.draw("cancelled");
+  draw.destroy();
+  clock.tick(2000);
+  assert.deepEqual(selected, ["first", "second"]);
   assert.equal(clock.pending(), 0);
 });
 

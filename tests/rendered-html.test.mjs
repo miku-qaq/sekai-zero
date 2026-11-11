@@ -133,8 +133,8 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /hero-anime-v3\.webp/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-025"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.025"]);
+  assert.match(html, /href="\/logs\/#ep-026"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.026"]);
   assert.match(html, /动效已开启/);
   assert.match(html, /陪逛已开启/);
   assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
@@ -337,7 +337,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /25 EPISODES/);
+  assert.match(logs, /26 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -373,9 +373,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 25);
-  assert.deepEqual(episodeIds.slice(0, 3), ["025", "024", "023"]);
-  assert.ok(logs.indexOf('id="ep-025"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 26);
+  assert.deepEqual(episodeIds.slice(0, 3), ["026", "025", "024"]);
+  assert.ok(logs.indexOf('id="ep-026"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -438,6 +438,10 @@ test("keeps the Wonder Collection hub concise while linking all seven rooms", as
 
   assert.match(html, /07 间/);
   assert.match(html, /269 条/);
+  assert.match(html, /收藏扭蛋机/);
+  assert.match(html, /aria-label="转动旋钮，抽取一件收藏"/);
+  assert.match(html, /选择随机收藏的展示方式/);
+  assert.match(html, /下一件喜欢，等你来发现。/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
   assert.match(html, /手办收藏/);
@@ -705,6 +709,9 @@ test("renders the distributed-training outline while preserving earlier course n
   );
   assert.match(html, /id="research-prompt-title"/);
   assert.match(html, /抽一道研究问题/);
+  assert.match(html, /收起本篇/);
+  assert.match(html, /本篇目录/);
+  assert.match(html, /id="distributed-training-parallelism-section-6"/);
   assert.match(html, /今天，想从哪里开始？/);
   assert.match(html, /Column Parallel Linear/);
   assert.match(html, /Ring All-Reduce/);

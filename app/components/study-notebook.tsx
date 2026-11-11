@@ -116,6 +116,31 @@ export function StudyNotebook() {
     if (target instanceof HTMLDetailsElement) target.open = true;
   }
 
+  function returnTo(target: HTMLElement) {
+    const reduceMotion =
+      document.documentElement.dataset.motion === "off" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
+  function closeNote(noteId: string) {
+    const note = document.getElementById(noteId);
+    if (!(note instanceof HTMLDetailsElement)) return;
+    setTargetNoteId(null);
+    note.open = false;
+    const summary = note.querySelector("summary");
+    if (summary) returnTo(summary);
+  }
+
+  function openSection(noteId: string, index: number) {
+    const heading = document.getElementById(`${noteId}-section-${index + 1}`);
+    if (heading) returnTo(heading);
+  }
+
   return (
     <div className={styles.notebook}>
       <nav className={styles.topic} aria-labelledby="system-topic-title">
@@ -230,10 +255,31 @@ export function StudyNotebook() {
                   </button>
                   <a href={sitePath("/study/#archive-title")}>回到笔记索引</a>
                 </div>
+                {note.sections.length > 2 ? (
+                  <nav
+                    className={styles.sectionNav}
+                    aria-label={`${note.title} 篇内目录`}
+                  >
+                    <span>本篇目录</span>
+                    <div>
+                      {note.sections.map((section, index) => (
+                        <button
+                          type="button"
+                          key={section.heading}
+                          onClick={() => openSection(note.id, index)}
+                        >
+                          {section.heading}
+                        </button>
+                      ))}
+                    </div>
+                  </nav>
+                ) : null}
                 <div className={styles.noteSections}>
-                  {note.sections.map((section) => (
+                  {note.sections.map((section, index) => (
                     <section key={section.heading}>
-                      <h4>{section.heading}</h4>
+                      <h4 id={`${note.id}-section-${index + 1}`} tabIndex={-1}>
+                        {section.heading}
+                      </h4>
                       {section.paragraphs?.map((paragraph) => (
                         <p key={paragraph}>{paragraph}</p>
                       ))}
@@ -287,6 +333,12 @@ export function StudyNotebook() {
                     </ul>
                   </div>
                 ) : null}
+                <nav className={styles.noteEnd} aria-label={`${note.title} 阅读导航`}>
+                  <button type="button" onClick={() => closeNote(note.id)}>
+                    收起本篇
+                  </button>
+                  <a href={sitePath("/study/#archive-title")}>回到目录</a>
+                </nav>
               </div>
             </details>
           ))}
