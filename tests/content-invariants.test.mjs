@@ -198,7 +198,7 @@ test("keeps eight owner-provided systems chapters current while retaining earlie
   assert.match(study, /https:\/\/cs231n\.github\.io\/convolutional-networks\//);
 });
 
-test("keeps five top-level worlds, seven collection rooms and EP.026 as the latest release", async () => {
+test("keeps five top-level worlds, seven collection rooms and EP.027 as the latest release", async () => {
   const [
     site,
     collections,
@@ -557,10 +557,10 @@ test("keeps five top-level worlds, seven collection rooms and EP.026 as the late
   const episodes = [...releases.matchAll(/episode: "EP\.(\d{3})"/g)].map(
     (match) => match[1],
   );
-  assert.equal(episodes.length, 26);
-  assert.equal(new Set(episodes).size, 26);
-  assert.equal(episodes[0], "026");
-  assert.deepEqual(episodes.slice(0, 3), ["026", "025", "024"]);
+  assert.equal(episodes.length, 27);
+  assert.equal(new Set(episodes).size, 27);
+  assert.equal(episodes[0], "027");
+  assert.deepEqual(episodes.slice(0, 3), ["027", "026", "025"]);
   assert.match(releases, /episode: "EP\.018"[^]*?Mac/);
   assert.match(releases, /episode: "EP\.018"[^]*?(?:GitHub|环境自检)/);
   assert.match(releases, /episode: "EP\.017"[^]*?手办/);

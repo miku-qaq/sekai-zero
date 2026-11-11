@@ -1,9 +1,9 @@
 export type CapsulePhase = "idle" | "turning" | "dropping" | "revealing";
 
 export const capsuleTiming = {
-  turning: 420,
-  dropping: 380,
-  revealing: 260,
+  turning: 520,
+  dropping: 460,
+  revealing: 380,
 } as const;
 
 type Timer = ReturnType<typeof globalThis.setTimeout>;

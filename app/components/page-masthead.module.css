@@ -74,6 +74,7 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.08em;
+  pointer-events: none;
 }
 
 .postcardCode {
@@ -106,32 +107,40 @@
   color: var(--accent-deep);
   font-size: 30px;
   line-height: 1;
+  pointer-events: none;
 }
 
 .portraits {
-  display: flex;
+  position: relative;
   width: 90%;
-  align-items: center;
-  justify-content: center;
-  padding-top: 2px;
+  height: 100%;
 }
 
 .portrait {
+  --portrait-x: -82%;
+  --portrait-y: 4px;
   --portrait-tilt: -9deg;
-  --portrait-scale: 1;
-  --portrait-origin: 22px;
-  position: relative;
+  --portrait-scale: 0.94;
+  --portrait-lift: 0px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
   display: grid;
   width: 34%;
   min-width: 0;
-  flex: 0 0 34%;
-  margin-inline: -4px;
   padding: 5px 5px 0;
   border: 1px solid var(--border-strong);
   border-radius: 9px;
   background: var(--surface-raised);
+  color: var(--foreground);
   box-shadow: 0 7px 20px color-mix(in srgb, var(--foreground) 13%, transparent);
-  transform: rotate(var(--portrait-tilt)) scale(var(--portrait-scale));
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate(-50%, -50%)
+    translate(var(--portrait-x), calc(var(--portrait-y) + var(--portrait-lift)))
+    rotate(var(--portrait-tilt)) scale(var(--portrait-scale));
   transform-origin: 50% 85%;
 }
 
@@ -150,17 +159,25 @@
   content: "";
 }
 
-.portrait:nth-child(3) {
+.portrait[data-slot="right"] {
+  --portrait-x: 82%;
   --portrait-tilt: 9deg;
-  --portrait-origin: -22px;
 }
 
 .portrait[data-featured] {
+  --portrait-x: 0%;
+  --portrait-y: -5px;
   --portrait-tilt: -2deg;
-  --portrait-scale: 1.07;
-  --portrait-origin: 0px;
-  z-index: 2;
-  margin-top: -10px;
+  --portrait-scale: 1.05;
+  z-index: 3;
+  border-color: color-mix(in srgb, var(--page-accent) 65%, var(--foreground));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--foreground) 18%, transparent);
+}
+
+.portrait:focus-visible {
+  z-index: 6;
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 3px;
 }
 
 .portrait img {
@@ -182,16 +199,10 @@
 
 @media (prefers-reduced-motion: no-preference) {
   :global(html:not([data-motion="off"])) .portrait {
-    animation: postcard-arrive 700ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
-    transition: translate 280ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-
-  :global(html:not([data-motion="off"])) .portrait:nth-child(2) {
-    animation-delay: 80ms;
-  }
-
-  :global(html:not([data-motion="off"])) .portrait:nth-child(3) {
-    animation-delay: 160ms;
+    transition:
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 220ms ease,
+      box-shadow 280ms ease;
   }
 
   :global(html:not([data-motion="off"])) .sparkle {
@@ -208,27 +219,8 @@
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :global(html:not([data-motion="off"])) .postcard:hover .portrait[data-featured] {
-    translate: 0 -5px;
-  }
-
-  :global(html:not([data-motion="off"])) .postcard:hover .portrait:first-child {
-    translate: -3px 1px;
-  }
-
-  :global(html:not([data-motion="off"])) .postcard:hover .portrait:last-child {
-    translate: 3px 1px;
-  }
-}
-
-@keyframes postcard-arrive {
-  from {
-    opacity: 0.25;
-    transform: translate(var(--portrait-origin), 14px) rotate(0deg) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0) rotate(var(--portrait-tilt)) scale(var(--portrait-scale));
+  :global(html:not([data-motion="off"])) .portrait:hover {
+    --portrait-lift: -4px;
   }
 }
 
@@ -280,13 +272,10 @@
 
   .portraits {
     width: min(100%, 380px);
-    padding-top: 0;
   }
 
   .portrait {
     width: 84px;
-    flex-basis: 84px;
-    margin-inline: 4px;
   }
 
   .postcardCode {
@@ -330,8 +319,6 @@
 
   .portrait {
     width: clamp(68px, 20vw, 84px);
-    flex-basis: clamp(68px, 20vw, 84px);
-    margin-inline: 2px;
     padding: 4px 4px 0;
   }
 

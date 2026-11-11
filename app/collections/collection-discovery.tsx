@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { collectionItems } from "@/content/collection-items";
 import { collectionRooms, type CollectionRoomId } from "@/content/collections";
 import { browserTimers } from "@/lib/browser-timers";
-import { createCapsuleDraw, type CapsulePhase } from "@/lib/capsule-draw";
+import {
+  capsuleTiming,
+  createCapsuleDraw,
+  type CapsulePhase,
+} from "@/lib/capsule-draw";
 import { createFortuneReveal, type FortunePhase } from "@/lib/fortune-draw";
 import { sitePath } from "@/lib/site-path";
 import { CapsuleMachine } from "./capsule-machine";
@@ -189,6 +193,9 @@ export function CollectionDiscovery() {
       id="collection-discovery"
       aria-labelledby="collection-discovery-title"
       data-mode={mode}
+      style={
+        { "--capsule-reveal-duration": `${capsuleTiming.revealing}ms` } as CSSProperties
+      }
     >
       <div className={styles.heading}>
         <div>
@@ -290,7 +297,7 @@ export function CollectionDiscovery() {
                     alt={item.imageAlt}
                     width={360}
                     height={480}
-                    sizes="(max-width: 600px) 108px, 132px"
+                    sizes="(max-width: 400px) 88px, (max-width: 600px) 108px, 132px"
                     className={styles.image}
                     style={{ objectFit: item.fit }}
                   />

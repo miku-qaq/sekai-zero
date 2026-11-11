@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { currentFocus, profileQuestions } from "@/content/about";
 import { profileFacts, publicProfile } from "@/content/profile";
-import { characterBanner, favoriteChannels } from "@/content/site";
+import { characterBanner } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import { AboutCharacters } from "../components/about-characters";
 import { JourneyNavigation } from "../components/journey-navigation";
 import { PageMasthead } from "../components/page-masthead";
 import { SiteFooter } from "../components/site-footer";
@@ -75,36 +75,7 @@ export default function AboutPage() {
             </div>
             <p>音乐、远行与摇滚，组成这个小世界。</p>
           </div>
-          <div className="influence-grid">
-            {favoriteChannels.map((signal) => (
-              <article
-                className={`influence-card influence-${signal.id}`}
-                key={signal.id}
-              >
-                <a
-                  className="influence-artwork"
-                  href={sitePath(signal.image)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`查看${signal.name}插画大图（新标签页）`}
-                >
-                  <Image
-                    src={sitePath(signal.image)}
-                    alt={signal.imageAlt}
-                    width={1024}
-                    height={1536}
-                    sizes="(max-width: 760px) 44vw, 30vw"
-                  />
-                </a>
-                <div className="influence-caption">
-                  <span className="influence-topline">{signal.index} / FAVORITES</span>
-                  <p>{signal.romanized}</p>
-                  <h3>{signal.name}</h3>
-                  <span className="influence-copy">{signal.note}</span>
-                </div>
-              </article>
-            ))}
-          </div>
+          <AboutCharacters />
         </div>
       </section>
 

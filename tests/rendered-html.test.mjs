@@ -53,18 +53,23 @@ test("builds the exact 17-route Worker manifest", async () => {
   ]);
 });
 
-test("ships collection navigation as a hydrated client boundary", async () => {
+test("ships collection navigation and character interactions as client boundaries", async () => {
   const manifest = JSON.parse(
     await readFile(
       new URL("../dist/client/.vite/manifest.json", import.meta.url),
       "utf8",
     ),
   );
-  const entry = manifest["app/collections/collection-link.tsx"];
-
-  assert.ok(entry, "collection-link should be present in the client manifest");
-  assert.equal(entry.isDynamicEntry, true);
-  await access(new URL(`../dist/client/${entry.file}`, import.meta.url));
+  for (const path of [
+    "app/collections/collection-link.tsx",
+    "app/components/character-postcard.tsx",
+    "app/components/about-characters.tsx",
+  ]) {
+    const entry = manifest[path];
+    assert.ok(entry, `${path} should be present in the client manifest`);
+    assert.equal(entry.isDynamicEntry, true);
+    await access(new URL(`../dist/client/${entry.file}`, import.meta.url));
+  }
 });
 
 test("serves a bounded gallery on static and deep-linked requests", async () => {
@@ -133,8 +138,8 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /hero-anime-v3\.webp/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-026"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.026"]);
+  assert.match(html, /href="\/logs\/#ep-027"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.027"]);
   assert.match(html, /动效已开启/);
   assert.match(html, /陪逛已开启/);
   assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
@@ -201,6 +206,26 @@ test("server-renders the five canonical top-level routes with clear purposes", a
     assert.match(html, /返回首页/);
     assert.match(html, /当前位置/);
     assert.doesNotMatch(html, /主人/);
+    const defaultCharacter = {
+      "/study": "miku",
+      "/links": "elaina",
+      "/logs": "bocchi",
+    }[route.pathname];
+    if (defaultCharacter) {
+      assert.match(html, /role="group" aria-label="角色明信片"/);
+      const portraits = html.match(/<button[^>]*data-character="[^"]+"[^>]*>/g) ?? [];
+      assert.equal(portraits.length, 3);
+      assert.equal(
+        portraits.filter((button) => button.includes('aria-pressed="true"')).length,
+        1,
+      );
+      assert.match(
+        portraits.find((button) =>
+          button.includes(`data-character="${defaultCharacter}"`),
+        ),
+        /aria-pressed="true"/,
+      );
+    }
   }
 });
 
@@ -337,7 +362,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /26 EPISODES/);
+  assert.match(logs, /27 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -373,9 +398,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 26);
-  assert.deepEqual(episodeIds.slice(0, 3), ["026", "025", "024"]);
-  assert.ok(logs.indexOf('id="ep-026"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 27);
+  assert.deepEqual(episodeIds.slice(0, 3), ["027", "026", "025"]);
+  assert.ok(logs.indexOf('id="ep-027"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -767,6 +792,13 @@ test("publishes only the owner-confirmed profile and one direct contact entry", 
   for (const character of ["miku", "elaina", "bocchi"]) {
     assert.match(about, new RegExp(`href="/characters/${character}-v1\\.webp"`));
   }
+  for (const name of ["初音未来", "伊蕾娜", "波奇"]) {
+    assert.match(
+      about,
+      new RegExp(`aria-label="打开${name}角色画册" aria-haspopup="dialog"`),
+    );
+  }
+  assert.doesNotMatch(about, /<dialog\b/);
   assert.match(about, /sekai-friends-wide\.webp/);
   assert.doesNotMatch(about, /称呼、职业、所在地等现实信息尚未由主人公开/);
 
@@ -1091,7 +1123,7 @@ test("keeps navigation, deep links and playful interactions within safe boundari
 
   // Character portraits keep theme selection and useful destination links,
   // without simulated connection or synchronization status.
-  assert.match(favoriteChannelsComponent, /sekai-channel/);
+  assert.match(favoriteChannelsComponent, /@\/lib\/character-channel/);
   assert.match(favoriteChannelsComponent, /active\.image/);
   assert.match(favoriteChannelsComponent, /active\.program\.href/);
   assert.match(favoriteChannelsComponent, /aria-pressed=\{selected\}/);

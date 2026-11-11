@@ -176,14 +176,14 @@ test("capsule turns and interrupted drops preserve browser timer receivers", () 
     onPhase() {},
   });
   draw.draw("first");
-  clock.tick(500);
+  clock.tick(700);
   motion = false;
   draw.motionChanged();
   assert.deepEqual(selected, ["first"]);
   assert.equal(clock.pending(), 0);
   motion = true;
   draw.draw("second");
-  clock.tick(1060);
+  clock.tick(1360);
   assert.deepEqual(selected, ["first", "second"]);
   draw.draw("cancelled");
   draw.destroy();

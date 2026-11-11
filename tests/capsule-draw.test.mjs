@@ -69,29 +69,29 @@ function setup({ allowed = true, onSelect, onPhase } = {}) {
   };
 }
 
-test("a capsule turns, drops, selects exactly once and settles after 1060 ms", () => {
+test("a capsule turns, drops, selects exactly once and settles after 1360 ms", () => {
   const context = setup();
-  assert.deepEqual(capsuleTiming, { turning: 420, dropping: 380, revealing: 260 });
+  assert.deepEqual(capsuleTiming, { turning: 520, dropping: 460, revealing: 380 });
   assert.equal(context.controller.draw("figure-001"), true);
-  context.tick(419);
+  context.tick(519);
   assert.deepEqual(context.phases(), ["turning"]);
   assert.deepEqual(context.selections(), []);
   context.tick(1);
   assert.deepEqual(context.phases(), ["turning", "dropping"]);
-  context.tick(379);
+  context.tick(459);
   assert.deepEqual(context.selections(), []);
   context.tick(1);
   assert.deepEqual(context.selections(), ["figure-001"]);
   assert.equal(context.phases().at(-1), "revealing");
-  context.tick(259);
+  context.tick(379);
   assert.equal(context.jobs.size, 1);
   context.tick(1);
   assert.deepEqual(context.events, [
     { phase: "turning", at: 0 },
-    { phase: "dropping", at: 420 },
-    { select: "figure-001", at: 800 },
-    { phase: "revealing", at: 800 },
-    { phase: "idle", at: 1060 },
+    { phase: "dropping", at: 520 },
+    { select: "figure-001", at: 980 },
+    { phase: "revealing", at: 980 },
+    { phase: "idle", at: 1360 },
   ]);
   assert.equal(context.jobs.size, 0);
 });
@@ -100,14 +100,14 @@ test("rapid input never queues a second piece and a completed turn accepts the n
   const context = setup();
   context.controller.draw("first");
   assert.equal(context.controller.draw("ignored-1"), false);
-  context.tick(420);
+  context.tick(520);
   assert.equal(context.controller.draw("ignored-2"), false);
-  context.tick(380);
+  context.tick(460);
   assert.equal(context.controller.draw("ignored-3"), false);
-  context.tick(260);
+  context.tick(380);
   assert.deepEqual(context.selections(), ["first"]);
   assert.equal(context.controller.draw("second"), true);
-  context.tick(1060);
+  context.tick(1360);
   assert.deepEqual(context.selections(), ["first", "second"]);
   assert.equal(context.jobs.size, 0);
 });
@@ -122,12 +122,12 @@ test("motion disabled before drawing delivers immediately without starting a tim
   assert.equal(context.jobs.size, 0);
   context.setMotion(true);
   assert.equal(context.controller.draw("animated"), true);
-  context.tick(1060);
+  context.tick(1360);
   assert.deepEqual(context.selections(), ["instant", "animated"]);
 });
 
 test("motion interruption during every stage selects once and cancels all remaining work", () => {
-  for (const elapsed of [100, 500, 900]) {
+  for (const elapsed of [100, 700, 1100]) {
     const context = setup();
     context.controller.draw("piece");
     context.tick(elapsed);
@@ -143,7 +143,7 @@ test("motion interruption during every stage selects once and cancels all remain
 });
 
 test("switching to the paper view can finish each stage once and immediately allow another draw", () => {
-  for (const elapsed of [0, 500, 900]) {
+  for (const elapsed of [0, 700, 1100]) {
     const context = setup();
     context.controller.finish();
     assert.deepEqual(context.events, []);
@@ -155,13 +155,13 @@ test("switching to the paper view can finish each stage once and immediately all
     assert.equal(context.phases().filter((phase) => phase === "idle").length, 1);
     assert.equal(context.jobs.size, 0);
     assert.equal(context.controller.draw("second"), true);
-    context.tick(1060);
+    context.tick(1360);
     assert.deepEqual(context.selections(), ["first", "second"]);
   }
 });
 
 test("unmount during any stage cancels callbacks and refuses later input or completion", () => {
-  for (const elapsed of [0, 500, 900]) {
+  for (const elapsed of [0, 700, 1100]) {
     const context = setup();
     context.controller.draw("piece");
     context.tick(elapsed);

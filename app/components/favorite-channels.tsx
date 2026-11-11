@@ -3,13 +3,17 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { favoriteChannels } from "@/content/site";
+import {
+  clientChannelSnapshot,
+  serverChannelSnapshot,
+  setClientChannel,
+  subscribeToChannel,
+  type ChannelId,
+} from "@/lib/character-channel";
 import { sitePath } from "@/lib/site-path";
 import styles from "./favorite-channels.module.css";
 import { CharacterAlbum } from "./character-album";
 
-type ChannelId = (typeof favoriteChannels)[number]["id"];
-const CHANNEL_STORAGE_KEY = "sekai-channel";
-const CHANNEL_CHANGE_EVENT = "sekai-channel-change";
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 type ChannelTransition = {
   from: ChannelId;
@@ -23,34 +27,6 @@ function canAnimate() {
     document.documentElement.dataset.motion !== "off" &&
     !window.matchMedia(REDUCED_MOTION).matches
   );
-}
-
-function isChannelId(value: string | null | undefined): value is ChannelId {
-  return favoriteChannels.some((channel) => channel.id === value);
-}
-
-function clientChannelSnapshot(): ChannelId {
-  const channel = document.documentElement.dataset.channel;
-  return isChannelId(channel) ? channel : "miku";
-}
-
-function serverChannelSnapshot(): ChannelId {
-  return "miku";
-}
-
-function subscribeToChannel(onStoreChange: () => void) {
-  window.addEventListener(CHANNEL_CHANGE_EVENT, onStoreChange);
-  return () => window.removeEventListener(CHANNEL_CHANGE_EVENT, onStoreChange);
-}
-
-function setClientChannel(channel: ChannelId) {
-  document.documentElement.dataset.channel = channel;
-  try {
-    window.localStorage.setItem(CHANNEL_STORAGE_KEY, channel);
-  } catch {
-    // The active visual channel still works for this page without storage.
-  }
-  window.dispatchEvent(new Event(CHANNEL_CHANGE_EVENT));
 }
 
 /** The selected character pairs a dedicated fan illustration with the site theme. */

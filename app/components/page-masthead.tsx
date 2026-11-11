@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { favoriteChannels, worldRoutes, type WorldRouteHref } from "@/content/site";
+import { worldRoutes, type WorldRouteHref } from "@/content/site";
 import { sitePath } from "@/lib/site-path";
+import { CharacterPostcard } from "./character-postcard";
 import styles from "./page-masthead.module.css";
 
 type PageMastheadProps = {
@@ -36,14 +37,6 @@ export function PageMasthead({
   const showPostcard = !artwork && animate && currentHref !== "/collections/";
   const featuredCharacter =
     currentHref === "/links/" ? "elaina" : currentHref === "/logs/" ? "bocchi" : "miku";
-  const supportingCharacters = favoriteChannels.filter(
-    (channel) => channel.id !== featuredCharacter,
-  );
-  const postcardCharacters = [
-    ...supportingCharacters.slice(0, 1),
-    ...favoriteChannels.filter((channel) => channel.id === featuredCharacter),
-    ...supportingCharacters.slice(1),
-  ];
 
   return (
     <section
@@ -87,34 +80,12 @@ export function PageMasthead({
           </figcaption>
         </figure>
       ) : showPostcard ? (
-        <div
+        <CharacterPostcard
+          key={featuredCharacter}
           className={`subpage-visual ${styles.postcard}${reveal("reveal-three")}`}
-          aria-hidden="true"
-        >
-          <span className={styles.postcardCode}>{fileCode} / FAVORITES</span>
-          <span className={styles.sparkle}>✦</span>
-          <div className={styles.portraits}>
-            {postcardCharacters.map((character) => (
-              <span
-                className={styles.portrait}
-                data-featured={character.id === featuredCharacter || undefined}
-                data-character={character.id}
-                key={character.id}
-              >
-                <Image
-                  src={sitePath(character.image)}
-                  alt=""
-                  width={1024}
-                  height={1536}
-                  sizes="(max-width: 900px) 110px, 140px"
-                />
-                <span>{character.name}</span>
-              </span>
-            ))}
-          </div>
-          <span className={styles.postcardCaption}>SONG · MAGIC · ROCK</span>
-          <span className={styles.postcardStamp}>好き × 3</span>
-        </div>
+          fileCode={fileCode}
+          featuredCharacter={featuredCharacter}
+        />
       ) : (
         <div
           className={`subpage-visual${reveal("reveal-three")}`}
