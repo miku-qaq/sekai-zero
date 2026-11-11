@@ -17,6 +17,16 @@ function resolvedHref(entry: LinkEntry): string {
   return entry.external ? entry.href : sitePath(entry.href);
 }
 
+/** Sample only from explicit click handling, outside the render calculation. */
+function pickRecommendedEntry(
+  entries: readonly LinkEntry[],
+  previousId: string | null,
+) {
+  const alternatives = entries.filter((entry) => entry.id !== previousId);
+  const candidates = alternatives.length ? alternatives : entries;
+  return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
 /** Searchable navigation terminal with a playful, deterministic content model. */
 export function LinkTerminal() {
   const [group, setGroup] = useState<GroupId>("all");
@@ -72,14 +82,10 @@ export function LinkTerminal() {
   }
 
   function recommendRandomEntry(event: MouseEvent<HTMLButtonElement>) {
-    if (visibleEntries.length === 0) return;
+    const entry = pickRecommendedEntry(visibleEntries, lastRecommendation.current);
+    if (!entry) return;
     if (pendingFrame.current !== null)
       window.cancelAnimationFrame(pendingFrame.current);
-    const alternatives = visibleEntries.filter(
-      (entry) => entry.id !== lastRecommendation.current,
-    );
-    const candidates = alternatives.length ? alternatives : visibleEntries;
-    const entry = candidates[Math.floor(Math.random() * candidates.length)];
     lastRecommendation.current = entry.id;
     setRecommendedId(entry.id);
     const fromKeyboard = event.detail === 0;
