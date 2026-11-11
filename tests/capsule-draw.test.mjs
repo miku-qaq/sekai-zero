@@ -142,7 +142,7 @@ test("motion interruption during every stage selects once and cancels all remain
   }
 });
 
-test("switching to the paper view can finish each stage once and immediately allow another draw", () => {
+test("finishing early settles each stage once and immediately allows another draw", () => {
   for (const elapsed of [0, 700, 1100]) {
     const context = setup();
     context.controller.finish();

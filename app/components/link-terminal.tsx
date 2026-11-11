@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import {
   linkEntries,
   linkGroups,
@@ -8,6 +8,7 @@ import {
   type LinkEntry,
 } from "@/content/links";
 import { sitePath } from "@/lib/site-path";
+import { LinkIcon, NavigationGlyph } from "./link-icon";
 import styles from "./link-terminal.module.css";
 
 type GroupId = (typeof linkGroups)[number]["id"];
@@ -21,6 +22,16 @@ export function LinkTerminal() {
   const [group, setGroup] = useState<GroupId>("all");
   const [query, setQuery] = useState("");
   const [recommendedId, setRecommendedId] = useState<string | null>(null);
+  const lastRecommendation = useRef<string | null>(null);
+  const pendingFrame = useRef<number | null>(null);
+
+  useEffect(
+    () => () => {
+      if (pendingFrame.current !== null)
+        window.cancelAnimationFrame(pendingFrame.current);
+    },
+    [],
+  );
 
   const matchingEntries = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase("zh-CN");
@@ -46,23 +57,43 @@ export function LinkTerminal() {
   );
   const hasActiveFilters = group !== "all" || query.trim() !== "";
 
-  function resetFilters() {
-    setGroup("all");
-    setQuery("");
+  function clearRecommendation() {
+    if (pendingFrame.current !== null)
+      window.cancelAnimationFrame(pendingFrame.current);
+    pendingFrame.current = null;
+    lastRecommendation.current = null;
     setRecommendedId(null);
   }
 
-  function recommendRandomEntry() {
-    if (visibleEntries.length === 0) return;
-    const entry = visibleEntries[Math.floor(Math.random() * visibleEntries.length)];
-    setRecommendedId(entry.id);
+  function resetFilters() {
+    clearRecommendation();
+    setGroup("all");
+    setQuery("");
+  }
 
-    window.requestAnimationFrame(() => {
+  function recommendRandomEntry(event: MouseEvent<HTMLButtonElement>) {
+    if (visibleEntries.length === 0) return;
+    if (pendingFrame.current !== null)
+      window.cancelAnimationFrame(pendingFrame.current);
+    const alternatives = visibleEntries.filter(
+      (entry) => entry.id !== lastRecommendation.current,
+    );
+    const candidates = alternatives.length ? alternatives : visibleEntries;
+    const entry = candidates[Math.floor(Math.random() * candidates.length)];
+    lastRecommendation.current = entry.id;
+    setRecommendedId(entry.id);
+    const fromKeyboard = event.detail === 0;
+
+    pendingFrame.current = window.requestAnimationFrame(() => {
+      pendingFrame.current = null;
+      if (lastRecommendation.current !== entry.id) return;
       const card = document.getElementById(`route-${entry.id}`);
+      if (!(card instanceof HTMLAnchorElement) || !card.isConnected) return;
       const reduceMotion =
         document.documentElement.dataset.motion === "off" ||
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      card?.scrollIntoView({
+      if (fromKeyboard) card.focus({ preventScroll: true });
+      card.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
         block: "center",
       });
@@ -79,26 +110,6 @@ export function LinkTerminal() {
   return (
     <div className={`link-terminal ${styles.terminal}`}>
       <div className="terminal-toolbar">
-        <div className="terminal-filters" role="group" aria-label="筛选导航入口">
-          {linkGroups.map((item) => (
-            <button
-              type="button"
-              key={item.id}
-              aria-pressed={group === item.id}
-              onClick={() => {
-                setGroup(item.id);
-                setRecommendedId(null);
-              }}
-            >
-              {item.label}
-              <span aria-hidden="true">
-                {item.id === "all"
-                  ? matchingEntries.length
-                  : matchingEntries.filter((entry) => entry.group === item.id).length}
-              </span>
-            </button>
-          ))}
-        </div>
         <label className="terminal-search">
           <span className="sr-only">搜索导航终端</span>
           <svg className={styles.searchIcon} viewBox="0 0 24 24" aria-hidden="true">
@@ -109,10 +120,10 @@ export function LinkTerminal() {
             type="search"
             value={query}
             onChange={(event) => {
+              clearRecommendation();
               setQuery(event.target.value);
-              setRecommendedId(null);
             }}
-            placeholder="搜索网站、分类或标签"
+            placeholder="搜索网站或分类"
           />
         </label>
         <button
@@ -123,6 +134,27 @@ export function LinkTerminal() {
         >
           随机推荐
         </button>
+        <div className="terminal-filters" role="group" aria-label="筛选导航入口">
+          {linkGroups.map((item) => (
+            <button
+              type="button"
+              key={item.id}
+              aria-pressed={group === item.id}
+              onClick={() => {
+                clearRecommendation();
+                setGroup(item.id);
+              }}
+            >
+              <NavigationGlyph kind={item.id} className={styles.categoryIcon} />
+              {item.label}
+              <span aria-hidden="true">
+                {item.id === "all"
+                  ? matchingEntries.length
+                  : matchingEntries.filter((entry) => entry.group === item.id).length}
+              </span>
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="terminal-result-line">
@@ -183,9 +215,7 @@ export function LinkTerminal() {
                     rel={entry.external ? "noreferrer" : undefined}
                   >
                     <div className="terminal-card-head">
-                      <span className="terminal-card-icon" aria-hidden="true">
-                        {entry.icon}
-                      </span>
+                      <LinkIcon icon={entry.icon} group={entry.group} />
                       <div className="terminal-card-title">
                         <h4>{entry.label}</h4>
                         <span className="terminal-card-domain">
@@ -196,12 +226,9 @@ export function LinkTerminal() {
                       </div>
                     </div>
                     <span className="terminal-reason">{entry.reason}</span>
-                    <strong>
-                      {entry.action ?? (entry.external ? "打开外部坐标" : "进入频道")}
-                      {entry.external ? (
-                        <span className="sr-only">（将在新标签页打开）</span>
-                      ) : null}
-                    </strong>
+                    {entry.external ? (
+                      <span className="sr-only">（将在新标签页打开）</span>
+                    ) : null}
                   </a>
                 ))}
               </div>
@@ -228,8 +255,8 @@ export function LinkTerminal() {
                 resetFilters();
                 return;
               }
+              clearRecommendation();
               setGroup("all");
-              setRecommendedId(null);
             }}
           >
             {matchingEntries.length > 0 ? "查看所有分类的结果" : "清除筛选"}

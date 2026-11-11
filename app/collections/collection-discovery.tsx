@@ -10,13 +10,11 @@ import {
   createCapsuleDraw,
   type CapsulePhase,
 } from "@/lib/capsule-draw";
-import { createFortuneReveal, type FortunePhase } from "@/lib/fortune-draw";
 import { sitePath } from "@/lib/site-path";
 import { CapsuleMachine } from "./capsule-machine";
 import styles from "./collection-discovery.module.css";
 
 type DiscoveryFilter = "all" | CollectionRoomId;
-type DiscoveryMode = "capsule" | "paper";
 
 const firstItem =
   collectionItems.find((item) => item.id === "figure-001") ?? collectionItems[0];
@@ -39,26 +37,21 @@ function shuffled(ids: readonly string[]) {
   return result;
 }
 
-/** Both views share room bags and results; changing views never draws again. */
+/** Each accepted turn reveals one piece from its room's shuffled bag. */
 export function CollectionDiscovery() {
-  const [mode, setMode] = useState<DiscoveryMode>("capsule");
-  const modeRef = useRef<DiscoveryMode>("capsule");
   const [filter, setFilter] = useState<DiscoveryFilter>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [announcement, setAnnouncement] = useState("");
-  const [paperPhase, setPaperPhase] = useState<FortunePhase>("idle");
-  const [capsulePhase, setCapsulePhase] = useState<CapsulePhase>("idle");
+  const [phase, setPhase] = useState<CapsulePhase>("idle");
   const [encounter, setEncounter] = useState(0);
   const resultRef = useRef<HTMLDivElement>(null);
   const scrollToResult = useRef(false);
   const bags = useRef<Partial<Record<DiscoveryFilter, string[]>>>({});
-  const paperRef = useRef<ReturnType<typeof createFortuneReveal> | null>(null);
   const capsuleRef = useRef<ReturnType<typeof createCapsuleDraw> | null>(null);
   const item = collectionItems.find((entry) => entry.id === selectedId) ?? firstItem;
   const room = collectionRooms.find((entry) => entry.id === item?.room);
-  const phase = mode === "capsule" ? capsulePhase : paperPhase;
   const busy = phase !== "idle";
-  const hasResult = selectedId !== null || mode === "paper";
+  const hasResult = selectedId !== null;
 
   useEffect(() => {
     function select(id: string) {
@@ -68,24 +61,16 @@ export function CollectionDiscovery() {
       setEncounter((value) => value + 1);
       setAnnouncement(`这次遇见：${next.title}`);
     }
-    const paper = createFortuneReveal({
-      clock: browserTimers,
-      motionAllowed: () => modeRef.current === "paper" && allowsMotion(),
-      onPhase: setPaperPhase,
-      onSelect: select,
-    });
     const capsule = createCapsuleDraw({
       clock: browserTimers,
-      motionAllowed: () => modeRef.current === "capsule" && allowsMotion(),
-      onPhase: setCapsulePhase,
+      motionAllowed: allowsMotion,
+      onPhase: setPhase,
       onSelect: select,
     });
-    paperRef.current = paper;
     capsuleRef.current = capsule;
     const preference = window.matchMedia(reducedMotion);
     const update = () => {
       if (document.hidden) scrollToResult.current = false;
-      paper.motionChanged();
       capsule.motionChanged();
     };
     const observer = new MutationObserver(update);
@@ -97,9 +82,7 @@ export function CollectionDiscovery() {
     window.addEventListener("sekai-motion-change", update);
     document.addEventListener("visibilitychange", update);
     return () => {
-      paper.destroy();
       capsule.destroy();
-      paperRef.current = null;
       capsuleRef.current = null;
       observer.disconnect();
       preference.removeEventListener("change", update);
@@ -109,18 +92,12 @@ export function CollectionDiscovery() {
   }, []);
 
   useEffect(() => {
-    if (
-      mode !== "capsule" ||
-      capsulePhase !== "idle" ||
-      !selectedId ||
-      !scrollToResult.current
-    )
-      return;
+    if (phase !== "idle" || !selectedId || !scrollToResult.current) return;
     scrollToResult.current = false;
     if (document.hidden || !window.matchMedia("(max-width: 760px)").matches) return;
     const frame = window.requestAnimationFrame(() => {
       const result = resultRef.current;
-      if (!result || document.hidden || modeRef.current !== "capsule") return;
+      if (!result || document.hidden) return;
       // Only follow an explicit turn while focus is still inside this exhibit.
       if (!result.closest("section")?.contains(document.activeElement)) return;
       const bounds = result.getBoundingClientRect();
@@ -131,24 +108,14 @@ export function CollectionDiscovery() {
         });
     });
     return () => window.cancelAnimationFrame(frame);
-  }, [capsulePhase, selectedId, mode]);
-
-  function changeMode(next: DiscoveryMode) {
-    if (next === modeRef.current) return;
-    modeRef.current = next;
-    scrollToResult.current = false;
-    // Finish the accepted draw before switching views; keep its result and count.
-    paperRef.current?.motionChanged();
-    capsuleRef.current?.motionChanged();
-    setMode(next);
-  }
+  }, [phase, selectedId]);
 
   function draw(nextFilter: DiscoveryFilter) {
     const candidates = collectionItems.filter(
       (entry) => nextFilter === "all" || entry.room === nextFilter,
     );
     if (!candidates.length) return;
-    const currentId = selectedId ?? (mode === "paper" ? firstItem?.id : null);
+    const currentId = selectedId;
     // A rejected click must not consume a result from the room's shuffled bag.
     const previousBag = bags.current[nextFilter];
     let bag = previousBag ? [...previousBag] : undefined;
@@ -172,12 +139,9 @@ export function CollectionDiscovery() {
     const nextId = bag.pop();
     const next = collectionItems.find((entry) => entry.id === nextId);
     if (!next) return;
-    const accepted =
-      mode === "capsule"
-        ? capsuleRef.current?.draw(next.id)
-        : paperRef.current?.reveal(next.id, false);
+    const accepted = capsuleRef.current?.draw(next.id);
     if (!accepted) return;
-    scrollToResult.current = mode === "capsule";
+    scrollToResult.current = true;
     bags.current[nextFilter] = bag;
     setFilter(nextFilter);
     // Start loading the local cover during the reveal, without blocking controls.
@@ -192,7 +156,6 @@ export function CollectionDiscovery() {
       className={`section-shell ${styles.discovery}`}
       id="collection-discovery"
       aria-labelledby="collection-discovery-title"
-      data-mode={mode}
       style={
         { "--capsule-reveal-duration": `${capsuleTiming.revealing}ms` } as CSSProperties
       }
@@ -200,25 +163,7 @@ export function CollectionDiscovery() {
       <div className={styles.heading}>
         <div>
           <p className={styles.eyebrow}>COLLECTION / LITTLE SURPRISE</p>
-          <h2 id="collection-discovery-title">
-            {mode === "capsule" ? "收藏扭蛋机" : "随机逛一件"}
-          </h2>
-        </div>
-        <div className={styles.modes} role="group" aria-label="选择随机收藏的展示方式">
-          <button
-            type="button"
-            aria-pressed={mode === "capsule"}
-            onClick={() => changeMode("capsule")}
-          >
-            扭蛋机
-          </button>
-          <button
-            type="button"
-            aria-pressed={mode === "paper"}
-            onClick={() => changeMode("paper")}
-          >
-            画册
-          </button>
+          <h2 id="collection-discovery-title">收藏扭蛋机</h2>
         </div>
       </div>
       <div className={styles.layout}>
@@ -229,11 +174,7 @@ export function CollectionDiscovery() {
               <select
                 value={filter}
                 disabled={busy}
-                onChange={(event) => {
-                  const next = event.target.value as DiscoveryFilter;
-                  if (mode === "paper") draw(next);
-                  else setFilter(next);
-                }}
+                onChange={(event) => setFilter(event.target.value as DiscoveryFilter)}
               >
                 <option value="all">所有收藏</option>
                 {collectionRooms.map((entry) => (
@@ -243,32 +184,18 @@ export function CollectionDiscovery() {
                 ))}
               </select>
             </label>
-            {mode === "paper" ? (
-              <button
-                className={styles.draw}
-                type="button"
-                onClick={() => draw(filter)}
-                aria-disabled={busy}
-              >
-                {busy ? "翻开中" : "换一件"}
-              </button>
-            ) : null}
           </div>
         </div>
-        {mode === "capsule" ? (
-          <div className={styles.cabinet}>
-            <CapsuleMachine
-              phase={capsulePhase}
-              drawCount={encounter}
-              onDraw={() => draw(filter)}
-            />
-          </div>
-        ) : null}
+        <div className={styles.cabinet}>
+          <CapsuleMachine
+            phase={phase}
+            drawCount={encounter}
+            onDraw={() => draw(filter)}
+          />
+        </div>
         <div className={styles.stage} data-phase={phase} ref={resultRef}>
           <div className={styles.topline}>
-            <span>
-              {encounter ? "这次遇见" : hasResult ? "展柜一瞥" : "等待一颗小惊喜"}
-            </span>
+            <span>{encounter ? "这次遇见" : "等待一颗小惊喜"}</span>
             <span
               className={styles.counter}
               aria-label={encounter ? `本次漫游第 ${encounter} 件` : undefined}

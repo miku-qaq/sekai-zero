@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { characterBanner, siteConfig } from "@/content/site";
 import { absoluteSiteUrl, resolveSiteUrl } from "@/lib/site-url";
+import { sitePath } from "@/lib/site-path";
 import { SiteHeader } from "./components/site-header";
 import { BackToTop } from "./components/back-to-top";
 import { SiteMotion } from "./components/site-motion";
@@ -27,7 +28,7 @@ const themeInitializationScript = `try{const theme=localStorage.getItem("sekai-t
 
 const metadataBase = resolveSiteUrl();
 const socialImage = absoluteSiteUrl(characterBanner.socialImage);
-const favicon = absoluteSiteUrl("favicon.svg");
+const favicon = sitePath("/favicon.svg");
 
 export const metadata: Metadata = {
   metadataBase,
@@ -52,8 +53,12 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.owner }],
   creator: siteConfig.owner,
   icons: {
-    icon: favicon,
-    shortcut: favicon,
+    icon: [
+      { url: favicon, type: "image/svg+xml" },
+      { url: sitePath("/favicon-32.png"), type: "image/png", sizes: "32x32" },
+    ],
+    shortcut: sitePath("/favicon-32.png"),
+    apple: { url: sitePath("/apple-touch-icon.png"), sizes: "180x180" },
   },
   openGraph: {
     type: "website",

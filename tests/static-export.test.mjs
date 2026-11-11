@@ -611,7 +611,8 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   );
   assert.match(links, /Nintendo Switch 官方网站/);
   assert.match(links, /我最喜欢的游戏平台之一/);
-  assert.match(links, /terminal-card-icon[^>]*>NS</);
+  assert.match(links, /src="\/sekai-zero\/link-icons\/nintendo-switch\.svg"/);
+  assert.equal(links.match(/<img[^>]*src="\/sekai-zero\/link-icons\//g)?.length, 14);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
   assert.match(links, /id="route-current-study-note"/);
   assert.match(links, /大模型系统学习笔记/);
@@ -632,7 +633,7 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   const logs = exported.get("logs/index.html");
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /27 EPISODES/);
+  assert.match(logs, /28 EPISODES/);
   assert.match(logs, /CASE \/ 001/);
   assert.match(logs, /https:\/\/github\.com\/miku-qaq\/sekai-zero/);
   assert.match(logs, /id="ep-018"/);
@@ -663,9 +664,9 @@ test("exports the visitor-first multi-page site for GitHub Pages", async () => {
   assert.match(logs, /EP\.010/);
   assert.match(logs, /把网站内容重新交还给访客/);
   assert.match(logs, /id="ep-009"/);
-  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 27);
-  assert.match(logs, /id="ep-027"/);
-  assert.ok(logs.indexOf('id="ep-027"') < logs.indexOf('id="project-overview"'));
+  assert.equal(logs.match(/id="ep-\d{3}"/g)?.length, 28);
+  assert.match(logs, /id="ep-028"/);
+  assert.ok(logs.indexOf('id="ep-028"') < logs.indexOf('id="project-overview"'));
 
   const projects = exported.get("projects/index.html");
   assert.match(projects, /id="project-overview"/);

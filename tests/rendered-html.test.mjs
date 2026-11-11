@@ -136,10 +136,12 @@ test("server-renders a visitor-first homepage with personal and playful content"
   assert.match(html, /清除本机印记/);
   assert.match(html, /先让明天发出声音/);
   assert.match(html, /hero-anime-v3\.webp/);
+  assert.match(html, /rel="icon"[^>]*href="\/favicon\.svg"/);
+  assert.match(html, /rel="apple-touch-icon"[^>]*href="\/apple-touch-icon\.png"/);
 
   // 首页只给出最新日志入口，完整制作档案仍留在日志页。
-  assert.match(html, /href="\/logs\/#ep-027"/);
-  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.027"]);
+  assert.match(html, /href="\/logs\/#ep-028"/);
+  assert.deepEqual([...new Set(html.match(/EP\.\d{3}/g))], ["EP.028"]);
   assert.match(html, /动效已开启/);
   assert.match(html, /陪逛已开启/);
   assert.doesNotMatch(html, /aria-label="暂时收起陪逛角色"/);
@@ -362,7 +364,7 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="project-overview"/);
   assert.match(logs, /关于 SEKAI \/ 00 的制作记录/);
   assert.match(logs, /SEKAI \/ 00 的制作选择与更新/);
-  assert.match(logs, /27 EPISODES/);
+  assert.match(logs, /28 EPISODES/);
   assert.match(logs, /项目公开入口/);
   assert.match(logs, /打开公开网站/);
   assert.match(logs, /查看 GitHub 仓库/);
@@ -398,9 +400,9 @@ test("publishes the project overview and complete release history only in Logs",
   assert.match(logs, /id="ep-001"/);
 
   const episodeIds = [...logs.matchAll(/id="ep-(\d{3})"/g)].map((match) => match[1]);
-  assert.equal(episodeIds.length, 27);
-  assert.deepEqual(episodeIds.slice(0, 3), ["027", "026", "025"]);
-  assert.ok(logs.indexOf('id="ep-027"') < logs.indexOf('id="project-overview"'));
+  assert.equal(episodeIds.length, 28);
+  assert.deepEqual(episodeIds.slice(0, 3), ["028", "027", "026"]);
+  assert.ok(logs.indexOf('id="ep-028"') < logs.indexOf('id="project-overview"'));
   assert.equal(new Set(episodeIds).size, episodeIds.length);
 });
 
@@ -426,7 +428,8 @@ test("publishes the categorized directory with all confirmed destinations", asyn
   assert.match(links, /Nintendo Switch 官方网站/);
   assert.match(links, /我最喜欢的游戏平台之一/);
   assert.match(links, /和 Steam 并列的最爱/);
-  assert.match(links, /terminal-card-icon[^>]*>NS</);
+  assert.match(links, /src="\/link-icons\/nintendo-switch\.svg"/);
+  assert.equal(links.match(/<img[^>]*src="\/link-icons\//g)?.length, 14);
   assert.match(links, /id="route-cs231n-course"/);
   assert.match(links, /href="https:\/\/cs231n\.stanford\.edu\/"/);
   assert.match(links, /大模型系统学习笔记/);
@@ -465,7 +468,11 @@ test("keeps the Wonder Collection hub concise while linking all seven rooms", as
   assert.match(html, /269 条/);
   assert.match(html, /收藏扭蛋机/);
   assert.match(html, /aria-label="转动旋钮，抽取一件收藏"/);
-  assert.match(html, /选择随机收藏的展示方式/);
+  const discovery = html.match(
+    /<section[^>]*id="collection-discovery"[^]*?<\/section>/,
+  )?.[0];
+  assert.ok(discovery);
+  assert.doesNotMatch(discovery, /选择随机收藏的展示方式|随机逛一件/);
   assert.match(html, /下一件喜欢，等你来发现。/);
   assert.match(html, /动画展柜/);
   assert.match(html, /游戏展柜/);
@@ -1109,9 +1116,9 @@ test("keeps navigation, deep links and playful interactions within safe boundari
 
   // Random recommendation only highlights and scrolls to a card. Opening the
   // destination remains an explicit visitor action on the rendered anchor.
-  assert.match(linkTerminal, /function recommendRandomEntry\(\)/);
+  assert.match(linkTerminal, /function recommendRandomEntry\(/);
   assert.match(linkTerminal, /setRecommendedId\(entry\.id\)/);
-  assert.match(linkTerminal, /card\?\.scrollIntoView/);
+  assert.match(linkTerminal, /card\.scrollIntoView/);
   assert.match(linkTerminal, /data-recommended=/);
   assert.doesNotMatch(
     linkTerminal,

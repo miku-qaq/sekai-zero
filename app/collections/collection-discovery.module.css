@@ -34,32 +34,6 @@
   line-height: 1.3;
 }
 
-.modes {
-  display: flex;
-  gap: 3px;
-  padding: 3px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-}
-
-.modes button {
-  min-height: 44px;
-  padding: 8px 16px;
-  border: 0;
-  border-radius: 999px;
-  color: var(--muted);
-  background: transparent;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.modes button[aria-pressed="true"] {
-  color: var(--accent-deep);
-  background: var(--accent-soft);
-  font-weight: 650;
-}
-
 .layout {
   display: grid;
   grid-template-columns: minmax(250px, 0.95fr) minmax(0, 1.05fr);
@@ -76,23 +50,10 @@
   padding: 8px 0;
 }
 
-.discovery[data-mode="paper"] .layout {
-  grid-template-areas: "controls result";
-}
-
 .controls {
   grid-area: controls;
   align-self: end;
   min-width: 0;
-}
-
-.discovery[data-mode="paper"] .controls,
-.discovery[data-mode="paper"] .stage {
-  align-self: center;
-}
-
-.discovery[data-mode="capsule"] .filter {
-  width: 100%;
 }
 
 .actions {
@@ -103,6 +64,7 @@
 }
 
 .filter {
+  width: 100%;
   min-width: 0;
 }
 
@@ -128,31 +90,6 @@
   font: inherit;
   font-size: 14px;
   cursor: pointer;
-}
-
-.draw {
-  display: inline-flex;
-  min-height: 46px;
-  min-width: 92px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 9px 19px;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: linear-gradient(115deg, var(--accent-soft), var(--surface));
-  color: var(--foreground);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 650;
-  cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    transform 180ms ease;
-}
-
-.draw[aria-disabled="true"] {
-  cursor: progress;
 }
 
 .stage {
@@ -300,26 +237,17 @@
   align-self: start;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 13px;
-  background: var(--surface-muted);
-}
-
-.discovery[data-mode="capsule"] .artwork {
   padding: 4px;
   border-radius: 12px;
   background: var(--surface-raised);
   box-shadow: 0 4px 10px color-mix(in srgb, var(--foreground) 9%, transparent);
 }
 
-.discovery[data-mode="capsule"] .image {
-  height: 168px;
-  border-radius: 8px;
-}
-
 .image {
   display: block;
   width: 100%;
-  height: 176px;
+  height: 168px;
+  border-radius: 8px;
 }
 
 .identity {
@@ -374,8 +302,6 @@
 }
 
 .filter select:focus-visible,
-.modes button:focus-visible,
-.draw:focus-visible,
 .card:focus-visible {
   outline: 2px solid var(--accent-deep);
   outline-offset: 4px;
@@ -399,17 +325,6 @@
   }
 }
 
-@keyframes piece-arrive {
-  from {
-    opacity: 0.4;
-    transform: translateX(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @keyframes capsule-ticket-arrive {
   0% {
     opacity: 0;
@@ -426,7 +341,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  :global(:root:not([data-motion="off"])) .stage[data-phase="drawing"] .card::after,
   :global(:root:not([data-motion="off"])) .stage[data-phase="turning"] .card::after {
     transform-origin: right center;
     animation: page-close 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
@@ -438,44 +352,19 @@
 
   :global(:root:not([data-motion="off"])) .stage[data-phase="revealing"] .card::after {
     transform-origin: left center;
-    animation: page-open 280ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation: page-open var(--capsule-reveal-duration) cubic-bezier(0.2, 0.7, 0.2, 1)
+      both;
   }
 
   :global(:root:not([data-motion="off"])) .stage[data-phase="revealing"] .preview {
-    animation: piece-arrive 280ms ease-out both;
-  }
-
-  :global(:root:not([data-motion="off"]))
-    .discovery[data-mode="capsule"]
-    .stage[data-phase="revealing"]
-    .card::after,
-  :global(:root:not([data-motion="off"]))
-    .discovery[data-mode="capsule"]
-    .stage[data-phase="revealing"]
-    .preview {
-    animation-duration: var(--capsule-reveal-duration);
-  }
-
-  :global(:root:not([data-motion="off"]))
-    .discovery[data-mode="capsule"]
-    .stage[data-phase="revealing"]
-    .preview {
-    animation-name: capsule-ticket-arrive;
-    animation-timing-function: cubic-bezier(0.22, 0.68, 0.24, 1);
+    animation: capsule-ticket-arrive var(--capsule-reveal-duration)
+      cubic-bezier(0.22, 0.68, 0.24, 1) both;
   }
 }
 
 @media (hover: hover) {
-  .draw:hover,
   .card:hover {
     border-color: var(--accent-deep);
-  }
-
-  .draw:hover:not([aria-disabled="true"]) {
-    transform: translateY(-2px);
-  }
-
-  .card:hover {
     box-shadow: var(--shadow);
   }
 }
@@ -485,10 +374,6 @@
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "controls" "machine" "result";
     gap: 20px;
-  }
-
-  .discovery[data-mode="paper"] .layout {
-    grid-template-areas: "controls" "result";
   }
 
   .cabinet > div {
@@ -517,10 +402,6 @@
   }
 
   .image {
-    height: 144px;
-  }
-
-  .discovery[data-mode="capsule"] .image {
     height: 136px;
   }
 
@@ -545,30 +426,16 @@
   }
 
   .image {
-    height: 116px;
-  }
-
-  .discovery[data-mode="capsule"] .image {
     height: 108px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .draw,
   .card {
     transition: none;
   }
-
-  .draw:hover:not([aria-disabled="true"]) {
-    transform: none;
-  }
 }
 
-:global(:root[data-motion="off"]) .draw,
 :global(:root[data-motion="off"]) .card {
   transition: none;
-}
-
-:global(:root[data-motion="off"]) .draw:hover {
-  transform: none;
 }
